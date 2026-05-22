@@ -373,7 +373,7 @@ export default function LekhaFlowHomepage() {
                 />
 
                 <textarea
-                  rows="5"
+                  rows={5}
                   placeholder="Tell us about your accounting workflow"
                   className="w-full rounded-2xl border border-white/10 bg-white/5 p-4 outline-none focus:border-yellow-400"
                 ></textarea>
