@@ -13,7 +13,7 @@ export default function Home() {
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const [showTrialModal, setShowTrialModal] = useState<boolean>(false);
 
-  // 100% Comprehensive English & Hindi Content Matrix with Integrated Footer Telemetry
+  // 100% Comprehensive English & Hindi Content Matrix with Fixed Contact Section Text
   const content = {
     en: {
       navLinks: { howItWorks: "How It Works", modules: "Our Modules", pricing: "Pricing Plans", contact: "Request Demo" },
@@ -44,13 +44,16 @@ export default function Home() {
         "Step 5: Drop the 'license.dat' file directly into the software installation directory. The system will unlock instantly and guide your output to Excel/Tally automatically."
       ],
       restrictedBanner: "🔒 Sign In to unlock advanced technical telemetry and granular system feature structures.",
+      contactTitle: "Submit Your Workflow Specifications",
+      contactDesc: "Complete the form below. Our team will contact you promptly to set up your workflow pipeline.",
+      systemMandate: "All desktop setup bundles enforce runtime cryptographic Machine Hardware ID locks verification.",
       footerCredits: "Engineered & Architected by Jitendra Bharti | Developed in India"
     },
     hi: {
       navLinks: { howItWorks: "काम कैसे करता है", modules: "हमारे 7 सॉफ़्टवेयर वेरिएंट", pricing: "सब्स्क्रिप्शन रेट्स", contact: "संपर्क / डेमो अनुरोध" },
       heroBadge: "सटीकता का स्वचालन, लेखाकारों का सशक्तिकरण",
       heroTitle: "उच्च-सटीक इनवॉइस डेटा एक्सट्रैक्टर्स और ऑटोमैटिक स्प्लिट लॉजिक",
-      heroDesc: "लेखाफ्लो आपके मैन्युअल और बिखरे हुए अकाउंटिंग बिलिंग रूटीन को हाई-स्पीड digital ऑटोमेशन लाइनों में बदल देता है। एडवांस्ड एआई पार्सिंग आर्किटेक्चर और स्प्लिटिंग स्कीमा द्वारा संचालित, यह इनवॉइस रो वेरिएबल्स को सीधे आपके एकाउंटिंग सॉफ्टवेयर में सिंक करता है।",
+      heroDesc: "लेखाफ्लो आपके मैन्युअल & बिखरे हुए अकाउंटिंग बिलिंग रूटीन को हाई-स्पीड डिजिटल ऑटोमेशन लाइनों में बदल देता है। एडवांस्ड एआई पार्सिंग आर्किटेक्चर और स्प्लिटिंग स्कीमा द्वारा संचालित, यह इनवॉइस रो वेरिएबल्स को सीधे आपके एकाउंटिंग सॉफ्टवेयर में सिंक करता है।",
       trialBtn: "🚀 7-दिनों का फ्री ट्रायल आज़माएं",
       videoBtn: "🎬 सॉफ़्टवेयर डेमो वीडियो देखें",
       secTitle: "7 विशेषीकृत फंक्शनल मॉड्यूल्स",
@@ -71,10 +74,13 @@ export default function Home() {
         "चरण 1: 'Download Trial' पर क्लिक करके या अपने सुरक्षित क्लाइंट लिंक के माध्यम से एकीकृत डेस्कटॉप सॉफ़्टवेयर पैकेज डाउनलोड करें।",
         "चरण 2: पैकेज को अपने सिस्टम पर इंस्टॉल करें और चलाएं। सॉफ़्टवेयर आपके सिस्टम के हार्डवेयर के आधार पर एक अद्वितीय 'Machine Hardware ID' जनरेट करेगा।",
         "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और अपने लेखाफ्लो क्लाइंट डैशबोर्ड में पेस्ट करें या हमारे परिनियोजन डेस्क को फॉरवर्ड करें।",
-        "चरण 4: हमारा ऑटोमेटेड系统 इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षरित 'license.dat' फ़ाइल जारी करेगा।",
+        "चरण 4: हमारा ऑटोमेटेड सिस्टम इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षरित 'license.dat' फ़ाइल जारी करेगा।",
         "चरण 5: 'license.dat' फ़ाइल को सीधे सॉफ़्टवेयर के इंस्टॉलेशन फ़ोल्डर में डालें। सिस्टम तुरंत अनलॉक हो जाएगा और आउटपुट सीधे एक्सेल/टैली में जनरेट होने लगेगा।"
       ],
       restrictedBanner: "🔒 एडवांस्ड तकनीकी टेलीमेट्री और पूर्ण सिस्टम फीचर्स को अनलॉक करने के लिए कृपया साइन इन करें।",
+      contactTitle: "अपनी वर्कफ़्लो आवश्यकताएँ सबमिट करें",
+      contactDesc: "नीचे दिए गए फ़ॉर्म को पूरा भरें। हमारे एक्सपर्ट तुरंत आपके सिस्टम सेटअप के लिए आपसे संपर्क करेंगे।",
+      systemMandate: "सभी डेस्कटॉप सेटअप बंडल रनटाइम क्रिप्टोग्राफिक मशीन हार्डवेयर आईडी लॉक सत्यापन लागू करते हैं।",
       footerCredits: "जितेंद्र भारती द्वारा इंजीनियर और आर्किटेक्ट किया गया | भारत में विकसित"
     }
   };
@@ -136,7 +142,7 @@ export default function Home() {
     lite: {
       id: "lite",
       title: "Lekha Flow Lite",
-      tagline: isHindi ? "बेसलाइन यूटिलिटी - ट्रू कॉपी स्नैपशॉट और एक्सेल टेम्पलेट मैपर" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
+      tagline: isHindi ? "BASE यूटिलिटी - ट्रू कॉपी स्नैsnapshot और एक्सेल टेम्पलेट मैपर" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
       price: "₹ 8,000 / Year",
       limit: "5,000 Invoices / Year (10K limit @ ₹15,000)",
       compatibility: "Excel Formatting & Mapping Engine",
@@ -196,7 +202,7 @@ export default function Home() {
         "Engineered specifically for complete error-free transaction voucher injections inside active BUSY setups",
         "Produces streamlined single-sheet split database configurations to completely eliminate desktop system hang problems",
         "Strict operational data ingestion order mapping sequence: Accounts → Items → Vouchers",
-        "Explicit structural spreadsheet field mapping protocol tracking columns A, B, C through K",
+        "Explicit structural spreadsheet field mapping protocol targeting columns A, B, C through K",
         "Automated master ledger lookup validation checks executed locally prior to voucher data stream injection",
         "Complimentary inclusion of Unlimited Tally/Busy Bank Statement automated entry handler utilities"
       ]
@@ -575,18 +581,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FIXED 100%: DYNAMIC LOCALIZATION FOR CONTACT INTAKE SHEET */}
       <section id="contact" className="border-t border-slate-200 bg-slate-50">
         <div className="max-w-xl mx-auto px-4 pt-12 text-center space-y-1">
           <span className="text-blue-600 font-mono text-[9px] uppercase tracking-widest font-black block">Secure Intake Node</span>
-          <h2 className="text-xl font-bold text-slate-950">{currentContent.navLinks.contact}</h2>
-          <p className="text-black text-xs font-black">
-            {isHindi ? "नीचे दिए गए फ़ॉर्म को पूरा भरें। हमारे एक्सपर्ट तुरंत आपसे संपर्क करेंगे।" : "Forward structural configuration fields matrix directly to Nexoriva consultation systems."}
+          <h2 className="text-xl font-bold text-slate-950">{currentContent.contactTitle}</h2>
+          <p className="text-black text-xs font-black leading-relaxed">
+            {currentContent.contactDesc}
           </p>
         </div>
         <Contact />
       </section>
 
-      {/* FIXED: DYNAMIC FOOTER CREDITS APPLIED HERE */}
+      {/* FIXED 100%: FULL LOCALIZATION FOR LOWER PLATFORM MANDATES */}
       <footer className="bg-slate-950 py-8 border-t border-slate-900 font-mono text-[10px] text-slate-400 text-center space-y-3">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 text-left gap-6 pb-6 border-b border-zinc-800/40 font-sans text-zinc-400">
           <div>
@@ -599,7 +606,7 @@ export default function Home() {
           </div>
           <div>
             <h5 className="text-white font-bold text-xs font-sans mb-1">System Mandate</h5>
-            <p className="text-xs leading-relaxed text-zinc-400">All desktop setup bundles enforce runtime cryptographic Machine Hardware ID locks verification.</p>
+            <p className="text-xs leading-relaxed text-zinc-400">{currentContent.systemMandate}</p>
           </div>
         </div>
         <p className="font-bold text-zinc-300 font-sans text-xs">Nexoriva Systems © 2026</p>
