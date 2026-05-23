@@ -129,7 +129,7 @@ export default function Home() {
       price: "₹ 15,000 / Year",
       limit: "5,000 Invoices / Year (10K limit @ ₹25,000)",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://rzp.io/l/lekhaflow_standard",
+      razorpayUrl: "https://rzp.io/rzp/BKytDmX",
       features: [
         "Direct automatic entry handler for Sales and Purchase vouchers into Tally Prime runtime environment",
         "Instant background automation generation of necessary client Masters, Party Ledgers, and Stock Items",
