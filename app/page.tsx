@@ -13,7 +13,6 @@ export default function Home() {
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const [showTrialModal, setShowTrialModal] = useState<boolean>(false);
 
-  // 100% Comprehensive English & Hindi Content Matrix with Fixed Contact Section Text
   const content = {
     en: {
       navLinks: { howItWorks: "How It Works", modules: "Our Modules", pricing: "Pricing Plans", contact: "Request Demo" },
@@ -87,15 +86,16 @@ export default function Home() {
 
   const currentContent = isHindi ? content.hi : content.en;
 
+  // 100% RECTIFIED PRODUCT PARAMETERS (Perfectly matched with your verified prices)
   const productData = {
     gold: {
       id: "gold",
       title: "Lekha Flow Gold",
       tagline: isHindi ? "सबसे उन्नत ऑटोमेशन सुइट (प्रीमियम एडवांस एडिशन)" : "Most Advanced Automation Suite (Premium Advance Edition)",
       price: "₹ 35,000 / Year",
-      limit: "10,000 Invoices / Year",
+      limit: "Unlimited Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://rzp.io/l/lekhaflow_gold",
+      razorpayUrl: "https://rzp.io/l/sQg7LGy",
       features: [
         "Random splitting of sales invoice amounts strictly below ₹50,000 threshold",
         "Random distribution of items per bill (dynamically assigns 1, 2, 3, 4 rows or custom item list)",
@@ -109,10 +109,10 @@ export default function Home() {
       id: "premium",
       title: "Lekha Flow Premium",
       tagline: isHindi ? "उच्च दक्षता स्प्लिटिंग और ऑटोमेटेड लेज़र प्रोसेसिंग इंजन" : "High Efficiency Splitting & Automated Ledger Processing Engine",
-      price: "₹ 18,000 / Year",
-      limit: "5,000 Invoices / Year",
+      price: "₹ 35,000 / Year",
+      limit: "25,000 Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://rzp.io/l/lekhaflow_premium",
+      razorpayUrl: "https://rzp.io/l/9HGERapH",
       features: [
         "Matches exact high-speed operational backend computational matrix of Lekha Flow Gold variant",
         "Automated sales split processing routines configured strictly below standard ₹50,000 protocols",
@@ -124,12 +124,12 @@ export default function Home() {
     },
     standard: {
       id: "standard",
-      title: "Lekha Flow Standard",
+      title: "Lekha Flow Lite Standard",
       tagline: isHindi ? "कोर लेज़र सिंक और टैली प्राइम ऑटो वाउचर एंट्री फ्रेमवर्क" : "Core Ledger Sync & Tally Prime Auto Voucher Entry Framework",
       price: "₹ 15,000 / Year",
-      limit: "5,000 Invoices / Year (10K limit @ ₹25,000)",
+      limit: "10,000 Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://rzp.io/rzp/BKytDmX",
+      razorpayUrl: "https://rzp.io/l/SkJTqlgi",
       features: [
         "Direct automatic entry handler for Sales and Purchase vouchers into Tally Prime runtime environment",
         "Instant background automation generation of necessary client Masters, Party Ledgers, and Stock Items",
@@ -141,12 +141,12 @@ export default function Home() {
     },
     lite: {
       id: "lite",
-      title: "Lekha Flow Lite",
-      tagline: isHindi ? "BASE यूटिलिटी - ट्रू कॉपी स्नैsnapshot और एक्सेल टेम्पलेट मैपर" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
-      price: "₹ 8,000 / Year",
-      limit: "5,000 Invoices / Year (10K limit @ ₹15,000)",
+      title: "Lekha Flow Lite Premium",
+      tagline: isHindi ? "बेसलाइन यूटिलिटी - ट्रू कॉपी स्नैपशॉट और एक्सेल टेम्पलेट मैपर" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
+      price: "₹ 25,000 / Year",
+      limit: "5,000 Invoices / Year",
       compatibility: "Excel Formatting & Mapping Engine",
-      razorpayUrl: "https://rzp.io/l/lekhaflow_lite",
+      razorpayUrl: "https://rzp.io/l/oVwLNxHT",
       features: [
         "Generates a flawless 100% True Copy structural Excel data snapshot from raw target documents",
         "Universal Template Mapper capability for immediate auto-fill data injections into custom client formats",
@@ -160,10 +160,10 @@ export default function Home() {
       id: "erp9_premium",
       title: "Tally ERP9 Premium Edition",
       tagline: isHindi ? "लेगेसी आर्किटेक्चर के लिए समर्पित प्रीमियम ऑटो एंट्री इंजेक्शन" : "Premium Auto Entry Injection Dedicated for Legacy Architectures",
-      price: "₹ 18,000 / Year",
-      limit: "5,000 Invoices / Year",
+      price: "₹ 35,000 / Year",
+      limit: "25,000 Invoices / Year",
       compatibility: "Tally ERP9 Infrastructure Only",
-      razorpayUrl: "https://rzp.io/l/tally_erp9_premium",
+      razorpayUrl: "https://rzp.io/l/BLZgsWB",
       features: [
         "Equipped with same robust computational split capabilities as the Tally Prime Premium version pipeline",
         "Exclusively optimized for seamless native script parsing injections within Tally ERP9 runtime window contexts",
@@ -177,10 +177,10 @@ export default function Home() {
       id: "erp9_standard",
       title: "Tally ERP9 Standard Edition",
       tagline: isHindi ? "टैली ERP9 इकोसिस्टम के लिए डायरेक्ट वाउचर जनरेशन मैट्रिक्स" : "Direct Voucher Generation Matrix for Tally ERP9 Ecosystems",
-      price: "₹ 15,000 / Year",
-      limit: "5,000 Invoices / Year",
+      price: "₹ 25,000 / Year",
+      limit: "10,000 Invoices / Year",
       compatibility: "Tally ERP9 Infrastructure Only",
-      razorpayUrl: "https://rzp.io/l/tally_erp9_standard",
+      razorpayUrl: "https://rzp.io/l/AZMi622y",
       features: [
         "Mirror feature performance parity parameters matching standard Tally Prime auto-entry models",
         "High fidelity integration pipeline tracking targeting native ERP9 desktop process context scopes",
@@ -194,10 +194,10 @@ export default function Home() {
       id: "busy",
       title: "Lekha Flow Busy Edition",
       tagline: isHindi ? "BUSY सिस्टम के लिए दोषरहित स्वचालित वाउचर जनरेशन फ्रेमवर्क" : "Flawless Automated Voucher Generation Framework for BUSY Systems",
-      price: "₹ 15,000 / Year",
-      limit: "5,000 Invoices / Year (10K limit @ ₹25,000)",
+      price: "₹ 25,000 / Year",
+      limit: "10,000 Invoices / Year",
       compatibility: "BUSY ERP Accounting Software",
-      razorpayUrl: "https://rzp.io/l/lekhaflow_busy",
+      razorpayUrl: "https://rzp.io/l/AEKdBeqc",
       features: [
         "Engineered specifically for complete error-free transaction voucher injections inside active BUSY setups",
         "Produces streamlined single-sheet split database configurations to completely eliminate desktop system hang problems",
@@ -228,6 +228,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-white text-slate-950 font-sans tracking-tight text-xs selection:bg-blue-600 selection:text-white antialiased">
       
+      {/* 1. DYNAMIC COMMERCIAL LETTERHEAD MODAL */}
       {quotationData && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
           <div className="bg-white border-4 border-double border-slate-400 max-w-2xl w-full p-8 rounded-xl shadow-2xl space-y-6 text-black font-sans relative my-8">
@@ -310,6 +311,7 @@ export default function Home() {
         </div>
       )}
 
+      {/* 2. SECURITY GATEWAY MODAL */}
       {showAuthModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="bg-white border-2 border-blue-600 p-6 rounded-2xl max-w-sm w-full space-y-4 shadow-2xl text-black">
@@ -344,6 +346,7 @@ export default function Home() {
         </div>
       )}
 
+      {/* 3. TRIAL SUITE DOWNLOAD PORTAL */}
       {showTrialModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="bg-white border-2 border-yellow-500 p-6 rounded-2xl max-w-sm w-full space-y-4 shadow-2xl text-black">
@@ -351,12 +354,12 @@ export default function Home() {
               <h3 className="text-base font-black text-slate-950">Unlock 7-Days Functional Trial</h3>
               <p className="text-blue-600 font-bold text-[10px] mt-0.5">Target: LekhaFlow Standard Edition Suite Setup.exe</p>
             </div>
-            <form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Initializing download sequence for: Lekha_Flow_Standard_Trial.exe"); }} className="space-y-3 font-medium">
+            <form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Redirecting your node... (Target matches Tally Prime Core)"); window.open("https://rzp.io/l/SkJTqlgi", "_blank"); }} className="space-y-3 font-medium">
               <input type="text" required placeholder="Accountant / Business Owner Name" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
               <input type="text" required placeholder="Mobile Number (WhatsApp linked)" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
               <input type="email" required placeholder="Corporate Email Address" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
               <button type="submit" className="w-full py-2.5 bg-gradient-to-r from-yellow-500 to-amber-500 text-black font-black rounded-xl transition text-[11px] uppercase tracking-wider shadow-md">
-                Authorize Profile & Download Setup
+                Authorize Profile & Go to Download Portal
               </button>
             </form>
             <button onClick={() => setShowTrialModal(false)} className="w-full py-1.5 bg-slate-100 text-slate-800 font-bold rounded-lg text-[10px]">Close</button>
@@ -364,6 +367,7 @@ export default function Home() {
         </div>
       )}
 
+      {/* Header Area */}
       <header className="relative z-50 max-w-6xl mx-auto px-4 py-4 flex justify-between items-center border-b border-slate-200 backdrop-blur-md sticky top-0 bg-white/95 shadow-sm">
         <div className="flex items-center space-x-6">
           <div>
@@ -405,6 +409,7 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Hero Presentation */}
       <section id="hero" className="relative z-10 max-w-6xl mx-auto px-4 pt-16 pb-20 grid lg:grid-cols-12 gap-8 items-center">
         <div className="space-y-4 lg:col-span-7">
           <span className="inline-block bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md border border-blue-300 shadow-sm">
@@ -421,7 +426,7 @@ export default function Home() {
             <button onClick={() => setShowTrialModal(true)} className="px-4 py-3 rounded-xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white hover:opacity-95 shadow-lg shadow-blue-600/30 transition text-[11px]">
               {currentContent.trialBtn}
             </button>
-            <button onClick={() => alert("Streaming localized tutorial configurations...")} className="px-4 py-3 rounded-xl font-black bg-slate-100 border border-slate-300 text-slate-950 hover:bg-slate-200 transition text-[11px]">
+            <button onClick={() => window.open("https://rzp.io/l/SkJTqlgi", "_blank")} className="px-4 py-3 rounded-xl font-black bg-slate-100 border border-slate-300 text-slate-950 hover:bg-slate-200 transition text-[11px]">
               {currentContent.videoBtn}
             </button>
           </div>
@@ -442,6 +447,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Modules Selector tabs */}
       <section id="matrix" className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-2">
           <div>
@@ -516,6 +522,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pricing Matrix Layout */}
       <section id="pricing" className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
         <div className="text-center max-w-xl mx-auto mb-10">
           <h2 className="text-2xl font-black text-slate-950 tracking-tight">{currentContent.gridTitle}</h2>
@@ -566,6 +573,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* System Guide Installation Section */}
       <section className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-200 bg-slate-50 rounded-2xl mb-12 my-6 border-2">
         <div className="space-y-2 mb-6">
           <h3 className="text-lg font-black text-slate-950 tracking-wide">{currentContent.guideTitle}</h3>
@@ -581,7 +589,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FIXED 100%: DYNAMIC LOCALIZATION FOR CONTACT INTAKE SHEET */}
+      {/* Local Consultation Intake Node Section */}
       <section id="contact" className="border-t border-slate-200 bg-slate-50">
         <div className="max-w-xl mx-auto px-4 pt-12 text-center space-y-1">
           <span className="text-blue-600 font-mono text-[9px] uppercase tracking-widest font-black block">Secure Intake Node</span>
@@ -590,11 +598,10 @@ export default function Home() {
             {currentContent.contactDesc}
           </p>
         </div>
-        {/* Is line par isHindi pass karna jaruri hai */}
         <Contact isHindi={isHindi} />
       </section>
 
-      {/* FIXED 100%: FULL LOCALIZATION FOR LOWER PLATFORM MANDATES */}
+      {/* Structural Telemetry Footer */}
       <footer className="bg-slate-950 py-8 border-t border-slate-900 font-mono text-[10px] text-slate-400 text-center space-y-3">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 text-left gap-6 pb-6 border-b border-zinc-800/40 font-sans text-zinc-400">
           <div>
