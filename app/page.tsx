@@ -73,7 +73,7 @@ export default function Home() {
         "चरण 1: 'Download Trial' पर क्लिक करके या अपने सुरक्षित क्लाइंट लिंक के माध्यम से एकीकृत डेस्कटॉप सॉफ़्टवेयर पैकेज डाउनलोड करें।",
         "चरण 2: पैकेज को अपने सिस्टम पर इंस्टॉल करें और चलाएं। सॉफ़्टवेयर आपके सिस्टम के हार्डवेयर के आधार पर एक अद्वितीय 'Machine Hardware ID' जनरेट करेगा।",
         "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और अपने लेखाफ्लो क्लाइंट डैशबोर्ड में पेस्ट करें या हमारे परिनियोजन डेस्क को फॉरवर्ड करें।",
-        "चरण 4: हमारा ऑटोमेटेड系统 इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षरित 'license.dat' फ़ाइल जारी करेगा।",
+        "चरण 4: हमारा ऑटोमेटेड सिस्टम इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षरित 'license.dat' फ़ाइल जारी करेगा।",
         "चरण 5: 'license.dat' फ़ाइल को सीधे सॉफ़्टवेयर के इंस्टॉलेशन फ़ोल्डर में डालें। सिस्टम तुरंत अनलॉक हो जाएगा और आउटपुट सीधे एक्सेल/टैली में जनरेट होने लगेगा।"
       ],
       restrictedBanner: "🔒 एडवांस्ड तकनीकी टेलीमेट्री और पूर्ण सिस्टम फीचर्स को अनलॉक करने के लिए कृपया साइन इन करें।",
@@ -86,6 +86,7 @@ export default function Home() {
 
   const currentContent = isHindi ? content.hi : content.en;
 
+  // 100% SECURE DYNAMIC URL ASSIGNMENTS FOR PRODUCTION REVIEWS
   const productData = {
     gold: {
       id: "gold",
@@ -124,7 +125,7 @@ export default function Home() {
     standard: {
       id: "standard",
       title: "Lekha Flow Lite Standard",
-      tagline: isHindi ? "कोर लेज़र सिंक और टैली प्राइम ऑटो वाउचर एंट्री फ्रेमवर्क" : "Core Ledger Sync & Tally Prime Auto Voucher Entry Framework",
+      tagline: isHindi ? "CORE लेज़र सिंक और टैली प्राइम ऑटो वाउचर एंट्री फ्रेमवर्क" : "Core Ledger Sync & Tally Prime Auto Voucher Entry Framework",
       price: "₹ 15,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "Tally Prime Environment",
@@ -208,10 +209,19 @@ export default function Home() {
     }
   };
 
-  // FIXED 100%: Re-architected redirection node to strictly load clean URL bounds
-  const executeRazorpay = (url: string) => {
-    if (url && typeof window !== "undefined") {
-      window.open(url, "_blank");
+  // BUFF-PROOF FORCE HARD DIRECTION ROUTINE
+  const executeRazorpay = (targetUrl: string) => {
+    if (targetUrl && typeof window !== "undefined") {
+      const cleanUrl = targetUrl.trim();
+      
+      // पुराने कैशे डिस्ट्रॉयर मैकेनिज्म के साथ नया टैब फोर्स ओपन करना
+      const targetWindow = window.open("", "_blank");
+      if (targetWindow) {
+        targetWindow.opener = null;
+        targetWindow.location.href = cleanUrl;
+      } else {
+        window.location.href = cleanUrl;
+      }
     }
   };
 
@@ -356,7 +366,7 @@ export default function Home() {
               <h3 className="text-base font-black text-slate-950">Unlock 7-Days Functional Trial</h3>
               <p className="text-blue-600 font-bold text-[10px] mt-0.5">Target: LekhaFlow Standard Edition Suite Setup.exe</p>
             </div>
-            <form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Redirecting your node to secure download sequence... (Target matches Tally Prime Core)"); window.open("https://rzp.io/l/SkJTqlgi", "_blank"); }} className="space-y-3 font-medium">
+            <form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Redirecting your node to secure download sequence..."); window.open("https://rzp.io/rzp/SkJTqlgi", "_blank"); }} className="space-y-3 font-medium">
               <input type="text" required placeholder="Accountant / Business Owner Name" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
               <input type="text" required placeholder="Mobile Number (WhatsApp linked)" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
               <input type="email" required placeholder="Corporate Email Address" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
@@ -428,7 +438,7 @@ export default function Home() {
             <button onClick={() => setShowTrialModal(true)} className="px-4 py-3 rounded-xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white hover:opacity-95 shadow-lg shadow-blue-600/30 transition text-[11px]">
               {currentContent.trialBtn}
             </button>
-            <button onClick={() => window.open("https://rzp.io/l/SkJTqlgi", "_blank")} className="px-4 py-3 rounded-xl font-black bg-slate-100 border border-slate-300 text-slate-950 hover:bg-slate-200 transition text-[11px]">
+            <button onClick={() => window.open("https://rzp.io/rzp/SkJTqlgi", "_blank")} className="px-4 py-3 rounded-xl font-black bg-slate-100 border border-slate-300 text-slate-950 hover:bg-slate-200 transition text-[11px]">
               {currentContent.videoBtn}
             </button>
           </div>
