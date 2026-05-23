@@ -84,7 +84,7 @@ footerCredits: "जितेंद्र भारती द्वारा इ�
 };
 const currentContent = isHindi ? content.hi : content.en;
 
-// 100% RECTIFIED PRODUCT PARAMETERS MATRIX (Fully Verified with Razorpay Sheets)
+// 🚀 RESTORED ORIGINAL RAZORPAY /rzp/ LINKS 🚀
 const productData = {
 gold: {
 id: "gold",
@@ -127,7 +127,7 @@ tagline: isHindi ? "कोर लेज़र सिंक और टैली �
 price: "₹ 15,000 / Year",
 limit: "10,000 Invoices / Year",
 compatibility: "Tally Prime Environment",
-razorpayUrl: "https://rzp.io/rzp/BKytDmX",
+razorpayUrl: "https://rzp.io/rzp/SkJTqlgi",
 features: [
 "Direct automatic entry handler for Sales and Purchase vouchers into Tally Prime runtime environment",
 "Instant background automation generation of necessary client Masters, Party Ledgers, and Stock Items",
@@ -207,7 +207,6 @@ features: [
 }
 };
 
-// BUFF-PROOF FORCE REDIRECTION (Bypasses any state latency or old caches)
 const executeRazorpay = (targetUrl: string) => {
 if (targetUrl && typeof window !== "undefined") {
 const cleanUrl = targetUrl.trim();
@@ -232,7 +231,7 @@ return (
 
 {/* 1. DYNAMIC COMMERCIAL LETTERHEAD MODAL */}
 {quotationData && (
-<div className="fixed inset-0 z-[10] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
+<div className="fixed inset-0 z- flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
 <div className="bg-white border-4 border-double border-slate-400 max-w-2xl w-full p-8 rounded-xl shadow-2xl space-y-6 text-black font-sans relative my-8">
 <div className="text-center border-b-2 border-slate-900 pb-4">
 <h2 className="text-2xl font-black tracking-wider text-slate-950">Nexoriva Systems</h2>
@@ -315,7 +314,7 @@ Close Letterhead Sheet
 
 {/* 2. SECURITY GATEWAY MODAL */}
 {showAuthModal && (
-<div className="fixed inset-0 z-[10] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+<div className="fixed inset-0 z- flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
 <div className="bg-white border-2 border-blue-600 p-6 rounded-2xl max-w-sm w-full space-y-4 shadow-2xl text-black">
 <div className="text-center">
 <h3 className="text-lg font-black text-slate-950 tracking-wide">
@@ -350,13 +349,13 @@ Close Letterhead Sheet
 
 {/* 3. TRIAL SUITE DOWNLOAD PORTAL */}
 {showTrialModal && (
-<div className="fixed inset-0 z-[10] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+<div className="fixed inset-0 z- flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
 <div className="bg-white border-2 border-yellow-500 p-6 rounded-2xl max-w-sm w-full space-y-4 shadow-2xl text-black">
 <div className="text-center">
 <h3 className="text-base font-black text-slate-950">Unlock 7-Days Functional Trial</h3>
 <p className="text-blue-600 font-bold text-[10px] mt-0.5">Target: LekhaFlow Standard Edition Suite Setup.exe</p>
 </div>
-<form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Redirecting your node to secure download portal..."); window.open("https://rzp.io/l/SkJTqlgi", "_blank"); }} className="space-y-3 font-medium">
+<form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Redirecting your node to secure download portal..."); window.open("https://rzp.io/rzp/SkJTqlgi", "_blank"); }} className="space-y-3 font-medium">
 <input type="text" required placeholder="Accountant / Business Owner Name" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
 <input type="text" required placeholder="Mobile Number (WhatsApp linked)" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
 <input type="email" required placeholder="Corporate Email Address" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
@@ -424,7 +423,7 @@ className="px-2.5 py-1 text-[10px] font-black rounded-md border-2 border-blue-60
 <button onClick={() => setShowTrialModal(true)} className="px-4 py-3 rounded-xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white hover:opacity-95 shadow-lg shadow-blue-600/30 transition text-[11px]">
 {currentContent.trialBtn}
 </button>
-<button onClick={() => window.open("https://rzp.io/l/SkJTqlgi", "_blank")} className="px-4 py-3 rounded-xl font-black bg-slate-100 border border-slate-300 text-slate-950 hover:bg-slate-200 transition text-[11px]">
+<button onClick={() => window.open("https://rzp.io/rzp/SkJTqlgi", "_blank")} className="px-4 py-3 rounded-xl font-black bg-slate-100 border border-slate-300 text-slate-950 hover:bg-slate-200 transition text-[11px]">
 {currentContent.videoBtn}
 </button>
 </div>
