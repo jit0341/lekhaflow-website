@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-// Props Interface: page.tsx से आ रहे 'isHindi' को एक्सेप्ट करने के लिए
 interface ContactProps {
   isHindi: boolean;
 }
@@ -16,7 +15,7 @@ export default function Contact({ isHindi }: ContactProps) {
   const [isSubmitted, setIsSubmitted] = useState(false); 
   const [emailError, setEmailError] = useState(""); 
 
-  // ड्युअल-लैंग्वेज डिक्शनरी (UI टेक्स्ट को सिंक करने के लिए)
+  // Complete English and Hindi Dictionary
   const t = {
     en: {
       heroSub: "Nexoriva Systems",
@@ -32,7 +31,7 @@ export default function Contact({ isHindi }: ContactProps) {
       alertFail: "Submission failed. Please try again.",
       alertNet: "Networking error. Please check your connection.",
       thankYouTitle: "Thank You",
-      thankYouDesc: "Your request has been successfully received by **Nexoriva Systems**. Our expert deployment team will contact you within the next 24 hours.",
+      thankYouDesc: "Your request has been successfully received by Nexoriva Systems. Our expert deployment team will contact you within the next 24 hours.",
       thankYouNote: "📬 We have forwarded a confirmation note to your email:",
       btnBack: "Go Back / Submit another response",
       emailRequired: "Email is required",
@@ -41,7 +40,7 @@ export default function Contact({ isHindi }: ContactProps) {
     hi: {
       heroSub: "नेक्सोरीवा सिस्टम्स",
       heroTitle: <>अपनी <br /> <span className="text-yellow-400">अकाउंटिंग ऑटोमेशन</span> बनाएं</>,
-      heroDesc: "हमारे साथ अपने एकाउंटिंग फ्लो को ऑटोमेट करें। फॉर्म भरें, हमारी टीम आपसे जल्द ही संपर्क करेगी।",
+      heroDesc: "हमारे साथ अपने एकाउंटिंग充फ्लो को ऑटोमेट करें। फॉर्म भरें, हमारी टीम आपसे जल्द ही संपर्क करेगी।",
       placeholderName: "आपका नाम",
       placeholderEmail: "ईमेल एड्रेस",
       placeholderCompany: "कंपनी का नाम (वैकल्पिक)",
@@ -52,7 +51,7 @@ export default function Contact({ isHindi }: ContactProps) {
       alertFail: "सबमिशन विफल रहा। कृपया पुनः प्रयास करें।",
       alertNet: "नेटवर्किंग एरर। कृपया अपना इंटरनेट कनेक्शन चेक करें।",
       thankYouTitle: "धन्यवाद",
-      thankYouDesc: "आपका अनुरोध **Nexoriva Systems** को प्राप्त हो गया है। हमारी टेक्निकल डिप्लॉयमेंट टीम अगले 24 घंटों में आपसे संपर्क करेगी।",
+      thankYouDesc: "आपका अनुरोध Nexoriva Systems को प्राप्त हो गया है। हमारी टेक्निकल डिप्लॉयमेंट टीम अगले 24 घंटों में आपसे संपर्क करेगी।",
       thankYouNote: "📬 हमने आपकी ईमेल पर एक कन्फर्मेशन नोट भेजा है:",
       btnBack: "वापस जाएं / दूसरा फॉर्म भरें",
       emailRequired: "ईमेल लिखना अनिवार्य है",
@@ -62,7 +61,6 @@ export default function Contact({ isHindi }: ContactProps) {
 
   const current = isHindi ? t.hi : t.en;
 
-  // ईमेल चेक करने के लिए Regex Function
   const validateEmail = (inputEmail: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!inputEmail) {
@@ -76,12 +74,10 @@ export default function Contact({ isHindi }: ContactProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (emailError || !email) {
       alert(current.alertError);
       return;
     }
-
     setLoading(true);
 
     try {
@@ -97,7 +93,6 @@ export default function Contact({ isHindi }: ContactProps) {
       );
 
       const data = await response.json();
-
       if (data.success) {
         setIsSubmitted(true); 
       } else {
@@ -111,7 +106,6 @@ export default function Contact({ isHindi }: ContactProps) {
     }
   };
 
-  // इंटरैक्टिव ड्युअल-लैंग्वेज Thank You व्यू
   if (isSubmitted) {
     return (
       <section className="relative z-20 py-16 px-6 text-center bg-gradient-to-b from-transparent to-[#040a14]">
@@ -121,11 +115,7 @@ export default function Contact({ isHindi }: ContactProps) {
           </div>
           <h2 className="text-4xl font-bold text-white">{current.thankYouTitle}, {name}!</h2>
           <p className="text-zinc-300 text-sm leading-relaxed max-w-xl mx-auto">
-            {isHindi ? (
-              <span>आपका अनुरोध <strong>Nexoriva Systems</strong> को प्राप्त हो गया है। हमारी टेक्निकल डिप्लॉयमेंट टीम अगले 24 घंटों में आपसे संपर्क करेगी।</span>
-            ) : (
-              <span>Your request has been successfully received by <strong>Nexoriva Systems</strong>. Our expert deployment team will contact you within the next 24 hours.</span>
-            )}
+            {current.thankYouDesc}
           </p>
           <div className="p-4 bg-[#101b2d] rounded-xl border border-cyan-500/10 text-xs text-cyan-400 font-mono">
             {current.thankYouNote} <span className="underline text-white font-bold">{email}</span>
@@ -143,10 +133,10 @@ export default function Contact({ isHindi }: ContactProps) {
     );
   }
 
-  // डायनेमिक इनपुट फॉर्म व्यू
   return (
     <section className="relative z-20 py-12 px-6 bg-gradient-to-b from-transparent to-[#040a14]">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        {/* FIXED 100%: Ab yeh content completely isHindi toggle ke sath sync ho jayega */}
         <div className="space-y-4">
           <p className="text-cyan-400 tracking-[0.3em] text-xs uppercase font-bold">{current.heroSub}</p>
           <h2 className="text-3xl md:text-5xl font-black leading-tight text-white tracking-tight">

@@ -590,7 +590,8 @@ export default function Home() {
             {currentContent.contactDesc}
           </p>
         </div>
-       <Contact isHindi={isHindi} />
+        {/* Is line par isHindi pass karna jaruri hai */}
+        <Contact isHindi={isHindi} />
       </section>
 
       {/* FIXED 100%: FULL LOCALIZATION FOR LOWER PLATFORM MANDATES */}
