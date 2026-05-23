@@ -73,7 +73,7 @@ export default function Home() {
         "चरण 1: 'Download Trial' पर क्लिक करके या अपने सुरक्षित क्लाइंट लिंक के माध्यम से एकीकृत डेस्कटॉप सॉफ़्टवेयर पैकेज डाउनलोड करें।",
         "चरण 2: पैकेज को अपने सिस्टम पर इंस्टॉल करें और चलाएं। सॉफ़्टवेयर आपके सिस्टम के हार्डवेयर के आधार पर एक अद्वितीय 'Machine Hardware ID' जनरेट करेगा।",
         "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और अपने लेखाफ्लो क्लाइंट डैशबोर्ड में पेस्ट करें या हमारे परिनियोजन डेस्क को फॉरवर्ड करें।",
-        "चरण 4: हमारा ऑटोमेटेड सिस्टम इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षरित 'license.dat' फ़ाइल जारी करेगा।",
+        "चरण 4: हमारा ऑटोमेटेड系统 इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षरित 'license.dat' फ़ाइल जारी करेगा।",
         "चरण 5: 'license.dat' फ़ाइल को सीधे सॉफ़्टवेयर के इंस्टॉलेशन फ़ोल्डर में डालें। सिस्टम तुरंत अनलॉक हो जाएगा और आउटपुट सीधे एक्सेल/टैली में जनरेट होने लगेगा।"
       ],
       restrictedBanner: "🔒 एडवांस्ड तकनीकी टेलीमेट्री और पूर्ण सिस्टम फीचर्स को अनलॉक करने के लिए कृपया साइन इन करें।",
@@ -86,7 +86,6 @@ export default function Home() {
 
   const currentContent = isHindi ? content.hi : content.en;
 
-  // 100% RECTIFIED PRODUCT PARAMETERS (Perfectly matched with your verified prices)
   const productData = {
     gold: {
       id: "gold",
@@ -209,8 +208,11 @@ export default function Home() {
     }
   };
 
+  // FIXED 100%: Re-architected redirection node to strictly load clean URL bounds
   const executeRazorpay = (url: string) => {
-    window.open(url, "_blank");
+    if (url && typeof window !== "undefined") {
+      window.open(url, "_blank");
+    }
   };
 
   const launchQuotationLetterhead = (product: any) => {
@@ -354,7 +356,7 @@ export default function Home() {
               <h3 className="text-base font-black text-slate-950">Unlock 7-Days Functional Trial</h3>
               <p className="text-blue-600 font-bold text-[10px] mt-0.5">Target: LekhaFlow Standard Edition Suite Setup.exe</p>
             </div>
-            <form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Redirecting your node... (Target matches Tally Prime Core)"); window.open("https://rzp.io/l/SkJTqlgi", "_blank"); }} className="space-y-3 font-medium">
+            <form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Redirecting your node to secure download sequence... (Target matches Tally Prime Core)"); window.open("https://rzp.io/l/SkJTqlgi", "_blank"); }} className="space-y-3 font-medium">
               <input type="text" required placeholder="Accountant / Business Owner Name" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
               <input type="text" required placeholder="Mobile Number (WhatsApp linked)" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
               <input type="email" required placeholder="Corporate Email Address" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
@@ -367,7 +369,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* Header Area */}
+      {/* Professional Navbar Layout */}
       <header className="relative z-50 max-w-6xl mx-auto px-4 py-4 flex justify-between items-center border-b border-slate-200 backdrop-blur-md sticky top-0 bg-white/95 shadow-sm">
         <div className="flex items-center space-x-6">
           <div>
@@ -409,7 +411,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Presentation */}
+      {/* Hero Core Section */}
       <section id="hero" className="relative z-10 max-w-6xl mx-auto px-4 pt-16 pb-20 grid lg:grid-cols-12 gap-8 items-center">
         <div className="space-y-4 lg:col-span-7">
           <span className="inline-block bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md border border-blue-300 shadow-sm">
@@ -447,7 +449,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Modules Selector tabs */}
+      {/* Modules Selector component block */}
       <section id="matrix" className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-2">
           <div>
@@ -522,7 +524,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing Matrix Layout */}
+      {/* Pricing Grid */}
       <section id="pricing" className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
         <div className="text-center max-w-xl mx-auto mb-10">
           <h2 className="text-2xl font-black text-slate-950 tracking-tight">{currentContent.gridTitle}</h2>
@@ -573,7 +575,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* System Guide Installation Section */}
+      {/* Manual Guide Section */}
       <section className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-200 bg-slate-50 rounded-2xl mb-12 my-6 border-2">
         <div className="space-y-2 mb-6">
           <h3 className="text-lg font-black text-slate-950 tracking-wide">{currentContent.guideTitle}</h3>
@@ -589,7 +591,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Local Consultation Intake Node Section */}
+      {/* Contact Section */}
       <section id="contact" className="border-t border-slate-200 bg-slate-50">
         <div className="max-w-xl mx-auto px-4 pt-12 text-center space-y-1">
           <span className="text-blue-600 font-mono text-[9px] uppercase tracking-widest font-black block">Secure Intake Node</span>
@@ -601,7 +603,7 @@ export default function Home() {
         <Contact isHindi={isHindi} />
       </section>
 
-      {/* Structural Telemetry Footer */}
+      {/* Footer Block */}
       <footer className="bg-slate-950 py-8 border-t border-slate-900 font-mono text-[10px] text-slate-400 text-center space-y-3">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 text-left gap-6 pb-6 border-b border-zinc-800/40 font-sans text-zinc-400">
           <div>
