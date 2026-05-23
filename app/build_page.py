@@ -1,4 +1,7 @@
-"use client";
+import os
+
+# 100% Correct synced code string targeting production layout
+nextjs_code = """"use client";
 
 import Contact from "@/components/contact";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -616,3 +619,13 @@ export default function Home() {
     </div>
   );
 }
+"""
+
+# Ensure the app/ directory exists smoothly
+os.makedirs("app", exist_ok=True)
+
+# Write out the fresh production payload explicitly
+with open("app/page.tsx", "w", encoding="utf-8") as f:
+    f.write(nextjs_code)
+
+print("SUCCESS: app/page.tsx has been forcefully overwritten with exact Razorpay URLs!")
