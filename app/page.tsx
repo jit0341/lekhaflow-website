@@ -1,409 +1,618 @@
-'use client'
-export default function LekhaFlowHomepage() {
-  const products = [
-    {
-      name: 'LekhaFlow Lite',
-      price5k: '₹8,000 / Year',
-      price10k: '₹15,000 / Year',
-      desc: 'Excel Summary + AI Invoice Analysis + Universal Template Mapper'
-    },
-    {
-      name: 'LekhaFlow Standard',
-      price5k: '₹15,000 / Year',
-      price10k: '₹25,000 / Year',
-      desc: 'Tally XML Automation + Master Creation + GST Smart Processing'
-    },
-    {
-      name: 'LekhaFlow Premium',
-      price5k: '₹18,000 / Year',
-      price10k: '₹35,000 / Year',
-      desc: 'Full Automation + GSTR-2B + Auto Split + Priority Support'
-    },
-    {
-      name: 'LekhaFlow BUSY',
-      price5k: '₹15,000 / Year',
-      price10k: '₹25,000 / Year',
-      desc: 'Dedicated BUSY Software Automation Environment'
-    }
-  ]
+"use client";
 
-  const features = [
-    'AI-Powered Invoice OCR',
-    'Tally XML Automation',
-    'BUSY Import Automation',
-    'Bank Statement Automation',
-    'GSTR-2B Reconciliation',
-    'Machine ID License Security',
-    'Concurrent Multi-Thread Processing',
-    'Auto Master Creation',
-    'Universal Template Mapper',
-    'Smart Cache (No API Wastage)',
-    'One Click Installer',
-    'Live Usage Monitoring'
-  ]
+import Contact from "@/components/contact";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import { useState } from "react";
+
+export default function Home() {
+  const [isHindi, setIsHindi] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<"gold" | "premium" | "standard" | "lite" | "erp9_premium" | "erp9_standard" | "busy">("gold");
+  const [quotationData, setQuotationData] = useState<any | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [showAuthModal, setShowAuthModal] = useState<boolean>(false);
+  const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
+  const [showTrialModal, setShowTrialModal] = useState<boolean>(false);
+
+  const content = {
+    en: {
+      navLinks: { howItWorks: "How It Works", modules: "Our Modules", pricing: "Pricing Plans", contact: "Request Demo" },
+      heroBadge: "Automating Accuracy, Empowering Accountants",
+      heroTitle: "High Precision Invoicing Data Extractors & Automated Split Logic",
+      heroDesc: "LekhaFlow converts manual, fragmented accounting workflows into high-speed digital pipelines. Powered by Gemini AI parsing architectures and deterministic splitting schemas, it safely matches invoice row variables directly into target ERP environments smoothly.",
+      trialBtn: "🚀 Try 7-Days Free Trial",
+      videoBtn: "🎬 Watch Product Video",
+      secTitle: "7 Specialized Functional Modules",
+      secDesc: "Select any product tab component to analyze specific execution logic algorithms",
+      activeText: "Active Selection",
+      featureTitle: "Explicit Integration Protocols List:",
+      unlimitedBank: "UNLIMITED Bank Statement Automated Entry (Tally/Busy) - Included Free",
+      quoteBtn: "📄 Generate Quotation Letterhead",
+      buyBtn: "💳 Buy Now / Pay with Razorpay",
+      gridTitle: "Full Product Deployment Grid",
+      gridDesc: "Comprehensive list grid summary showcasing operating parameters bounds",
+      mostAdvanced: "Most Advanced",
+      gridQuote: "Quotation",
+      gridBuy: "Buy Now",
+      guideTitle: "⚙️ System Installation & Machine Locking Guide",
+      guideDesc: "Please follow these steps sequentially to activate LekhaFlow on your local operating environment.",
+      steps: [
+        "Step 1: Download the unified desktop software package by clicking 'Download Trial' or via your secure client link.",
+        "Step 2: Install and run the package locally. The software will generate and display a unique 'Machine Hardware ID' based on your local system specs.",
+        "Step 3: Copy that Hardware ID and paste it into your LekhaFlow Client Dashboard or forward it to our deployment desk.",
+        "Step 4: Our automated vault will process it and issue a cryptographically signed 'license.dat' file directly to your Email/WhatsApp.",
+        "Step 5: Drop the 'license.dat' file directly into the software installation directory. The system will unlock instantly and guide your output to Excel/Tally automatically."
+      ],
+      restrictedBanner: "🔒 Sign In to unlock advanced technical telemetry and granular system feature structures.",
+      contactTitle: "Submit Your Workflow Specifications",
+      contactDesc: "Complete the form below. Our team will contact you promptly to set up your workflow pipeline.",
+      systemMandate: "All desktop setup bundles enforce runtime cryptographic Machine Hardware ID locks verification.",
+      footerCredits: "Engineered & Architected by Jitendra Bharti | Developed in India"
+    },
+    hi: {
+      navLinks: { howItWorks: "काम कैसे करता है", modules: "हमारे 7 सॉफ़्टवेयर वेरिएंट", pricing: "सब्स्क्रिप्शन रेट्स", contact: "संपर्क / डेमो अनुरोध" },
+      heroBadge: "सटीकता का स्वचालन, लेखाकारों का सशक्तिकरण",
+      heroTitle: "उच्च-सटीक इनवॉइस डेटा एक्सट्रैक्टर्स और ऑटोमैटिक स्प्लिट लॉजिक",
+      heroDesc: "लेखाफ्लो आपके मैन्युअल & बिखरे हुए अकाउंटिंग बिलिंग रूटीन को हाई-स्पीड डिजिटल ऑटोमेशन लाइनों में बदल देता है। एडवांस्ड एआई पार्सिंग आर्किटेक्चर और स्प्लिटिंग स्कीमा द्वारा संचालित, यह इनवॉइस रो वेरिएबल्स को सीधे आपके एकाउंटिंग सॉफ्टवेयर में सिंक करता है।",
+      trialBtn: "🚀 7-दिनों का फ्री ट्रायल आज़माएं",
+      videoBtn: "🎬 सॉफ़्टवेयर डेमो वीडियो देखें",
+      secTitle: "7 विशेषीकृत फंक्शनल मॉड्यूल्स",
+      secDesc: "विशिष्ट निष्पादन लॉजिक एल्गोरिदम का विश्लेषण करने के लिए किसी भी उत्पाद टैब पर क्लिक करें",
+      activeText: "सक्रिय चयन",
+      featureTitle: "सॉफ़्टवेयर एकीकरण प्रोटोकॉल की सूची:",
+      unlimitedBank: "असीमित बैंक स्टेटमेंट ऑटोमैटिक एंट्री (Tally/Busy) - पूरी तरह से मुफ्त शामिल",
+      quoteBtn: "📄 ऑफिशियल कोटेशन लेटरहेड जनरेट करें",
+      buyBtn: "💳 अभी खरीदें / रेज़रपे से सुरक्षित भुगतान",
+      gridTitle: "पूर्ण उत्पाद परिनियोजन मैट्रिक्स ग्रिड",
+      gridDesc: "सारे सॉफ़्टवेयर वेरिएंट्स की कीमतों और परिचालन सीमाओं का संक्षिप्त विवरण",
+      mostAdvanced: "सबसे उन्नत",
+      gridQuote: "कोटेशन",
+      gridBuy: "अभी खरीदें",
+      guideTitle: "⚙️ सिस्टम इंस्टॉलेशन और मशीन लॉकिंग गाइड",
+      guideDesc: "अपने स्थानीय ऑपरेटिंग एनवायरनमेंट पर लेखाफ्लो को सक्रिय करने के लिए कृपया इन चरणों का क्रमिक रूप से पालन करें।",
+      steps: [
+        "चरण 1: 'Download Trial' पर क्लिक करके या अपने सुरक्षित क्लाइंट लिंक के माध्यम से एकीकृत डेस्कटॉप सॉफ़्टवेयर पैकेज डाउनलोड करें।",
+        "चरण 2: पैकेज को अपने सिस्टम पर इंस्टॉल करें और चलाएं। सॉफ़्टवेयर आपके सिस्टम के हार्डवेयर के आधार पर एक अद्वितीय 'Machine Hardware ID' जनरेट करेगा।",
+        "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और अपने लेखाफ्लो क्लाइंट डैशबोर्ड में पेस्ट करें या हमारे परिनियोजन डेस्क को फॉरवर्ड करें।",
+        "चरण 4: हमारा ऑटोमेटेड सिस्टम इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षरित 'license.dat' फ़ाइल जारी करेगा।",
+        "चरण 5: 'license.dat' फ़ाइल को सीधे सॉफ़्टवेयर के इंस्टॉलेशन फ़ोल्डर में डालें। सिस्टम तुरंत अनलॉक हो जाएगा और आउटपुट सीधे एक्सेल/टैली में जनरेट होने लगेगा।"
+      ],
+      restrictedBanner: "🔒 एडवांस्ड तकनीकी टेलीमेट्री और पूर्ण सिस्टम फीचर्स को अनलॉक करने के लिए कृपया साइन इन करें।",
+      contactTitle: "अपनी वर्कफ़्लो आवश्यकताएँ सबमिट करें",
+      contactDesc: "नीचे दिए गए फ़ॉर्म को पूरा भरें। हमारे एक्सपर्ट तुरंत आपके सिस्टम सेटअप के लिए आपसे संपर्क करेंगे।",
+      systemMandate: "सभी डेस्कटॉप सेटअप बंडल रनटाइम क्रिप्टोग्राफिक मशीन हार्डवेयर आईडी锁 सत्यापन लागू करते हैं।",
+      footerCredits: "जितेंद्र भारती द्वारा इंजीनियर और आर्किटेक्ट किया गया | भारत में विकसित"
+    }
+  };
+
+  const currentContent = isHindi ? content.hi : content.en;
+
+  // 100% SECURE REDIRECTION ENHANCEMENT - ZERO LATENCY MATCH
+  const productData = {
+    gold: {
+      id: "gold",
+      title: "Lekha Flow Gold",
+      tagline: isHindi ? "सबसे उन्नत ऑटोमेशन सुइट (प्रीमियम एडवांस एडिशन)" : "Most Advanced Automation Suite (Premium Advance Edition)",
+      price: "₹ 35,000 / Year",
+      limit: "Unlimited Invoices / Year",
+      compatibility: "Tally Prime Environment",
+      razorpayUrl: "https://rzp.io/rzp/sQg7LGy",
+      features: [
+        "Random splitting of sales invoice amounts strictly below ₹50,000 threshold",
+        "Random distribution of items per bill (dynamically assigns 1, 2, 3, 4 rows or custom item list)",
+        "Proportional balanced asset allocation across transaction values and inventory lines automatically",
+        "Dedicated Monthly / Quarterly split management configurations available natively right on the GUI dashboard",
+        "Advanced tamper prevention technology with auto-fail hardware lock license protection",
+        "Complimentary inclusion of Unlimited Tally/Busy Bank Statement automated entry handler utilities"
+      ]
+    },
+    premium: {
+      id: "premium",
+      title: "Lekha Flow Premium",
+      tagline: isHindi ? "उच्च दक्षता स्प्लिटिंग और ऑटोमेटेड लेज़र प्रोसेसिंग इंजन" : "High Efficiency Splitting & Automated Ledger Processing Engine",
+      price: "₹ 35,000 / Year",
+      limit: "25,000 Invoices / Year",
+      compatibility: "Tally Prime Environment",
+      razorpayUrl: "https://rzp.io/rzp/9HGERapH",
+      features: [
+        "Matches exact high-speed operational backend computational matrix of Lekha Flow Gold variant",
+        "Automated sales split processing routines configured strictly below standard ₹50,000 protocols",
+        "Dynamic random distribution patterns active across transaction values and line item arrays",
+        "Note: Monthly / Quarterly custom operational split toggles are absent on the physical GUI layout",
+        "Direct desktop distribution server package deployment executable configuration",
+        "Complimentary inclusion of Unlimited Tally/Busy Bank Statement automated entry handler utilities"
+      ]
+    },
+    standard: {
+      id: "standard",
+      title: "Lekha Flow Lite Standard",
+      tagline: isHindi ? "कोर लेज़र सिंक और टैली प्राइम ऑटो वाउचर एंट्री फ्रेमवर्क" : "Core Ledger Sync & Tally Prime Auto Voucher Entry Framework",
+      price: "₹ 15,000 / Year",
+      limit: "10,000 Invoices / Year",
+      compatibility: "Tally Prime Environment",
+      razorpayUrl: "https://rzp.io/rzp/SkJTqlgi",
+      features: [
+        "Direct automatic entry handler for Sales and Purchase vouchers into Tally Prime runtime environment",
+        "Instant background automation generation of necessary client Masters, Party Ledgers, and Stock Items",
+        "Automated form population logic fields: State, Country, GSTIN metadata, PAN cards, HSN codes, and GST rates",
+        "Produces a highly organized structural independent Invoice Summary Excel dataset sheet automatically",
+        "Advanced tracking integration layer designed to completely eliminate missing accounting reference codes",
+        "Complimentary inclusion of Unlimited Tally/Busy Bank Statement automated entry handler utilities"
+      ]
+    },
+    lite: {
+      id: "lite",
+      title: "Lekha Flow Lite Premium",
+      tagline: isHindi ? "बेसलाइन यूटिलिटी - ट्रू कॉपी स्नैपशॉट और एक्सेल टेम्पलेट मैपर" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
+      price: "₹ 25,000 / Year",
+      limit: "5,000 Invoices / Year",
+      compatibility: "Excel Formatting & Mapping Engine",
+      razorpayUrl: "https://rzp.io/rzp/oVwLNxHT",
+      features: [
+        "Generates a flawless 100% True Copy structural Excel data snapshot from raw target documents",
+        "Universal Template Mapper capability for immediate auto-fill data injections into custom client formats",
+        "Dynamic automated compilation sequence tracking operational Invoice Summary metrics data sheet",
+        "Produces exactly 3 specialized standalone output Excel files per active transaction workspace batch",
+        "Built-in multi-page isolated PDF parser pipeline framework routing automation components",
+        "Complimentary inclusion of Unlimited Tally/Busy Bank Statement automated entry handler utilities"
+      ]
+    },
+    erp9_premium: {
+      id: "erp9_premium",
+      title: "Tally ERP9 Premium Edition",
+      tagline: isHindi ? "लेगेसी आर्किटेक्चर के लिए समर्पित प्रीमियम ऑटो एंट्री इंजेक्शन" : "Premium Auto Entry Injection Dedicated for Legacy Architectures",
+      price: "₹ 35,000 / Year",
+      limit: "25,000 Invoices / Year",
+      compatibility: "Tally ERP9 Infrastructure Only",
+      razorpayUrl: "https://rzp.io/rzp/BLZgsWB",
+      features: [
+        "Equipped with same robust computational split capabilities as the Tally Prime Premium version pipeline",
+        "Exclusively optimized for seamless native script parsing injections within Tally ERP9 runtime window contexts",
+        "Standalone legacy system adapter environment block separate from standard Prime codebase framework lines",
+        "Sales transaction amount processing logic configured safely underneath standard ₹50,000 security tags",
+        "Encrypted local data serialization framework bypass handlers enabled for reliable background injections",
+        "Complimentary inclusion of Unlimited Tally/Busy Bank Statement automated entry handler utilities"
+      ]
+    },
+    erp9_standard: {
+      id: "erp9_standard",
+      title: "Tally ERP9 Standard Edition",
+      tagline: isHindi ? "टैली ERP9 इकोसिस्टम के लिए डायरेक्ट वाउचर जनरेशन मैट्रिक्स" : "Direct Voucher Generation Matrix for Tally ERP9 Ecosystems",
+      price: "₹ 25,000 / Year",
+      limit: "10,000 Invoices / Year",
+      compatibility: "Tally ERP9 Infrastructure Only",
+      razorpayUrl: "https://rzp.io/rzp/AZMi622y",
+      features: [
+        "Mirror feature performance parity parameters matching standard Tally Prime auto-entry models",
+        "High fidelity integration pipeline tracking targeting native ERP9 desktop process context scopes",
+        "Automated background creation pathways configured for Ledgers, Stock entities, and metadata tax arrays",
+        "Instant validation compilation of corresponding standalone Invoice Summary documentation sheets",
+        "Sleek low footprint computing script running locally with zero latency or network communication delays",
+        "Complimentary inclusion of Unlimited Tally/Busy Bank Statement automated entry handler utilities"
+      ]
+    },
+    busy: {
+      id: "busy",
+      title: "Lekha Flow Busy Edition",
+      tagline: isHindi ? "BUSY सिस्टम के लिए दोषरहित स्वचालित वाउचर जनरेशन फ्रेमवर्क" : "Flawless Automated Voucher Generation Framework for BUSY Systems",
+      price: "₹ 25,000 / Year",
+      limit: "10,000 Invoices / Year",
+      compatibility: "BUSY ERP Accounting Software",
+      razorpayUrl: "https://rzp.io/rzp/AEKdBeqc",
+      features: [
+        "Engineered specifically for complete error-free transaction voucher injections inside active BUSY setups",
+        "Produces streamlined single-sheet split database configurations to completely eliminate desktop system hang problems",
+        "Strict operational data ingestion order mapping sequence: Accounts → Items → Vouchers",
+        "Explicit structural spreadsheet field mapping protocol tracking columns A, B, C through K",
+        "Automated master ledger lookup validation checks executed locally prior to voucher data stream injection",
+        "Complimentary inclusion of Unlimited Tally/Busy Bank Statement automated entry handler utilities"
+      ]
+    }
+  };
+
+  const executeRazorpay = (targetUrl: string) => {
+    if (targetUrl && typeof window !== "undefined") {
+      window.location.href = targetUrl.trim();
+    }
+  };
+
+  const launchQuotationLetterhead = (product: any) => {
+    setQuotationData({
+      refNo: `NS/2026/QUOT/${product.id.toUpperCase()}_0523`,
+      date: "May 23, 2026",
+      name: product.title,
+      limit: product.limit,
+      price: product.price,
+      scope: product.tagline,
+      benefits: product.features
+    });
+  };
 
   return (
-    <div className="min-h-screen bg-[#07111f] text-white">
-      {/* NAVBAR */}
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#07111f]/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div>
-            <h1 className="text-3xl font-black tracking-wide text-yellow-400">
-              Lekha<span className="text-white">Flow</span>
-            </h1>
-            <p className="text-xs text-slate-400">
-              AI Accounting Automation by Nexoriva Systems
-            </p>
-          </div>
-
-          <div className="hidden gap-8 text-sm md:flex">
-            <a href="#features" className="hover:text-yellow-400">Features</a>
-            <a href="#products" className="hover:text-yellow-400">Products</a>
-            <a href="#pricing" className="hover:text-yellow-400">Pricing</a>
-            <a href="#contact" className="hover:text-yellow-400">Contact</a>
-          </div>
-
-          <div className="flex gap-3">
-            <button className="rounded-xl border border-yellow-400 px-4 py-2 text-sm font-semibold text-yellow-400 hover:bg-yellow-400 hover:text-black">
-              Client Login
+    <div className="relative min-h-screen bg-white text-slate-950 font-sans tracking-tight text-xs selection:bg-blue-600 selection:text-white antialiased">
+      {quotationData && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-white border-4 border-double border-slate-400 max-w-2xl w-full p-8 rounded-xl shadow-2xl space-y-6 text-black font-sans relative my-8">
+            <div className="text-center border-b-2 border-slate-900 pb-4">
+              <h2 className="text-2xl font-black tracking-wider text-slate-950">Nexoriva Systems</h2>
+              <p className="text-xs font-bold text-blue-600 tracking-wide">"Automating Accuracy, Empowering Accountants"</p>
+              <div className="text-[10px] text-slate-900 font-bold mt-1 space-y-0.5">
+                <div>Registered MSME (Udyam): <span className="font-extrabold text-black">UDYAM-CG-27-0013072</span></div>
+                <div>Office: Surajpur, Chhattisgarh, India | Email: Nexoriva.systems@gmail.com | Web: lekhaflow.in</div>
+              </div>
+            </div>
+            <div className="flex justify-between font-mono text-[10px] text-black bg-slate-100 p-2.5 rounded-lg border border-slate-300">
+              <div><span className="font-black text-black">Ref No:</span> {quotationData.refNo}</div>
+              <div><span className="font-black text-black">Date:</span> {quotationData.date}</div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-xs font-black text-slate-600 uppercase tracking-wider">Subject:</div>
+              <div className="text-sm font-black text-slate-950">Official Commercial Quotation for LekhaFlow Enterprise Accounting Automation Suite</div>
+            </div>
+            <div className="overflow-x-auto border border-slate-300 rounded-xl">
+              <table className="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr className="bg-slate-200 border-b border-slate-300 text-slate-950 font-black">
+                    <th className="p-3">Specification Target</th>
+                    <th className="p-3">Deployment Coverage parameters</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-300 font-bold text-black">
+                  <tr>
+                    <td className="p-3 font-black bg-slate-50">Software Module Target</td>
+                    <td className="p-3 text-blue-600 font-extrabold">{quotationData.name}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-black bg-slate-50">Processing Bounds</td>
+                    <td className="p-3 text-black">{quotationData.limit}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-black bg-slate-50">Core System Scope</td>
+                    <td className="p-3 text-black">{quotationData.scope}</td>
+                  </tr>
+                  <tr className="bg-blue-50">
+                    <td className="p-3 font-black text-black">Annual Subscription Fee</td>
+                    <td className="p-3 text-sm font-extrabold text-black">{quotationData.price}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="space-y-2">
+              <div className="text-xs font-black text-slate-950 uppercase tracking-wider">Exclusive Operational System Benefits:</div>
+              <ul className="space-y-1.5 text-[11px] text-black pl-0 list-none font-bold">
+                <li className="flex items-start gap-2 text-black">✔ <span>{currentContent.unlimitedBank}</span></li>
+                {quotationData.benefits.map((b: string, i: number) => (
+                  <li key={i} className="flex items-start gap-2 text-black">✔ <span>{b}</span></li>
+                ))}
+              </ul>
+            </div>
+            <div className="p-3 bg-slate-100 rounded-xl border border-slate-300 space-y-1 text-[10px] font-mono text-black font-bold">
+              <div className="font-black text-slate-700 uppercase tracking-wider text-[9px] mb-1">Corporate Bank Wire Parameters:</div>
+              <div className="grid grid-cols-2 gap-1.5">
+                <div><span className="font-black">Bank Name:</span> Bank of India</div>
+                <div><span className="font-black">Account Number:</span> 946110110001194</div>
+                <div><span className="font-black">IFSC Code:</span> BKID0009461</div>
+                <div><span className="font-black">UPI ID:</span> 8871097310-2@ybl</div>
+              </div>
+            </div>
+            <div className="flex justify-between items-end pt-4 border-t border-slate-300 text-[10px] text-slate-800 font-bold">
+              <div className="space-y-0.5">
+                <div>• Software locked securely via local Machine Hardware ID code protocols.</div>
+                <div>• Technical assistance desk remains active across a standard 12-Month pipeline.</div>
+              </div>
+              <div className="text-center text-slate-950 font-black">
+                <div className="text-[9px] text-slate-500 mb-6 font-mono">For, Nexoriva Systems</div>
+                <div className="underline border-t border-slate-400 pt-1">Authorized Signatory</div>
+              </div>
+            </div>
+            <button onClick={() => setQuotationData(null)} className="w-full py-2.5 bg-slate-950 hover:bg-slate-900 text-white font-black rounded-xl transition text-[11px] uppercase tracking-wider">
+              Close Letterhead Sheet
             </button>
-            <button className="rounded-xl bg-yellow-400 px-4 py-2 text-sm font-bold text-black hover:scale-105 transition-transform">
-              Download Trial
+          </div>
+        </div>
+      )}
+
+      {showAuthModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-white border-2 border-blue-600 p-6 rounded-2xl max-w-sm w-full space-y-4 shadow-2xl text-black">
+            <div className="text-center">
+              <h3 className="text-lg font-black text-slate-950 tracking-wide">
+                {authMode === "signin" ? "Sign In to Dashboard" : "Create Professional Account"}
+              </h3>
+              <p className="text-zinc-500 text-[10px] mt-0.5 font-medium">LekhaFlow Cloud Execution Gateway Platform</p>
+            </div>
+            <form onSubmit={(e) => { e.preventDefault(); setIsLoggedIn(true); setShowAuthModal(false); }} className="space-y-3 font-medium">
+              {authMode === "signup" && (
+                <>
+                  <input type="text" required placeholder="Full Operational Name" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
+                  <input type="text" required placeholder="Firm / Company Name" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
+                </>
+              )}
+              <input type="email" required placeholder="Registered Corporate Email" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
+              <input type="password" required placeholder="Secure Access Password" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
+              <button type="submit" className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-xl transition text-[11px] uppercase tracking-wider shadow-md shadow-blue-600/10">
+                {authMode === "signin" ? "Authenticate Credentials" : "Register and Open Systems"}
+              </button>
+            </form>
+            <div className="text-center pt-2 text-[11px] font-bold text-slate-600">
+              {authMode === "signin" ? (
+                <p>New to LekhaFlow? <span onClick={() => setAuthMode("signup")} className="text-blue-600 underline cursor-pointer">Create Account here</span></p>
+              ) : (
+                <p>Already registered? <span onClick={() => setAuthMode("signin")} className="text-blue-600 underline cursor-pointer">Sign In here</span></p>
+              )}
+            </div>
+            <button onClick={() => setShowAuthModal(false)} className="w-full py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-lg transition text-[10px]">Cancel</button>
+          </div>
+        </div>
+      )}
+
+      {showTrialModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-white border-2 border-yellow-500 p-6 rounded-2xl max-w-sm w-full space-y-4 shadow-2xl text-black">
+            <div className="text-center">
+              <h3 className="text-base font-black text-slate-950">Unlock 7-Days Functional Trial</h3>
+              <p className="text-blue-600 font-bold text-[10px] mt-0.5">Target: LekhaFlow Standard Edition Suite Setup.exe</p>
+            </div>
+            <form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Redirecting your node to secure download portal..."); window.open("https://rzp.io/rzp/SkJTqlgi", "_blank"); }} className="space-y-3 font-medium">
+              <input type="text" required placeholder="Accountant / Business Owner Name" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
+              <input type="text" required placeholder="Mobile Number (WhatsApp linked)" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
+              <input type="email" required placeholder="Corporate Email Address" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
+              <button type="submit" className="w-full py-2.5 bg-gradient-to-r from-yellow-500 to-amber-500 text-black font-black rounded-xl transition text-[11px] uppercase tracking-wider shadow-md">
+                Authorize Profile & Go to Download Portal
+              </button>
+            </form>
+            <button onClick={() => setShowTrialModal(false)} className="w-full py-1.5 bg-slate-100 text-slate-800 font-bold rounded-lg text-[10px]">Close</button>
+          </div>
+        </div>
+      )}
+
+      <header className="relative z-50 max-w-6xl mx-auto px-4 py-4 flex justify-between items-center border-b border-slate-200 backdrop-blur-md sticky top-0 bg-white/95 shadow-sm">
+        <div className="flex items-center space-x-6">
+          <div>
+            <div className="text-xl font-black text-slate-950 tracking-wider">
+              Lekha<span className="text-blue-600">Flow</span>
+            </div>
+            <span className="text-[9px] block text-slate-500 font-mono font-bold uppercase tracking-wider -mt-0.5">🛡️ MSME Regd: UDYAM-CG-27-0013072</span>
+          </div>
+
+          <button 
+            onClick={() => setIsHindi(!isHindi)} 
+            className="px-2.5 py-1 text-[10px] font-black rounded-md border-2 border-blue-600 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-sm"
+          >
+            🌐 {isHindi ? "English" : "हिंदी"}
+          </button>
+        </div>
+        
+        <nav className="hidden lg:flex space-x-6 text-slate-950 font-black tracking-wide text-[11px]">
+          <a href="#hero" className="hover:text-blue-600 transition">{currentContent.navLinks.howItWorks}</a>
+          <a href="#matrix" className="hover:text-blue-600 transition">{currentContent.navLinks.modules}</a>
+          <a href="#pricing" className="hover:text-blue-600 transition">{currentContent.navLinks.pricing}</a>
+          <a href="#contact" className="hover:text-blue-600 transition">{currentContent.navLinks.contact}</a>
+        </nav>
+
+        <div className="flex space-x-2">
+          {isLoggedIn ? (
+            <div className="flex items-center space-x-2">
+              <span className="bg-green-100 text-green-700 font-mono text-[9px] font-black px-2 py-1 rounded border border-green-300 uppercase animate-pulse">● Pro Dashboard</span>
+              <button onClick={() => setIsLoggedIn(false)} className="px-2.5 py-1.5 font-bold rounded-lg bg-red-50 text-red-600 text-[10px] border border-red-200 hover:bg-red-100 transition">Log Out</button>
+            </div>
+          ) : (
+            <button onClick={() => { setAuthMode("signin"); setShowAuthModal(true); }} className="px-3 py-2 font-black rounded-lg bg-slate-50 border border-slate-300 hover:bg-slate-100 text-slate-950 transition text-[10px]">
+              🔑 Client Login
             </button>
-          </div>
+          )}
+          <button onClick={() => setShowTrialModal(true)} className="px-3 py-2 font-black rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-600/20 transition text-[10px]">
+            📥 Download Installer / Demo
+          </button>
         </div>
-      </nav>
+      </header>
 
-      {/* HERO */}
-      <section className="relative overflow-hidden px-6 py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(250,204,21,0.15),transparent_40%)]"></div>
-
-        <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2">
-          <div>
-            <div className="mb-6 inline-flex rounded-full border border-yellow-400/30 bg-yellow-400/10 px-4 py-2 text-sm text-yellow-300">
-              MSME Registered AI Automation Platform
-            </div>
-
-            <h1 className="text-5xl font-black leading-tight md:text-7xl">
-              AI Accounting
-              <span className="block text-yellow-400">Automation</span>
-              for Tally & BUSY
-            </h1>
-
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300">
-              LekhaFlow transforms invoice processing, Tally entry,
-              BUSY imports, GST reconciliation, and bank statement
-              automation into a one-click AI workflow.
-            </p>
-
-            <div className="mt-10 flex flex-wrap gap-4">
-              <button className="rounded-2xl bg-yellow-400 px-7 py-4 text-lg font-black text-black hover:scale-105 transition-transform">
-                Request Live Demo
-              </button>
-
-              <button className="rounded-2xl border border-white/20 bg-white/5 px-7 py-4 text-lg font-semibold hover:bg-white/10">
-                Watch Product Video
-              </button>
-            </div>
-
-            <div className="mt-10 flex flex-wrap gap-6 text-sm text-slate-400">
-              <div>✔ AI OCR Engine</div>
-              <div>✔ Tally XML</div>
-              <div>✔ BUSY Automation</div>
-              <div>✔ GSTR-2B</div>
-            </div>
-          </div>
-
-          <div>
-            <div className="rounded-[32px] border border-yellow-400/20 bg-gradient-to-br from-[#132238] to-[#09131f] p-8 shadow-2xl shadow-yellow-500/10">
-              <div className="rounded-3xl bg-black/30 p-6">
-                <div className="mb-6 flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-slate-400">Live AI Processing</p>
-                    <h3 className="text-2xl font-bold text-yellow-400">
-                      LekhaFlow Dashboard
-                    </h3>
-                  </div>
-
-                  <div className="rounded-xl bg-green-500/20 px-4 py-2 text-sm font-bold text-green-400">
-                    ACTIVE
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="rounded-2xl bg-white/5 p-4">
-                    <div className="flex justify-between text-sm">
-                      <span>Total Invoices Processed</span>
-                      <span className="font-bold text-yellow-400">12,845</span>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl bg-white/5 p-4">
-                    <div className="flex justify-between text-sm">
-                      <span>AI Cost Saved via Cache</span>
-                      <span className="font-bold text-green-400">₹8,420</span>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl bg-white/5 p-4">
-                    <div className="flex justify-between text-sm">
-                      <span>Concurrent Processing</span>
-                      <span className="font-bold text-cyan-400">20 Threads</span>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl bg-white/5 p-4">
-                    <div className="flex justify-between text-sm">
-                      <span>License Security</span>
-                      <span className="font-bold text-pink-400">Machine Locked</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button className="mt-8 w-full rounded-2xl bg-yellow-400 py-4 text-lg font-black text-black hover:opacity-90">
-                  Start Free Trial
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section id="features" className="px-6 py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-16 text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.3em] text-yellow-400">
-              Powerful Features
-            </p>
-            <h2 className="mt-4 text-5xl font-black">
-              Built For Real Accountants
-            </h2>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="rounded-3xl border border-white/10 bg-white/5 p-7 hover:border-yellow-400/40 hover:bg-white/10 transition-all"
-              >
-                <div className="mb-4 text-4xl">⚡</div>
-                <h3 className="text-xl font-bold">{feature}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-400">
-                  Enterprise-grade automation designed for Indian accounting workflows.
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PRODUCTS */}
-      <section id="products" className="bg-[#0b1727] px-6 py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-16 text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.3em] text-yellow-400">
-              Product Plans
-            </p>
-            <h2 className="mt-4 text-5xl font-black">
-              Choose Your Automation Engine
-            </h2>
-          </div>
-
-          <div className="grid gap-8 lg:grid-cols-4">
-            {products.map((product, index) => (
-              <div
-                key={index}
-                className="rounded-[32px] border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-8 hover:border-yellow-400/40 hover:scale-[1.02] transition-all"
-              >
-                <div className="mb-6">
-                  <h3 className="text-3xl font-black text-yellow-400">
-                    {product.name}
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-slate-400">
-                    {product.desc}
-                  </p>
-                </div>
-
-                <div className="space-y-4 rounded-2xl bg-black/30 p-5">
-                  <div>
-                    <p className="text-xs uppercase tracking-wide text-slate-500">
-                      5K Invoice Plan
-                    </p>
-                    <p className="mt-1 text-2xl font-black">
-                      {product.price5k}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs uppercase tracking-wide text-slate-500">
-                      10K Invoice Plan
-                    </p>
-                    <p className="mt-1 text-2xl font-black text-yellow-400">
-                      {product.price10k}
-                    </p>
-                  </div>
-                </div>
-
-                <button className="mt-8 w-full rounded-2xl bg-yellow-400 py-4 text-lg font-black text-black hover:opacity-90">
-                  Buy Now
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* DEMO SECTION */}
-      <section className="px-6 py-24">
-        <div className="mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-2">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.3em] text-yellow-400">
-              Live Demonstration
-            </p>
-
-            <h2 className="mt-5 text-5xl font-black leading-tight">
-              From Invoice PDF
-              <span className="block text-yellow-400">To Tally Entry</span>
-              in Seconds
-            </h2>
-
-            <p className="mt-8 text-lg leading-8 text-slate-300">
-              Process purchase invoices, sales invoices, bank statements,
-              GST reconciliation, and BUSY imports with AI-powered automation.
-            </p>
-
-            <div className="mt-10 flex flex-wrap gap-4">
-              <button className="rounded-2xl bg-green-500 px-7 py-4 text-lg font-black text-white">
-                WhatsApp Demo
-              </button>
-
-              <button className="rounded-2xl border border-white/20 px-7 py-4 text-lg font-bold">
-                Download Installer
-              </button>
-            </div>
-          </div>
-
-          <div>
-            <div className="aspect-video rounded-[32px] border border-yellow-400/20 bg-gradient-to-br from-[#132238] to-black p-6 shadow-2xl shadow-yellow-500/10">
-              <div className="flex h-full items-center justify-center rounded-3xl border border-dashed border-white/10 bg-black/20 text-center">
-                <div>
-                  <div className="text-7xl">▶</div>
-                  <h3 className="mt-6 text-3xl font-black">
-                    Product Demo Video
-                  </h3>
-                  <p className="mt-4 text-slate-400">
-                    Upload your official demo video here.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PAYMENT SECTION */}
-      <section id="pricing" className="bg-[#0b1727] px-6 py-24">
-        <div className="mx-auto max-w-5xl rounded-[40px] border border-yellow-400/20 bg-gradient-to-br from-[#132238] to-[#09131f] p-12 text-center shadow-2xl shadow-yellow-500/10">
-          <p className="text-sm font-bold uppercase tracking-[0.3em] text-yellow-400">
-            Secure Subscription
+      <section id="hero" className="relative z-10 max-w-6xl mx-auto px-4 pt-16 pb-20 grid lg:grid-cols-12 gap-8 items-center">
+        <div className="space-y-4 lg:col-span-7">
+          <span className="inline-block bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md border border-blue-300 shadow-sm">
+            {currentContent.heroBadge}
+          </span>
+          <h1 className="text-3xl md:text-5xl font-black leading-none text-slate-950 tracking-tight">
+            {currentContent.heroTitle}
+          </h1>
+          <p className="text-black text-sm font-black leading-relaxed max-w-xl">
+            {currentContent.heroDesc}
           </p>
-
-          <h2 className="mt-6 text-5xl font-black">
-            Razorpay Payment Integration Ready
-          </h2>
-
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-slate-300">
-            Annual subscription plans with invoice-based licensing,
-            cloud updates, WhatsApp support, and Machine ID protection.
-          </p>
-
-          <div className="mt-12 flex flex-wrap justify-center gap-5">
-            <button className="rounded-2xl bg-yellow-400 px-8 py-5 text-lg font-black text-black hover:scale-105 transition-transform">
-              Pay With Razorpay
+          
+          <div className="flex flex-wrap gap-2.5 pt-2">
+            <button onClick={() => setShowTrialModal(true)} className="px-4 py-3 rounded-xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white hover:opacity-95 shadow-lg shadow-blue-600/30 transition text-[11px]">
+              {currentContent.trialBtn}
             </button>
+            <button onClick={() => window.open("https://rzp.io/rzp/SkJTqlgi", "_blank")} className="px-4 py-3 rounded-xl font-black bg-slate-100 border border-slate-300 text-slate-950 hover:bg-slate-200 transition text-[11px]">
+              {currentContent.videoBtn}
+            </button>
+          </div>
+        </div>
 
-            <button className="rounded-2xl border border-white/20 bg-white/5 px-8 py-5 text-lg font-bold hover:bg-white/10">
-              Generate Quotation
+        <div className="lg:col-span-5 bg-slate-50 border-2 border-slate-200 p-5 rounded-2xl shadow-md space-y-4 font-mono text-[11px]">
+          <div className="flex justify-between items-center pb-2.5 border-b border-slate-200">
+            <span className="text-slate-950 font-black text-[10px]">lekhaflow_gui_dashboard.log</span>
+            <span className="text-blue-600 font-bold bg-blue-50 border border-blue-200 px-2 py-0.5 rounded text-[10px]">● CORE PIPELINE ONLINE</span>
+          </div>
+          
+          <div className="space-y-2 bg-white p-3 rounded-xl border border-slate-200 text-slate-950 font-black">
+            <div className="text-slate-400 text-[9px] font-bold uppercase tracking-wider">Operational Monitor Flags</div>
+            <div className="flex justify-between"><span>Splitting Cap Threshold:</span><span className="text-slate-950 font-black">&lt; ₹50,000 / Invoice</span></div>
+            <div className="flex justify-between"><span>Random Items Selector:</span><span className="text-blue-600 font-black">1 to 4 Variable Rows</span></div>
+            <div className="flex justify-between"><span>Parallel Thread Latency:</span><span className="text-green-600 font-black">20 Active Threads</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="matrix" className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-2">
+          <div>
+            <h2 className="text-2xl font-black text-slate-950 tracking-tight">{currentContent.secTitle}</h2>
+            <p className="text-black text-sm font-black">{currentContent.secDesc}</p>
+          </div>
+          <span className="text-[10px] font-mono bg-blue-50 border border-blue-200 text-blue-600 uppercase font-black px-3 py-1 rounded-md shadow-sm">
+            {currentContent.activeText}: {productData[activeTab].title}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-1.5 p-1.5 bg-slate-200 rounded-xl border border-slate-300 mb-4 shadow-inner">
+          {Object.values(productData).map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveTab(item.id as any)}
+              className={`px-1 py-2.5 rounded-lg font-black transition-all text-center text-[10px] cursor-pointer ${
+                activeTab === item.id 
+                  ? "bg-blue-600 text-white font-black shadow-md" 
+                  : "text-slate-950 hover:text-blue-600 hover:bg-white"
+              }`}
+            >
+              {item.title}
+            </button>
+          ))}
+        </div>
+
+        <div className="bg-slate-50 border-2 border-slate-200 p-6 rounded-2xl shadow-md relative">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center pb-5 border-b border-slate-200 gap-4">
+            <div className="space-y-1">
+              <h3 className="text-lg font-black text-slate-950 tracking-wide">{productData[activeTab].title}</h3>
+              <p className="text-blue-600 font-black text-[11px]">{productData[activeTab].tagline}</p>
+            </div>
+            <div className="bg-white p-3 rounded-xl border border-slate-200 min-w-[200px] shadow-sm">
+              <span className="text-slate-500 font-mono text-[9px] block uppercase tracking-wider font-bold">Annual Rate Profile</span>
+              <div className="text-2xl font-black text-slate-950 tracking-tight">{productData[activeTab].price}</div>
+              <span className="text-black text-[10px] font-mono font-black block mt-0.5">{productData[activeTab].limit}</span>
+            </div>
+          </div>
+
+          {!isLoggedIn && (activeTab === "gold" || activeTab === "premium") && (
+            <div className="my-3 p-3 bg-yellow-50 border-2 border-dashed border-yellow-400 rounded-xl text-yellow-900 font-black text-center text-[11px]">
+              {currentContent.restrictedBanner}
+            </div>
+          )}
+
+          <div className="mt-6 space-y-3">
+            <div className="text-slate-600 font-mono text-[9px] uppercase tracking-widest font-black">{currentContent.featureTitle}</div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {productData[activeTab].features.map((feature, i) => {
+                const isRestricted = !isLoggedIn && (activeTab === "gold" || activeTab === "premium") && i > 2;
+                return (
+                  <div key={i} className={`bg-white p-4 rounded-xl border-2 border-slate-300 text-black font-black text-[12px] flex items-start gap-3 shadow-sm hover:border-blue-500 transition-colors ${isRestricted ? "opacity-30 blur-[1px]" : ""}`}>
+                    <span className="text-blue-600 font-black text-sm">✔</span>
+                    <span className="leading-relaxed text-black font-black">
+                      {isRestricted ? "Encrypted core enterprise module parameters data path trace" : feature}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-8 pt-5 border-t border-slate-300 flex flex-col sm:flex-row justify-end gap-3">
+            <button onClick={() => launchQuotationLetterhead(productData[activeTab])} className="px-5 py-2.5 rounded-xl bg-white border-2 border-slate-400 hover:bg-slate-50 text-slate-950 font-black text-[11px] shadow-sm transition-all">
+              {currentContent.quoteBtn}
+            </button>
+            <button onClick={() => executeRazorpay(productData[activeTab].razorpayUrl)} className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-black hover:bg-blue-700 shadow-md shadow-blue-600/10 text-[11px] transition-all">
+              {currentContent.buyBtn}
             </button>
           </div>
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section id="contact" className="px-6 py-24">
-        <div className="mx-auto max-w-7xl rounded-[40px] border border-white/10 bg-white/5 p-12 backdrop-blur">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-[0.3em] text-yellow-400">
-                Nexoriva Systems
-              </p>
+      <section id="pricing" className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
+        <div className="text-center max-w-xl mx-auto mb-10">
+          <h2 className="text-2xl font-black text-slate-950 tracking-tight">{currentContent.gridTitle}</h2>
+          <p className="text-black text-sm font-black mt-1">{currentContent.gridDesc}</p>
+        </div>
 
-              <h2 className="mt-5 text-5xl font-black">
-                Let’s Build Your
-                <span className="block text-yellow-400">Accounting Automation</span>
-              </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {Object.values(productData).map((p) => (
+            <div key={p.id} className={`bg-white border-2 rounded-2xl p-4 flex flex-col justify-between transition-all group ${
+              activeTab === p.id ? "border-blue-600 ring-4 ring-blue-100 shadow-xl bg-slate-50/50" : "border-slate-300 hover:border-slate-400 shadow-sm"
+            }`}>
+              <div className="space-y-3">
+                <div className="flex justify-between items-start gap-1">
+                  <div>
+                    <h3 className="text-slate-950 font-black group-hover:text-blue-600 text-xs transition-colors">{p.title}</h3>
+                    <span className="text-[9px] text-slate-400 font-mono font-bold">{p.compatibility}</span>
+                  </div>
+                  {p.id === "gold" && (
+                    <span className="bg-yellow-100 text-yellow-700 border border-yellow-300 px-2 py-0.5 rounded text-[8px] uppercase tracking-wide font-black">{currentContent.mostAdvanced}</span>
+                  )}
+                </div>
 
-              <div className="mt-10 space-y-5 text-lg text-slate-300">
-                <p>📍 Surajpur, Chhattisgarh, India</p>
-                <p>📞 +91-8770808695</p>
-                <p>✉ Nexoriva.systems@gmail.com</p>
-                <p>🌐 lekhaflow.in</p>
+                <div className="py-2 border-y border-slate-200 my-1">
+                  <div className="text-lg font-black text-slate-950 tracking-tight">{p.price}</div>
+                  <span className="text-slate-600 text-[9px] font-mono font-black block mt-0.5">{p.limit}</span>
+                </div>
+
+                <ul className="space-y-1.5 pl-0 text-black text-[11px] list-none font-black">
+                  {p.features.slice(0, 3).map((f, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-black font-black leading-snug">
+                      <span className="text-blue-500 font-black">▪</span>
+                      <span className="line-clamp-2 text-black font-black">{f}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
 
-            <div className="rounded-3xl bg-black/20 p-8">
-              <div className="space-y-5">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 p-4 outline-none focus:border-yellow-400"
-                />
-
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 p-4 outline-none focus:border-yellow-400"
-                />
-
-                <input
-                  type="text"
-                  placeholder="Company Name"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 p-4 outline-none focus:border-yellow-400"
-                />
-
-                <textarea
-                  rows={5}
-                  placeholder="Tell us about your accounting workflow"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 p-4 outline-none focus:border-yellow-400"
-                ></textarea>
-
-                <button className="w-full rounded-2xl bg-yellow-400 py-4 text-lg font-black text-black hover:opacity-90">
-                  Request Consultation
+              <div className="mt-6 pt-3 border-t border-slate-200 grid grid-cols-2 gap-2">
+                <button onClick={() => launchQuotationLetterhead(p)} className="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-950 font-black text-[10px] transition-colors">
+                  {currentContent.gridQuote}
+                </button>
+                <button onClick={() => executeRazorpay(p.razorpayUrl)} className="py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] transition-all">
+                  {currentContent.gridBuy}
                 </button>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-white/10 px-6 py-10 text-center text-sm text-slate-500">
-        <p>
-          © 2026 LekhaFlow • AI Accounting Automation • Developed by Nexoriva Systems
-        </p>
-        <p className="mt-3">
-          MSME Registered | Built in Surajpur, Chhattisgarh
-        </p>
+      <section className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-200 bg-slate-50 rounded-2xl mb-12 my-6 border-2">
+        <div className="space-y-2 mb-6">
+          <h3 className="text-lg font-black text-slate-950 tracking-wide">{currentContent.guideTitle}</h3>
+          <p className="text-black text-xs font-black">{currentContent.guideDesc}</p>
+        </div>
+        <div className="grid md:grid-cols-1 gap-3.5">
+          {currentContent.steps.map((step, idx) => (
+            <div key={idx} className="bg-white border border-slate-300 p-4 rounded-xl flex items-start gap-4 shadow-sm">
+              <span className="bg-blue-600 text-white font-mono font-black rounded-full h-6 w-6 flex items-center justify-center text-xs shrink-0">{idx + 1}</span>
+              <p className="text-slate-950 font-black text-[12px] leading-relaxed">{step}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="contact" className="border-t border-slate-200 bg-slate-50">
+        <div className="max-w-xl mx-auto px-4 pt-12 text-center space-y-1">
+          <span className="text-blue-600 font-mono text-[9px] uppercase tracking-widest font-black block">Secure Intake Node</span>
+          <h2 className="text-xl font-bold text-slate-950">{currentContent.contactTitle}</h2>
+          <p className="text-black text-xs font-black leading-relaxed">
+            {currentContent.contactDesc}
+          </p>
+        </div>
+        <Contact isHindi={isHindi} />
+      </section>
+
+      <footer className="bg-slate-950 py-8 border-t border-slate-900 font-mono text-[10px] text-slate-400 text-center space-y-3">
+        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 text-left gap-6 pb-6 border-b border-zinc-800/40 font-sans text-zinc-400">
+          <div>
+            <h5 className="text-white font-bold text-xs font-sans mb-1">Corporate HQ</h5>
+            <p className="text-xs leading-relaxed text-zinc-400">Surajpur, Ambikapur Region,<br />Chhattisgarh, India - 497229</p>
+          </div>
+          <div>
+            <h5 className="text-white font-bold text-xs font-sans mb-1">Inquiries Hub</h5>
+            <p className="text-xs leading-relaxed text-zinc-400">Email: Nexoriva.systems@gmail.com<br />Direct Phone: +91-8770808695</p>
+          </div>
+          <div>
+            <h5 className="text-white font-bold text-xs font-sans mb-1">System Mandate</h5>
+            <p className="text-xs leading-relaxed text-zinc-400">{currentContent.systemMandate}</p>
+          </div>
+        </div>
+        <p className="font-bold text-zinc-300 font-sans text-xs">Nexoriva Systems © 2026</p>
+        <p className="tracking-wide text-zinc-500 font-sans text-xs">{currentContent.footerCredits}</p>
       </footer>
 
-      {/* FLOATING WHATSAPP */}
-      <a
-        href="https://wa.me/918770808695"
-        className="fixed bottom-6 right-6 rounded-full bg-green-500 p-5 text-2xl shadow-2xl shadow-green-500/30 hover:scale-110 transition-transform"
-      >
-        💬
-      </a>
+      <WhatsAppButton />
     </div>
-  )
+  );
 }
