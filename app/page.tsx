@@ -595,9 +595,9 @@ export default function Home() {
       <section id="contact" className="border-t border-slate-200 bg-slate-50">
         <div className="max-w-xl mx-auto px-4 pt-12 text-center space-y-1">
           <span className="text-blue-600 font-mono text-[9px] uppercase tracking-widest font-black block">Secure Intake Node</span>
-          <h2 className="text-xl font-bold text-slate-950">{isHindi ? "अपनी वर्कफ़्लो आवश्यकताएँ सबमिट करें" : "Submit Your Workflow Specifications"}</h2>
+          <h2 className="text-xl font-bold text-slate-950">{isHindi ? "Submit your workflow requirements" : "Submit Your Workflow Specifications"}</h2>
           <p className="text-black text-xs font-black">
-            {isHindi ? "नीचे दिए गए फ़ॉर्म को पूरा भरें। हमारे एक्सपर्ट तुरंत आपसे संपर्क करेंगे।" : "Forward structural configuration fields matrix directly to Nexoriva consultation systems."}
+            {isHindi ? "Complete the form below. Our experts will contact you promptly." : "Forward structural configuration fields matrix directly to Nexoriva consultation systems."}
           </p>
         </div>
         <Contact />
