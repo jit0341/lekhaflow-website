@@ -50,7 +50,7 @@ export default function Home() {
       heroBadge: "सटीकता का स्वचालन, लेखाकारों का सशक्तिकरण",
       heroTitle: "उच्च-सटीक इनवॉइस डेटा एक्सट्रैक्टर्स और ऑटोमैटिक स्प्लिट लॉजिक",
       heroDesc: "लेखाफ्लो आपके मैन्युअल और बिखरे हुए अकाउंटिंग बिलिंग रूटीन को हाई-स्पीड डिजिटल ऑटोमेशन लाइनों में बदल देता है। एडवांस्ड एआई पार्सिंग आर्किटेक्चर और स्प्लिटिंग स्कीमा द्वारा संचालित, यह इनवॉइस रो वेरिएबल्स को सीधे आपके एकाउंटिंग सॉफ्टवेयर में सिंक करता है।",
-      trialBtn: "🚀 7-दिनों का फ्री ट्रायल आज़माएं",
+      trialBtn: "🚀 7-दिनों का फ्री ख्याल आज़माएं",
       videoBtn: "🎬 सॉफ़्टवेयर डेमो वीडियो देखें",
       secTitle: "7 विशेषीकृत फंक्शनल मॉड्यूल्स",
       secDesc: "विशिष्ट निष्पादन लॉजिक एल्गोरिदम का विश्लेषण करने के लिए किसी भी उत्पाद टैब पर क्लिक करें",
@@ -200,6 +200,11 @@ export default function Home() {
         "Complimentary inclusion of Unlimited Tally/Busy Bank Statement automated entry handler utilities"
       ]
     }
+  };
+
+  // FIXED: Added missing executeRazorpay function handler line mapping context
+  const executeRazorpay = (url: string) => {
+    window.open(url, "_blank");
   };
 
   const launchQuotationLetterhead = (product: any) => {
@@ -535,7 +540,7 @@ export default function Home() {
                 <div className="flex justify-between items-start gap-1">
                   <div>
                     <h3 className="text-slate-950 font-black group-hover:text-blue-600 text-xs transition-colors">{p.title}</h3>
-                    <span className="text-[9px] text-slate-500 font-mono font-black">{p.compatibility}</span>
+                    <span className="text-[9px] text-slate-400 font-mono font-bold">{p.compatibility}</span>
                   </div>
                   {p.id === "gold" && (
                     <span className="bg-yellow-100 text-yellow-700 border border-yellow-300 px-2 py-0.5 rounded text-[8px] uppercase tracking-wide font-black">{currentContent.mostAdvanced}</span>
