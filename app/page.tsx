@@ -95,7 +95,7 @@ export default function Home() {
       price: "₹ 35,000 / Year",
       limit: "Unlimited Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://rzp.io/l/sQg7LGy",
+      razorpayUrl: "https://rzp.io/rzp/sQg7LGy",
       features: [
         "Random splitting of sales invoice amounts strictly below ₹50,000 threshold",
         "Random distribution of items per bill (dynamically assigns 1, 2, 3, 4 rows or custom item list)",
@@ -112,7 +112,7 @@ export default function Home() {
       price: "₹ 35,000 / Year",
       limit: "25,000 Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://rzp.io/l/9HGERapH",
+      razorpayUrl: "https://rzp.io/rzp/9HGERapH",
       features: [
         "Matches exact high-speed operational backend computational matrix of Lekha Flow Gold variant",
         "Automated sales split processing routines configured strictly below standard ₹50,000 protocols",
@@ -129,7 +129,7 @@ export default function Home() {
       price: "₹ 15,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://rzp.io/l/SkJTqlgi",
+      razorpayUrl: "https://rzp.io/rzp/SkJTqlgi",
       features: [
         "Direct automatic entry handler for Sales and Purchase vouchers into Tally Prime runtime environment",
         "Instant background automation generation of necessary client Masters, Party Ledgers, and Stock Items",
@@ -146,7 +146,7 @@ export default function Home() {
       price: "₹ 25,000 / Year",
       limit: "5,000 Invoices / Year",
       compatibility: "Excel Formatting & Mapping Engine",
-      razorpayUrl: "https://rzp.io/l/oVwLNxHT",
+      razorpayUrl: "https://rzp.io/rzp/oVwLNxHT",
       features: [
         "Generates a flawless 100% True Copy structural Excel data snapshot from raw target documents",
         "Universal Template Mapper capability for immediate auto-fill data injections into custom client formats",
@@ -163,7 +163,7 @@ export default function Home() {
       price: "₹ 35,000 / Year",
       limit: "25,000 Invoices / Year",
       compatibility: "Tally ERP9 Infrastructure Only",
-      razorpayUrl: "https://rzp.io/l/BLZgsWB",
+      razorpayUrl: "https://rzp.io/rzp/BLZgsWB",
       features: [
         "Equipped with same robust computational split capabilities as the Tally Prime Premium version pipeline",
         "Exclusively optimized for seamless native script parsing injections within Tally ERP9 runtime window contexts",
@@ -180,7 +180,7 @@ export default function Home() {
       price: "₹ 25,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "Tally ERP9 Infrastructure Only",
-      razorpayUrl: "https://rzp.io/l/AZMi622y",
+      razorpayUrl: "https://rzp.io/rzp/AZMi622y",
       features: [
         "Mirror feature performance parity parameters matching standard Tally Prime auto-entry models",
         "High fidelity integration pipeline tracking targeting native ERP9 desktop process context scopes",
@@ -197,7 +197,7 @@ export default function Home() {
       price: "₹ 25,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "BUSY ERP Accounting Software",
-      razorpayUrl: "https://rzp.io/l/AEKdBeqc",
+      razorpayUrl: "https://rzp.io/rzp/AEKdBeqc",
       features: [
         "Engineered specifically for complete error-free transaction voucher injections inside active BUSY setups",
         "Produces streamlined single-sheet split database configurations to completely eliminate desktop system hang problems",
