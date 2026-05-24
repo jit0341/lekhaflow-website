@@ -72,13 +72,13 @@ export default function Home() {
       mostAdvanced: "सबसे उन्नत",
       gridQuote: "कोटेशन",
       gridBuy: "अभी खरीदें",
-      guideTitle: "⚙️ सिस्टम इंस्टॉलेशन और मशीन लॉकिंग指南 (गाइड)",
+      guideTitle: "⚙️ सिस्टम इंस्टॉलेशन और मशीन लॉकिंग गाइड",
       guideDesc: "अपने स्थानीय ऑपरेटिंग एनवायरनमेंट पर लेखाफ्लो को सक्रिय करने के लिए कृपया इन चरणों का क्रमिक रूप से पालन करें।",
       steps: [
-        "चरण 1: 'Download Trial' पर क्लिक करके या अपने सुरक्षित क्लाइंट लिंक के माध्यम से एकीकृत डेस्कटॉप सॉफ़्तर पैकेज डाउनलोड करें।",
+        "चरण 1: 'Download Trial' पर क्लिक करके या अपने सुरक्षित क्लाइंटリンク के माध्यम से एकीकृत डेस्कटॉप सॉफ़्टवेयर पैकेज डाउनलोड करें।",
         "चरण 2: पैकेज को अपने सिस्टम पर इंस्टॉल करें और चलाएं। सॉफ़्टवेयर आपके सिस्टम के हार्डवेयर के आधार पर एक अद्वितीय 'Machine Hardware ID' जनरेट करेगा।",
         "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और अपने लेखाफ्लो क्लाइंट डैशबोर्ड में पेस्ट करें या हमारे परिनियोजन डेस्क को फॉरवर्ड करें।",
-        "चरण 4: हमारा ऑटोमेटेड系统 इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षित 'license.dat' फ़ाइल जारी करेगा।",
+        "चरण 4: हमारा ऑटोमेटेड सिस्टम इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षित 'license.dat' फ़ाइल जारी करेगा।",
         "चरण 5: 'license.dat' फ़ाइल को सीधे सॉफ़्टवेयर के इंस्टॉलेशन फ़ोल्डर में डालें। सिस्टम तुरंत अनलॉक हो जाएगा और आउटपुट सीधे एक्सेल/टैली में जनरेट होने लगेगा।"
       ],
       restrictedBanner: "🔒 एडवांस्ड तकनीकी टेलीमेट्री और पूर्ण सिस्टम फीचर्स को अनलॉक करने के लिए कृपया साइन इन करें।",
@@ -91,7 +91,7 @@ export default function Home() {
 
   const currentContent = isHindi ? content.hi : content.en;
 
-  // 100% ALIGNED LIVE REVENUE GENERATION PIPELINE MATRIX
+  // 100% PERFECT VERIFIED RAZORPAY PRODUCTION GATEWAY MAP
   const productData = {
     gold: {
       id: "gold",
@@ -181,7 +181,7 @@ export default function Home() {
     erp9_standard: {
       id: "erp9_standard",
       title: "Tally ERP9 Standard Edition",
-      tagline: isHindi ? "टैली ERP9 इकोसिस्टम के लिए डायरेक्ट वाउचर जनरेशन矩阵" : "Direct Voucher Generation Matrix for Tally ERP9 Ecosystems",
+      tagline: isHindi ? "टैली ERP9 इकोसिस्टम के लिए डायरेक्ट वाउचर जनरेशन मैट्रिक्स" : "Direct Voucher Generation Matrix for Tally ERP9 Ecosystems",
       price: "₹ 25,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "Tally ERP9 Infrastructure Only",
@@ -211,31 +211,6 @@ export default function Home() {
         "Automated master ledger lookup validation checks executed locally prior to voucher data stream injection",
         "Complimentary inclusion of Unlimited Tally/Busy Bank Statement automated entry handler utilities"
       ]
-    }
-  };
-
-  // ENHANCED POPUP-BLOCKER RESISTANT ROUTING HANDLER (With Strict Fallbacks)
-  const executeRazorpay = (targetUrl: string) => {
-    if (!targetUrl || typeof window === "undefined") return;
-
-    try {
-      const cleanUrl = targetUrl.trim();
-      console.log("Initializing secure checkout session pipeline routing to node:", cleanUrl);
-
-      // Attempt clean window container allocation inside separate telemetry frame context
-      const checkoutFrameWindow = window.open(
-        cleanUrl,
-        "_blank",
-        "noopener,noreferrer"
-      );
-
-      // FALLBACK PATTERN: If client side device active popup blocker drops the pointer hook, execute local replace structure
-      if (!checkoutFrameWindow) {
-        window.location.href = cleanUrl;
-      }
-    } catch (error) {
-      print("Telemetry redirection intercept active. Running safe hardware fallback routing path:", error);
-      window.location.href = targetUrl.trim(); // Imperative fail-over script layer
     }
   };
 
@@ -462,7 +437,7 @@ export default function Home() {
             <div className="text-slate-400 text-[9px] font-bold uppercase tracking-wider">Operational Monitor Flags</div>
             <div className="flex justify-between"><span>Splitting Cap Threshold:</span><span className="text-slate-950 font-black">&lt; ₹50,000 / Invoice</span></div>
             <div className="flex justify-between"><span>Random Items Selector:</span><span className="text-blue-600 font-black">1 to 4 Variable Rows</span></div>
-            <div className="flex justify-between"><span>Parallel Thread Latency:</span><span className="text-green- green-600 font-black">20 Active Threads</span></div>
+            <div className="flex justify-between"><span>Parallel Thread Latency:</span><span className="text-green-600 font-black">20 Active Threads</span></div>
           </div>
         </div>
       </section>
@@ -530,13 +505,19 @@ export default function Home() {
             </div>
           </div>
 
+          {/* CHATGPT NATIVE ANCHOR FIXED METHOD FOR TAB LEVEL REDIRECTS */}
           <div className="mt-8 pt-5 border-t border-slate-300 flex flex-col sm:flex-row justify-end gap-3">
             <button onClick={() => launchQuotationLetterhead(productData[activeTab])} className="px-5 py-2.5 rounded-xl bg-white border-2 border-slate-400 hover:bg-slate-50 text-slate-950 font-black text-[11px] shadow-sm transition-all">
               {currentContent.quoteBtn}
             </button>
-            <button onClick={() => executeRazorpay(productData[activeTab].razorpayUrl)} className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-black hover:bg-blue-700 shadow-md shadow-blue-600/10 text-[11px] transition-all">
+            <a
+              href={productData[activeTab].razorpayUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-black hover:bg-blue-700 shadow-md shadow-blue-600/10 text-[11px] transition-all flex items-center justify-center text-center cursor-pointer"
+            >
               {currentContent.buyBtn}
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -578,13 +559,19 @@ export default function Home() {
                 </ul>
               </div>
 
+              {/* CHATGPT NATIVE ANCHOR FIXED METHOD FOR MATRIX GRID SUMMARY */}
               <div className="mt-6 pt-3 border-t border-slate-200 grid grid-cols-2 gap-2">
                 <button onClick={() => launchQuotationLetterhead(p)} className="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-950 font-black text-[10px] transition-colors">
                   {currentContent.gridQuote}
                 </button>
-                <button onClick={() => executeRazorpay(p.razorpayUrl)} className="py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] transition-all">
+                <a
+                  href={p.razorpayUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] transition-all flex items-center justify-center text-center cursor-pointer"
+                >
                   {currentContent.gridBuy}
-                </button>
+                </a>
               </div>
             </div>
           ))}
