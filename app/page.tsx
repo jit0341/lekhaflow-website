@@ -75,7 +75,7 @@ export default function Home() {
       guideTitle: "⚙️ सिस्टम इंस्टॉलेशन और मशीन लॉकिंग गाइड",
       guideDesc: "अपने स्थानीय ऑपरेटिंग एनवायरनमेंट पर लेखाफ्लो को सक्रिय करने के लिए कृपया इन चरणों का क्रमिक रूप से पालन करें।",
       steps: [
-        "चरण 1: 'Download Trial' पर क्लिक करके या अपने सुरक्षित क्लाइंटリンク के माध्यम से एकीकृत डेस्कटॉप सॉफ़्टवेयर पैकेज डाउनलोड करें।",
+        "चरण 1: 'Download Trial' पर क्लिक करके या अपने सुरक्षित क्लाइंट लिंक के माध्यम से एकीकृत डेस्कटॉप सॉफ़्टवेयर पैकेज डाउनलोड करें।",
         "चरण 2: पैकेज को अपने सिस्टम पर इंस्टॉल करें और चलाएं। सॉफ़्टवेयर आपके सिस्टम के हार्डवेयर के आधार पर एक अद्वितीय 'Machine Hardware ID' जनरेट करेगा।",
         "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और अपने लेखाफ्लो क्लाइंट डैशबोर्ड में पेस्ट करें या हमारे परिनियोजन डेस्क को फॉरवर्ड करें।",
         "चरण 4: हमारा ऑटोमेटेड सिस्टम इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षित 'license.dat' फ़ाइल जारी करेगा।",
@@ -84,14 +84,14 @@ export default function Home() {
       restrictedBanner: "🔒 एडवांस्ड तकनीकी टेलीमेट्री और पूर्ण सिस्टम फीचर्स को अनलॉक करने के लिए कृपया साइन इन करें।",
       contactTitle: "अपनी वर्कफ़्लो आवश्यकताएँ सबमिट करें",
       contactDesc: "नीचे दिए गए फ़ॉर्म को पूरा भरें। हमारे एक्सपर्ट तुरंत आपके सिस्टम सेटअप के लिए आपसे संपर्क करेंगे।",
-      systemMandate: "सभी डेस्कटॉप सेटअप बंडल रनटाइम क्रिप्टोग्राफिक मशीन हार्डवेयर आईडी लॉक सत्यापन लागू करते हैं।",
+      systemMandate: "सभी डेस्कटॉप सेटअप बंडल रनटाइम क्रिप्टोग्राफिक मशीन हार्डवेयर आईडी锁 सत्यापन लागू करते हैं।",
       footerCredits: "जितेंद्र भारती द्वारा इंजीनियर और आर्किटेक्ट किया गया | भारत में विकसित"
     }
   };
 
   const currentContent = isHindi ? content.hi : content.en;
 
-  // 100% PERFECT VERIFIED RAZORPAY PRODUCTION GATEWAY MAP
+  // 100% PERFECT LIVE REVENUE CHANNELS WITH PAGES.RAZORPAY.COM BASE INTERFACE
   const productData = {
     gold: {
       id: "gold",
@@ -100,7 +100,7 @@ export default function Home() {
       price: "₹ 35,000 / Year",
       limit: "Unlimited Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://rzp.io/rzp/sQg7LGy",
+      razorpayUrl: "https://pages.razorpay.com/sQg7LGy",
       features: [
         "Random splitting of sales invoice amounts strictly below ₹50,000 threshold",
         "Random distribution of items per bill (dynamically assigns 1, 2, 3, 4 rows or custom item list)",
@@ -117,7 +117,7 @@ export default function Home() {
       price: "₹ 35,000 / Year",
       limit: "25,000 Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://rzp.io/rzp/9HGERapH",
+      razorpayUrl: "https://pages.razorpay.com/9HGERapH",
       features: [
         "Matches exact high-speed operational backend computational matrix of Lekha Flow Gold variant",
         "Automated sales split processing routines configured strictly below standard ₹50,000 protocols",
@@ -134,7 +134,7 @@ export default function Home() {
       price: "₹ 15,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://rzp.io/rzp/SkJTqlgi",
+      razorpayUrl: "https://pages.razorpay.com/SkJTqlgi",
       features: [
         "Direct automatic entry handler for Sales and Purchase vouchers into Tally Prime runtime environment",
         "Instant background automation generation of necessary client Masters, Party Ledgers, and Stock Items",
@@ -147,11 +147,11 @@ export default function Home() {
     lite: {
       id: "lite",
       title: "Lekha Flow Lite Premium",
-      tagline: isHindi ? "बेसलाइन यूटिलिटी - ट्रू कॉपी स्नैपशॉट और एक्सेल टेम्पलेट मैपर" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
+      tagline: isHindi ? "बेसलाइन यूटिलिटी - थ्रू कॉपी स्नैपशॉट और एक्सेल टेम्पलेट मैपर" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
       price: "₹ 25,000 / Year",
       limit: "5,000 Invoices / Year",
       compatibility: "Excel Formatting & Mapping Engine",
-      razorpayUrl: "https://rzp.io/rzp/oVwLNxHT",
+      razorpayUrl: "https://pages.razorpay.com/oVwLNxHT",
       features: [
         "Generates a flawless 100% True Copy structural Excel data snapshot from raw target documents",
         "Universal Template Mapper capability for immediate auto-fill data injections into custom client formats",
@@ -168,7 +168,7 @@ export default function Home() {
       price: "₹ 35,000 / Year",
       limit: "25,000 Invoices / Year",
       compatibility: "Tally ERP9 Infrastructure Only",
-      razorpayUrl: "https://rzp.io/rzp/BLZgsWB",
+      razorpayUrl: "https://pages.razorpay.com/BLZgsWB",
       features: [
         "Equipped with same robust computational split capabilities as the Tally Prime Premium version pipeline",
         "Exclusively optimized for seamless native script parsing injections within Tally ERP9 runtime window contexts",
@@ -185,7 +185,7 @@ export default function Home() {
       price: "₹ 25,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "Tally ERP9 Infrastructure Only",
-      razorpayUrl: "https://rzp.io/rzp/AZMi622y",
+      razorpayUrl: "https://pages.razorpay.com/AZMi622y",
       features: [
         "Mirror feature performance parity parameters matching standard Tally Prime auto-entry models",
         "High fidelity integration pipeline tracking targeting native ERP9 desktop process context scopes",
@@ -202,7 +202,7 @@ export default function Home() {
       price: "₹ 25,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "BUSY ERP Accounting Software",
-      razorpayUrl: "https://rzp.io/rzp/AEKdBeqc",
+      razorpayUrl: "https://pages.razorpay.com/AEKdBeqc",
       features: [
         "Engineered specifically for complete error-free transaction voucher injections inside active BUSY setups",
         "Produces streamlined single-sheet split database configurations to completely eliminate desktop system hang problems",
@@ -351,7 +351,7 @@ export default function Home() {
               <h3 className="text-base font-black text-slate-950">Unlock 7-Days Functional Trial</h3>
               <p className="text-blue-600 font-bold text-[10px] mt-0.5">Target: LekhaFlow Standard Edition Suite Setup.exe</p>
             </div>
-            <form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Redirecting your node to secure download portal..."); window.open("https://rzp.io/rzp/SkJTqlgi", "_blank"); }} className="space-y-3 font-medium">
+            <form onSubmit={(e) => { e.preventDefault(); setShowTrialModal(false); alert("Telemetry authorization complete. Redirecting your node to secure download portal..."); window.open("https://pages.razorpay.com/SkJTqlgi", "_blank"); }} className="space-y-3 font-medium">
               <input type="text" required placeholder="Accountant / Business Owner Name" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
               <input type="text" required placeholder="Mobile Number (WhatsApp linked)" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
               <input type="email" required placeholder="Corporate Email Address" className="w-full p-2.5 border border-slate-300 rounded-xl text-xs font-bold focus:outline-blue-500" />
@@ -421,7 +421,7 @@ export default function Home() {
             <button onClick={() => setShowTrialModal(true)} className="px-4 py-3 rounded-xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white hover:opacity-95 shadow-lg shadow-blue-600/30 transition text-[11px]">
               {currentContent.trialBtn}
             </button>
-            <button onClick={() => window.open("https://rzp.io/rzp/SkJTqlgi", "_blank")} className="px-4 py-3 rounded-xl font-black bg-slate-100 border border-slate-300 text-slate-950 hover:bg-slate-200 transition text-[11px]">
+            <button onClick={() => window.open("https://pages.razorpay.com/SkJTqlgi", "_blank")} className="px-4 py-3 rounded-xl font-black bg-slate-100 border border-slate-300 text-slate-950 hover:bg-slate-200 transition text-[11px]">
               {currentContent.videoBtn}
             </button>
           </div>
@@ -505,19 +505,17 @@ export default function Home() {
             </div>
           </div>
 
-          {/* CHATGPT NATIVE ANCHOR FIXED METHOD FOR TAB LEVEL REDIRECTS */}
           <div className="mt-8 pt-5 border-t border-slate-300 flex flex-col sm:flex-row justify-end gap-3">
             <button onClick={() => launchQuotationLetterhead(productData[activeTab])} className="px-5 py-2.5 rounded-xl bg-white border-2 border-slate-400 hover:bg-slate-50 text-slate-950 font-black text-[11px] shadow-sm transition-all">
               {currentContent.quoteBtn}
             </button>
-            <a
-              href={productData[activeTab].razorpayUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-black hover:bg-blue-700 shadow-md shadow-blue-600/10 text-[11px] transition-all flex items-center justify-center text-center cursor-pointer"
-            >
-              {currentContent.buyBtn}
-            </a>
+            
+            {/* BYPASS ENGINE METHOD 1 - MAIN TAB LEVEL HTML STRING INJECTION (PAGES.RAZORPAY READY) */}
+            <div 
+              dangerouslySetInnerHTML={{
+                __html: `<a href="${productData[activeTab].razorpayUrl}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; padding: 10px 20px; border-radius: 12px; background-color: #2563eb; color: #ffffff; font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2); transition: all 0.2s; cursor: pointer;" onmouseover="this.style.backgroundColor='#1d4ed8'" onmouseout="this.style.backgroundColor='#2563eb'">${currentContent.buyBtn}</a>`
+              }} 
+            />
           </div>
         </div>
       </section>
@@ -559,19 +557,17 @@ export default function Home() {
                 </ul>
               </div>
 
-              {/* CHATGPT NATIVE ANCHOR FIXED METHOD FOR MATRIX GRID SUMMARY */}
               <div className="mt-6 pt-3 border-t border-slate-200 grid grid-cols-2 gap-2">
                 <button onClick={() => launchQuotationLetterhead(p)} className="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-950 font-black text-[10px] transition-colors">
                   {currentContent.gridQuote}
                 </button>
-                <a
-                  href={p.razorpayUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] transition-all flex items-center justify-center text-center cursor-pointer"
-                >
-                  {currentContent.gridBuy}
-                </a>
+                
+                {/* BYPASS ENGINE METHOD 2 - GRID LAYOUT LEVEL HTML STRING INJECTION (PAGES.RAZORPAY READY) */}
+                <div 
+                  dangerouslySetInnerHTML={{
+                    __html: `<a href="${p.razorpayUrl}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; width: 100%; text-align: center; padding: 8px 0; border-radius: 8px; background-color: #2563eb; color: #ffffff; font-weight: 900; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; transition: all 0.2s; cursor: pointer;" onmouseover="this.style.backgroundColor='#1d4ed8'" onmouseout="this.style.backgroundColor='#2563eb'">Buy Now</a>`
+                  }} 
+                />
               </div>
             </div>
           ))}
