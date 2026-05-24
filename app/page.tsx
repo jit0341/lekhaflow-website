@@ -100,7 +100,7 @@ export default function Home() {
       price: "₹ 35,000 / Year",
       limit: "Unlimited Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://pages.razorpay.com/sQg7LGy",
+      razorpayUrl: "https://pages.razorpay.com/pl_SsiWsxVHOSCM9D/view",
       features: [
         "Random splitting of sales invoice amounts strictly below ₹50,000 threshold",
         "Random distribution of items per bill (dynamically assigns 1, 2, 3, 4 rows or custom item list)",
@@ -117,7 +117,7 @@ export default function Home() {
       price: "₹ 35,000 / Year",
       limit: "25,000 Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://pages.razorpay.com/9HGERapH",
+      razorpayUrl: "https://pages.razorpay.com/pl_SsiO0HKvLbpgm0/view",
       features: [
         "Matches exact high-speed operational backend computational matrix of Lekha Flow Gold variant",
         "Automated sales split processing routines configured strictly below standard ₹50,000 protocols",
@@ -134,7 +134,7 @@ export default function Home() {
       price: "₹ 15,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://pages.razorpay.com/SkJTqlgi",
+      razorpayUrl: "https://pages.razorpay.com/pl_SshDcz10pz7Leq/view",
       features: [
         "Direct automatic entry handler for Sales and Purchase vouchers into Tally Prime runtime environment",
         "Instant background automation generation of necessary client Masters, Party Ledgers, and Stock Items",
@@ -151,7 +151,7 @@ export default function Home() {
       price: "₹ 25,000 / Year",
       limit: "5,000 Invoices / Year",
       compatibility: "Excel Formatting & Mapping Engine",
-      razorpayUrl: "https://pages.razorpay.com/oVwLNxHT",
+      razorpayUrl: "https://pages.razorpay.com/pl_SsiUN3b1D9o4Yz/view",
       features: [
         "Generates a flawless 100% True Copy structural Excel data snapshot from raw target documents",
         "Universal Template Mapper capability for immediate auto-fill data injections into custom client formats",
@@ -168,7 +168,7 @@ export default function Home() {
       price: "₹ 35,000 / Year",
       limit: "25,000 Invoices / Year",
       compatibility: "Tally ERP9 Infrastructure Only",
-      razorpayUrl: "https://pages.razorpay.com/BLZgsWB",
+      razorpayUrl: "https://pages.razorpay.com/pl_Ssih9ZXhEh6I0z/view",
       features: [
         "Equipped with same robust computational split capabilities as the Tally Prime Premium version pipeline",
         "Exclusively optimized for seamless native script parsing injections within Tally ERP9 runtime window contexts",
@@ -185,7 +185,7 @@ export default function Home() {
       price: "₹ 25,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "Tally ERP9 Infrastructure Only",
-      razorpayUrl: "https://pages.razorpay.com/AZMi622y",
+      razorpayUrl: "https://pages.razorpay.com/pl_SsiZhwlw7ppv7j/view",
       features: [
         "Mirror feature performance parity parameters matching standard Tally Prime auto-entry models",
         "High fidelity integration pipeline tracking targeting native ERP9 desktop process context scopes",
@@ -202,7 +202,7 @@ export default function Home() {
       price: "₹ 25,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "BUSY ERP Accounting Software",
-      razorpayUrl: "https://pages.razorpay.com/AEKdBeqc",
+      razorpayUrl: "https://pages.razorpay.com/pl_SskDAy2zn1cvov/view",
       features: [
         "Engineered specifically for complete error-free transaction voucher injections inside active BUSY setups",
         "Produces streamlined single-sheet split database configurations to completely eliminate desktop system hang problems",
