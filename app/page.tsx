@@ -75,7 +75,7 @@ export default function Home() {
       guideTitle: "⚙️ सिस्टम इंस्टॉलेशन और मशीन लॉकिंग गाइड",
       guideDesc: "अपने स्थानीय ऑपरेटिंग एनवायरनमेंट पर लेखाफ्लो को सक्रिय करने के लिए कृपया इन चरणों का क्रमिक रूप से पालन करें।",
       steps: [
-        "चरण 1: 'Download Trial' पर क्लिक करके या अपने सुरक्षित क्लाइंटリンク के माध्यम से एकीकृत डेस्कटॉप सॉफ़्टवेयर पैकेज डाउनलोड करें।",
+        "चरण 1: 'Download Trial' पर क्लिक करके या अपने सुरक्षित क्लाइंट लिंक के माध्यम से एकीकृत डेस्कटॉप सॉफ़्टवेयर पैकेज डाउनलोड करें।",
         "चरण 2: पैकेज को अपने सिस्टम पर इंस्टॉल करें और चलाएं। सॉफ़्टवेयर आपके सिस्टम के हार्डवेयर के आधार पर एक अद्वितीय 'Machine Hardware ID' जनरेट करेगा।",
         "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और अपने लेखाफ्लो क्लाइंट डैशबोर्ड में पेस्ट करें या हमारे परिनियोजन डेस्क को फॉरवर्ड करें।",
         "चरण 4: हमारा ऑटोमेटेड सिस्टम इसे प्रोसेस करेगा और सीधे आपके ईमेल/व्हाट्सएप पर एक क्रिप्टोग्राफिक रूप से हस्ताक्षित 'license.dat' फ़ाइल जारी करेगा।",
@@ -147,7 +147,7 @@ export default function Home() {
     lite: {
       id: "lite",
       title: "Lekha Flow Lite Premium",
-      tagline: isHindi ? "बेसलाइन यूटिलिटी - ट्रू कॉपी स्नैपशॉट और एक्सेल टेम्पलेट मैपर" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
+      tagline: isHindi ? "बेलाइन यूटिलिटी - थ्रू कॉपी स्नैपशॉट और एक्सेल टेम्पलेट मैपर" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
       price: "₹ 25,000 / Year",
       limit: "5,000 Invoices / Year",
       compatibility: "Excel Formatting & Mapping Engine",
@@ -505,19 +505,17 @@ export default function Home() {
             </div>
           </div>
 
-          {/* CHATGPT NATIVE ANCHOR FIXED METHOD FOR TAB LEVEL REDIRECTS */}
           <div className="mt-8 pt-5 border-t border-slate-300 flex flex-col sm:flex-row justify-end gap-3">
             <button onClick={() => launchQuotationLetterhead(productData[activeTab])} className="px-5 py-2.5 rounded-xl bg-white border-2 border-slate-400 hover:bg-slate-50 text-slate-950 font-black text-[11px] shadow-sm transition-all">
               {currentContent.quoteBtn}
             </button>
-            <a
-              href={productData[activeTab].razorpayUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-black hover:bg-blue-700 shadow-md shadow-blue-600/10 text-[11px] transition-all flex items-center justify-center text-center cursor-pointer"
-            >
-              {currentContent.buyBtn}
-            </a>
+            
+            {/* BYPASS ENGINE METHOD 1 - MAIN TAB LEVEL HTML STRING INJECTION */}
+            <div 
+              dangerouslySetInnerHTML={{
+                __html: `<a href="${productData[activeTab].razorpayUrl}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; padding: 10px 20px; border-radius: 12px; background-color: #2563eb; color: #ffffff; font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2); transition: all 0.2s; cursor: pointer;" onmouseover="this.style.backgroundColor='#1d4ed8'" onmouseout="this.style.backgroundColor='#2563eb'">${currentContent.buyBtn}</a>`
+              }} 
+            />
           </div>
         </div>
       </section>
@@ -559,19 +557,17 @@ export default function Home() {
                 </ul>
               </div>
 
-              {/* CHATGPT NATIVE ANCHOR FIXED METHOD FOR MATRIX GRID SUMMARY */}
               <div className="mt-6 pt-3 border-t border-slate-200 grid grid-cols-2 gap-2">
                 <button onClick={() => launchQuotationLetterhead(p)} className="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-950 font-black text-[10px] transition-colors">
                   {currentContent.gridQuote}
                 </button>
-                <a
-                  href={p.razorpayUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] transition-all flex items-center justify-center text-center cursor-pointer"
-                >
-                  {currentContent.gridBuy}
-                </a>
+                
+                {/* BYPASS ENGINE METHOD 2 - GRID LAYOUT LEVEL HTML STRING INJECTION */}
+                <div 
+                  dangerouslySetInnerHTML={{
+                    __html: `<a href="${p.razorpayUrl}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; width: 100%; text-align: center; padding: 8px 0; border-radius: 8px; background-color: #2563eb; color: #ffffff; font-weight: 900; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; transition: all 0.2s; cursor: pointer;" onmouseover="this.style.backgroundColor='#1d4ed8'" onmouseout="this.style.backgroundColor='#2563eb'">Buy Now</a>`
+                  }} 
+                />
               </div>
             </div>
           ))}
