@@ -10,7 +10,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"gold" | "standard" | "lite" | "erp9_premium" | "erp9_standard">("gold");
   const [quotationData, setQuotationData] = useState<any | null>(null);
   
-  // Modal & Navigation States
+  // Modal & Navigation Dropdown States
   const [showIntakeModal, setShowIntakeModal] = useState<boolean>(false);
   const [intakeTarget, setIntakeTarget] = useState<"demo" | "quotation">("demo");
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -27,7 +27,10 @@ export default function Home() {
     document.title = "LekhaFlow | Premium Tally & BUSY Accounting Automation Platform";
   }, []);
 
-  // 🚀 DROPBOX DIRECT DOWNLOAD STORAGE ROUTER (dl=1 Forced for instant download)
+  // 🚀 FIXED: Absolute WhatsApp Business Endpoint Route Target
+  const WHATSAPP_LINK = "https://wa.me/918770808695";
+
+  // 🚀 DROPBOX DIRECT DOWNLOAD STORAGE ROUTER (dl=1 Forced)
   const downloadRoutes = {
     gold: "https://www.dropbox.com/scl/fi/tyv7sepqejvkvfn7mjvzq/Lekhaflow_Gold_setup.rar?rlkey=w0cows2xjd6ln0xq8gdkx7p13&st=xgrsgy1d&dl=1",
     standard: "https://www.dropbox.com/scl/fi/8pqk5mvruopj1wzhmfi0d/Lekhaflow_Standard_setup.rar?rlkey=9vdr69llvgodt4022vsx38e88&st=ts7yxvi2&dl=1",
@@ -36,14 +39,14 @@ export default function Home() {
     erp9_standard: "https://www.dropbox.com/scl/fi/kmd3tbus1feicyt9zr5lb/LekhaFlow_ERP9_Standard_setup.rar?rlkey=79r07zew1hjftwqogwptp9drr&st=tdyb0j07&dl=1"
   };
 
-  // 🚀 100% CORRECTED HIGHER-CONVERSION ENTERPRISE DICTIONARY (All pricing blunders resolved)
+  // 🚀 100% CORRECTED HIGHER-CONVERSION ENTERPRISE DICTIONARY
   const productData = {
     gold: {
       id: "gold",
       title: "LekhaFlow Gold Suite",
       tagline: isHindi ? "सबसे उन्नत स्वचालन सुइट (Tally Prime एडवांस एडिशन)" : "Most Advanced Automation Suite (Tally Prime Advance Edition)",
       price: "₹ 18,000 / Year",
-      limit: "10,000 Invoices / Year", // 🎯 FIXED: 10,000 Invoices for 18,000
+      limit: "10,000 Invoices / Year", 
       compatibility: "Tally Prime Environment",
       razorpayUrl: "https://pages.razorpay.com/pl_SsiWsxVHOSCM9D/view",
       features: [
@@ -77,14 +80,14 @@ export default function Home() {
       title: "LekhaFlow Lite Engine",
       tagline: isHindi ? "ट्रू कॉपी एक्सेल डेटा स्नैपशॉट और टेम्पलेट मैपर यूटिलिटी" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
       price: "₹ 10,000 / Year",
-      limit: "10,000 Invoices / Year", // 🎯 FIXED: 10,000 Invoices for 10,000
+      limit: "10,000 Invoices / Year", 
       compatibility: "Excel Formatting & Mapping Engine",
       razorpayUrl: "https://pages.razorpay.com/pl_StcltseyG0RpGD/view",
       features: [
         "Generates a flawless 100% True Copy structural Excel data snapshot from raw target client documents",
         "Universal Template Mapper capability for immediate auto-fill data injections into custom client formats",
         "Dynamic automated compilation sequence tracking operational Invoice Summary metrics data sheet safely",
-        "Produces exactly 3 specialized standalone output Excel format sheets per active transaction batch loop",
+        "Produces exactly 3 specialized standalone output Excel format formats sheets per transaction batch loop",
         "Built-in multi-page isolated PDF parser pipeline framework routing automation system components seamlessly",
         "Complimentary inclusion of Unlimited Tally & BUSY Bank Statement auto-entry utility handler modules"
       ]
@@ -94,7 +97,7 @@ export default function Home() {
       title: "Tally ERP9 Premium Edition",
       tagline: isHindi ? "लेगेसी इन्फ्रास्ट्रक्चर के लिए समर्पित प्रीमियम ऑटो एंट्री इंजेक्शन" : "Premium Auto Entry Injection Dedicated for Legacy Architectures",
       price: "₹ 18,000 / Year",
-      limit: "10,000 Invoices / Year", // 🎯 FIXED: 10,000 Invoices for 18,000
+      limit: "10,000 Invoices / Year", 
       compatibility: "Tally ERP9 Infrastructure Only",
       razorpayUrl: "https://pages.razorpay.com/pl_Ssih9ZXhEh6I0z/view",
       features: [
@@ -128,7 +131,7 @@ export default function Home() {
   const content = {
     en: {
       navLinks: { howItWorks: "How It Works", modules: "Software Variants", pricing: "Pricing Matrix", contact: "Book Consultation" },
-      heroBadge: "⚡ India's Most Trusted Tally & BUSY Automation Suite for Tax Professionals",
+      heroBadge: "⚡ AI-Powered Tally & BUSY Automation Suite for Tax Professionals",
       heroTitle: "Automate Tally Entries from PDF & Excel in Minutes",
       heroDesc: "Stop entering invoices manually. LekhaFlow automatically converts purchase/sales PDFs, raw bank statements, and complex client Excel files into clean, ready-to-import Tally vouchers with 100% accuracy.",
       trialBtn: "🚀 Start 7-Days Free Trial",
@@ -163,14 +166,14 @@ export default function Home() {
       navLinks: { howItWorks: "यह कैसे काम करता है", modules: "सॉफ़्टवेयर वेरिएंट", pricing: "प्राइसिंग ग्रिड", contact: "लाइव डेमो बुक करें" },
       heroBadge: "⚡ CAs, अकाउंटेंट्स और टैक्स प्रोफेशनल्स के लिए नंबर #1 एआई स्वचालन सुइट",
       heroTitle: "PDF और Excel इनवॉइस से सीधे Tally में एंट्री करें, मिनटों में!",
-      heroDesc: "घंटों की थका देने वाली मैन्युअल डेटा एंट्री को कहें अलविदा। लेखाफ्लो आपके सेल्स/परचेज बिल, पीडीएफ इनवॉइस, और कच्चे बैंक स्टेटमेंट्स को बिना किसी मानवीय गलती के शत-प्रतिशत सटीकता के साथ सीधे टैली में इम्पोर्ट करने योग्य वाуchers में बदल देता है।",
+      heroDesc: "घंटों की थका देने वाली मैन्युअल डेटा एंट्री को कहें अलविदा। लेखाफ्लो आपके सेल्स/परचेज बिल, पीडीएफ इनवॉइस, और कच्चे बैंक स्टेटमेंट्स को बिना किसी मानवीय गलती के शत-प्रतिशत सटीकता के साथ सीधे टैली में इम्पोर्ट करने योग्य वाउचर में बदल देता है।",
       trialBtn: "🚀 7-दिनों का फ्री ट्रायल शुरू करें",
       videoBtn: "🎬 लाइव प्रोडक्ट वीडियो देखें",
       secTitle: "अपने एकाउंटिंग सॉफ्टवेयर वेरिएंट का चयन करें",
       secDesc: "नीचे दिए गए टैब से अपने वर्किंग एनवायरनमेंट को चुनें और उसकी परिचालन क्षमता और एआई लॉजिक की जांच करें।",
       activeText: "सक्रिय वेरिएंट",
       featureTitle: "सॉफ़्टवेयर फीचर्स और ऑटोमेशन प्रोटोकॉल:",
-      unlimitedBank: "असीमित बैंक स्टेटमेंट ऑटोमैटिक एंट्री मॉड्यूल (Tally/Busy) - पूरी तरह मुफ्त शामिल",
+      unlimitedBank: "असीमित बैंक收藏 स्टेटमेंट ऑटोमैटिक एंट्री मॉड्यूल (Tally/Busy) - पूरी तरह मुफ्त शामिल",
       quoteBtn: "📄 ऑफिशियल कोटेशन लेटरहेड जनरेट करें",
       buyBtn: "💳 अभी खरीदें / रेज़रपे सुरक्षित भुगतान",
       gridTitle: "उत्पाद परिनियोजन मैट्रिक्स ग्रिड",
@@ -178,10 +181,10 @@ export default function Home() {
       mostAdvanced: "एडवांस गोल्ड",
       gridQuote: "कोटेशन",
       gridBuy: "अभी खरीदें",
-      guideTitle: "⚙️ 5-चरणों का सिस्टम इंस्टॉलेशन और मशीन लॉकिंग指南",
+      guideTitle: "⚙️ 5-चरणों का सिस्टम इंस्टॉलेशन और मशीन लॉकिंग गाइड",
       guideDesc: "अपने स्थानीय कंप्यूटर पर लेखाफ्लो को पूरी तरह सुरक्षित सक्रिय करने के लिए इन चरणों का पालन करें।",
       steps: [
-        "चरण 1: 'Download Trial' पर क्लिक करके फॉर्म भरें और अपनी सेटअप फ़ाइल तुरंत डाउनलोड करें।",
+        "चरण 1: 'Download Trial' पर क्लिक करके फॉर्म भरें और अपनी  सेटअप फ़ाइल तुरंत डाउनलोड करें।",
         "चरण 2: पैकेज को अपने कंप्यूटर पर इंस्टॉल करें। पहली बार रन होने पर यह एक यूनीक Machine Hardware ID जनरेट करेगा।",
         "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और एक्टिवेशन के लिए हमारे व्हाट्सएप डेस्क या ईमेल पर फॉरवर्ड करें।",
         "चरण 4: हमारा ऑटोमेटेड क्लाउड वॉल्ट इसे सत्यापित करेगा और सीधे आपके व्हाट्सएप/ईमेल पर 'license.dat' फ़ाइल जारी करेगा।",
@@ -196,6 +199,16 @@ export default function Home() {
   };
 
   const currentContent = isHindi ? content.hi : content.en;
+
+  // 🚀 FIXED: Dynamic Dropdown Tab Selection Router Routing System smoothly
+  const handleDropdownSelect = (variantId: "gold" | "standard" | "lite" | "erp9_premium" | "erp9_standard") => {
+    setActiveTab(variantId);
+    setActiveMenu(null);
+    const pricingSection = document.getElementById("pricing");
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const triggerIntake = (type: "demo" | "quotation", product?: any) => {
     setIntakeTarget(type);
@@ -230,7 +243,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-slate-950 text-slate-100 font-sans tracking-tight text-xs selection:bg-amber-500 selection:text-slate-950 antialiased">
       
-      {/* 📄 OFFICIAL PRINTABLE QUOTATION MODAL */}
+      {/* 📄 CUSTOMIZED PRINTABLE OFFICIAL QUOTATION MODAL */}
       {quotationData && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
           <div className="bg-white border-4 border-double border-slate-400 max-w-2xl w-full p-8 rounded-xl shadow-2xl space-y-6 text-black font-sans relative my-8" id="quotation-sheet">
@@ -260,7 +273,7 @@ export default function Home() {
                 <thead>
                   <tr className="bg-slate-200 border-b border-slate-300 text-slate-950 font-black">
                     <th className="p-3">Specification Target</th>
-                    <th className="p-3">Deployment Coverage Parameters</th>
+                    <th className="p-3">Deployment Parameters</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-300 font-bold text-black">
@@ -351,7 +364,7 @@ export default function Home() {
       )}
 
       {/* 🌟 PREMIUM MULTI-PAGE DROPDOWN HEADER */}
-      <header className="relative z-50 max-w-6xl mx-auto px-4 py-4 flex justify-between items-center border-b border-slate-900 bg-slate-950/95 sticky top-0 shadow-xl no-print">
+      <header className="relative z-50 max-w-6xl mx-auto px-4 py-4 flex justify-between items-center border-b border-slate-800 bg-slate-950/95 sticky top-0 shadow-lg no-print">
         <div className="flex items-center space-x-6">
           <Link href="/">
             <div className="text-xl font-black text-white tracking-wider cursor-pointer">
@@ -363,36 +376,36 @@ export default function Home() {
           </button>
         </div>
         
-        {/* DROPDOWN NAVIGATION TABS */}
+        {/* MULTI-PAGE INTEGRATED DROPDOWN NAVIGATION TABS */}
         <nav className="hidden lg:flex space-x-8 text-slate-300 font-black tracking-wide text-[11px] relative">
-          <div className="relative group" onMouseEnter={() => setActiveMenu("products")} onMouseLeave={() => setActiveMenu(null)}>
-            <button className="hover:text-amber-400 transition-colors flex items-center gap-1">
+          <div className="relative" onMouseEnter={() => setActiveMenu("products")} onMouseLeave={() => setActiveMenu(null)}>
+            <button className="hover:text-amber-400 transition-colors flex items-center gap-1 font-black cursor-pointer">
               Software Variants <span className="text-[8px]">▼</span>
             </button>
             {activeMenu === "products" && (
-              <div className="absolute top-4 left-0 w-48 bg-slate-900 border border-slate-800 rounded-xl p-2 shadow-2xl space-y-1">
-                <button onClick={() => setActiveTab("gold")} className="w-full text-left p-2 hover:bg-slate-800 rounded text-slate-300 font-bold hover:text-amber-400">LekhaFlow Gold Suite</button>
-                <button onClick={() => setActiveTab("standard")} className="w-full text-left p-2 hover:bg-slate-800 rounded text-slate-300 font-bold hover:text-amber-400">LekhaFlow Standard Sync</button>
-                <button onClick={() => setActiveTab("lite")} className="w-full text-left p-2 hover:bg-slate-800 rounded text-slate-300 font-bold hover:text-amber-400">LekhaFlow Lite Engine</button>
+              <div className="absolute top-full left-0 w-48 bg-slate-900 border border-slate-800 rounded-xl p-2 shadow-2xl space-y-1 mt-1">
+                <button onClick={() => handleDropdownSelect("gold")} className="w-full text-left p-2 hover:bg-slate-800 rounded text-slate-300 font-bold hover:text-amber-400 cursor-pointer">LekhaFlow Gold Suite</button>
+                <button onClick={() => handleDropdownSelect("standard")} className="w-full text-left p-2 hover:bg-slate-800 rounded text-slate-300 font-bold hover:text-amber-400 cursor-pointer">LekhaFlow Standard Sync</button>
+                <button onClick={() => handleDropdownSelect("lite")} className="w-full text-left p-2 hover:bg-slate-800 rounded text-slate-300 font-bold hover:text-amber-400 cursor-pointer">LekhaFlow Lite Engine</button>
               </div>
             )}
           </div>
 
-          <div className="relative group" onMouseEnter={() => setActiveMenu("legacy")} onMouseLeave={() => setActiveMenu(null)}>
-            <button className="hover:text-amber-400 transition-colors flex items-center gap-1">
+          <div className="relative" onMouseEnter={() => setActiveMenu("legacy")} onMouseLeave={() => setActiveMenu(null)}>
+            <button className="hover:text-amber-400 transition-colors flex items-center gap-1 font-black cursor-pointer">
               Legacy Infrastructure <span className="text-[8px]">▼</span>
             </button>
             {activeMenu === "legacy" && (
-              <div className="absolute top-4 left-0 w-48 bg-slate-900 border border-slate-800 rounded-xl p-2 shadow-2xl space-y-1">
-                <button onClick={() => setActiveTab("erp9_premium")} className="w-full text-left p-2 hover:bg-slate-800 rounded text-slate-300 font-bold hover:text-amber-400">Tally ERP9 Premium</button>
-                <button onClick={() => setActiveTab("erp9_standard")} className="w-full text-left p-2 hover:bg-slate-800 rounded text-slate-300 font-bold hover:text-amber-400">Tally ERP9 Standard</button>
+              <div className="absolute top-full left-0 w-48 bg-slate-900 border border-slate-800 rounded-xl p-2 shadow-2xl space-y-1 mt-1">
+                <button onClick={() => handleDropdownSelect("erp9_premium")} className="w-full text-left p-2 hover:bg-slate-800 rounded text-slate-300 font-bold hover:text-amber-400 cursor-pointer">Tally ERP9 Premium</button>
+                <button onClick={() => handleDropdownSelect("erp9_standard")} className="w-full text-left p-2 hover:bg-slate-800 rounded text-slate-300 font-bold hover:text-amber-400 cursor-pointer">Tally ERP9 Standard</button>
               </div>
             )}
           </div>
 
-          {/* 🖼️ DYNAMIC LINK: ARTIFACT INTERACTIVE SCREEN GALLERY */}
+          {/* 🖼️ INTERACTIVE ROUTE NAVIGATION: DETECTS MULTI-PAGE CANVAS */}
           <Link href="/gallery">
-            <span className="hover:text-amber-400 transition-colors cursor-pointer text-amber-400 flex items-center gap-1">
+            <span className="hover:text-amber-400 transition-colors cursor-pointer text-amber-400 flex items-center gap-1 font-black">
               🖼️ Software Dashboard Gallery
             </span>
           </Link>
@@ -405,7 +418,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 🚀 BUYER-CENTRIC CLEAN HIGH-CONVERSION HERO SECTION */}
+      {/* 🚀 BUYER-CENTRIC HERO SECTION */}
       <section id="hero" className="relative z-10 max-w-6xl mx-auto px-4 pt-16 pb-24 grid lg:grid-cols-12 gap-12 items-center no-print">
         <div className="space-y-5 lg:col-span-7">
           <span className="inline-block bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded border border-amber-500/20">
@@ -418,6 +431,7 @@ export default function Home() {
             {currentContent.heroDesc}
           </p>
           
+          {/* RISK-FREE FREE TRIAL COMPONENT FOR ADOPTERS */}
           <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 max-w-md grid grid-cols-1 sm:grid-cols-3 gap-2 text-slate-300 font-bold text-[11px]">
             <div className="flex items-center gap-2"><span className="text-emerald-500 font-black">✔</span><span>7-Day Free Trial</span></div>
             <div className="flex items-center gap-2"><span className="text-emerald-500 font-black">✔</span><span>No Card Required</span></div>
@@ -436,9 +450,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* CATCHY APP PRESENTATION SHIELD CARD */}
+        {/* CATCHY VALIDATED LIVE WHATSAPP ROUTING PRESENTATION SHIELD CARD */}
         <div className="lg:col-span-5 bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 p-6 rounded-3xl shadow-2xl text-center space-y-4">
-          <div className="border border-slate-800 bg-slate-950/60 p-4 rounded-2xl">
+          <div className="border border-slate-800 bg-slate-950/60 p-4 rounded-2xl text-left">
             <div className="text-amber-400 font-black text-sm uppercase tracking-wide">Stop Manual Ledger Posting</div>
             <p className="text-slate-400 text-[11px] mt-1 font-sans leading-relaxed">
               LekhaFlow reads purchase, sales, and banking data with flawless accuracy and transforms them directly into native Tally runtime structures seamlessly.
@@ -449,14 +463,15 @@ export default function Home() {
               <div className="text-white font-black text-xs">Need a Live Walkthrough?</div>
               <div className="text-slate-400 text-[10px] mt-0.5">Talk directly with our product experts.</div>
             </div>
-            <a href="https://wa.me/918770808695" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-xl text-[10px] uppercase tracking-wider">
+            {/* FIXED Absolute Native Mobile Activation Node Point Link Loop */}
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-xl text-[10px] uppercase tracking-wider inline-flex items-center">
               📞 Chat WhatsApp
             </a>
           </div>
         </div>
       </section>
 
-      {/* 📊 INTERACTIVE SELECTION ENGINE WORKSPACE */}
+      {/* 📊 CORE INTERACTIVE RUNTIME MODULE MATRICES */}
       <section id="matrix" className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-900 no-print">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
           <div>
@@ -468,7 +483,7 @@ export default function Home() {
           </span>
         </div>
 
-        {/* Variant Tabs Selector */}
+        {/* Tab Variant Click Selectors Layout Component Container Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 p-2 bg-slate-900 rounded-2xl border border-slate-800 mb-6 shadow-2xl">
           {Object.values(productData).map((item) => (
             <button
@@ -485,7 +500,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Tab Detail Blueprint Card */}
+        {/* Tab Display Info Canvas Sheet */}
         <div className="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 p-6 md:p-8 rounded-3xl shadow-2xl relative">
           <div className="flex flex-col md:flex-row md:justify-between md:items-center pb-6 border-b border-slate-800 gap-4">
             <div className="space-y-1">
@@ -532,7 +547,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📈 LOGICAL TRUST COMPARED matrix */}
+      {/* 📈 COMPARED CONVERSION TRUST matrix */}
       <section className="max-w-6xl mx-auto px-4 py-16 border-t border-slate-900 no-print">
         <div className="text-center max-w-xl mx-auto mb-12">
           <h2 className="text-2xl font-black text-white tracking-tight">Why Choose LekhaFlow Automation Architecture?</h2>
@@ -574,7 +589,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📋 PRODUCTION GRID MATRIX SUMMARY */}
+      {/* 📋 PRICING GRID DEPLOYMENT SECTION */}
       <section id="pricing" className="relative z-20 max-w-6xl mx-auto px-4 py-16 border-t border-slate-900 no-print">
         <div className="text-center max-w-xl mx-auto mb-12">
           <h2 className="text-2xl font-black text-white tracking-tight">{currentContent.gridTitle}</h2>
@@ -622,7 +637,7 @@ export default function Home() {
                   rel="noopener noreferrer" 
                   className="py-2.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-[10px] text-center transition-all uppercase tracking-wider cursor-pointer"
                 >
-                  Buy Now
+                  {currentContent.gridBuy}
                 </a>
               </div>
             </div>
@@ -646,7 +661,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🔒 SUBMIT SECURE TERMINAL NODE */}
+      {/* 🔒 INBOUND SPECIFICATIONS NODE */}
       <section id="contact" className="border-t border-slate-900 bg-slate-900/10 no-print">
         <div className="max-w-xl mx-auto px-4 pt-16 text-center space-y-1">
           <span className="text-amber-400 font-mono text-[9px] uppercase tracking-widest font-black block">Secure Intake Node</span>
@@ -656,7 +671,7 @@ export default function Home() {
         <Contact isHindi={isHindi} />
       </section>
 
-      {/* 🛡️ REVENUE SECURE FOOTER */}
+      {/* 🛡️ REVENUE BLOCK SYSTEM FOOTER */}
       <footer className="bg-slate-950 py-12 border-t border-slate-900 font-mono text-[10px] text-slate-400 text-center space-y-4 no-print">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 text-left gap-8 pb-8 border-b border-slate-800 font-sans text-slate-400">
           <div>
@@ -665,7 +680,7 @@ export default function Home() {
           </div>
           <div>
             <h5 className="text-white font-black text-xs font-sans mb-2 tracking-wide">Inquiries Hub</h5>
-            <p className="text-xs leading-relaxed text-zinc-400 font-medium">Email: Nexoriva.systems@gmail.com<br />Direct Phone: +91-8770808695</p>
+            <p className="text-xs leading-relaxed text-slate-400 font-medium">Email: Nexoriva.systems@gmail.com<br />Direct Phone: +91-8770808695</p>
           </div>
           <div>
             <h5 className="text-white font-black text-xs font-sans mb-2 tracking-wide">System Mandate</h5>
@@ -676,34 +691,15 @@ export default function Home() {
         <p className="tracking-wide text-slate-500 font-sans text-xs font-medium">{currentContent.footerCredits}</p>
       </footer>
 
-      <WhatsAppButton />
+      {/* STICKY WHATSAPP COMPONENT DIRECT LINK INJECTION */}
+      <div className="fixed bottom-6 right-6 z-[90] no-print">
+        <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-2xl transition-all transform hover:scale-110 cursor-pointer">
+          <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.66.986 3.292 1.493 4.913 1.494 5.429 0 9.849-4.42 9.852-9.855.002-2.633-1.02-5.107-2.882-6.97C16.66 1.86 14.19 .836 11.565.836c-5.43 0-9.852 4.42-9.855 9.856-.001 1.693.473 3.344 1.372 4.815L2.01 19.981l4.637-1.227z" />
+          </svg>
+        </a>
+      </div>
 
-      {/* 🖨️ PRINTING INTERFACE CONFIGURATION */}
-      <style jsx global>{`
-        @media print {
-          body * {
-            visibility: hidden;
-          }
-          #quotation-sheet, #quotation-sheet * {
-            visibility: visible;
-            color: #000000 !important;
-          }
-          #quotation-sheet {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            background: #ffffff !important;
-          }
-          .no-print {
-            display: none !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }
