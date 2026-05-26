@@ -27,7 +27,7 @@ export default function Home() {
     document.title = "LekhaFlow | Premium Tally & BUSY Accounting Automation Platform";
   }, []);
 
-  // 🚀 FIXED: Absolute WhatsApp Business Endpoint Route Target
+  // 🚀 Absolute WhatsApp Business Endpoint Route Target
   const WHATSAPP_LINK = "https://wa.me/918770808695";
 
   // 🚀 DROPBOX DIRECT DOWNLOAD STORAGE ROUTER (dl=1 Forced)
@@ -39,7 +39,6 @@ export default function Home() {
     erp9_standard: "https://www.dropbox.com/scl/fi/kmd3tbus1feicyt9zr5lb/LekhaFlow_ERP9_Standard_setup.rar?rlkey=79r07zew1hjftwqogwptp9drr&st=tdyb0j07&dl=1"
   };
 
-  // 🚀 100% CORRECTED HIGHER-CONVERSION ENTERPRISE DICTIONARY
   const productData = {
     gold: {
       id: "gold",
@@ -148,14 +147,13 @@ export default function Home() {
       mostAdvanced: "Premium Advance",
       gridQuote: "Get Quote",
       gridBuy: "Buy Now",
-      guideTitle: "⚙️ Secure 5-Step System Installation & Machine Locking Guide",
-      guideDesc: "Please follow this sequence locally to activate your cryptographic enterprise license file.",
+      guideTitle: "⚙️ LekhaFlow Automation Suite - User Setup Guide",
+      guideDesc: "Thank you for choosing LekhaFlow. Please execute these steps carefully to activate the software loop on your local computer:",
       steps: [
-        "Step 1: Click 'Download Trial' and complete your intake details to capture your unified desktop software setup package.",
-        "Step 2: Install and run the package locally on your workstation. The runtime framework captures a unique Machine Hardware ID.",
-        "Step 3: Copy that Hardware ID string from your dashboard and forward it to our secure deployment desk for authorization.",
-        "Step 4: Our automated vault logs the token and instantly issues a cryptographically signed secure 'license.dat' validation key.",
-        "Step 5: Drop the 'license.dat' file directly into the application installation directory. The system unlocks instantly for use."
+        "Step 1: Software Installation & Folder Structure\n• When you install and run the software for the first time, it will automatically create a root folder named 'LekhaFlow data' on your system.\n• Folder Location Priority:\n  - If your PC has D: Drive -> D:\\LekhaFlow data\n  - If D: Drive is missing -> C:\\Users\\<Username>\\Documents\\LekhaFlow data",
+        "Step 2: License File Activation (Mandatory)\n• Copy the automatically downloaded 'license.dat' file from your web browser.\n• Directly paste/save this file inside the newly created 'LekhaFlow data' folder.\n  [Note: The file name must be exactly 'license.dat'. No other name will be detected by the system]",
+        "Step 3: Invoice Processing (Processing Engine)\n• Run the desktop core application and process your raw client invoices.\n• Upon completion, a new 'output' directory will appear inside your core 'LekhaFlow data' folder containing:\n  - 'invoice_summary.xlsx' (Independent formatted master dataset summary report)\n  - 'batch_folder' (Contains two main files: master.xml and transaction.xml)",
+        "Step 4: Importing Data Directly into Tally Prime\n• Open your Tally Prime environment and select the targeted working client company.\n• Go to Import Menu -> Select 'Masters'. Map the path to 'output/batch_folder/master.xml' to instantly create Ledgers, States, GSTIN, and Stock Items with HSN/GST configurations.\n• Go back to Import Menu -> Select 'Transactions'. Route the path to 'output/batch_folder/transaction.xml' to instantly inject entries."
       ],
       contactTitle: "Submit Your Custom Workflow Specifications",
       contactDesc: "Need a custom template mapper or bespoke ERP routing logic? Complete the secure inbound form below. Our engineering desk will contact you promptly.",
@@ -173,7 +171,7 @@ export default function Home() {
       secDesc: "नीचे दिए गए टैब से अपने वर्किंग एनवायरनमेंट को चुनें और उसकी परिचालन क्षमता और एआई लॉजिक की जांच करें।",
       activeText: "सक्रिय वेरिएंट",
       featureTitle: "सॉफ़्टवेयर फीचर्स और ऑटोमेशन प्रोटोकॉल:",
-      unlimitedBank: "असीमित बैंक收藏 स्टेटमेंट ऑटोमैटिक एंट्री मॉड्यूल (Tally/Busy) - पूरी तरह मुफ्त शामिल",
+      unlimitedBank: "असीमित बैंक स्टेटमेंट ऑटोमैटिक एंट्री मॉड्यूल (Tally/Busy) - पूरी तरह मुफ्त शामिल",
       quoteBtn: "📄 ऑफिशियल कोटेशन लेटरहेड जनरेट करें",
       buyBtn: "💳 अभी खरीदें / रेज़रपे सुरक्षित भुगतान",
       gridTitle: "उत्पाद परिनियोजन मैट्रिक्स ग्रिड",
@@ -181,14 +179,13 @@ export default function Home() {
       mostAdvanced: "एडवांस गोल्ड",
       gridQuote: "कोटेशन",
       gridBuy: "अभी खरीदें",
-      guideTitle: "⚙️ 5-चरणों का सिस्टम इंस्टॉलेशन और मशीन लॉकिंग गाइड",
-      guideDesc: "अपने स्थानीय कंप्यूटर पर लेखाफ्लो को पूरी तरह सुरक्षित सक्रिय करने के लिए इन चरणों का पालन करें।",
+      guideTitle: "⚙️ LekhaFlow Automation Suite - User Setup Guide",
+      guideDesc: "LekhaFlow को चुनने के लिए धन्यवाद। सॉफ़्टवेयर को चालू करने के लिए कृपया नीचे दिए गए स्टेप्स को ध्यान से फॉलो करें:",
       steps: [
-        "चरण 1: 'Download Trial' पर क्लिक करके फॉर्म भरें और अपनी  सेटअप फ़ाइल तुरंत डाउनलोड करें।",
-        "चरण 2: पैकेज को अपने कंप्यूटर पर इंस्टॉल करें। पहली बार रन होने पर यह एक यूनीक Machine Hardware ID जनरेट करेगा।",
-        "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और एक्टिवेशन के लिए हमारे व्हाट्सएप डेस्क या ईमेल पर फॉरवर्ड करें।",
-        "चरण 4: हमारा ऑटोमेटेड क्लाउड वॉल्ट इसे सत्यापित करेगा और सीधे आपके व्हाट्सएप/ईमेल पर 'license.dat' फ़ाइल जारी करेगा।",
-        "चरण 5: 'license.dat' फ़ाइल को सॉफ्टवेयर के फोल्डर में पेस्ट करें। आपका सिस्टम तुरंत हमेशा के लिए अनलॉक हो जाएगा।"
+        "चरण 1: सॉफ़्टवेयर इंस्टॉलेशन और फ़ोल्डर स्ट्रक्चर\n• जैसे ही आप सॉफ़्टवेयर इंस्टॉल करके पहली बार रन करेंगे, यह आपके सिस्टम पर ऑटोमैटिकली 'LekhaFlow data' नाम से एक रूट फ़ोल्डर बनाएगा।\n• फ़ोल्डर लोकेशन प्राथमिकता:\n  - यदि आपके कंप्यूटर में D: Drive है -> D:\\LekhaFlow data\n  - यदि D: Drive नहीं है -> C:\\Users\\<Username>\\Documents\\LekhaFlow data",
+        "चरण 2: लाइसेंस फ़ाइल एक्टिवेशन (Mandatory)\n• वेबसाइट से डाउनलोड की गई 'license.dat' फ़ाइल को कॉपी करें।\n• इस फ़ाइल को ऊपर बनाए गए 'LekhaFlow data' फ़ोल्डर के अंदर सीधे पेस्ट (Save) कर दें।\n  [नोट: फ़ाइल का नाम केवल 'license.dat' ही होना चाहिए, कोई अन्य नाम सॉफ़्टवेयर डिटेक्ट नहीं करेगा]",
+        "चरण 3: इनवॉइस प्रोसेसिंग (Processing Engine)\n• अपने इनवॉइस को सिस्टम में प्रोसेस करें।\n• प्रोसेसिंग पूरी होते ही 'LekhaFlow data' फ़ोल्डर के अंदर एक नया 'output' फ़ोल्डर बन जाएगा जिसमें आपको निम्न फ़ाइलें मिलेंगी:\n  - 'invoice_summary.xlsx' (सभी इनवॉइस की एक्सेल समरी रिपोर्ट)\n  - 'batch_folder' (इसके अंदर दो मुख्य फ़ाइलें होंगी: master.xml और transaction.xml)",
+        "चरण 4: Tally Prime में डेटा इम्पोर्ट करने की विधि\n• अपना Tally Prime ओपन करें और संबंधित कंपनी को सेलेक्ट करें।\n• Import menu पर जाएं -> Masters को सेलेक्ट करें और 'output/batch_folder/master.xml' को इम्पोर्ट करें (इससे आपके सभी Ledgers, States, GSTIN और Stock Items HSN/GST डिटेल्स के साथ ऑटोमैटिक बन जाएंगे)।\n• इसके बाद दोबारा Import menu पर जाएं -> Transactions पर जाकर 'output/batch_folder/transaction.xml' फ़ाइल इम्पोर्ट करें।"
       ],
       restrictedBanner: "🔒 एडवांस्ड तकनीकी डेटा लॉग्स और पूर्ण क्लाउड फीचर्स को एक्टिवेट करने के लिए कृपया साइन इन करें।",
       contactTitle: "अपनी वर्कफ़्लो आवश्यकताएँ सबमिट करें",
@@ -200,7 +197,6 @@ export default function Home() {
 
   const currentContent = isHindi ? content.hi : content.en;
 
-  // 🚀 FIXED: Dynamic Dropdown Tab Selection Router Routing System smoothly
   const handleDropdownSelect = (variantId: "gold" | "standard" | "lite" | "erp9_premium" | "erp9_standard") => {
     setActiveTab(variantId);
     setActiveMenu(null);
@@ -216,12 +212,63 @@ export default function Home() {
     setShowIntakeModal(true);
   };
 
-  const handleIntakeSubmit = (e: React.FormEvent) => {
+  // 🚀 HELPER FUNCTION: Utility triggers file downloads dynamically
+  const triggerTxtDownload = (filename: string, text: string) => {
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
+  const handleIntakeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setShowIntakeModal(false);
 
     if (intakeTarget === "demo") {
-      window.open(downloadRoutes[activeTab] || downloadRoutes.gold, "_blank");
+      try {
+        // 1. बैकएंड एपीआई से license.dat जेनरेट और डाउनलोड करवाएं
+        const response = await fetch("/api/generate-license", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            clientName: clientForm.clientName,
+            companyName: clientForm.companyName,
+            licenseType: "DEMO", 
+            planType: activeTab.toUpperCase() 
+          }),
+        });
+
+        if (response.ok) {
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "license.dat"; 
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+
+        // 2. ⚡ NEW IMPLEMENTATION: Download User Guides automatically in TXT formats
+        const textGuides = {
+          hindi: `===============================================================================\n               LekhaFlow Automation Suite - User Setup Guide\n===============================================================================\n\nLekhaFlow को चुनने के लिए धन्यवाद। यह सॉफ़्टवेयर आपके इनवॉइस (PDF/Excel) को \nपूरी तरह से Tally-Compatible फॉर्मेट में ऑटोमैटिकली कन्वर्ट कर देता है।\n\nसॉफ़्टवेयर को चालू करने के लिए कृपया नीचे दिए गए स्टेप्स को ध्यान से फॉलो करें:\n\nचरण 1: सॉफ़्टवेयर इंस्टॉलेशन और फ़ोल्डर स्ट्रक्चर\n--------------------------------------------------\n1. जैसे ही आप सॉफ़्टवेयर इंस्टॉल करके पहली बार रन करेंगे, यह आपके सिस्टम पर \n   ऑटोमैटिकली "LekhaFlow data" नाम से एक रूट फ़ोल्डर बनाएगा.\n2. फ़ोल्डर लोकेशन प्राथमिकता:\n   - यदि आपके कंप्यूटर में D: Drive है -> D:\\LekhaFlow data\n   - यदि D: Drive नहीं है -> C:\\Users\\<Username>\\Documents\\LekhaFlow data\n\nचरण 2: लाइसेंस फ़ाइल एक्टिवेशन (Mandatory)\n--------------------------------------------------\n1. वेबसाइट से डाउनलोड की गई "license.dat" फ़ाइल को कॉपी करें.\n2. इस फ़ाइल को ऊपर बनाए गए "LekhaFlow data" फ़ोल्डर के अंदर सीधे पेस्ट (Save) कर दें.\n   [नोट: फ़ाइल का नाम केवल 'license.dat' ही होना चाहिए, कोई अन्य नाम सॉफ़्टवेयर डिटेक्ट नहीं करेगा]\n\nचरण 3: इनवॉइस प्रोसेसिंग (Processing Engine)\n--------------------------------------------------\n1. अपने इनवॉइस को सिस्टम में प्रोसेस करें.\n2. प्रोसेसिंग पूरी होते ही "LekhaFlow data" फ़ोल्डर के अंदर एक नया "output" फ़ोल्डर बन जाएगा.\n3. इस output फ़ोल्डर के अंदर आपको निम्नलिखित फ़ाइलें मिलेंगी:\n   - "invoice_summary.xlsx" (सभी इनवॉइस की एक्सेल समरी रिपोर्ट)\n   - "batch_folder" (इसके अंदर दो मुख्य फ़ाइलें होंगी: master.xml और transaction.xml)\n\nचरण 4: Tally Prime में डेटा इम्पोर्ट करने की विधि\n--------------------------------------------------\n1. अपना Tally Prime ओपन करें और संबंधित कंपनी को सेलेक्ट करें.\n2. Import menu पर जाएं -> Masters को सेलेक्ट करें.\n3. फ़ाइल पाथ में "output/batch_folder/master.xml" को सेलेक्ट करके इम्पोर्ट करें. \n   (इससे आपके सभी Ledgers, States, GSTIN और Stock Items HSN/GST डिटेल्स के साथ ऑटोमैटिक बन जाएंगे).\n4. इसके बाद दोबारा Import menu पर जाएं -> Transactions को सेलेक्ट करें.\n5. इस बार "output/batch_folder/transaction.xml" फ़ाइल को सेलेक्ट करके इम्पोर्ट करें.\n\nबधाई हो! आपकी सभी एंट्रीज टैली में आ चुकी हैं। आप Daybook या Ledger Alteration में जाकर अपनी सटीक एंट्रीज और स्टॉक डिटेल्स चेक कर सकते हैं।\n\n----------------------------------------------------------------===============\nसपोर्ट या सहायता के लिए वेबसाइट पर दिए गए "Connect on WhatsApp" बटन पर क्लिक करें.\nLekhaFlow Support Team | Nexoriva Systems © 2026\n===============================================================================`,
+          english: `===============================================================================\n               LekhaFlow Automation Suite - User Setup Guide\n===============================================================================\n\nThank you for choosing LekhaFlow. This software automatically converts your invoices (PDF/Excel) \ninto a fully Tally-Compatible format without manual errors.\n\nPlease carefully follow the steps below to activate the system loops:\n\nStep 1: Software Installation & Folder Structure\n--------------------------------------------------\n1. As soon as you install and run the software for the first time, it will automatically \n   create a root directory named "LekhaFlow data" on your system.\n2. Directory Location Priority:\n   - If your PC has D: Drive -> D:\\LekhaFlow data\n   - If D: Drive is missing -> C:\\Users\\<Username>\\Documents\\LekhaFlow data\n\nStep 2: License File Activation (Mandatory)\n--------------------------------------------------\n1. Copy the automatically downloaded "license.dat" file from your browser setup folder.\n2. Paste/Save this file directly inside the "LekhaFlow data" folder generated above.\n   [Note: The file name must be exactly "license.dat". No other string format is detected by the application]\n\nStep 3: Invoice Parsing (Processing Engine)\n--------------------------------------------------\n1. Execute the core desktop application and process your targeted invoices.\n2. Upon successful compilation, an "output" directory will automatically appear inside "LekhaFlow data".\n3. Inside this output folder, you will find the following computational outputs:\n   - "invoice_summary.xlsx" (Formatted structured main summary dataset sheet)\n   - "batch_folder" (Contains two core files: master.xml and transaction.xml)\n\nStep 4: Data Import Methods within Tally Prime\n--------------------------------------------------\n1. Boot your Tally Prime workspace and select your targeted active accounting company.\n2. Navigate to Import Menu -> Select "Masters".\n3. Map the directory file path to "output/batch_folder/master.xml" and hit import. \n   (This will automatically construct Ledgers, State structures, GSTIN validation arrays, and Stock Items with HSN/GST metrics).\n4. Return to the Import Menu -> Select "Transactions".\n5. Route the path directly to "output/batch_folder/transaction.xml" to synchronize entries instantly.\n\nCongratulations! Your automated data stack is fully synchronized inside Tally environment loops.\n\n----------------------------------------------------------------===============\nFor instant tech desk support, click the "Connect on WhatsApp" asset node on our main landing grid.\nLekhaFlow Support Team | Nexoriva Systems © 2026\n===============================================================================`
+        };
+
+        triggerTxtDownload("How_to_use_Hindi.txt", textGuides.hindi);
+        triggerTxtDownload("How_to_use_English.txt", textGuides.english);
+
+        // 3. इसके बाद आपकी असली सॉफ़्टवेयर ज़िप फ़ाइल (ड्रॉपबॉक्स लिंक) को डाउनलोड पर लगा दें
+        const dynamicDownloadUrl = downloadRoutes[activeTab] || downloadRoutes.gold;
+        window.open(dynamicDownloadUrl, "_blank");
+
+      } catch (err) {
+        console.error("Download pipeline broke down:", err);
+      }
     } else {
       const currentSelected = productData[activeTab];
       setQuotationData({
@@ -323,47 +370,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* 📥 INTAKE MODAL FRAMEWORK */}
-      {showIntakeModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-slate-900 border-2 border-amber-500 p-6 rounded-2xl max-w-sm w-full space-y-4 shadow-2xl text-slate-100">
-            <div className="text-center">
-              <span className="bg-amber-500/10 text-amber-400 font-mono text-[9px] font-black px-2.5 py-1 rounded-md uppercase border border-amber-500/20">
-                {intakeTarget === "demo" ? "Secure Installer Node" : "Quotation Engine Pipeline"}
-              </span>
-              <h3 className="text-base font-black text-white mt-2.5">
-                {intakeTarget === "demo" ? "Download LekhaFlow Installer" : `Generate Quotation for ${productData[activeTab].title}`}
-              </h3>
-            </div>
-            
-            <form onSubmit={handleIntakeSubmit} className="space-y-3 font-medium">
-              <div>
-                <label className="text-[9px] font-black text-slate-300 uppercase block mb-1">Your Full Name</label>
-                <input type="text" required placeholder="e.g., Jitendra Bharti" value={clientForm.clientName} onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})} className="w-full p-2.5 bg-slate-800 border border-slate-700 text-white rounded-xl text-xs font-bold focus:outline-amber-500" />
-              </div>
-              <div>
-                <label className="text-[9px] font-black text-slate-300 uppercase block mb-1">Firm / Company Name</label>
-                <input type="text" required placeholder="e.g., Nexoriva Systems" value={clientForm.companyName} onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})} className="w-full p-2.5 bg-slate-800 border border-slate-700 text-white rounded-xl text-xs font-bold focus:outline-amber-500" />
-              </div>
-              <div>
-                <label className="text-[9px] font-black text-slate-300 uppercase block mb-1">WhatsApp Mobile Number</label>
-                <input type="tel" required pattern="[0-9]{10}" placeholder="10-Digit Mobile Number" value={clientForm.mobileNumber} onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})} className="w-full p-2.5 bg-slate-800 border border-slate-700 text-white rounded-xl text-xs font-bold focus:outline-amber-500" />
-              </div>
-              <div>
-                <label className="text-[9px] font-black text-slate-300 uppercase block mb-1">Corporate Email Address</label>
-                <input type="email" required placeholder="name@company.com" value={clientForm.clientEmail} onChange={(e) => setClientForm({...clientForm, clientEmail: e.target.value})} className="w-full p-2.5 bg-slate-800 border border-slate-700 text-white rounded-xl text-xs font-bold focus:outline-amber-500" />
-              </div>
-              
-              <button type="submit" className="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black rounded-xl transition text-[11px] uppercase tracking-wider shadow-md mt-2">
-                {intakeTarget === "demo" ? "🚀 Open Secure Download Portal" : "📄 Initialize Customized Letterhead"}
-              </button>
-            </form>
-            <button onClick={() => setShowIntakeModal(false)} className="w-full py-1.5 bg-slate-800 text-slate-400 hover:text-white font-bold rounded-lg text-[10px] transition-colors">Cancel Process</button>
-          </div>
-        </div>
-      )}
-
-      {/* 🌟 PREMIUM MULTI-PAGE DROPDOWN HEADER */}
+      {/* 🌟 PREMIUM HEADER */}
       <header className="relative z-50 max-w-6xl mx-auto px-4 py-4 flex justify-between items-center border-b border-slate-800 bg-slate-950/95 sticky top-0 shadow-lg no-print">
         <div className="flex items-center space-x-6">
           <Link href="/">
@@ -376,7 +383,6 @@ export default function Home() {
           </button>
         </div>
         
-        {/* MULTI-PAGE INTEGRATED DROPDOWN NAVIGATION TABS */}
         <nav className="hidden lg:flex space-x-8 text-slate-300 font-black tracking-wide text-[11px] relative">
           <div className="relative" onMouseEnter={() => setActiveMenu("products")} onMouseLeave={() => setActiveMenu(null)}>
             <button className="hover:text-amber-400 transition-colors flex items-center gap-1 font-black cursor-pointer">
@@ -403,7 +409,6 @@ export default function Home() {
             )}
           </div>
 
-          {/* 🖼️ INTERACTIVE ROUTE NAVIGATION: DETECTS MULTI-PAGE CANVAS */}
           <Link href="/gallery">
             <span className="hover:text-amber-400 transition-colors cursor-pointer text-amber-400 flex items-center gap-1 font-black">
               🖼️ Software Dashboard Gallery
@@ -418,7 +423,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 🚀 BUYER-CENTRIC HERO SECTION */}
+      {/* 🚀 HERO SECTION */}
       <section id="hero" className="relative z-10 max-w-6xl mx-auto px-4 pt-16 pb-24 grid lg:grid-cols-12 gap-12 items-center no-print">
         <div className="space-y-5 lg:col-span-7">
           <span className="inline-block bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded border border-amber-500/20">
@@ -431,7 +436,6 @@ export default function Home() {
             {currentContent.heroDesc}
           </p>
           
-          {/* RISK-FREE FREE TRIAL COMPONENT FOR ADOPTERS */}
           <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 max-w-md grid grid-cols-1 sm:grid-cols-3 gap-2 text-slate-300 font-bold text-[11px]">
             <div className="flex items-center gap-2"><span className="text-emerald-500 font-black">✔</span><span>7-Day Free Trial</span></div>
             <div className="flex items-center gap-2"><span className="text-emerald-500 font-black">✔</span><span>No Card Required</span></div>
@@ -450,7 +454,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* CATCHY VALIDATED LIVE WHATSAPP ROUTING PRESENTATION SHIELD CARD */}
         <div className="lg:col-span-5 bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 p-6 rounded-3xl shadow-2xl text-center space-y-4">
           <div className="border border-slate-800 bg-slate-950/60 p-4 rounded-2xl text-left">
             <div className="text-amber-400 font-black text-sm uppercase tracking-wide">Stop Manual Ledger Posting</div>
@@ -463,7 +466,6 @@ export default function Home() {
               <div className="text-white font-black text-xs">Need a Live Walkthrough?</div>
               <div className="text-slate-400 text-[10px] mt-0.5">Talk directly with our product experts.</div>
             </div>
-            {/* FIXED Absolute Native Mobile Activation Node Point Link Loop */}
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-xl text-[10px] uppercase tracking-wider inline-flex items-center">
               📞 Chat WhatsApp
             </a>
@@ -471,7 +473,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📊 CORE INTERACTIVE RUNTIME MODULE MATRICES */}
+      {/* 📊 CORE RUNTIME MODULE MATRICES */}
       <section id="matrix" className="relative z-20 max-w-6xl mx-auto px-4 py-12 border-t border-slate-900 no-print">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
           <div>
@@ -483,7 +485,6 @@ export default function Home() {
           </span>
         </div>
 
-        {/* Tab Variant Click Selectors Layout Component Container Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 p-2 bg-slate-900 rounded-2xl border border-slate-800 mb-6 shadow-2xl">
           {Object.values(productData).map((item) => (
             <button
@@ -500,7 +501,6 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Tab Display Info Canvas Sheet */}
         <div className="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 p-6 md:p-8 rounded-3xl shadow-2xl relative">
           <div className="flex flex-col md:flex-row md:justify-between md:items-center pb-6 border-b border-slate-800 gap-4">
             <div className="space-y-1">
@@ -547,7 +547,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📈 COMPARED CONVERSION TRUST matrix */}
+      {/* 📈 COMPARISON TRUST MATRIX */}
       <section className="max-w-6xl mx-auto px-4 py-16 border-t border-slate-900 no-print">
         <div className="text-center max-w-xl mx-auto mb-12">
           <h2 className="text-2xl font-black text-white tracking-tight">Why Choose LekhaFlow Automation Architecture?</h2>
@@ -645,8 +645,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ⚙️ SYSTEM INSTALLATION CHRONOLOGY GUIDE */}
-      <section className="relative z-20 max-w-6xl mx-auto px-4 py-16 border-t border-slate-900 bg-slate-900/20 rounded-3xl mb-16 my-6 border-2 border-slate-800/60 no-print">
+      {/* ⚙️ 4-STEP MASTER SETUP CONFIGURATION GUIDE */}
+      <section id="how-it-works" className="relative z-20 max-w-6xl mx-auto px-4 py-16 border-t border-slate-900 bg-slate-900/20 rounded-3xl mb-16 my-6 border-2 border-slate-800/60 no-print">
         <div className="space-y-2 mb-8">
           <h3 className="text-lg font-black text-white tracking-wide">{currentContent.guideTitle}</h3>
           <p className="text-slate-400 text-xs font-medium">{currentContent.guideDesc}</p>
@@ -655,7 +655,7 @@ export default function Home() {
           {currentContent.steps.map((step, idx) => (
             <div key={idx} className="bg-slate-950/40 border border-slate-800 p-4 rounded-xl flex items-start gap-4 shadow-sm hover:border-slate-700 transition-colors">
               <span className="bg-amber-500 text-slate-950 font-mono font-black rounded-full h-6 w-6 flex items-center justify-center text-xs shrink-0">{idx + 1}</span>
-              <p className="text-slate-300 font-bold text-[12px] leading-relaxed font-sans">{step}</p>
+              <pre className="text-slate-300 font-bold text-[12px] leading-relaxed font-sans whitespace-pre-line">{step}</pre>
             </div>
           ))}
         </div>
@@ -671,7 +671,7 @@ export default function Home() {
         <Contact isHindi={isHindi} />
       </section>
 
-      {/* 🛡️ REVENUE BLOCK SYSTEM FOOTER */}
+      {/* 🛡️ REVENUE SECURE FOOTER */}
       <footer className="bg-slate-950 py-12 border-t border-slate-900 font-mono text-[10px] text-slate-400 text-center space-y-4 no-print">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 text-left gap-8 pb-8 border-b border-slate-800 font-sans text-slate-400">
           <div>
@@ -691,7 +691,7 @@ export default function Home() {
         <p className="tracking-wide text-slate-500 font-sans text-xs font-medium">{currentContent.footerCredits}</p>
       </footer>
 
-      {/* STICKY WHATSAPP COMPONENT DIRECT LINK INJECTION */}
+      {/* STICKY WHATSAPP */}
       <div className="fixed bottom-6 right-6 z-[90] no-print">
         <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-2xl transition-all transform hover:scale-110 cursor-pointer">
           <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
