@@ -10,35 +10,32 @@ import Contact from "@/components/contact";
 export default function Home() {
   const [isHindi, setIsHindi] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<"gold" | "standard" | "lite" | "erp9_premium" | "erp9_standard">("gold");
-  const [quotationData, setQuotationData] = useState<any | null>(null);
-  const [showIntakeModal, setShowIntakeModal] = useState<boolean>(false);
-  const [intakeTarget, setIntakeTarget] = useState<"demo" | "quotation">("demo");
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [clientForm, setClientForm] = useState({ clientName: "", companyName: "", mobileNumber: "", clientEmail: "" });
 
   useEffect(() => {
-    document.title = "LekhaFlow | Premium Tally Automation Platform";
+    document.title = "LekhaFlow | AI Accounting Automation";
   }, []);
 
-  const WHATSAPP_LINK = "https://wa.me/918770808695";
-
   const downloadRoutes = {
-    gold: "https://rzp.io/rzp/9HGERapH", // उदाहरण लिंक, आप अपने ड्रॉपबॉक्स लिंक यहाँ डाल सकते हैं
-    standard: "https://rzp.io/rzp/SkJTqlgi",
-    lite: "https://rzp.io/rzp/oVwLNxHT",
-    erp9_premium: "https://rzp.io/rzp/BLZgsWB",
-    erp9_standard: "https://rzp.io/rzp/AZMi622y"
+    gold: "https://www.dropbox.com/scl/fi/tyv7sepqejvkvfn7mjvzq/Lekhaflow_Gold_setup.rar?dl=1",
+    standard: "https://www.dropbox.com/scl/fi/8pqk5mvruopj1wzhmfi0d/Lekhaflow_Standard_setup.rar?dl=1",
+    lite: "https://www.dropbox.com/scl/fi/i49mnsm6z2x97n3vivvs7/LekhaFlow_LITE_setup.rar?dl=1",
+    erp9_premium: "https://www.dropbox.com/scl/fi/3uby3jvlhd2gcqjwkbpo2/Lekhaflow_ERP9_Premium_setup.rar?dl=1",
+    erp9_standard: "https://www.dropbox.com/scl/fi/kmd3tbus1feicyt9zr5lb/LekhaFlow_ERP9_Standard_setup.rar?dl=1"
   };
 
-  // --- यहाँ से आपका पुराना content और logic शुरू होता है ---
-  // (मैंने इसे संक्षेप में रखा है ताकि कोड पढ़ा जा सके, आप अपना पूरा content यहाँ रखें)
-  const productData = { /* ... आपका पिछला पूरा productData Object यहाँ रहेगा ... */ };
-  const currentContent = isHindi ? { /* hi content */ } : { /* en content */ };
+  const productData = {
+    gold: { title: "Gold Suite", price: "₹18,000", limit: "10,000 Invoices" },
+    standard: { title: "Standard Sync", price: "₹15,000", limit: "5,000 Invoices" },
+    lite: { title: "Lite Engine", price: "₹10,000", limit: "2,000 Invoices" },
+    erp9_premium: { title: "ERP9 Premium", price: "₹18,000", limit: "10,000 Invoices" },
+    erp9_standard: { title: "ERP9 Standard", price: "₹15,000", limit: "5,000 Invoices" }
+  };
 
   return (
-    <div className="min-h-screen bg-slate-950 selection:bg-amber-500 selection:text-slate-950 antialiased">
+    <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-amber-500 selection:text-slate-950 antialiased">
       
-      {/* 📱 1. MOBILE DASHBOARD VIEW (Visible only on Mobile) */}
+      {/* 📱 1. MOBILE DASHBOARD VIEW */}
       <div className="md:hidden flex flex-col min-h-screen bg-slate-50 text-slate-900">
         <div className="bg-[#1e3a8a] p-6 text-white rounded-b-[2.5rem] shadow-xl">
           <div className="flex justify-between items-center mb-4">
@@ -85,52 +82,67 @@ export default function Home() {
             <Link href={downloadRoutes[activeTab]} className="bg-teal-500 p-3 rounded-xl shadow-lg"><DownloadCloud /></Link>
           </div>
         </div>
-        {/* मोबाइल फुटर */}
-        <div className="mt-auto p-8 text-center text-[10px] text-slate-400 font-bold">
+        <div className="mt-auto p-8 text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest">
             Nexoriva Systems © 2026
         </div>
       </div>
 
-      {/* 💻 2. DESKTOP LANDING PAGE (Visible only on Desktop) */}
+      {/* 💻 2. DESKTOP VIEW */}
       <div className="hidden md:block">
-        {/* 🌟 यहाँ आपका पूरा पुराना Desktop Header रहेगा */}
         <header className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center border-b border-slate-800 bg-slate-950/95 sticky top-0 z-50">
-            <div className="text-xl font-black text-white tracking-wider">Lekha<span className="text-amber-500">Flow</span></div>
-            <nav className="flex space-x-8 text-slate-300 font-black text-[11px]">
-                <Link href="#hero" className="hover:text-amber-400">Home</Link>
-                <Link href="#matrix" className="hover:text-amber-400">Software Variants</Link>
+            <div className="text-xl font-black text-white tracking-wider uppercase">Lekha<span className="text-amber-500">Flow</span></div>
+            <nav className="flex space-x-8 text-slate-300 font-black text-[11px] uppercase tracking-widest">
+                <Link href="/" className="hover:text-amber-400">Home</Link>
                 <Link href="#pricing" className="hover:text-amber-400">Pricing</Link>
                 <Link href="#contact" className="hover:text-amber-400">Contact</Link>
             </nav>
-            <button className="bg-amber-500 text-slate-950 px-4 py-2 rounded-lg font-black text-[10px]">Download Installer</button>
+            <button className="bg-amber-500 text-slate-950 px-4 py-2 rounded-lg font-black text-[10px] uppercase">Client Login</button>
         </header>
 
-        {/* 🚀 यहाँ आपका पूरा पुराना Hero Section */}
-        <section id="hero" className="max-w-6xl mx-auto px-4 py-20">
-            <h1 className="text-6xl font-black text-white leading-tight">Automate Tally Entries <br/> in <span className="text-amber-500">Minutes</span></h1>
-            <p className="text-slate-400 mt-6 max-w-2xl text-lg font-medium">Stop entering invoices manually. LekhaFlow does it with 100% precision.</p>
-            <div className="mt-10 flex gap-4">
-                <button className="bg-amber-500 text-slate-950 px-8 py-4 rounded-xl font-black uppercase tracking-wider">Start Free Trial</button>
-                <button className="border border-slate-700 text-white px-8 py-4 rounded-xl font-black uppercase tracking-wider">View Gallery</button>
+        <section className="max-w-6xl mx-auto px-4 py-32 text-center">
+            <h1 className="text-7xl font-black text-white leading-tight tracking-tighter">
+                AUTOMATE TALLY <br/> IN <span className="text-amber-500">MINUTES</span>
+            </h1>
+            <p className="text-slate-400 mt-8 max-w-2xl mx-auto text-xl font-medium leading-relaxed">
+                Stop manual data entry. Our AI engine converts invoices and bank statements to Tally with 100% precision.
+            </p>
+            <div className="mt-12 flex justify-center gap-6">
+                <button className="bg-white text-slate-950 px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-amber-500 transition-all">Start Free Trial</button>
+                <button className="border-2 border-slate-800 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-slate-900 transition-all">Watch Demo</button>
             </div>
         </section>
 
-        {/* 📊 यहाँ आपका पुराना Matrix, Comparison और Pricing Section रहेगा */}
-        {/* (आप अपना पिछला पूरा कोड यहाँ पेस्ट करें) */}
-        
-        <section id="contact" className="py-20 bg-slate-900/20">
-            <div className="max-w-xl mx-auto text-center mb-10">
-                <h2 className="text-2xl font-black text-white uppercase tracking-widest">Submit Requirements</h2>
+        {/* Pricing Matrix */}
+        <section id="pricing" className="max-w-6xl mx-auto px-4 py-24 border-t border-slate-900">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {Object.entries(productData).slice(0,3).map(([key, item]) => (
+                    <div key={key} className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:border-amber-500 transition-all group">
+                        <h3 className="text-2xl font-black mb-2">{item.title}</h3>
+                        <p className="text-amber-500 font-black text-3xl mb-6">{item.price}</p>
+                        <ul className="space-y-4 text-slate-400 font-bold text-sm mb-8">
+                            <li className="flex items-center gap-2 text-teal-400">✔ {item.limit} Invoices</li>
+                            <li>✔ Direct Tally Import</li>
+                            <li>✔ HSN/GST Mapping</li>
+                            <li>✔ Bank Statement Parser</li>
+                        </ul>
+                        <button className="w-full py-4 bg-slate-800 rounded-xl font-black uppercase text-xs group-hover:bg-amber-500 group-hover:text-slate-950 transition-all">Select Plan</button>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <section id="contact" className="py-32 bg-slate-900/20 border-t border-slate-900">
+            <div className="max-w-xl mx-auto text-center mb-16">
+                <h2 className="text-4xl font-black text-white uppercase tracking-tighter">Submit Requirements</h2>
+                <p className="text-slate-500 mt-4 font-bold">Our engineering desk will contact you shortly.</p>
             </div>
             <Contact isHindi={isHindi} />
         </section>
 
-        {/* 🛡️ डेस्कटॉप फुटर */}
-        <footer className="py-10 border-t border-slate-900 text-center text-slate-500 text-[11px] font-bold">
-            Engineered by Jitendra Bharti | Nexoriva Systems © 2026
+        <footer className="py-16 border-t border-slate-900 text-center">
+            <p className="text-slate-500 text-xs font-black uppercase tracking-[0.2em]">Nexoriva Systems © 2026 | Developed in India</p>
         </footer>
       </div>
-
     </div>
   );
 }
