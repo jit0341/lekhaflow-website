@@ -9,6 +9,7 @@ import Contact from "@/components/contact";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function Home() {
+  // 1. ALL STATES
   const [isHindi, setIsHindi] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<"gold" | "standard" | "lite" | "erp9_premium" | "erp9_standard">("gold");
   const [quotationData, setQuotationData] = useState<any | null>(null);
@@ -21,6 +22,7 @@ export default function Home() {
     document.title = "LekhaFlow | Premium Tally & BUSY Automation Platform";
   }, []);
 
+  // 2. CONSTANTS
   const WHATSAPP_LINK = "https://wa.me/918770808695";
 
   const downloadRoutes = {
@@ -46,7 +48,7 @@ export default function Home() {
     },
     lite: {
       id: "lite", title: "LekhaFlow Lite Engine", price: "₹ 10,000 / Year", limit: "2,000 Invoices",
-      tagline: isHindi ? "baseline एक्सेल डेटा स्नैपशॉट" : "Excel Template Mapper Utility",
+      tagline: isHindi ? "Baseline एक्सेल डेटा स्नैपशॉट" : "Excel Template Mapper Utility",
       razorpayUrl: "https://pages.razorpay.com/pl_StcltseyG0RpGD/view",
       features: ["100% True Copy Excel", "Universal Template Mapper", "Invoice Summary Sheets", "Multi-page PDF Parser"]
     },
@@ -75,8 +77,8 @@ export default function Home() {
             "Step 3: Run Processing Engine (Generate XML files).",
             "Step 4: Import Masters & Transactions into Tally."
         ],
-        buyBtn: "💳 Buy Now / Pay with Razorpay",
-        quoteBtn: "📄 Official Quotation"
+        buyBtn: "💳 Buy Now",
+        quoteBtn: "📄 Quotation"
     },
     hi: {
         heroTitle: "PDF और Excel से Tally एंट्री करें, मिनटों में!",
@@ -88,14 +90,14 @@ export default function Home() {
             "चरण 3: इनवॉइस प्रोसेस करें (XML फ़ाइलें जनरेट करें)।",
             "चरण 4: Tally में मास्टर और ट्रांजेक्शन इम्पोर्ट करें।"
         ],
-        buyBtn: "💳 अभी खरीदें / रेज़रपे भुगतान",
-        quoteBtn: "📄 ऑफिशियल कोटेशन प्राप्त करें"
+        buyBtn: "💳 अभी खरीदें",
+        quoteBtn: "📄 कोटेशन"
     }
   };
 
   const currentContent = isHindi ? content.hi : content.en;
 
-  // 🚀 DOWNLOAD HELPER
+  // 3. CORE FUNCTIONS (Fixed placement for Scope)
   const triggerTxtDownload = (filename: string, text: string) => {
     const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
     const url = window.URL.createObjectURL(blob);
@@ -107,13 +109,18 @@ export default function Home() {
     link.remove();
   };
 
+  const triggerIntake = (type: "demo" | "quotation") => {
+    setIntakeTarget(type);
+    setShowIntakeModal(true);
+  };
+
   const handleIntakeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setShowIntakeModal(false);
     if (intakeTarget === "demo") {
         const textGuides = {
-            hindi: `Setup Steps: ${currentContent.steps.join("\n")}`,
-            english: `Setup Steps: ${content.en.steps.join("\n")}`
+            hindi: `सेटअप स्टेप्स:\n${content.hi.steps.join("\n")}`,
+            english: `Setup Steps:\n${content.en.steps.join("\n")}`
         };
         triggerTxtDownload("Guide_Hindi.txt", textGuides.hindi);
         triggerTxtDownload("Guide_English.txt", textGuides.english);
@@ -127,6 +134,7 @@ export default function Home() {
         price: p.price,
         clientName: clientForm.clientName,
         companyName: clientForm.companyName,
+        mobileNumber: clientForm.mobileNumber,
         benefits: p.features
       });
     }
@@ -135,7 +143,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-950 selection:bg-amber-500 selection:text-slate-950 antialiased">
       
-      {/* 📱 1. MOBILE APP DASHBOARD (md:hidden) */}
+      {/* 📱 1. MOBILE APP DASHBOARD (Visible only on Mobile) */}
       <div className="md:hidden flex flex-col min-h-screen bg-slate-50 text-slate-900">
         <div className="bg-[#1e3a8a] p-6 text-white rounded-b-[2.5rem] shadow-xl">
           <div className="flex justify-between items-center mb-4">
@@ -163,8 +171,8 @@ export default function Home() {
             <h3 className="font-black text-slate-900 mb-4 flex items-center gap-2 uppercase text-[10px] tracking-widest text-slate-500">Analytics</h3>
             <div className="space-y-4">
               <div className="flex justify-between text-[10px] font-bold">
-                <span>Free Trial</span>
-                <span>4 Days Left</span>
+                <span>Free Trial Progress</span>
+                <span>Active</span>
               </div>
               <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                 <div className="bg-amber-500 h-full w-[60%]" />
@@ -177,26 +185,33 @@ export default function Home() {
               <p className="text-[9px] font-black text-teal-400 uppercase tracking-widest mb-1">Get Desktop Version</p>
               <h4 className="text-xs font-black">Download EXE Installer</h4>
             </div>
-            <button onClick={() => triggerIntake("demo")} className="bg-teal-500 p-3 rounded-xl shadow-lg"><DownloadCloud /></button>
+            <button onClick={() => triggerIntake("demo")} className="bg-teal-500 p-3 rounded-xl shadow-lg hover:scale-105 transition-transform"><DownloadCloud /></button>
+          </div>
+
+          <div className="space-y-3">
+             <h4 className="font-black text-slate-400 text-[10px] uppercase px-2">Setup Guide</h4>
+             {currentContent.steps.map((s, i) => (
+                 <div key={i} className="bg-white p-4 rounded-2xl text-[11px] font-bold border border-slate-100 shadow-sm">{s}</div>
+             ))}
           </div>
         </div>
       </div>
 
-      {/* 💻 2. FULL DESKTOP MARKETING SITE (hidden md:block) */}
+      {/* 💻 2. FULL DESKTOP MARKETING SITE (Visible only on Desktop) */}
       <div className="hidden md:block">
         <header className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center border-b border-slate-800 bg-slate-950/95 sticky top-0 z-50">
           <div className="text-xl font-black text-white tracking-wider uppercase">Lekha<span className="text-amber-500">Flow</span></div>
           <nav className="flex space-x-8 text-slate-300 font-black text-[11px] uppercase tracking-widest">
-            <Link href="#hero" className="hover:text-amber-400 cursor-pointer">Home</Link>
-            <div className="relative group">
-                <button className="hover:text-amber-400 flex items-center gap-1 font-black cursor-pointer uppercase">Variants <ChevronDown size={12}/></button>
+            <Link href="#hero" className="hover:text-amber-400">Home</Link>
+            <div className="relative group cursor-pointer">
+                <button className="hover:text-amber-400 flex items-center gap-1 font-black uppercase">Variants <ChevronDown size={12}/></button>
                 <div className="absolute top-full -left-4 w-48 bg-slate-900 border border-slate-800 rounded-xl p-2 hidden group-hover:block shadow-2xl">
-                    {Object.values(productData).map(p => <button key={p.id} onClick={() => setActiveTab(p.id as any)} className="w-full text-left p-2 hover:bg-slate-800 rounded text-xs font-bold">{p.title}</button>)}
+                    {Object.values(productData).map(p => <button key={p.id} onClick={() => setActiveTab(p.id as any)} className="w-full text-left p-2 hover:bg-slate-800 rounded text-xs font-bold text-slate-300 hover:text-amber-400">{p.title}</button>)}
                 </div>
             </div>
-            <Link href="#pricing" className="hover:text-amber-400 cursor-pointer text-amber-500 underline underline-offset-4">Pricing Grid</Link>
-            <Link href="#how-it-works" className="hover:text-amber-400 cursor-pointer">Setup Guide</Link>
-            <button onClick={() => setIsHindi(!isHindi)} className="text-amber-500 border border-amber-500/30 px-2 rounded font-black text-[9px]">{isHindi ? "ENGLISH" : "हिंदी"}</button>
+            <Link href="#pricing" className="hover:text-amber-400">Pricing Matrix</Link>
+            <Link href="#how-it-works" className="hover:text-amber-400">Setup Guide</Link>
+            <button onClick={() => setIsHindi(!isHindi)} className="text-amber-500 border border-amber-500/30 px-2 rounded font-black text-[9px] uppercase">{isHindi ? "English" : "हिंदी"}</button>
           </nav>
           <button onClick={() => triggerIntake("demo")} className="bg-amber-500 text-slate-950 px-4 py-2 rounded-lg font-black text-[10px] uppercase shadow-lg hover:bg-amber-600 transition-all">Download Installer</button>
         </header>
@@ -204,10 +219,10 @@ export default function Home() {
         {/* HERO SECTION */}
         <section id="hero" className="max-w-6xl mx-auto px-4 py-24 flex flex-col items-center text-center">
             <div className="bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border border-amber-500/20 mb-8">
-                ⚡ Number #1 AI Automation Suite
+                ⚡ Premium Tally & BUSY Automation
             </div>
             <h1 className="text-7xl font-black text-white leading-tight tracking-tighter max-w-4xl">
-                {currentContent.heroTitle.split(' ').map((word, i) => i === 3 ? <span key={i} className="text-amber-500">{word} </span> : word + ' ')}
+                {currentContent.heroTitle}
             </h1>
             <p className="text-slate-400 mt-8 max-w-2xl text-xl font-medium leading-relaxed">
                 {currentContent.heroDesc}
@@ -222,7 +237,7 @@ export default function Home() {
         <section id="pricing" className="max-w-6xl mx-auto px-4 py-24 border-t border-slate-900">
             <div className="text-center mb-16 space-y-4">
                 <h2 className="text-4xl font-black text-white uppercase tracking-tighter">Compare Deployment Matrix</h2>
-                <p className="text-slate-500 font-bold">Select the edition optimized for your accounting environment.</p>
+                <p className="text-slate-500 font-bold">Select the edition optimized for your environment.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                 {Object.entries(productData).map(([key, item]) => (
@@ -238,8 +253,8 @@ export default function Home() {
                             </ul>
                         </div>
                         <div className="mt-6 space-y-2">
-                           <button onClick={() => { setActiveTab(key as any); triggerIntake("quotation"); }} className="w-full py-3 bg-slate-950 border border-slate-800 rounded-xl font-black uppercase text-[9px] hover:bg-slate-900 transition-all text-white tracking-widest">Get Quote</button>
-                           <a href={item.razorpayUrl} target="_blank" className="block w-full py-3 bg-amber-500 text-slate-950 rounded-xl font-black uppercase text-[9px] text-center tracking-widest shadow-md">Buy Edition</a>
+                           <button onClick={() => { setActiveTab(key as any); triggerIntake("quotation"); }} className="w-full py-3 bg-slate-950 border border-slate-800 rounded-xl font-black uppercase text-[9px] hover:bg-slate-900 transition-all text-white tracking-widest">{currentContent.quoteBtn}</button>
+                           <a href={item.razorpayUrl} target="_blank" rel="noreferrer" className="block w-full py-3 bg-amber-500 text-slate-950 rounded-xl font-black uppercase text-[9px] text-center tracking-widest shadow-md hover:bg-amber-600">{currentContent.buyBtn}</a>
                         </div>
                     </div>
                 ))}
@@ -261,7 +276,7 @@ export default function Home() {
                     <tbody className="divide-y divide-slate-800 font-bold text-slate-300">
                         <tr><td className="p-5 text-white">Entry Speed</td><td className="p-5">3 Mins / Invoice</td><td className="p-5 text-amber-400">⚡ 10 Seconds / Invoice</td></tr>
                         <tr><td className="p-5 text-white">Compliance Risk</td><td className="p-5">High (Human Error)</td><td className="p-5 text-emerald-400">🔒 0% (Strict AI Rules)</td></tr>
-                        <tr><td className="p-5 text-white">Bulk Batches</td><td className="p-5">Impossible</td><td className="p-5 text-teal-400">🚀 Unlimited Parallel Processing</td></tr>
+                        <tr><td className="p-5 text-white">Bulk Batches</td><td className="p-5">Manual Selection</td><td className="p-5 text-teal-400">🚀 Unlimited Parallel Processing</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -276,7 +291,7 @@ export default function Home() {
                         <div key={i} className="flex gap-5 items-start">
                             <span className="bg-amber-500 text-slate-950 font-black h-8 w-8 flex items-center justify-center rounded-xl text-sm shrink-0">{i+1}</span>
                             <div className="space-y-1">
-                                <p className="text-slate-200 font-black text-sm uppercase tracking-wide">Step Detail</p>
+                                <p className="text-slate-200 font-black text-sm uppercase tracking-wide">Protocol Step</p>
                                 <p className="text-slate-400 font-bold text-sm leading-relaxed">{s}</p>
                             </div>
                         </div>
@@ -288,14 +303,14 @@ export default function Home() {
         {/* CONTACT SECTION */}
         <section id="contact" className="py-32 bg-slate-900/20 border-t border-slate-900">
             <div className="max-w-xl mx-auto text-center mb-16">
-                <h2 className="text-4xl font-black text-white uppercase tracking-tighter">{isHindi ? "सम्पर्क विवरण सबमिट करें" : "Submit Workflow Specifications"}</h2>
+                <h2 className="text-4xl font-black text-white uppercase tracking-tighter">{isHindi ? "सम्पर्क विवरण सबमिट करें" : "Submit Specifications"}</h2>
                 <p className="text-slate-500 mt-4 font-bold">Our engineering desk will contact you within 24 hours.</p>
             </div>
             <Contact isHindi={isHindi} />
         </section>
 
         <footer className="py-16 border-t border-slate-900 text-center">
-            <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em]">Engineered by Jitendra Bharti | Nexoriva Systems © 2026 | Built in India 🇮🇳</p>
+            <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em]">Nexoriva Systems © 2026 | Developed by Jitendra Bharti</p>
         </footer>
       </div>
 
@@ -306,16 +321,16 @@ export default function Home() {
                 <button onClick={() => setShowIntakeModal(false)} className="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors"><X size={24}/></button>
                 <div className="text-center space-y-2 mb-8">
                     <h3 className="text-2xl font-black text-white uppercase tracking-tighter">
-                        {intakeTarget === "demo" ? "Authorize Download" : "Request Quotation"}
+                        {intakeTarget === "demo" ? "Authorize Setup" : "Official Quote"}
                     </h3>
-                    <p className="text-slate-500 text-xs font-bold">Please provide your firm details to proceed.</p>
+                    <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Enter Credentials to proceed</p>
                 </div>
                 <form onSubmit={handleIntakeSubmit} className="space-y-5">
-                    <input required placeholder="Client Name / Tax Pro Name" className="w-full bg-slate-950 border border-slate-800 p-4 rounded-2xl text-white font-bold text-sm focus:border-amber-500 outline-none transition-all" onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}/>
-                    <input required placeholder="Company / Firm Name" className="w-full bg-slate-950 border border-slate-800 p-4 rounded-2xl text-white font-bold text-sm focus:border-amber-500 outline-none transition-all" onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}/>
-                    <input required placeholder="WhatsApp Number" className="w-full bg-slate-950 border border-slate-800 p-4 rounded-2xl text-white font-bold text-sm focus:border-amber-500 outline-none transition-all" onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}/>
+                    <input required placeholder="Contact Person Name" className="w-full bg-slate-950 border border-slate-800 p-4 rounded-2xl text-white font-bold text-sm focus:border-amber-500 outline-none transition-all" onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}/>
+                    <input required placeholder="Firm / Company Name" className="w-full bg-slate-950 border border-slate-800 p-4 rounded-2xl text-white font-bold text-sm focus:border-amber-500 outline-none transition-all" onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}/>
+                    <input required placeholder="WhatsApp Contact Number" className="w-full bg-slate-950 border border-slate-800 p-4 rounded-2xl text-white font-bold text-sm focus:border-amber-500 outline-none transition-all" onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}/>
                     <button type="submit" className="w-full py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black rounded-2xl uppercase tracking-[0.2em] shadow-lg hover:scale-[1.02] transition-transform">
-                        {intakeTarget === "demo" ? "Download Now" : "Create Quotation"}
+                        {intakeTarget === "demo" ? "Download Setup" : "Get Quotation"}
                     </button>
                 </form>
             </div>
@@ -331,7 +346,7 @@ export default function Home() {
             <div className="flex justify-between items-start border-b-4 border-slate-950 pb-6">
                <div>
                   <h2 className="text-3xl font-black tracking-tighter text-slate-950 uppercase">Nexoriva Systems</h2>
-                  <p className="text-[10px] font-black text-blue-700 tracking-[0.2em] uppercase">Surajpur, CG | MSME: UDYAM-CG-27-0013072</p>
+                  <p className="text-[10px] font-black text-blue-700 tracking-[0.2em] uppercase">MSME: UDYAM-CG-27-0013072</p>
                </div>
                <div className="text-right font-mono text-[10px] font-bold uppercase">
                   <div>Ref: {quotationData.refNo}</div>
@@ -341,7 +356,7 @@ export default function Home() {
 
             <div className="space-y-4">
               <div className="bg-slate-100 p-5 rounded-2xl border border-slate-200">
-                <p className="text-[9px] font-black text-slate-500 uppercase mb-1">Formal Proposal For:</p>
+                <p className="text-[9px] font-black text-slate-500 uppercase mb-1">Prepared For:</p>
                 <h3 className="text-xl font-black text-slate-950 uppercase tracking-tighter">{quotationData.clientName}</h3>
                 <p className="text-sm font-bold text-slate-700">M/S {quotationData.companyName}</p>
                 <p className="text-[10px] font-bold text-slate-500 mt-1">Contact: {quotationData.mobileNumber}</p>
@@ -351,13 +366,13 @@ export default function Home() {
                 <table className="w-full text-left text-[11px] border-collapse">
                   <thead>
                     <tr className="bg-slate-950 text-white font-black uppercase tracking-widest">
-                      <th className="p-4 border-r border-slate-800">Deployment Specification</th>
-                      <th className="p-4 text-right">Investment</th>
+                      <th className="p-4 border-r border-slate-800">Deployment Logic</th>
+                      <th className="p-4 text-right">Investment Amount</th>
                     </tr>
                   </thead>
                   <tbody className="font-bold text-slate-900">
                     <tr className="border-b-2 border-slate-100">
-                      <td className="p-4 border-r border-slate-100">{quotationData.name} (Annual Production License)</td>
+                      <td className="p-4 border-r border-slate-100">{quotationData.name} (Annual License)</td>
                       <td className="p-4 text-right text-lg font-black text-blue-700">{quotationData.price}</td>
                     </tr>
                   </tbody>
@@ -366,7 +381,7 @@ export default function Home() {
             </div>
 
             <div className="space-y-3">
-               <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Premium Production Features Included:</h4>
+               <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest font-sans">Included Professional Modules:</h4>
                <ul className="grid grid-cols-1 gap-2">
                   {quotationData.benefits.map((b: any, i: number) => (
                     <li key={i} className="flex items-center gap-3 text-[11px] font-bold">
@@ -377,13 +392,13 @@ export default function Home() {
             </div>
 
             <div className="pt-10 border-t border-slate-200 flex justify-between items-end">
-                <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight">
-                    Authorized Digital Document<br/>System Mandate Verified
+                <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight font-sans">
+                    Digitally Authorized Document<br/>System Mandate ID Verified
                 </div>
-                <div className="text-center">
+                <div className="text-center font-sans">
                     <div className="w-32 h-1 bg-slate-950 mb-2 mx-auto"></div>
-                    <p className="text-[10px] font-black uppercase tracking-widest">Authorised Signatory</p>
-                    <p className="text-[8px] font-bold text-slate-500">Nexoriva AI Systems</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest">Authorised Official</p>
+                    <p className="text-[8px] font-bold text-slate-500">Nexoriva AI Systems Desk</p>
                 </div>
             </div>
 
@@ -391,7 +406,7 @@ export default function Home() {
               <button onClick={() => window.print()} className="flex-1 py-4 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-xs">
                 <Printer size={20}/> Save as PDF / Print
               </button>
-              <button onClick={() => setQuotationData(null)} className="px-8 py-4 bg-slate-900 text-white font-black rounded-2xl hover:bg-black transition-all uppercase text-[10px] tracking-widest">Close</button>
+              <button onClick={() => setQuotationData(null)} className="px-8 py-4 bg-slate-900 text-white font-black rounded-2xl hover:bg-black transition-all uppercase text-[10px] tracking-widest">Close Layout</button>
             </div>
           </div>
         </div>
