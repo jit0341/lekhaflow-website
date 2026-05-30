@@ -44,13 +44,13 @@ export default function Home() {
     erp9_standard: "https://www.dropbox.com/scl/fi/kmd3tbus1feicyt9zr5lb/LekhaFlow_ERP9_Standard_setup.rar?dl=1"
   };
 
-  // 🚀 100% RECOVERY: ENTERPRISE PRODUCT DICTIONARY WITH DETAILED FEATURES
+  // 🚀 UPDATED PRODUCTION DICTIONARY WITH NEW PRICING MATRIX
   const productData = {
     gold: {
       id: "gold",
       title: "LekhaFlow Gold Suite",
       tagline: isHindi ? "सबसे उन्नत स्वचालन सुइट (Tally Prime एडवांस एडिशन)" : "Most Advanced Automation Suite (Tally Prime Advance Edition)",
-      price: "₹ 18,000 / Year",
+      price: "₹ 30,000 / Year",
       limit: "10,000 Invoices / Year", 
       compatibility: "Tally Prime Environment",
       razorpayUrl: "https://pages.razorpay.com/pl_SsiWsxVHOSCM9D/view",
@@ -67,7 +67,7 @@ export default function Home() {
       id: "standard",
       title: "LekhaFlow Standard Sync",
       tagline: isHindi ? "टैली प्राइम ऑटो वाउचर एंट्री और कोर लेज़र सिंक फ्रेमवर्क" : "Core Ledger Sync & Tally Prime Auto Voucher Entry Framework",
-      price: "₹ 15,000 / Year",
+      price: "₹ 25,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "Tally Prime Environment",
       razorpayUrl: "https://pages.razorpay.com/pl_SshDcz10pz7Leq/view",
@@ -84,7 +84,7 @@ export default function Home() {
       id: "lite",
       title: "LekhaFlow Lite Engine",
       tagline: isHindi ? "ट्रू कॉपी एक्सेल डेटा स्नैपशॉट और टेम्पलेट मैपर यूटिलिटी" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
-      price: "₹ 10,000 / Year",
+      price: "₹ 15,000 / Year",
       limit: "10,000 Invoices / Year", 
       compatibility: "Excel Formatting & Mapping Engine",
       razorpayUrl: "https://pages.razorpay.com/pl_StcltseyG0RpGD/view",
@@ -101,7 +101,7 @@ export default function Home() {
       id: "erp9_premium",
       title: "Tally ERP9 Premium Edition",
       tagline: isHindi ? "लेगेसी इन्फ्रास्ट्रक्चर के लिए समर्पित प्रीमियम ऑटो एंट्री इंजेक्शन" : "Premium Auto Entry Injection Dedicated for Legacy Architectures",
-      price: "₹ 18,000 / Year",
+      price: "₹ 30,000 / Year",
       limit: "10,000 Invoices / Year", 
       compatibility: "Tally ERP9 Infrastructure Only",
       razorpayUrl: "https://pages.razorpay.com/pl_Ssih9ZXhEh6I0z/view",
@@ -118,7 +118,7 @@ export default function Home() {
       id: "erp9_standard",
       title: "Tally ERP9 Standard Edition",
       tagline: isHindi ? "टैली ERP9 इकोसिस्टम के लिए डायरेक्ट वाउचर जनरेशन मैट्रिक्स" : "Direct Voucher Generation Matrix for Tally ERP9 Ecosystems",
-      price: "₹ 15,000 / Year",
+      price: "₹ 25,000 / Year",
       limit: "10,000 Invoices / Year",
       compatibility: "Tally ERP9 Infrastructure Only",
       razorpayUrl: "https://pages.razorpay.com/pl_SsiZhwlw7ppv7j/view",
@@ -133,7 +133,7 @@ export default function Home() {
     }
   };
 
-  // 🌍 100% RECOVERY: MASTER TRANSLATION DICTIONARY
+  // 🌍 MASTER TRANSLATION DICTIONARY
   const content = {
     en: {
       heroBadge: "⚡ AI-Powered Tally & BUSY Automation Suite for Tax Professionals",
@@ -169,7 +169,7 @@ export default function Home() {
       heroTitle: "PDF और Excel इनवॉइस से सीधे Tally में एंट्री करें, मिनटों में!",
       heroDesc: "घंटों की थका देने वाली मैन्युअल डेटा एंट्री को कहें अलविदा। लेखाफ्लो आपके सेल्स/परचेज बिल, पीडीएफ इनवॉइस, और कच्चे बैंक स्टेटमेंट्स को बिना किसी मानवीय गलती के शत-प्रतिशत सटीकता के साथ सीधे टैली में इम्पोर्ट करने योग्य वाउचर में बदल देता है।",
       trialBtn: "🚀 7-दिनों का फ्री ट्रायल शुरू करें",
-      secTitle: "अपने एकाउंटिंग सॉफ्टवेयर वेरिएंट का चयन करें",
+      secTitle: "अपने एकाउंटिंग转换 सॉफ्टवेयर वेरिएंट का चयन करें",
       secDesc: "नीचे दिए गए टैब से अपने वर्किंग एनवायरनमेंट को चुनें और उसकी परिचालन क्षमता और एआई लॉजिक की जांच करें।",
       activeText: "सक्रिय वेरिएंट",
       featureTitle: "सॉफ़्टवेयर फीचर्स और ऑटोमेशन प्रोटोकॉल:",
@@ -184,7 +184,7 @@ export default function Home() {
       guideTitle: "⚙️ 5-चरणों का सिस्टम इंस्टॉलेशन और मशीन लॉकिंग गाइड",
       guideDesc: "अपने स्थानीय कंप्यूटर पर लेखाफ्लो को पूरी तरह सुरक्षित सक्रिय करने के लिए इन चरणों का पालन करें।",
       steps: [
-        "चरण 1: 'Download Trial' पर क्लिक करके फॉर्म भरें और अपनी सेटअप फ़ाइल तुरंत डाउनलोड करें।",
+        "चरण 1: 'Download Trial' पर क्लिक करके फॉर्म भरें और अपनी  सेटअप फ़ाइल तुरंत डाउनलोड करें।",
         "चरण 2: पैकेज को अपने कंप्यूटर पर इंस्टॉल करें। पहली बार रन होने पर यह एक यूनीक Machine Hardware ID जनरेट करेगा।",
         "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और एक्टिवेशन के लिए हमारे व्हाट्सएप डेस्क या ईमेल पर फॉरवर्ड करें।",
         "चरण 4: हमारा ऑटोमेटेड क्लाउड वॉल्ट इसे सत्यापित करेगा और सीधे आपके व्हाट्सएप/ईमेल पर 'license.dat' फ़ाइल जारी करेगा।",
@@ -333,7 +333,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* 📱 UNIQUE MOBILE DASHBOARD VIEW (🎯 ACTIVE ON MOBILE ONLY) */}
+      {/* 📱 UNIQUE MOBILE DASHBOARD VIEW */}
       <div className="md:hidden flex flex-col min-h-screen bg-slate-50 text-slate-900">
         <div className="bg-[#1e3a8a] p-6 text-white rounded-b-[2.5rem] shadow-xl">
           <div className="flex justify-between items-center mb-4">
@@ -380,7 +380,7 @@ export default function Home() {
               className="w-full p-2.5 bg-slate-100 border border-slate-200 rounded-xl font-bold text-xs outline-none"
             >
               {Object.values(productData).map((p) => (
-                <option key={p.id} value={p.id}>{p.title}</option>
+                <option key={p.id} value={p.id}>{p.title} ({p.price})</option>
               ))}
             </select>
             <div className="pt-2 grid grid-cols-2 gap-2">
@@ -414,7 +414,7 @@ export default function Home() {
         </footer>
       </div>
 
-      {/* 💻 PREMIUM DESKTOP VIEW SYSTEM (🎯 ACTIVE ON TABLET/DESKTOP ONLY) */}
+      {/* 💻 PREMIUM DESKTOP VIEW SYSTEM */}
       <div className="hidden md:block">
         
         {/* 🌟 STICKY HEADER MATRIX */}
@@ -457,7 +457,7 @@ export default function Home() {
           </button>
         </header>
 
-        {/* 🚀 BUYER-CENTRIC HERO SECTION */}
+        {/* 🚀 HERO SECTION */}
         <section id="hero" className="max-w-6xl mx-auto px-4 py-28 flex flex-col items-center text-center no-print">
           <div className="bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-[0.3em] px-5 py-2 rounded-full border border-amber-500/20 mb-8 shadow-sm">
             {currentContent.heroBadge}
@@ -485,7 +485,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 📊 CORE INTERACTIVE RUNTIME MODULE MATRICES */}
+        {/* 📊 INTERACTIVE RUNTIME MODULE MATRICES */}
         <section id="matrix" className="max-w-6xl mx-auto px-4 py-12 border-t border-slate-900 no-print">
           <div className="flex justify-between items-end mb-8">
             <div>
