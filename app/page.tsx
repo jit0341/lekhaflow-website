@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Head from "next/head";
+
 import { 
   Zap, AlertCircle, ArrowRight, Play, CheckCircle2, 
   Calculator, BarChart3, Users, ShieldCheck, HelpCircle, 
