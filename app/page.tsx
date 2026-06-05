@@ -208,7 +208,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 5. WHAT LEKHAFLOW CAN DO */}
+      {/* 4. WHAT LEKHAFLOW CAN DO */}
       <section id="features" className="py-24 bg-slate-900/20">
         <div className={`${containerClass}`}>
           <div className="text-center mb-16">
@@ -303,7 +303,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 6. ROI CALCULATOR */}
+      {/* 5. ROI CALCULATOR */}
       <section className="py-24">
         <div className={`${containerClass}`}>
           <div className="bg-slate-900 border-2 border-slate-800 rounded-[3rem] p-8 lg:p-16">
@@ -339,7 +339,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 7. PRODUCT COMPARISON */}
+      {/* 6. PRODUCT COMPARISON */}
       <section id="pricing" className="py-24 bg-slate-900/30">
         <div className={`${containerClass}`}>
           <div className="text-center mb-16 space-y-4">
@@ -383,7 +383,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 8. WHO SHOULD USE */}
+      {/* 7. WHO SHOULD USE */}
       <section className="py-24">
         <div className={`${containerClass}`}>
           <div className="text-center mb-16">
@@ -399,7 +399,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 10. BEFORE VS AFTER */}
+      {/* 8. BEFORE VS AFTER */}
       <section className="py-24 bg-slate-900/40">
         <div className={`${containerClass}`}>
           <div className="grid md:grid-cols-2 gap-12">
@@ -427,7 +427,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 12. FAQ */}
+      {/* 9. FAQ */}
       <section className="py-24">
         <div className={`${containerClass} max-w-4xl`}>
           <h2 className="text-3xl font-black text-white text-center mb-12 uppercase tracking-tighter">Common Questions</h2>
@@ -449,7 +449,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 13. ABOUT FOUNDER */}
+      {/* 10. ABOUT FOUNDER */}
       <section className="py-24 bg-slate-900/30">
         <div className={`${containerClass} max-w-5xl`}>
           <div className="bg-slate-900 border border-slate-800 rounded-[3rem] p-10 lg:p-20 overflow-hidden relative">
@@ -483,7 +483,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 14. CONTACT */}
+      {/* 11. CONTACT */}
       <section id="contact" className="py-24 border-t border-slate-900">
         <div className={`${containerClass}`}>
           <div className="grid lg:grid-cols-2 gap-20">
