@@ -2,12 +2,32 @@
 
 import React, { useState, useEffect } from "react";
 
-import { 
-  Zap, AlertCircle, ArrowRight, Play, CheckCircle2, 
-  Calculator, BarChart3, Users, ShieldCheck, HelpCircle, 
-  User, MessageCircle, Phone, Mail, Download, Menu, X, ChevronDown, Monitor, Cpu, Plus, Minus
+import {
+  Zap,
+  AlertCircle,
+  ArrowRight,
+  Play,
+  CheckCircle2,
+  Calculator,
+  BarChart3,
+  Users,
+  ShieldCheck,
+  HelpCircle,
+  User,
+  MessageCircle,
+  Phone,
+  Mail,
+  Download,
+  Menu,
+  X,
+  ChevronDown,
+  Monitor,
+  Cpu,
+  Plus,
+  Minus,
+  FileText
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+
 import Contact from "@/components/contact";
 
 // --- Types ---
@@ -52,61 +72,83 @@ export default function LekhaFlowLanding() {
       </nav>
 
       {/* 1. HERO SECTION */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-900/20 via-slate-950 to-slate-950 -z-10"></div>
-        
-        <div className={`${containerClass} grid lg:grid-cols-2 gap-16 items-center`}>
-          <div>
-            className="space-y-8"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-bold uppercase tracking-widest">
-              <Zap size={14} /> The Future of Indian Accounting
-            </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tighter">
-              Stop Repetitive <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">Accounting Work</span>
-            </h1>
-            <p className="text-xl text-slate-400 font-medium max-w-xl">
-              Invoice → XML → Tally. Convert Purchase, Sales, Bank Statements and GST Data into Tally-Ready files in minutes.
-            </p>
-            
-            <div className="grid grid-cols-2 gap-4 text-sm font-bold">
-              {["Save Hundreds of Hours", "Reduce Data Entry", "Improve Accuracy", "Tally Compatible XML", "Local Installation", "Peace of Mind"].map((benefit, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <CheckCircle2 size={16} className="text-teal-500" /> {benefit}
-                </div>
-              ))}
+<section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-900/20 via-slate-950 to-slate-950 -z-10"></div>
+
+  <div className={`${containerClass} grid lg:grid-cols-2 gap-16 items-center`}>
+
+    {/* Left Side */}
+    <div className="space-y-8">
+
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-bold uppercase tracking-widest">
+        <Zap size={14} /> The Future of Indian Accounting
+      </div>
+
+      <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tighter">
+        Stop Repetitive <br />
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
+          Accounting Work
+        </span>
+      </h1>
+
+      <p className="text-xl text-slate-400 font-medium max-w-xl">
+        Invoice → XML → Tally. Convert Purchase, Sales, Bank Statements and GST Data into Tally-Ready files in minutes.
+      </p>
+
+      <div className="grid grid-cols-2 gap-4 text-sm font-bold">
+        {[
+          "Save Hundreds of Hours",
+          "Reduce Data Entry",
+          "Improve Accuracy",
+          "Tally Compatible XML",
+          "Local Installation",
+          "Peace of Mind",
+        ].map((benefit, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <CheckCircle2 size={16} className="text-teal-500" />
+            {benefit}
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-wrap gap-4 pt-4">
+        <button className="bg-white text-slate-950 px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-teal-500 transition-all active:scale-95">
+          Watch Demo
+        </button>
+
+        <button className="bg-slate-900 border border-slate-700 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-slate-800 transition-all">
+          Download Trial
+        </button>
+      </div>
+    </div>
+
+    {/* Right Side */}
+    <div className="relative">
+
+      <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-2 rounded-[2.5rem] shadow-2xl border border-slate-700">
+
+        <div className="bg-slate-950 rounded-[2rem] overflow-hidden aspect-video flex items-center justify-center border border-slate-800 relative">
+
+          <Monitor size={80} className="text-slate-800" />
+
+          <div className="absolute inset-0 bg-teal-500/5 hover:bg-transparent transition-colors cursor-pointer flex items-center justify-center group">
+
+            <div className="w-20 h-20 bg-teal-500 rounded-full flex items-center justify-center text-slate-950 shadow-xl group-hover:scale-110 transition-transform">
+
+              <Play fill="currentColor" size={30} />
+
             </div>
 
-            <div className="flex flex-wrap gap-4 pt-4">
-              <button className="bg-white text-slate-950 px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-teal-500 transition-all active:scale-95">
-                Watch Demo
-              </button>
-              <button className="bg-slate-900 border border-slate-700 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-slate-800 transition-all">
-                Download Trial
-              </button>
-            </div>
           </div>
 
-          </div 
-             initial={{ opacity: 0, scale: 0.9 }} 
-             animate={{ opacity: 1, scale: 1 }}
-             className="relative"
-          >
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-2 rounded-[2.5rem] shadow-2xl border border-slate-700">
-              <div className="bg-slate-950 rounded-[2rem] overflow-hidden aspect-video flex items-center justify-center border border-slate-800">
-                 {/* Product Screenshot / Video Placeholder */}
-                 <Monitor size={80} className="text-slate-800" />
-                 <div className="absolute inset-0 bg-teal-500/5 hover:bg-transparent transition-colors cursor-pointer flex items-center justify-center group">
-                    <div className="w-20 h-20 bg-teal-500 rounded-full flex items-center justify-center text-slate-950 shadow-xl group-hover:scale-110 transition-transform">
-                      <Play fill="currentColor" size={30} />
-                    </div>
-                 </div>
-              </div>
-            </div>
-          <div>
         </div>
-      </section>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
       {/* 2. PAIN POINTS */}
       <section className="py-24 bg-slate-900/30">
