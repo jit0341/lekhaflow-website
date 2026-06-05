@@ -69,7 +69,7 @@ export default function LekhaFlowLanding() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">Accounting Work</span>
             </h1>
             <p className="text-xl text-slate-400 font-medium max-w-xl">
-              Invoice â†’ XML â†’ Tally. Convert Purchase, Sales, Bank Statements and GST Data into Tally-Ready files in minutes.
+              Invoice → XML → Tally. Convert Purchase, Sales, Bank Statements and GST Data into Tally-Ready files in minutes.
             </p>
             
             <div className="grid grid-cols-2 gap-4 text-sm font-bold">
@@ -278,7 +278,7 @@ export default function LekhaFlowLanding() {
                     <input type="range" min="100" max="5000" step="100" value={invoices} onChange={(e) => setInvoices(parseInt(e.target.value))} className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500" />
                   </div>
                   <div className="space-y-4">
-                    <label className="text-xs font-black text-teal-400 uppercase tracking-[0.2em]">Monthly Staff Salary: <span className="text-white text-lg ml-2">â‚¹{staffCost}</span></label>
+                    <label className="text-xs font-black text-teal-400 uppercase tracking-[0.2em]">Monthly Staff Salary: <span className="text-white text-lg ml-2">₹{staffCost}</span></label>
                     <input type="range" min="8000" max="50000" step="1000" value={staffCost} onChange={(e) => setStaffCost(parseInt(e.target.value))} className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500" />
                   </div>
                 </div>
@@ -291,7 +291,7 @@ export default function LekhaFlowLanding() {
                 </div>
                 <div className="bg-teal-500 p-8 rounded-3xl text-center text-slate-950">
                    <div className="text-teal-900 text-xs font-black uppercase tracking-widest mb-2">Estimated Annual Savings</div>
-                   <div className="text-5xl font-black tracking-tighter">â‚¹{annualSavings.toLocaleString()}</div>
+                   <div className="text-5xl font-black tracking-tighter">₹{annualSavings.toLocaleString()}</div>
                 </div>
               </div>
             </div>
@@ -316,13 +316,14 @@ export default function LekhaFlowLanding() {
                <div className="p-4 text-center font-black text-teal-500">Gold</div>
                <div className="p-4 text-center font-black text-white">ERP9 Std</div>
                <div className="p-4 text-center font-black text-white">ERP9 Prem</div>
-                 {/* Rows */}
+
+               {/* Rows */}
                <div className="p-4 border-t border-slate-800 text-xs font-bold uppercase">Annual Price</div>
-               <div className="p-4 border-t border-slate-800 text-center font-black">â‚¹10,000</div>
-               <div className="p-4 border-t border-slate-800 text-center font-black">â‚¹15,000</div>
-               <div className="p-4 border-t border-slate-800 text-center font-black text-teal-500">â‚¹18,000</div>
-               <div className="p-4 border-t border-slate-800 text-center font-black">â‚¹15,000</div>
-               <div className="p-4 border-t border-slate-800 text-center font-black text-teal-500">â‚¹18,000</div>
+               <div className="p-4 border-t border-slate-800 text-center font-black">₹10,000</div>
+               <div className="p-4 border-t border-slate-800 text-center font-black">₹15,000</div>
+               <div className="p-4 border-t border-slate-800 text-center font-black text-teal-500">₹18,000</div>
+               <div className="p-4 border-t border-slate-800 text-center font-black">₹15,000</div>
+               <div className="p-4 border-t border-slate-800 text-center font-black text-teal-500">₹18,000</div>
 
                <div className="p-4 border-t border-slate-800 text-xs font-bold uppercase">Target User</div>
                <div className="p-4 border-t border-slate-800 text-center text-[10px]">Tax Pros</div>
@@ -365,21 +366,21 @@ export default function LekhaFlowLanding() {
             <div className="bg-red-500/5 border border-red-500/20 p-10 rounded-[3rem] space-y-6">
                <h3 className="text-2xl font-black text-red-500 uppercase tracking-widest">Before LekhaFlow</h3>
                <ul className="space-y-4 text-slate-400 font-bold uppercase text-xs tracking-widest">
-                  <li>âŒ Manual Ledger Posting</li>
-                  <li>âŒ Human Typing Errors</li>
-                  <li>âŒ Month-End Stress</li>
-                  <li>âŒ 3 Minutes per Invoice</li>
-                  <li>âŒ Staff Dependent</li>
+                  <li>❌ Manual Ledger Posting</li>
+                  <li>❌ Human Typing Errors</li>
+                  <li>❌ Month-End Stress</li>
+                  <li>❌ 3 Minutes per Invoice</li>
+                  <li>❌ Staff Dependent</li>
                </ul>
             </div>
             <div className="bg-teal-500/10 border border-teal-500/30 p-10 rounded-[3rem] space-y-6 shadow-2xl shadow-teal-900/10">
                <h3 className="text-2xl font-black text-teal-500 uppercase tracking-widest">After LekhaFlow</h3>
                <ul className="space-y-4 text-white font-bold uppercase text-xs tracking-widest">
-                  <li>âœ… XML Automatic Import</li>
-                  <li>âœ… 100% Accurate Data</li>
-                  <li>âœ… Work Done in Minutes</li>
-                  <li>âœ… 10 Seconds per Invoice</li>
-                  <li>âœ… Scalable Process</li>
+                  <li>✅ XML Automatic Import</li>
+                  <li>✅ 100% Accurate Data</li>
+                  <li>✅ Work Done in Minutes</li>
+                  <li>✅ 10 Seconds per Invoice</li>
+                  <li>✅ Scalable Process</li>
                </ul>
             </div>
           </div>
@@ -433,7 +434,7 @@ export default function LekhaFlowLanding() {
                    </div>
                    <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800">
                       <div className="text-teal-400 font-black uppercase text-[10px] mb-1">Support</div>
-                      <div className="text-white font-bold text-sm">Made with â¤ï¸ in India</div>
+                      <div className="text-white font-bold text-sm">Made with ❤️ in India</div>
                    </div>
                 </div>
               </div>
@@ -478,7 +479,7 @@ export default function LekhaFlowLanding() {
       </section>
 
       <footer className="py-12 border-t border-slate-900 text-center">
-        <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em]">Nexoriva Systems Â© 2026 | Built for Tax Professionals</p>
+        <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em]">Nexoriva Systems © 2026 | Built for Tax Professionals</p>
       </footer>
 
       {/* STICKY WHATSAPP */}
@@ -493,4 +494,4 @@ export default function LekhaFlowLanding() {
 
     </div>
   );
-      }
+}
