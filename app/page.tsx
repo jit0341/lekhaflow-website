@@ -1,760 +1,496 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import { 
-  Camera, Key, Activity, DownloadCloud, Zap, Crown, 
-  Building2, CheckCircle2, ChevronDown, Printer, X, MessageCircle, Info 
+  Zap, AlertCircle, ArrowRight, Play, CheckCircle2, 
+  Calculator, BarChart3, Users, ShieldCheck, HelpCircle, 
+  User, MessageCircle, Phone, Mail, Download, Menu, X, ChevronDown, Monitor, Cpu, Plus, Minus
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import Contact from "@/components/contact";
-import WhatsAppButton from "@/components/WhatsAppButton";
 
-export default function Home() {
-  // 1. STATES
-  const [isHindi, setIsHindi] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<"gold" | "standard" | "lite" | "erp9_premium" | "erp9_standard">("gold");
-  const [quotationData, setQuotationData] = useState<any | null>(null);
-  
-  // Modal & Navigation Dropdown States
-  const [showIntakeModal, setShowIntakeModal] = useState<boolean>(false);
-  const [intakeTarget, setIntakeTarget] = useState<"demo" | "quotation">("demo");
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  
-  // Client Profile Intake State
-  const [clientForm, setClientForm] = useState({
-    clientName: "",
-    companyName: "",
-    mobileNumber: "",
-    clientEmail: ""
-  });
+// --- Types ---
+type Variant = "lite" | "standard" | "gold" | "erp9_standard" | "erp9_premium";
 
-  useEffect(() => {
-    document.title = "LekhaFlow | Premium Tally & BUSY Accounting Automation Platform";
-  }, []);
+export default function LekhaFlowLanding() {
+  const [invoices, setInvoices] = useState(500);
+  const [staffCost, setStaffCost] = useState(15000);
+  const [activeTab, setActiveTab] = useState<Variant>("gold");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // 2. CONSTANTS & DATA
-  const WHATSAPP_LINK = "https://wa.me/918770808695";
+  // ROI Calculation
+  const timeSaved = invoices * 3; // 3 mins saved per invoice in minutes
+  const moneySaved = Math.round((timeSaved / 60) * (staffCost / 160)); // Avg 160 working hours
+  const annualSavings = moneySaved * 12;
 
-  // 🚀 DROPBOX DIRECT DOWNLOAD STORAGE ROUTER (dl=1 Forced)
-  const downloadRoutes = {
-    gold: "https://www.dropbox.com/scl/fi/tyv7sepqejvkvfn7mjvzq/Lekhaflow_Gold_setup.rar?dl=1",
-    standard: "https://www.dropbox.com/scl/fi/8pqk5mvruopj1wzhmfi0d/Lekhaflow_Standard_setup.rar?dl=1",
-    lite: "https://www.dropbox.com/scl/fi/i49mnsm6z2x97n3vivvs7/LekhaFlow_LITE_setup.rar?dl=1",
-    erp9_premium: "https://www.dropbox.com/scl/fi/3uby3jvlhd2gcqjwkbpo2/Lekhaflow_ERP9_Premium_setup.rar?dl=1",
-    erp9_standard: "https://www.dropbox.com/scl/fi/kmd3tbus1feicyt9zr5lb/LekhaFlow_ERP9_Standard_setup.rar?dl=1"
-  };
-
-  // 🚀 UPDATED PRODUCTION DICTIONARY WITH NEW PRICING MATRIX
-  const productData = {
-    gold: {
-      id: "gold",
-      title: "LekhaFlow Gold Suite",
-      tagline: isHindi ? "सबसे उन्नत स्वचालन सुइट (Tally Prime एडवांस एडिशन)" : "Most Advanced Automation Suite (Tally Prime Advance Edition)",
-      price: "₹ 30,000 / Year",
-      limit: "10,000 Invoices / Year", 
-      compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://pages.razorpay.com/pl_SsiWsxVHOSCM9D/view",
-      features: [
-        "Random splitting of sales invoice amounts strictly below ₹50,000 safety threshold automatically",
-        "Random distribution of items per bill (dynamically assigns 1 to 4 item rows to completely eliminate manual footprint)",
-        "Proportional balanced asset allocation across transaction values and inventory lines safely",
-        "Dedicated Monthly / Quarterly split management configurations accessible right from the main UI pipeline",
-        "Advanced tamper prevention technology with cryptographic machine-lock license node security framework",
-        "Complimentary inclusion of Unlimited Tally & BUSY Bank Statement auto-entry utility handler modules"
-      ]
-    },
-    standard: {
-      id: "standard",
-      title: "LekhaFlow Standard Sync",
-      tagline: isHindi ? "टैली प्राइम ऑटो वाउचर एंट्री और कोर लेज़र सिंक फ्रेमवर्क" : "Core Ledger Sync & Tally Prime Auto Voucher Entry Framework",
-      price: "₹ 25,000 / Year",
-      limit: "10,000 Invoices / Year",
-      compatibility: "Tally Prime Environment",
-      razorpayUrl: "https://pages.razorpay.com/pl_SshDcz10pz7Leq/view",
-      features: [
-        "Direct automated entry handler for Sales and Purchase vouchers into Tally Prime runtime environment",
-        "Instant background generation of required client Masters, Party Ledgers, and Stock Items instantly",
-        "Automated form population logic fields: State, Country, GSTIN metadata, PAN cards, HSN codes, and GST rates",
-        "Produces a highly organized structural independent Invoice Summary Excel dataset snapshot sheet instantly",
-        "Advanced tracking integration layer engineered to completely eliminate missing accounting reference codes",
-        "Complimentary inclusion of Unlimited Tally & BUSY Bank Statement auto-entry utility handler modules"
-      ]
-    },
-    lite: {
-      id: "lite",
-      title: "LekhaFlow Lite Engine",
-      tagline: isHindi ? "ट्रू कॉपी एक्सेल डेटा स्नैपशॉट और टेम्पलेट मैपर यूटिलिटी" : "Baseline Utility - True Copy Snapshot & Excel Template Mapper",
-      price: "₹ 15,000 / Year",
-      limit: "10,000 Invoices / Year", 
-      compatibility: "Excel Formatting & Mapping Engine",
-      razorpayUrl: "https://pages.razorpay.com/pl_StcltseyG0RpGD/view",
-      features: [
-        "Generates a flawless 100% True Copy structural Excel data snapshot from raw target client documents",
-        "Universal Template Mapper capability for immediate auto-fill data injections into custom client formats",
-        "Dynamic automated compilation sequence tracking operational Invoice Summary metrics data sheet safely",
-        "Produces exactly 3 specialized standalone output Excel format formats sheets per transaction batch loop",
-        "Built-in multi-page isolated PDF parser pipeline framework routing automation system components seamlessly",
-        "Complimentary inclusion of Unlimited Tally & BUSY Bank Statement auto-entry utility handler modules"
-      ]
-    },
-    erp9_premium: {
-      id: "erp9_premium",
-      title: "Tally ERP9 Premium Edition",
-      tagline: isHindi ? "लेगेसी इन्फ्रास्ट्रक्चर के लिए समर्पित प्रीमियम ऑटो एंट्री इंजेक्शन" : "Premium Auto Entry Injection Dedicated for Legacy Architectures",
-      price: "₹ 30,000 / Year",
-      limit: "10,000 Invoices / Year", 
-      compatibility: "Tally ERP9 Infrastructure Only",
-      razorpayUrl: "https://pages.razorpay.com/pl_Ssih9ZXhEh6I0z/view",
-      features: [
-        "Equipped with same robust computational split capabilities as the Tally Prime Premium version pipeline",
-        "Exclusively optimized for seamless native script parsing injections within Tally ERP9 desktop process contexts",
-        "Standalone legacy system adapter environment block separate from standard Prime codebase framework lines",
-        "Sales transaction amount processing logic configured safely underneath standard ₹50,000 security tags",
-        "Encrypted local data serialization framework bypass handlers enabled for reliable background injections",
-        "Complimentary inclusion of Unlimited Tally & BUSY Bank Statement auto-entry utility handler modules"
-      ]
-    },
-    erp9_standard: {
-      id: "erp9_standard",
-      title: "Tally ERP9 Standard Edition",
-      tagline: isHindi ? "टैली ERP9 इकोसिस्टम के लिए डायरेक्ट वाउचर जनरेशन मैट्रिक्स" : "Direct Voucher Generation Matrix for Tally ERP9 Ecosystems",
-      price: "₹ 25,000 / Year",
-      limit: "10,000 Invoices / Year",
-      compatibility: "Tally ERP9 Infrastructure Only",
-      razorpayUrl: "https://pages.razorpay.com/pl_SsiZhwlw7ppv7j/view",
-      features: [
-        "Mirror feature performance parity parameters matching standard Tally Prime auto-entry models seamlessly",
-        "High fidelity integration pipeline tracking targeting native ERP9 desktop process context scopes flawlessly",
-        "Automated background creation pathways configured for Ledgers, Stock entities, and metadata tax arrays",
-        "Instant validation compilation of corresponding standalone Invoice Summary documentation data sheets",
-        "Sleek low footprint computing script running locally with zero latency or network communication delays",
-        "Complimentary inclusion of Unlimited Tally & BUSY Bank Statement auto-entry utility handler modules"
-      ]
-    }
-  };
-
-  // 🌍 MASTER TRANSLATION DICTIONARY
-  const content = {
-    en: {
-      heroBadge: "⚡ AI-Powered Tally & BUSY Automation Suite for Tax Professionals",
-      heroTitle: "Automate Tally Entries from PDF & Excel in Minutes",
-      heroDesc: "Stop entering invoices manually. LekhaFlow automatically converts purchase/sales PDFs, raw bank statements, and complex client Excel files into clean, ready-to-import Tally vouchers with 100% accuracy.",
-      trialBtn: "🚀 Start 7-Days Free Trial",
-      secTitle: "Select Your Target Accounting Software Variant",
-      secDesc: "Choose your environment setup below to analyze the specialized functional execution logic and capabilities.",
-      activeText: "Selected Profile",
-      featureTitle: "Included Production Automation Features:",
-      unlimitedBank: "UNLIMITED Bank Statement Auto-Entry Utilities Included Natively (Tally/Busy Ready)",
-      quoteBtn: "📄 Generate Quotation Letterhead",
-      buyBtn: "💳 Buy Now / Pay with Razorpay",
-      gridTitle: "Compare Premium Deployment Matrix",
-      gridDesc: "Granular breakdown of subscription rates, licensing parameters, and yearly invoice capacity bounds.",
-      mostAdvanced: "Premium Advance",
-      gridQuote: "Get Quote",
-      gridBuy: "Buy Now",
-      guideTitle: "⚙️ Secure 5-Step System Installation & Machine Locking Guide",
-      guideDesc: "Please follow this sequence locally to activate your cryptographic enterprise license file.",
-      steps: [
-        "Step 1: Click 'Download Trial' and complete your intake details to capture your unified desktop software setup package.",
-        "Step 2: Install and run the package locally on your workstation. The runtime framework captures a unique Machine Hardware ID.",
-        "Step 3: Copy that Hardware ID string from your dashboard and forward it to our secure deployment desk for authorization.",
-        "Step 4: Our automated vault logs the token and instantly issues a cryptographically signed secure 'license.dat' validation key.",
-        "Step 5: Drop the 'license.dat' file directly into the application installation directory. The system unlocks instantly for use."
-      ],
-      systemMandate: "All production bundles enforce local runtime cryptographic Machine Hardware ID locks to secure accounting files.",
-      footerCredits: "Engineered & Architected by Jitendra Bharti | Developed in India"
-    },
-    hi: {
-      heroBadge: "⚡ CAs, अकाउंटेंट्स और टैक्स प्रोफेशनल्स के लिए नंबर #1 एआई स्वचालन सुइट",
-      heroTitle: "PDF और Excel इनवॉइस से सीधे Tally में एंट्री करें, मिनटों में!",
-      heroDesc: "घंटों की थका देने वाली मैन्युअल डेटा एंट्री को कहें अलविदा। लेखाफ्लो आपके सेल्स/परचेज बिल, पीडीएफ इनवॉइस, और कच्चे बैंक स्टेटमेंट्स को बिना किसी मानवीय गलती के शत-प्रतिशत सटीकता के साथ सीधे टैली में इम्पोर्ट करने योग्य वाउचर में बदल देता है।",
-      trialBtn: "🚀 7-दिनों का फ्री ट्रायल शुरू करें",
-      secTitle: "अपने एकाउंटिंग转换 सॉफ्टवेयर वेरिएंट का चयन करें",
-      secDesc: "नीचे दिए गए टैब से अपने वर्किंग एनवायरनमेंट को चुनें और उसकी परिचालन क्षमता और एआई लॉजिक की जांच करें।",
-      activeText: "सक्रिय वेरिएंट",
-      featureTitle: "सॉफ़्टवेयर फीचर्स और ऑटोमेशन प्रोटोकॉल:",
-      unlimitedBank: "असीमित बैंक स्टेटमेंट ऑटोमैटिक एंट्री मॉड्यूल (Tally/Busy) - पूरी तरह मुफ्त शामिल",
-      quoteBtn: "📄 ऑफिशियल कोटेशन लेटरहेड जनरेट करें",
-      buyBtn: "💳 अभी खरीदें / रेज़रपे सुरक्षित भुगतान",
-      gridTitle: "उत्पाद परिनियोजन मैट्रिक्स ग्रिड",
-      gridDesc: "सारे वेरिएंट्स की कीमतों, परिचालन सीमाओं और वार्षिक इनवॉइस क्षमता का संपूर्ण विवरण।",
-      mostAdvanced: "एडवांस गोल्ड",
-      gridQuote: "कोटेशन",
-      gridBuy: "अभी खरीदें",
-      guideTitle: "⚙️ 5-चरणों का सिस्टम इंस्टॉलेशन और मशीन लॉकिंग गाइड",
-      guideDesc: "अपने स्थानीय कंप्यूटर पर लेखाफ्लो को पूरी तरह सुरक्षित सक्रिय करने के लिए इन चरणों का पालन करें।",
-      steps: [
-        "चरण 1: 'Download Trial' पर क्लिक करके फॉर्म भरें और अपनी  सेटअप फ़ाइल तुरंत डाउनलोड करें।",
-        "चरण 2: पैकेज को अपने कंप्यूटर पर इंस्टॉल करें। पहली बार रन होने पर यह एक यूनीक Machine Hardware ID जनरेट करेगा।",
-        "चरण 3: उस हार्डवेयर आईडी को कॉपी करें और एक्टिवेशन के लिए हमारे व्हाट्सएप डेस्क या ईमेल पर फॉरवर्ड करें।",
-        "चरण 4: हमारा ऑटोमेटेड क्लाउड वॉल्ट इसे सत्यापित करेगा और सीधे आपके व्हाट्सएप/ईमेल पर 'license.dat' फ़ाइल जारी करेगा।",
-        "चरण 5: 'license.dat' फ़ाइल को सॉफ्टवेयर के फोल्डर में पेस्ट करें। आपका सिस्टम तुरंत हमेशा के लिए अनलॉक हो जाएगा।"
-      ],
-      systemMandate: "सभी डेस्कटॉप बंडल रनटाइम क्रिप्टोग्राफिक मशीन हार्डवेयर आईडी सत्यापन अनिवार्य रूप से लागू करते हैं।",
-      footerCredits: "जितेंद्र भारती द्वारा इंजीनियर और आर्किटेक्ट किया गया | भारत में विकसित"
-    }
-  };
-
-  const currentContent = isHindi ? content.hi : content.en;
-
-  // 3. LOGIC FUNCTIONS
-  const triggerTxtDownload = (filename: string, text: string) => {
-    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  };
-
-  const handleDropdownSelect = (variantId: "gold" | "standard" | "lite" | "erp9_premium" | "erp9_standard") => {
-    setActiveTab(variantId);
-    setActiveMenu(null);
-    document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const triggerIntake = (type: "demo" | "quotation", product?: any) => {
-    setIntakeTarget(type);
-    if (product) setActiveTab(product.id);
-    setShowIntakeModal(true);
-  };
-
-  const handleIntakeSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowIntakeModal(false);
-
-    if (intakeTarget === "demo") {
-      triggerTxtDownload("Setup_Instructions_Hindi.txt", `LekhaFlow गाइड:\n${content.hi.steps.join("\n")}`);
-      triggerTxtDownload("Setup_Instructions_English.txt", `Setup Guide:\n${content.en.steps.join("\n")}`);
-      window.open(downloadRoutes[activeTab] || downloadRoutes.gold, "_blank");
-    } else {
-      const currentSelected = productData[activeTab];
-      setQuotationData({
-        refNo: `NS/2026/QUOT/${currentSelected.id.toUpperCase()}_${Math.floor(1000 + Math.random() * 9000)}`,
-        date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }),
-        name: currentSelected.title,
-        limit: currentSelected.limit,
-        price: currentSelected.price,
-        scope: currentSelected.tagline,
-        benefits: currentSelected.features,
-        clientName: clientForm.clientName,
-        companyName: clientForm.companyName,
-        mobileNumber: clientForm.mobileNumber,
-        clientEmail: clientForm.clientEmail
-      });
-    }
-  };
+  const containerClass = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
 
   return (
-    <div className="relative min-h-screen bg-slate-950 text-slate-100 font-sans tracking-tight text-xs selection:bg-amber-500 selection:text-slate-950 antialiased">
+    <div className="bg-slate-950 text-slate-200 selection:bg-teal-500 selection:text-white overflow-x-hidden">
       
-      {/* 📄 CUSTOMIZED PRINTABLE OFFICIAL QUOTATION MODAL */}
-      {quotationData && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-white border-4 border-double border-slate-400 max-w-2xl w-full p-8 rounded-xl shadow-2xl space-y-6 text-black font-sans relative my-8" id="quotation-sheet">
-            <button onClick={() => setQuotationData(null)} className="absolute top-4 right-4 no-print text-slate-400 hover:text-black"><X/></button>
+      {/* 1. NAVIGATION */}
+      <nav className="fixed top-0 w-full z-[100] bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
+        <div className={`${containerClass} flex justify-between items-center h-20`}>
+          <div className="text-2xl font-black tracking-tighter text-white">
+            LEKHA<span className="text-teal-500">FLOW</span>
+          </div>
+          
+          <div className="hidden lg:flex items-center gap-8 text-sm font-bold uppercase tracking-widest">
+            <a href="#features" className="hover:text-teal-400 transition-colors">Features</a>
+            <a href="#how-it-works" className="hover:text-teal-400 transition-colors">Process</a>
+            <a href="#pricing" className="hover:text-teal-400 transition-colors text-teal-500">Pricing</a>
+            <button className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl transition-all shadow-lg shadow-teal-900/20">
+              Request Consultation
+            </button>
+          </div>
+
+          <button className="lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+      </nav>
+
+      {/* 1. HERO SECTION */}
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-900/20 via-slate-950 to-slate-950 -z-10"></div>
+        
+        <div className={`${containerClass} grid lg:grid-cols-2 gap-16 items-center`}>
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }} 
+            animate={{ opacity: 1, x: 0 }}
+            className="space-y-8"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-bold uppercase tracking-widest">
+              <Zap size={14} /> The Future of Indian Accounting
+            </div>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tighter">
+              Stop Repetitive <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">Accounting Work</span>
+            </h1>
+            <p className="text-xl text-slate-400 font-medium max-w-xl">
+              Invoice â†’ XML â†’ Tally. Convert Purchase, Sales, Bank Statements and GST Data into Tally-Ready files in minutes.
+            </p>
             
-            <div className="text-center border-b-2 border-slate-900 pb-4">
-              <h2 className="text-2xl font-black tracking-wider text-slate-950">Nexoriva Systems</h2>
-              <p className="text-xs font-bold text-blue-600 tracking-wide">"Automating Accuracy, Empowering Accountants"</p>
-              <div className="text-[10px] text-slate-900 font-bold mt-1 space-y-0.5">
-                <div>Registered MSME (Udyam): <span className="font-extrabold text-black">UDYAM-CG-27-0013072</span></div>
-                <div>Office: Surajpur, Chhattisgarh, India | Email: Nexoriva.systems@gmail.com | Web: lekhaflow.in</div>
+            <div className="grid grid-cols-2 gap-4 text-sm font-bold">
+              {["Save Hundreds of Hours", "Reduce Data Entry", "Improve Accuracy", "Tally Compatible XML", "Local Installation", "Peace of Mind"].map((benefit, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <CheckCircle2 size={16} className="text-teal-500" /> {benefit}
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-4 pt-4">
+              <button className="bg-white text-slate-950 px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-teal-500 transition-all active:scale-95">
+                Watch Demo
+              </button>
+              <button className="bg-slate-900 border border-slate-700 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Download Trial
+              </button>
+            </div>
+          </motion.div>
+
+          <motion.div 
+             initial={{ opacity: 0, scale: 0.9 }} 
+             animate={{ opacity: 1, scale: 1 }}
+             className="relative"
+          >
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-2 rounded-[2.5rem] shadow-2xl border border-slate-700">
+              <div className="bg-slate-950 rounded-[2rem] overflow-hidden aspect-video flex items-center justify-center border border-slate-800">
+                 {/* Product Screenshot / Video Placeholder */}
+                 <Monitor size={80} className="text-slate-800" />
+                 <div className="absolute inset-0 bg-teal-500/5 hover:bg-transparent transition-colors cursor-pointer flex items-center justify-center group">
+                    <div className="w-20 h-20 bg-teal-500 rounded-full flex items-center justify-center text-slate-950 shadow-xl group-hover:scale-110 transition-transform">
+                      <Play fill="currentColor" size={30} />
+                    </div>
+                 </div>
               </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
 
-            <div className="bg-blue-50/70 border border-blue-200 rounded-xl p-4 space-y-1 text-xs">
-              <div className="font-black text-blue-800 uppercase tracking-wider text-[9px]">Prepared Exclusively For:</div>
-              <div className="font-black text-slate-950 text-sm">{quotationData.clientName}</div>
-              <div className="font-bold text-slate-800"><span className="font-black">M/S:</span> {quotationData.companyName}</div>
-              <div className="text-slate-600 font-medium">Contact: {quotationData.mobileNumber} {quotationData.clientEmail && `| Email: ${quotationData.clientEmail}`}</div>
+      {/* 2. PAIN POINTS */}
+      <section className="py-24 bg-slate-900/30">
+        <div className={`${containerClass}`}>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase">Are You Facing These Problems?</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { title: "Manual Invoice Entry", desc: "Spending hours typing data from paper to screen." },
+              { title: "Data Entry Errors", desc: "Small mistakes leading to major GST reconciliation issues." },
+              { title: "Month-End Pressure", desc: "Working late nights to clear the voucher backlog." },
+              { title: "GST Reconciliation", desc: "Struggling to match GSTR-2B with purchase ledgers." },
+              { title: "Bank Entry Workload", desc: "Manually posting hundreds of UPI and bank transactions." },
+              { title: "Staff Dependency", desc: "Business stops when your data entry operator is on leave." }
+            ].map((pain, i) => (
+              <div key={i} className="bg-slate-900/50 border border-slate-800 p-8 rounded-3xl hover:border-red-500/50 transition-colors group">
+                <AlertCircle className="text-red-500 mb-4 group-hover:scale-110 transition-transform" size={32} />
+                <h3 className="text-xl font-black text-white mb-2">{pain.title}</h3>
+                <p className="text-slate-400 font-medium">{pain.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 bg-gradient-to-r from-teal-600 to-blue-600 p-1 rounded-3xl">
+            <div className="bg-slate-950 p-8 rounded-[1.4rem] text-center">
+              <h3 className="text-2xl font-black text-white">LekhaFlow Automates The Entire Workflow</h3>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="flex justify-between font-mono text-[10px] text-black bg-slate-100 p-2.5 rounded-lg border border-slate-300">
-              <div><span className="font-black text-black">Ref No:</span> {quotationData.refNo}</div>
-              <div><span className="font-black text-black">Date:</span> {quotationData.date}</div>
-            </div>
+      {/* 3. HOW IT WORKS */}
+      <section id="how-it-works" className="py-24">
+        <div className={`${containerClass}`}>
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter">THE SIMPLE 5-STEP FLOW</h2>
+          </div>
 
-            <div className="overflow-x-auto border border-slate-300 rounded-xl">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="bg-slate-200 border-b border-slate-300 text-slate-950 font-black">
-                    <th className="p-3">Specification Target</th>
-                    <th className="p-3 text-right">Investment Parameters</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-300 font-bold text-black">
-                  <tr>
-                    <td className="p-3 text-black font-black bg-slate-50">Software Module Target</td>
-                    <td className="p-3 text-blue-600 font-extrabold text-right">{quotationData.name}</td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 text-black font-black bg-slate-50">Processing Bounds</td>
-                    <td className="p-3 text-black text-right">{quotationData.limit}</td>
-                  </tr>
-                  <tr className="bg-blue-50">
-                    <td className="p-3 text-black font-black">Subscription Rate Framework (Annual)</td>
-                    <td className="p-3 text-sm font-extrabold text-blue-700 text-right">{quotationData.price}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-8 relative">
+            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-800 -z-10"></div>
+            {[
+              { step: "01", title: "Upload", desc: "Invoices, PDFs or Excel" },
+              { step: "02", title: "Read", desc: "LekhaFlow reads data" },
+              { step: "03", title: "Generate", desc: "XML created automatically" },
+              { step: "04", title: "Import", desc: "Into Tally Prime / ERP9" },
+              { step: "05", title: "Done", desc: "Vouchers Created" }
+            ].map((item, i) => (
+              <div key={i} className="bg-slate-950 border-2 border-slate-800 p-6 rounded-3xl w-full max-w-[220px] text-center hover:border-teal-500 transition-all group">
+                <div className="text-4xl font-black text-teal-500/20 group-hover:text-teal-500 mb-2 transition-colors">{item.step}</div>
+                <h4 className="text-lg font-black text-white mb-1">{item.title}</h4>
+                <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="space-y-2">
-              <ul className="space-y-1.5 text-[11px] text-black pl-0 list-none font-bold">
-                <li className="flex items-start gap-2 text-black">✔ <span>{currentContent.unlimitedBank}</span></li>
-                {quotationData.benefits.map((b: string, i: number) => (
-                  <li key={i} className="flex items-start gap-2 text-black">✔ <span>{b}</span></li>
-                ))}
+      {/* 5. WHAT LEKHAFLOW CAN DO */}
+      <section id="features" className="py-24 bg-slate-900/20">
+        <div className={`${containerClass}`}>
+          <div className="text-center mb-16">
+             <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase">Comprehensive Automation</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Card 1 */}
+            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
+              <div className="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-500 mb-6">
+                <FileText size={30} />
+              </div>
+              <h3 className="text-2xl font-black text-white mb-4">Invoice Automation</h3>
+              <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-teal-500" /> Sales Processing</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-teal-500" /> Purchase Processing</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-teal-500" /> XML Generation</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-teal-500" /> Voucher Automation</li>
               </ul>
             </div>
 
-            <div className="p-3 bg-slate-100 rounded-xl border border-slate-300 space-y-1 text-[10px] font-mono text-black font-bold">
-              <div className="font-black text-slate-700 uppercase tracking-wider text-[9px] mb-1">Corporate Bank Wire Parameters:</div>
-              <div className="grid grid-cols-2 gap-1.5">
-                <div><span className="font-black">Bank Name:</span> Bank of Baroda</div>
-                <div><span className="font-black">Account Number:</span> 946110110001194</div>
-                <div><span className="font-black">IFSC Code:</span> BARB0SURAJP</div>
-                <div className="text-blue-600 uppercase">System Mandate Verified</div>
+            {/* Card 2 */}
+            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
+              <div className="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-500 mb-6">
+                <BarChart3 size={30} />
               </div>
+              <h3 className="text-2xl font-black text-white mb-4">Bank Statement</h3>
+              <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-500" /> Unlimited Statements</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-500" /> Auto Mapping</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-500" /> BUSY & Tally Support</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-500" /> Accurate Narration</li>
+              </ul>
             </div>
 
-            <div className="flex gap-2 pt-2 no-print">
-              <button onClick={() => window.print()} className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-xl flex items-center justify-center gap-2 transition text-[11px] uppercase tracking-wider shadow-md">
-                <Printer size={16}/> Download as PDF / Print
-              </button>
-              <button onClick={() => setQuotationData(null)} className="py-3 px-6 bg-slate-900 hover:bg-slate-800 text-white font-black rounded-xl transition text-[11px] uppercase tracking-wider">
-                Close Layout Sheet
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 📱 UNIQUE MOBILE DASHBOARD VIEW */}
-      <div className="md:hidden flex flex-col min-h-screen bg-slate-50 text-slate-900">
-        <div className="bg-[#1e3a8a] p-6 text-white rounded-b-[2.5rem] shadow-xl">
-          <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-black tracking-tighter">LekhaFlow GO</h1>
-            <button onClick={() => setIsHindi(!isHindi)} className="text-[10px] font-black border border-white/20 px-3 py-1 rounded-full bg-white/10">
-              🌐 {isHindi ? "English" : "हिंदी"}
-            </button>
-          </div>
-          <div className="flex items-center gap-2 text-teal-400 text-xs font-bold bg-white/5 w-fit px-3 py-1 rounded-full border border-teal-500/20">
-            <Activity size={14}/> Cloud Sync Active
-          </div>
-        </div>
-        
-        <div className="p-4 -mt-8 space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col items-center active:scale-95 transition-all">
-              <Camera className="text-teal-600 mb-2"/>
-              <span className="font-black text-[10px] uppercase tracking-widest">Scanner</span>
-            </div>
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col items-center active:scale-95 transition-all">
-              <Key className="text-blue-600 mb-2"/>
-              <span className="font-black text-[10px] uppercase tracking-widest">Licenses</span>
-            </div>
-          </div>
-          
-          <div className="bg-[#1e3a8a] p-6 rounded-[2rem] text-white flex justify-between items-center shadow-lg">
-            <div>
-              <p className="text-[9px] font-black text-teal-400 uppercase tracking-widest">Desktop Engine</p>
-              <h4 className="text-xs font-black">Download EXE Package</h4>
-            </div>
-            <button onClick={() => triggerIntake("demo")} className="bg-teal-500 text-slate-950 p-3 rounded-xl shadow-lg">
-              <DownloadCloud size={20} />
-            </button>
-          </div>
-
-          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-3">
-            <div className="flex justify-between items-center border-b pb-2">
-              <span className="font-black text-slate-500 text-[10px] uppercase">Fast Tab Switching</span>
-              <span className="text-[9px] bg-amber-500/10 text-amber-700 px-2 py-0.5 rounded font-bold uppercase">{activeTab}</span>
-            </div>
-            <select 
-              value={activeTab} 
-              onChange={(e) => setActiveTab(e.target.value as any)}
-              className="w-full p-2.5 bg-slate-100 border border-slate-200 rounded-xl font-bold text-xs outline-none"
-            >
-              {Object.values(productData).map((p) => (
-                <option key={p.id} value={p.id}>{p.title} ({p.price})</option>
-              ))}
-            </select>
-            <div className="pt-2 grid grid-cols-2 gap-2">
-              <button onClick={() => triggerIntake("quotation")} className="py-2.5 bg-slate-900 text-white font-black rounded-xl text-[10px] uppercase tracking-wider text-center">
-                Get Quote
-              </button>
-              <a href={productData[activeTab].razorpayUrl} target="_blank" rel="noopener noreferrer" className="py-2.5 bg-amber-500 text-slate-950 font-black rounded-xl text-[10px] uppercase tracking-wider text-center block">
-                Buy Now
-              </a>
-            </div>
-          </div>
-          
-          <div className="space-y-3">
-            <h4 className="font-black text-slate-400 text-[10px] uppercase px-2 tracking-widest">Setup Instructions</h4>
-            {currentContent.steps.map((s, i) => (
-              <div key={i} className="bg-white p-4 rounded-2xl text-[11px] font-bold border border-slate-100 shadow-sm flex gap-3">
-                <span className="text-blue-600 font-black">{i+1}</span>
-                <span className="text-slate-700">{s}</span>
+            {/* Card 3 */}
+            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
+              <div className="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-500 mb-6">
+                <ShieldCheck size={30} />
               </div>
-            ))}
-          </div>
+              <h3 className="text-2xl font-black text-white mb-4">GST Intelligence</h3>
+              <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-purple-500" /> GSTR-2B Reconciliation</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-purple-500" /> Vendor Matching</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-purple-500" /> Purchase Verification</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-purple-500" /> GST Visibility</li>
+              </ul>
+            </div>
 
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
-            <Contact isHindi={isHindi} />
-          </div>
-        </div>
+            {/* Card 4 - Advanced Voucher */}
+            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
+              <div className="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center text-amber-500 mb-6">
+                <Cpu size={30} />
+              </div>
+              <h3 className="text-2xl font-black text-white mb-4">Advanced Voucher</h3>
+              <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-amber-500" /> Rule Based Segmentation</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-amber-500" /> High Volume Processing</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-amber-500" /> Large Transaction Handling</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-amber-500" /> Configurable Rules</li>
+              </ul>
+            </div>
 
-        <footer className="py-8 text-center bg-slate-100 border-t border-slate-200 space-y-2 mt-auto">
-          <p className="text-slate-500 text-[9px] font-black uppercase tracking-wider">LekhaFlow AI Systems | Surajpur, CG</p>
-          <p className="text-slate-400 text-[8px] font-bold uppercase">Developed by Jitendra Bharti</p>
-        </footer>
-      </div>
-
-      {/* 💻 PREMIUM DESKTOP VIEW SYSTEM */}
-      <div className="hidden md:block">
-        
-        {/* 🌟 STICKY HEADER MATRIX */}
-        <header className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center border-b border-slate-800 bg-slate-950/95 sticky top-0 z-50 no-print">
-          <div className="text-xl font-black text-white tracking-wider uppercase">
-            Lekha<span className="text-amber-500">Flow</span>
-          </div>
-          
-          <nav className="flex space-x-8 text-slate-300 font-black text-[11px] uppercase tracking-widest relative items-center">
-            <Link href="#hero" className="hover:text-amber-400 transition-colors">Home</Link>
-            
-            <div className="relative group">
-              <button className="hover:text-amber-400 flex items-center gap-1 font-black uppercase transition-colors">
-                Software Variants <ChevronDown size={12}/>
-              </button>
-              <div className="absolute top-full -left-4 w-56 bg-slate-900 border border-slate-800 rounded-xl p-2 hidden group-hover:block shadow-2xl mt-1">
-                {Object.values(productData).map((p) => (
-                  <button 
-                    key={p.id} 
-                    onClick={() => handleDropdownSelect(p.id as any)} 
-                    className="w-full text-left p-3 hover:bg-slate-800 rounded-lg text-[10px] font-black text-slate-400 hover:text-amber-400 transition-all uppercase tracking-wider border-b border-slate-800/50 last:border-0"
-                  >
-                    {p.title}
-                  </button>
+             {/* Card 5 - Units */}
+             <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
+              <div className="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-500 mb-6">
+                <Download size={30} />
+              </div>
+              <h3 className="text-2xl font-black text-white mb-4">Dynamic Units</h3>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {["KGS", "PCS", "LTR", "JAR", "CASE", "BOX"].map(unit => (
+                  <span key={unit} className="px-3 py-1 bg-slate-800 rounded-lg text-[10px] font-black text-slate-300 border border-slate-700">{unit}</span>
                 ))}
               </div>
+              <p className="mt-4 text-slate-500 font-bold text-xs uppercase tracking-widest">+ Custom Unit Support</p>
             </div>
 
-            <Link href="#pricing" className="hover:text-amber-400 transition-colors text-amber-500 underline underline-offset-4">Pricing Matrix</Link>
-            <Link href="#how-it-works" className="hover:text-amber-400 transition-colors">Setup Guide</Link>
-            <Link href="/gallery" className="hover:text-amber-400 transition-colors text-teal-400 font-black">🖼️ Dashboard Gallery</Link>
-            
-            <button onClick={() => setIsHindi(!isHindi)} className="text-amber-500 border border-amber-500/30 px-2 py-0.5 rounded font-black text-[9px] hover:bg-amber-500/10 transition-colors">
-              {isHindi ? "ENGLISH" : "हिंदी"}
-            </button>
-          </nav>
-
-          <button onClick={() => triggerIntake("demo")} className="bg-amber-500 text-slate-950 px-5 py-2 rounded-lg font-black text-[10px] uppercase shadow-lg hover:bg-amber-600 transition-all transform hover:scale-105">
-            Download Installer
-          </button>
-        </header>
-
-        {/* 🚀 HERO SECTION */}
-        <section id="hero" className="max-w-6xl mx-auto px-4 py-28 flex flex-col items-center text-center no-print">
-          <div className="bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-[0.3em] px-5 py-2 rounded-full border border-amber-500/20 mb-8 shadow-sm">
-            {currentContent.heroBadge}
-          </div>
-          <h1 className="text-6xl font-black text-white leading-tight tracking-tighter max-w-4xl">
-            {currentContent.heroTitle}
-          </h1>
-          <p className="text-slate-400 mt-8 max-w-2xl text-lg font-medium leading-relaxed italic">
-            "{currentContent.heroDesc}"
-          </p>
-          
-          <div className="mt-8 bg-slate-900/60 border border-slate-800 rounded-2xl p-4 max-w-xl grid grid-cols-3 gap-4 text-slate-300 font-bold text-[11px]">
-            <div className="flex items-center justify-center gap-2"><span className="text-emerald-500 font-black">✔</span><span>7-Day Free Trial</span></div>
-            <div className="flex items-center justify-center gap-2"><span className="text-emerald-500 font-black">✔</span><span>No Card Required</span></div>
-            <div className="flex items-center justify-center gap-2"><span className="text-emerald-500 font-black">✔</span><span>WhatsApp Support</span></div>
-          </div>
-
-          <div className="mt-12 flex gap-6">
-            <button onClick={() => triggerIntake("demo")} className="bg-white text-slate-950 px-12 py-5 rounded-2xl font-black uppercase tracking-[0.2em] hover:bg-amber-500 transition-all shadow-2xl active:scale-95 text-xs">
-              {currentContent.trialBtn}
-            </button>
-            <Link href="/gallery" className="border-2 border-slate-800 text-white px-12 py-5 rounded-2xl font-black uppercase tracking-[0.2em] hover:bg-slate-900 transition-all flex items-center gap-3 text-xs">
-              🔍 View App Screen Gallery
-            </Link>
-          </div>
-        </section>
-
-        {/* 📊 INTERACTIVE RUNTIME MODULE MATRICES */}
-        <section id="matrix" className="max-w-6xl mx-auto px-4 py-12 border-t border-slate-900 no-print">
-          <div className="flex justify-between items-end mb-8">
-            <div>
-              <h2 className="text-2xl font-black text-white uppercase tracking-tighter">{currentContent.secTitle}</h2>
-              <p className="text-slate-400 text-xs font-medium mt-1">{currentContent.secDesc}</p>
-            </div>
-            <span className="text-[10px] font-mono bg-amber-500/5 border border-amber-500/20 text-amber-400 uppercase font-black px-3 py-1.5 rounded-md">
-              {currentContent.activeText}: {productData[activeTab]?.title}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-5 gap-2 p-2 bg-slate-900 rounded-2xl border border-slate-800 mb-6">
-            {Object.values(productData).map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id as any)}
-                className={`px-2 py-3 rounded-xl font-black transition-all text-center text-[10px] tracking-wide uppercase ${
-                  activeTab === item.id 
-                    ? "bg-amber-500 text-slate-950 shadow-lg" 
-                    : "text-slate-400 hover:text-white hover:bg-slate-800/40"
-                }`}
-              >
-                {item.title}
-              </button>
-            ))}
-          </div>
-
-          <div className="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 p-8 rounded-3xl shadow-2xl">
-            <div className="flex justify-between items-center pb-6 border-b border-slate-800">
-              <div>
-                <h3 className="text-xl font-black text-white uppercase tracking-wide">{productData[activeTab]?.title}</h3>
-                <p className="text-amber-400 font-bold text-xs mt-1">{productData[activeTab]?.tagline}</p>
+            {/* Card 6 - Rounding */}
+            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
+              <div className="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-500 mb-6">
+                <Zap size={30} />
               </div>
-              <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 min-w-[260px] flex justify-between items-center">
-                <div>
-                  <span className="text-slate-500 font-mono text-[9px] block uppercase tracking-wider font-bold">Annual Capacity</span>
-                  <div className="text-sm font-black text-white mt-0.5">{productData[activeTab]?.limit}</div>
-                </div>
-                <div className="text-right">
-                  <span className="text-slate-500 font-mono text-[9px] block uppercase tracking-wider font-bold">Subscription Cost</span>
-                  <div className="text-sm font-black text-amber-400 mt-0.5">{productData[activeTab]?.price}</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 space-y-4">
-              <div className="text-slate-400 font-mono text-[9px] uppercase tracking-widest font-black">{currentContent.featureTitle}</div>
-              <div className="grid grid-cols-2 gap-4">
-                {productData[activeTab]?.features.map((feature, i) => (
-                  <div key={i} className="bg-slate-950/60 p-4 rounded-xl border border-slate-800 text-slate-200 font-medium text-xs flex items-start gap-3 hover:border-amber-500/30 transition-all">
-                    <span className="text-amber-400 font-black">✔</span>
-                    <span className="leading-relaxed font-bold text-slate-300">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-slate-800 flex justify-end gap-4">
-              <button onClick={() => triggerIntake("quotation", productData[activeTab])} className="px-6 py-3 rounded-xl bg-slate-950 border border-slate-700 hover:bg-slate-900 text-white font-black text-[10px] uppercase tracking-wider transition-all">
-                {currentContent.quoteBtn}
-              </button>
-              <a href={productData[activeTab]?.razorpayUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-[10px] uppercase tracking-wider shadow-lg transition-all">
-                {currentContent.buyBtn}
-              </a>
+              <h3 className="text-2xl font-black text-white mb-4">Rounding Engine</h3>
+              <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-pink-500" /> Positive Rounding</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-pink-500" /> Negative Rounding</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-pink-500" /> Ledger Balancing</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-pink-500" /> XML Validation</li>
+              </ul>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* 📈 OPERATIONAL COMPARISON MATRIX */}
-        <section className="max-w-6xl mx-auto px-4 py-16 border-t border-slate-900 no-print">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <h2 className="text-2xl font-black text-white uppercase tracking-tighter">Why Choose LekhaFlow Automation Architecture?</h2>
-            <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Comparing manual slow entries against our high-speed deterministic AI loops.</p>
-          </div>
-          
-          <div className="overflow-x-auto border border-slate-800 rounded-2xl shadow-2xl bg-slate-900/20">
-            <table className="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr className="bg-slate-900 border-b border-slate-800 font-black text-white">
-                  <th className="p-4">Operational Parameters</th>
-                  <th className="p-4 text-red-400">Manual Clerical Entries</th>
-                  <th className="p-4 text-amber-400 bg-amber-500/5">LekhaFlow AI Engine</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800/60 font-bold text-slate-300">
-                <tr>
-                  <td className="p-4 font-black text-white">Processing Time Bound per Invoice</td>
-                  <td className="p-4">~ 3 Minutes (Slow & Human Dependent)</td>
-                  <td className="p-4 text-amber-400 font-black bg-amber-500/5">⏳ Under 10 Seconds (Rocket Speed)</td>
-                </tr>
-                <tr>
-                  <td className="p-4 font-black text-white">Human Error & Compliance Risk</td>
-                  <td className="p-4 text-red-400">Extremely High Risk Allocation</td>
-                  <td className="p-4 text-emerald-400 font-black bg-amber-500/5">🔒 0% Risk (Strict Deterministic Loops)</td>
-                </tr>
-                <tr>
-                  <td className="p-4 font-black text-white">Bulk Batch Processing Capability</td>
-                  <td className="p-4">Impossible / Creates Server Hang Issues</td>
-                  <td className="p-4 text-amber-400 font-black bg-amber-500/5">🚀 20+ Parallel Threads Execution</td>
-                </tr>
-                <tr>
-                  <td className="p-4 font-black text-white">Accounting Staff Overhead</td>
-                  <td className="p-4">Requires Continuous Clerical Workforce</td>
-                  <td className="p-4 text-emerald-400 font-black bg-amber-500/5">📈 Over 70% Overhead Cost Reduction</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* 📋 PRICING GRID DEPLOYMENT SECTION */}
-        <section id="pricing" className="max-w-7xl mx-auto px-4 py-24 border-t border-slate-900 no-print">
-          <div className="text-center mb-16 space-y-2">
-            <h2 className="text-4xl font-black text-white uppercase tracking-tighter">{currentContent.gridTitle}</h2>
-            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">{currentContent.gridDesc}</p>
-          </div>
-          
-          <div className="grid grid-cols-5 gap-4">
-            {Object.entries(productData).map(([key, item]) => (
-              <div key={key} className={`bg-gradient-to-b from-slate-900 to-slate-950 border p-5 rounded-[2.5rem] flex flex-col justify-between transition-all group ${
-                activeTab === key ? 'border-amber-500 ring-8 ring-amber-500/5 shadow-2xl scale-[1.02]' : 'border-slate-800 hover:border-slate-700 shadow-lg'
-              }`}>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-start gap-1">
-                    <div>
-                      <h3 className="text-white font-black group-hover:text-amber-400 text-[11px] uppercase tracking-wider transition-colors">{item.title}</h3>
-                      <span className="text-[9px] text-slate-500 font-bold block mt-0.5">{item.compatibility}</span>
-                    </div>
-                    {item.id === "gold" && (
-                      <span className="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-1.5 py-0.5 rounded text-[8px] uppercase font-black shrink-0">{currentContent.mostAdvanced}</span>
-                    )}
-                  </div>
-                  
-                  <div className="py-4 border-y border-slate-800/60">
-                    <p className="text-amber-500 font-black text-xl tracking-tighter">{item.price}</p>
-                    <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{item.limit}</span>
-                  </div>
-                  
-                  <ul className="space-y-3 text-slate-400 font-bold text-[10px] min-h-[160px] list-none pl-0">
-                    {item.features.slice(0, 4).map((f, i) => (
-                      <li key={i} className="flex items-start gap-2 leading-tight">▪ {f}</li>
-                    ))}
-                  </ul>
-                </div>
+      {/* 6. ROI CALCULATOR */}
+      <section className="py-24">
+        <div className={`${containerClass}`}>
+          <div className="bg-slate-900 border-2 border-slate-800 rounded-[3rem] p-8 lg:p-16">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="space-y-6">
+                <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase">Calculate Your Savings</h2>
+                <p className="text-slate-400 font-bold text-lg uppercase tracking-widest">See how much time and money LekhaFlow saves for your firm.</p>
                 
-                <div className="mt-8 space-y-2">
-                  <button onClick={() => { setActiveTab(key as any); triggerIntake("quotation"); }} className="w-full py-3 bg-slate-950 border border-slate-800 rounded-xl font-black uppercase text-[9px] hover:bg-slate-900 transition-all text-white tracking-widest shadow-sm">
-                    {currentContent.gridQuote}
-                  </button>
-                  <a href={item.razorpayUrl} target="_blank" rel="noreferrer" className="block w-full py-3.5 bg-amber-500 text-slate-950 rounded-xl font-black uppercase text-[9px] text-center tracking-widest shadow-xl hover:bg-amber-600 active:scale-95 transition-all">
-                    {currentContent.gridBuy}
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ⚙️ SYSTEM INSTALLATION CHRONOLOGY GUIDE */}
-        <section id="how-it-works" className="max-w-6xl mx-auto px-4 py-24 border-t border-slate-900 no-print">
-          <div className="bg-slate-900/50 p-16 rounded-[4rem] border-2 border-slate-800 shadow-inner">
-            <h3 className="text-3xl font-black text-white mb-12 flex items-center gap-4 uppercase tracking-tighter">
-              <Info className="text-amber-500"/> {currentContent.guideTitle}
-            </h3>
-            <div className="grid grid-cols-2 gap-x-16 gap-y-12">
-              {currentContent.steps.map((s, i) => (
-                <div key={i} className="flex gap-6 items-start group">
-                  <span className="bg-slate-950 border border-slate-800 text-amber-500 font-black h-10 w-10 flex items-center justify-center rounded-2xl text-lg shrink-0 shadow-lg group-hover:bg-amber-500 group-hover:text-slate-950 transition-all">{i+1}</span>
-                  <div className="space-y-1">
-                    <p className="text-slate-200 font-black text-xs uppercase tracking-widest">Operational Protocol</p>
-                    <p className="text-slate-400 font-bold text-sm leading-relaxed">{s}</p>
+                <div className="space-y-8 mt-10">
+                  <div className="space-y-4">
+                    <label className="text-xs font-black text-teal-400 uppercase tracking-[0.2em]">Invoices Per Month: <span className="text-white text-lg ml-2">{invoices}</span></label>
+                    <input type="range" min="100" max="5000" step="100" value={invoices} onChange={(e) => setInvoices(parseInt(e.target.value))} className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500" />
+                  </div>
+                  <div className="space-y-4">
+                    <label className="text-xs font-black text-teal-400 uppercase tracking-[0.2em]">Monthly Staff Salary: <span className="text-white text-lg ml-2">â‚¹{staffCost}</span></label>
+                    <input type="range" min="8000" max="50000" step="1000" value={staffCost} onChange={(e) => setStaffCost(parseInt(e.target.value))} className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500" />
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
+              </div>
 
-        {/* 🔒 INBOUND SPECIFICATIONS NODE */}
-        <section id="contact" className="py-32 bg-slate-900/20 border-t border-slate-900 no-print">
-          <div className="max-w-xl mx-auto text-center mb-16 space-y-2">
-            <h2 className="text-4xl font-black text-white uppercase tracking-tighter">
-              {isHindi ? "सम्पर्क विवरण" : "Custom Workflow Intake"}
-            </h2>
-            <p className="text-slate-500 text-sm font-bold uppercase tracking-widest">Connect with our engineering desk</p>
-          </div>
-          <Contact isHindi={isHindi} />
-        </section>
-
-        {/* 🛡️ SYSTEM FOOTER CREDITS */}
-        <footer className="py-16 border-t border-slate-900 text-center space-y-4 bg-slate-950 text-slate-400 no-print">
-          <div className="max-w-6xl mx-auto px-4 grid grid-cols-3 text-left gap-8 pb-8 border-b border-slate-800 font-sans text-slate-400">
-            <div>
-              <h5 className="text-white font-black text-xs mb-2 tracking-wide uppercase">Corporate HQ</h5>
-              <p className="text-xs leading-relaxed font-medium">Surajpur, Ambikapur Region,<br />Chhattisgarh, India - 497229</p>
+              <div className="grid grid-cols-1 gap-4">
+                <div className="bg-slate-950 p-8 rounded-3xl border border-slate-800 text-center">
+                   <div className="text-slate-500 text-xs font-black uppercase tracking-widest mb-2">Hours Saved / Month</div>
+                   <div className="text-5xl font-black text-teal-500 tracking-tighter">{Math.round(timeSaved / 60)} Hrs</div>
+                </div>
+                <div className="bg-teal-500 p-8 rounded-3xl text-center text-slate-950">
+                   <div className="text-teal-900 text-xs font-black uppercase tracking-widest mb-2">Estimated Annual Savings</div>
+                   <div className="text-5xl font-black tracking-tighter">â‚¹{annualSavings.toLocaleString()}</div>
+                </div>
+              </div>
             </div>
-            <div>
-              <h5 className="text-white font-black text-xs mb-2 tracking-wide uppercase">Inquiries Hub</h5>
-              <p className="text-xs leading-relaxed font-medium">Email: Nexoriva.systems@gmail.com<br />Direct Phone: +91-8770808695</p>
-            </div>
-            <div>
-              <h5 className="text-white font-black text-xs mb-2 tracking-wide uppercase">System Mandate</h5>
-              <p className="text-xs leading-relaxed font-medium">{currentContent.systemMandate}</p>
-            </div>
-          </div>
-          <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.5em] pt-4">LekhaFlow AI Systems | Registered MSME | Surajpur, Chhattisgarh</p>
-          <p className="text-slate-600 text-[8px] font-bold uppercase tracking-[0.2em]">{currentContent.footerCredits}</p>
-        </footer>
-      </div>
-
-      {/* 📥 GLOBAL INTAKE MODAL FRAMEWORK */}
-      {showIntakeModal && (
-        <div className="fixed inset-0 z-[130] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4">
-          <div className="bg-slate-900 border-2 border-amber-500 p-10 rounded-[3.5rem] max-w-md w-full relative shadow-[0_0_100px_rgba(245,158,11,0.1)] text-slate-100">
-            <button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-500 hover:text-white transition-colors">
-              <X size={24}/>
-            </button>
-            
-            <div className="text-center space-y-3 mb-10">
-              <h3 className="text-2xl font-black text-white uppercase tracking-tighter">
-                {intakeTarget === "demo" ? "Authorize Setup" : "Official Quote"}
-              </h3>
-              <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest">Enter secure credentials to proceed</p>
-            </div>
-            
-            <form onSubmit={handleIntakeSubmit} className="space-y-4">
-              <input 
-                required 
-                type="text"
-                placeholder="YOUR FULL NAME" 
-                value={clientForm.clientName}
-                onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}
-                className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs tracking-widest focus:border-amber-500 outline-none transition-all" 
-              />
-              <input 
-                required 
-                type="text"
-                placeholder="COMPANY / FIRM NAME" 
-                value={clientForm.companyName}
-                onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}
-                className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs tracking-widest focus:border-amber-500 outline-none transition-all" 
-              />
-              <input 
-                required 
-                type="tel"
-                pattern="[0-9]{10}"
-                placeholder="10-DIGIT WHATSAPP NUMBER" 
-                value={clientForm.mobileNumber}
-                onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}
-                className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs tracking-widest focus:border-amber-500 outline-none transition-all" 
-              />
-              <input 
-                type="email"
-                placeholder="CORPORATE EMAIL (OPTIONAL)" 
-                value={clientForm.clientEmail}
-                onChange={(e) => setClientForm({...clientForm, clientEmail: e.target.value})}
-                className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs tracking-widest focus:border-amber-500 outline-none transition-all" 
-              />
-              
-              <button type="submit" className="w-full py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black rounded-2xl uppercase tracking-widest shadow-2xl hover:scale-[1.02] transition-transform text-xs mt-2">
-                {intakeTarget === "demo" ? "DOWNLOAD NOW" : "GENERATE QUOTE"}
-              </button>
-            </form>
           </div>
         </div>
-      )}
+      </section>
 
-      {/* STICKY FLOATING WHATSAPP REVENUE BUTTON */}
-      <WhatsAppButton />
+      {/* 7. PRODUCT COMPARISON */}
+      <section id="pricing" className="py-24 bg-slate-900/30">
+        <div className={`${containerClass}`}>
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase">Product Comparison</h2>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Choose the best fit for your workflow</p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <div className="min-w-[800px] grid grid-cols-6 bg-slate-900 border border-slate-800 rounded-3xl p-4">
+               {/* Table Header */}
+               <div className="p-4 font-black text-slate-500 uppercase text-[10px]">Specifications</div>
+               <div className="p-4 text-center font-black text-white">Lite</div>
+               <div className="p-4 text-center font-black text-white">Standard</div>
+               <div className="p-4 text-center font-black text-teal-500">Gold</div>
+               <div className="p-4 text-center font-black text-white">ERP9 Std</div>
+               <div className="p-4 text-center font-black text-white">ERP9 Prem</div>
+                 {/* Rows */}
+               <div className="p-4 border-t border-slate-800 text-xs font-bold uppercase">Annual Price</div>
+               <div className="p-4 border-t border-slate-800 text-center font-black">â‚¹10,000</div>
+               <div className="p-4 border-t border-slate-800 text-center font-black">â‚¹15,000</div>
+               <div className="p-4 border-t border-slate-800 text-center font-black text-teal-500">â‚¹18,000</div>
+               <div className="p-4 border-t border-slate-800 text-center font-black">â‚¹15,000</div>
+               <div className="p-4 border-t border-slate-800 text-center font-black text-teal-500">â‚¹18,000</div>
+
+               <div className="p-4 border-t border-slate-800 text-xs font-bold uppercase">Target User</div>
+               <div className="p-4 border-t border-slate-800 text-center text-[10px]">Tax Pros</div>
+               <div className="p-4 border-t border-slate-800 text-center text-[10px]">Accountants</div>
+               <div className="p-4 border-t border-slate-800 text-center text-[10px] text-teal-400">Large Firms</div>
+               <div className="p-4 border-t border-slate-800 text-center text-[10px]">ERP9 Legacy</div>
+               <div className="p-4 border-t border-slate-800 text-center text-[10px]">ERP9 Premium</div>
+
+               <div className="p-4 border-t border-slate-800 text-xs font-bold uppercase">Invoice Limit</div>
+               <div className="p-4 border-t border-slate-800 text-center text-[10px]">2,000/yr</div>
+               <div className="p-4 border-t border-slate-800 text-center text-[10px]">5,000/yr</div>
+               <div className="p-4 border-t border-slate-800 text-center text-[10px] text-teal-400">10,000/yr</div>
+               <div className="p-4 border-t border-slate-800 text-center text-[10px]">5,000/yr</div>
+               <div className="p-4 border-t border-slate-800 text-center text-[10px] text-teal-400">10,000/yr</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. WHO SHOULD USE */}
+      <section className="py-24">
+        <div className={`${containerClass}`}>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase">Who is it for?</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+             {["Chartered Accountants", "Tax Consultants", "Accounting Firms", "Distributors", "Manufacturers", "Retail Chains", "GST Practitioners", "Tally Users", "BUSY Users"].map(user => (
+               <div key={user} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center hover:bg-teal-600 hover:text-slate-950 transition-all font-black text-xs uppercase tracking-widest">
+                  {user}
+               </div>
+             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 10. BEFORE VS AFTER */}
+      <section className="py-24 bg-slate-900/40">
+        <div className={`${containerClass}`}>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="bg-red-500/5 border border-red-500/20 p-10 rounded-[3rem] space-y-6">
+               <h3 className="text-2xl font-black text-red-500 uppercase tracking-widest">Before LekhaFlow</h3>
+               <ul className="space-y-4 text-slate-400 font-bold uppercase text-xs tracking-widest">
+                  <li>âŒ Manual Ledger Posting</li>
+                  <li>âŒ Human Typing Errors</li>
+                  <li>âŒ Month-End Stress</li>
+                  <li>âŒ 3 Minutes per Invoice</li>
+                  <li>âŒ Staff Dependent</li>
+               </ul>
+            </div>
+            <div className="bg-teal-500/10 border border-teal-500/30 p-10 rounded-[3rem] space-y-6 shadow-2xl shadow-teal-900/10">
+               <h3 className="text-2xl font-black text-teal-500 uppercase tracking-widest">After LekhaFlow</h3>
+               <ul className="space-y-4 text-white font-bold uppercase text-xs tracking-widest">
+                  <li>âœ… XML Automatic Import</li>
+                  <li>âœ… 100% Accurate Data</li>
+                  <li>âœ… Work Done in Minutes</li>
+                  <li>âœ… 10 Seconds per Invoice</li>
+                  <li>âœ… Scalable Process</li>
+               </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 12. FAQ */}
+      <section className="py-24">
+        <div className={`${containerClass} max-w-4xl`}>
+          <h2 className="text-3xl font-black text-white text-center mb-12 uppercase tracking-tighter">Common Questions</h2>
+          <div className="space-y-4">
+            {[
+              { q: "Does it work with Tally Prime?", a: "Yes, fully optimized for all Tally Prime releases including 4.0 and 5.0." },
+              { q: "Is internet required?", a: "Internet is required only during the AI processing phase. Importing XML into Tally is offline." },
+              { q: "How is licensing done?", a: "We provide machine-locked licenses for maximum security of your accounting data." },
+              { q: "What file formats are supported?", a: "PDF, Scanned Images (JPG/PNG), and Client Excel files." }
+            ].map((faq, i) => (
+              <details key={i} className="bg-slate-900 border border-slate-800 rounded-2xl p-6 group open:border-teal-500 transition-all">
+                <summary className="font-black text-white uppercase tracking-widest cursor-pointer flex justify-between items-center list-none">
+                  {faq.q} <ChevronDown className="group-open:rotate-180 transition-transform" />
+                </summary>
+                <p className="mt-4 text-slate-400 font-medium leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 13. ABOUT FOUNDER */}
+      <section className="py-24 bg-slate-900/30">
+        <div className={`${containerClass} max-w-5xl`}>
+          <div className="bg-slate-900 border border-slate-800 rounded-[3rem] p-10 lg:p-20 overflow-hidden relative">
+            <div className="grid lg:grid-cols-3 gap-12 items-center relative z-10">
+              <div className="lg:col-span-1">
+                <div className="w-full aspect-square bg-slate-800 rounded-3xl border-4 border-teal-500/20 flex items-center justify-center overflow-hidden">
+                   <User size={100} className="text-slate-700" />
+                </div>
+              </div>
+              <div className="lg:col-span-2 space-y-6">
+                <div className="space-y-1">
+                   <h2 className="text-4xl font-black text-white uppercase tracking-tighter">Jitendra Bharti</h2>
+                   <p className="text-teal-500 font-black uppercase tracking-[0.2em] text-sm">Founder, LekhaFlow AI Systems</p>
+                </div>
+                <p className="text-slate-400 text-lg font-medium italic">
+                  "Our mission is simple: Helping Indian businesses eliminate repetitive accounting data entry once and for all."
+                </p>
+                <div className="pt-4 flex gap-4">
+                   <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                      <div className="text-teal-400 font-black uppercase text-[10px] mb-1">Our Vision</div>
+                      <div className="text-white font-bold text-sm">100% Paperless Tally Entry</div>
+                   </div>
+                   <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                      <div className="text-teal-400 font-black uppercase text-[10px] mb-1">Support</div>
+                      <div className="text-white font-bold text-sm">Made with â¤ï¸ in India</div>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 14. CONTACT */}
+      <section id="contact" className="py-24 border-t border-slate-900">
+        <div className={`${containerClass}`}>
+          <div className="grid lg:grid-cols-2 gap-20">
+            <div className="space-y-8">
+               <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase">Connect with our <br />Engineering Desk</h2>
+               <p className="text-slate-500 font-bold uppercase tracking-widest">Need a custom template or direct BUSY integration? Fill the form.</p>
+               
+               <div className="space-y-4">
+                  <div className="flex items-center gap-4 bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                     <Phone className="text-teal-500" /> 
+                     <div>
+                        <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Call Directly</div>
+                        <div className="text-white font-black">+91 87708 08695</div>
+                     </div>
+                  </div>
+                  <div className="flex items-center gap-4 bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                     <Mail className="text-blue-500" /> 
+                     <div>
+                        <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Email Support</div>
+                        <div className="text-white font-black">support@lekhaflow.in</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div className="bg-white rounded-[2.5rem] p-2">
+               <div className="bg-slate-950 border border-slate-200/10 rounded-[2.2rem] p-1">
+                   <Contact isHindi={false} />
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="py-12 border-t border-slate-900 text-center">
+        <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em]">Nexoriva Systems Â© 2026 | Built for Tax Professionals</p>
+      </footer>
+
+      {/* STICKY WHATSAPP */}
+      <a 
+        href="https://wa.me/918770808695" 
+        target="_blank" 
+        className="fixed bottom-8 right-8 z-[200] bg-emerald-500 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform active:scale-95 flex items-center gap-2"
+      >
+        <MessageCircle size={24} />
+        <span className="hidden md:inline font-black uppercase text-xs tracking-widest">WhatsApp Support</span>
+      </a>
+
     </div>
   );
-}
+      }
