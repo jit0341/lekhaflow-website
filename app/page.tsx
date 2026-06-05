@@ -56,9 +56,7 @@ export default function LekhaFlowLanding() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-900/20 via-slate-950 to-slate-950 -z-10"></div>
         
         <div className={`${containerClass} grid lg:grid-cols-2 gap-16 items-center`}>
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }} 
-            animate={{ opacity: 1, x: 0 }}
+          <div>
             className="space-y-8"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-bold uppercase tracking-widest">
@@ -88,9 +86,9 @@ export default function LekhaFlowLanding() {
                 Download Trial
               </button>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div 
+          </div 
              initial={{ opacity: 0, scale: 0.9 }} 
              animate={{ opacity: 1, scale: 1 }}
              className="relative"
@@ -106,7 +104,7 @@ export default function LekhaFlowLanding() {
                  </div>
               </div>
             </div>
-          </motion.div>
+          <div>
         </div>
       </section>
 
