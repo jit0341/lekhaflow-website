@@ -12,10 +12,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ✅ COMPREHENSIVE SEO METADATA FOR LEKHAFLOW
+// ✅ COMPREHENSIVE SEO METADATA FOR LEKHAFLOW - FINAL OPTIMIZED VERSION
 export const metadata: Metadata = {
-  title: "LekhaFlow | AI Accounting Automation for Tally & BUSY",
-  description: "India's fastest Invoice to Tally software for MSMEs. Automate GST accounting, invoice processing, and bank statement reconciliation with 100% accuracy. Save 80% admin time.",
+  title: "LekhaFlow | AI-Powered Tally & BUSY Accounting Automation",
+  description: "Convert Invoices to Tally XML with 100% accuracy. Save 80% accounting time. India's fastest GST automation software for MSMEs.",
   
   // ✅ Keywords for SEO
   keywords: [
@@ -50,32 +50,40 @@ export const metadata: Metadata = {
     canonical: "https://lekhaflow.in",
   },
 
-  // ✅ Open Graph for Social Sharing
+  // ✅ ENHANCED Open Graph for Social Sharing
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: "https://lekhaflow.in",
-    title: "LekhaFlow | AI Accounting Automation for Tally & BUSY",
-    description: "India's fastest Invoice to Tally software for MSMEs. Automate GST accounting with 100% accuracy.",
+    title: "LekhaFlow | Stop Manual Data Entry - AI Accounting Automation",
+    description: "The ultimate AI bridge for Tally Prime and ERP9. Convert invoices to XML in seconds. 100% accuracy. Zero manual entry. Free demo available.",
     siteName: "LekhaFlow",
     images: [
+      {
+        url: "https://lekhaflow.in/gui_screen_1.png",
+        width: 1200,
+        height: 630,
+        alt: "LekhaFlow - AI Accounting Automation Dashboard for Tally",
+        type: "image/png",
+      },
       {
         url: "https://lekhaflow.in/og-image.png",
         width: 1200,
         height: 630,
-        alt: "LekhaFlow - AI Accounting Automation",
+        alt: "LekhaFlow - GST Accounting Software India",
         type: "image/png",
-      },
+      }
     ],
   },
 
-  // ✅ Twitter Card
+  // ✅ ENHANCED Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: "LekhaFlow | AI Accounting Automation for Tally & BUSY",
-    description: "Automate your GST accounting workflow. Invoice → XML → Tally in minutes.",
-    images: ["https://lekhaflow.in/og-image.png"],
+    title: "LekhaFlow | Stop Manual Data Entry",
+    description: "AI-powered Tally automation for Indian accountants. Save 80% time. 100% accuracy. Free trial available.",
+    images: ["https://lekhaflow.in/gui_screen_1.png"],
     creator: "@LekhaFlow",
+    site: "@LekhaFlow",
   },
 
   // ✅ Robots and Verification
@@ -123,7 +131,7 @@ export const metadata: Metadata = {
     ],
   },
 
-  // ✅ Google Search Console Verification (सही format में)
+  // ✅ Google Search Console Verification
   verification: {
     google: "7sE7N5KU97y2Smf-yL134cohpzckYWzYrNpkIZ_Hlzw",
   },
@@ -166,17 +174,23 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="LekhaFlow" />
 
-        {/* ✅ Microsoft Clarity (Optional - Analytics) */}
-        {/* <script async src="https://clarity.ms/tag/YOUR-CLARITY-ID"></script> */}
-
-        {/* ✅ Google Tag Manager */}
-        {/* <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID"></script> */}
-        {/* <script dangerouslySetInnerHTML={{
+        {/* ✅ Google Analytics Ready (Uncomment when GA ID is available) */}
+        {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR-GA-ID"></script>
+        <script dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'YOUR-GA-ID');`
+            gtag('config', 'G-YOUR-GA-ID');`
         }} /> */}
+
+        {/* ✅ Microsoft Clarity (Optional) */}
+        {/* <script type="text/javascript">
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "YOUR-CLARITY-ID");
+        </script> */}
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-full antialiased bg-[#020617]`}>
         {children}
