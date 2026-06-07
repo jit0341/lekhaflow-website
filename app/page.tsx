@@ -179,30 +179,88 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 4. HOW IT WORKS */}
-      <section id="process" className="py-24 no-print">
-        <div className={`${containerClass}`}>
-          <div className="text-center mb-20 space-y-4">
-             <h2 className="text-4xl font-black text-white uppercase tracking-tighter">The Automation Workflow</h2>
-             <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Seamless bridge from document to accounting</p>
+     {/* 4. HOW IT WORKS (With Real Images) */}
+<section id="process" className="py-24 no-print bg-slate-950">
+  <div className={`${containerClass}`}>
+    <div className="text-center mb-20 space-y-4">
+      <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">
+        The Automation Workflow
+      </h2>
+      <p className="text-teal-400 font-bold uppercase tracking-widest text-sm">
+        Seamless bridge from document to accounting
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+      {[
+        { 
+          s: "01", t: "Upload", d: "PDF / Image / Excel", 
+          img: "/gui_screen_1.png", // आपका फोल्डर सिलेक्शन स्क्रीनशॉट
+          color: "border-blue-500/30"
+        },
+        { 
+          s: "02", t: "Read", d: "AI Extraction", 
+          img: "/gui_screen_2.png", // AI प्रोसेसिंग/लाइव आउटपुट स्क्रीनशॉट
+          color: "border-teal-500/30"
+        },
+        { 
+          s: "03", t: "Generate", d: "XML Created", 
+          img: "/gui_screen_3.png", // आउटपुट फोल्डर (XML फाइल्स) वाला स्क्रीनशॉट
+          color: "border-purple-500/30"
+        },
+        { 
+          s: "04", t: "Import", d: "Into Tally/BUSY", 
+          img: "/gui_screen_4.png", // टैली का इम्पोर्ट मेनू स्क्रीनशॉट
+          color: "border-amber-500/30"
+        },
+        { 
+          s: "05", t: "Done", d: "Vouchers Created", 
+          img: "/gui_screen_5.png", // टैली डे-बुक (फाइनल एंट्री) स्क्रीनशॉट
+          color: "border-emerald-500/30"
+        }
+      ].map((w, i) => (
+        <motion.div 
+          key={i} 
+          whileHover={{ y: -10 }}
+          className={`bg-slate-900 border-2 ${w.color} rounded-[2rem] overflow-hidden flex flex-col h-full shadow-2xl`}
+        >
+          {/* Top Info Header */}
+          <div className="p-6 pb-2">
+            <div className="text-3xl font-black text-white/10 mb-1">{w.s}</div>
+            <h4 className="text-xl font-black text-white mb-1 uppercase">{w.t}</h4>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-tight">{w.d}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
-             {[
-               { s: "01", t: "Upload", d: "PDF / Image / Excel" },
-               { s: "02", t: "Read", d: "AI Extraction" },
-               { s: "03", t: "Generate", d: "XML Created" },
-               { s: "04", t: "Import", d: "Into Tally/BUSY" },
-               { s: "05", t: "Done", d: "Vouchers Created" }
-             ].map((w, i) => (
-               <div key={i} className="bg-slate-900 border border-slate-800 p-8 rounded-3xl text-center hover:border-teal-500 transition-all">
-                  <div className="text-5xl font-black text-teal-500/10 mb-4">{w.s}</div>
-                  <h4 className="text-lg font-black text-white mb-1 uppercase tracking-tighter">{w.t}</h4>
-                  <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest">{w.d}</p>
-               </div>
-             ))}
+
+          {/* Image Container with Browser Frame Effect */}
+          <div className="mt-auto p-3">
+            <div className="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 shadow-inner group relative">
+              {/* Browser Dots */}
+              <div className="flex gap-1 p-2 bg-slate-800 border-b border-slate-700">
+                <div className="w-1.5 h-1.5 rounded-full bg-red-500/50"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-amber-500/50"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500/50"></div>
+              </div>
+              
+              {/* Real Image */}
+              <img 
+                src={w.img} 
+                alt={w.t} 
+                className="w-full h-32 object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                onError={(e) => {
+                   // अगर इमेज न मिले तो एक साफ़ ग्रे बैकग्राउंड दिखे
+                   e.currentTarget.src = "https://placehold.co/400x300/1e293b/64748b?text=LekhaFlow+UI";
+                }}
+              />
+              
+              {/* OverLay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60"></div>
+            </div>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* 5. WHAT CAN AUTOMATE SECTION */}
       <section id="features" className="py-24 bg-slate-900/20 no-print">
