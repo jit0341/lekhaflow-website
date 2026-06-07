@@ -6,7 +6,7 @@ import {
   Calculator, BarChart3, ShieldCheck, 
   User, MessageCircle, Phone, Mail, Download, Menu, X, ChevronDown, Monitor, Cpu, Info, FileText, Printer, Globe, ArrowRight, MousePointer2, FolderOutput, Database
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion"; // ✅ FIXED: Missing import
+import { motion, AnimatePresence } from "framer-motion";
 import Contact from "@/components/contact";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -89,7 +89,7 @@ export default function LekhaFlowLanding() {
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32">
         <div className={`${containerClass} grid lg:grid-cols-2 gap-16 items-center`}>
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
-            <h1 className="text-5xl md:text-7xl font-black text-white leading-tight tracking-tighter">
+            <h1 className="text-5xl md:text-7xl font-black text-white leading-tight tracking-tighter uppercase italic">
               Stop Repetitive <br />
               <span className="text-teal-500">Accounting Work</span>
             </h1>
@@ -99,34 +99,44 @@ export default function LekhaFlowLanding() {
               <button onClick={() => triggerIntake("demo")} className="bg-slate-900 border border-slate-700 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest">Download Trial</button>
             </div>
           </motion.div>
-          <div className="relative aspect-video bg-slate-900 rounded-[3rem] border border-slate-700 overflow-hidden flex items-center justify-center group cursor-pointer">
-            <Play fill="currentColor" size={40} className="text-teal-500 group-hover:scale-125 transition-transform" />
+          <div className="relative aspect-video bg-slate-900 rounded-[3rem] border border-slate-700 overflow-hidden flex items-center justify-center group cursor-pointer shadow-2xl">
+             {/* ✅ Hero Image Fix */}
+            <img src="/gui_screen_1.png" className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" alt="LekhaFlow Dashboard" />
+            <div className="absolute inset-0 flex items-center justify-center">
+                <Play fill="currentColor" size={40} className="text-teal-500 group-hover:scale-125 transition-transform" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ✅ NEW THE PROCESS SECTION (RENAMED PER REQUEST) */}
+      {/* THE PROCESS SECTION */}
       <section id="process" className="py-24 bg-slate-900/20">
         <div className={`${containerClass}`}>
           <h2 className="text-center text-4xl md:text-6xl font-black text-white mb-20 uppercase tracking-tighter italic">THE PROCESS</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {[
-              { s: "01", t: "GUI", d: "User-Friendly Interface", i: MousePointer2, color: "border-blue-500/20" },
-              { s: "02", t: "UPLOAD THE INVOICE", d: "PDF / Image / Excel", i: Download, color: "border-teal-500/20" },
-              { s: "03", t: "GENERATE", d: "AI Data Extraction", i: Zap, color: "border-amber-500/20" },
-              { s: "04", t: "OUTPUT", d: "XML Files Ready", i: FolderOutput, color: "border-purple-500/20" },
-              { s: "05", t: "IMPORT", d: "One-Click Tally Import", i: FileText, color: "border-emerald-500/20" },
-              { s: "06", t: "THE ENTRY", d: "Voucher Created", i: Database, color: "border-blue-400/20" }
+              { s: "01", t: "GUI", d: "Interface", i: MousePointer2, color: "border-blue-500/20", img: "/gui_screen_1.png" },
+              { s: "02", t: "UPLOAD THE INVOICE", d: "PDF/Image", i: Download, color: "border-teal-500/20", img: "/gui_screen_2.png" },
+              { s: "03", t: "GENERATE", d: "AI Logic", i: Zap, color: "border-amber-500/20", img: "/gui_screen_3.png" },
+              { s: "04", t: "OUTPUT", d: "XML Ready", i: FolderOutput, color: "border-purple-500/20", img: "/gui_screen_4.png" },
+              { s: "05", t: "IMPORT", d: "To Tally", i: FileText, color: "border-emerald-500/20", img: "/gui_screen_5.png" },
+              { s: "06", t: "THE ENTRY", d: "Done", i: Database, color: "border-blue-400/20", img: "/gui_screen_6.png" }
             ].map((w, i) => (
               <motion.div 
                 key={i} 
                 whileHover={{ y: -10 }}
-                className={`bg-slate-900 border-2 ${w.color} p-6 rounded-[2rem] text-center flex flex-col items-center group transition-all`}
+                className={`bg-slate-900 border-2 ${w.color} rounded-[2rem] overflow-hidden flex flex-col group transition-all`}
               >
-                <div className="text-4xl font-black text-white/5 mb-4 group-hover:text-white/10">{w.s}</div>
-                <w.i className="mb-4 text-teal-500" size={32} />
-                <h4 className="text-xs font-black text-white mb-2 uppercase tracking-tighter">{w.t}</h4>
-                <p className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">{w.d}</p>
+                <div className="h-24 bg-slate-800 relative overflow-hidden">
+                   {/* ✅ Step Image Fix */}
+                   <img src={w.img} className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity" alt={w.t} />
+                   <div className="absolute top-2 left-4 text-2xl font-black text-white/20">{w.s}</div>
+                </div>
+                <div className="p-4 text-center flex flex-col items-center">
+                    <w.i className="mb-2 text-teal-500" size={24} />
+                    <h4 className="text-[10px] font-black text-white mb-1 uppercase tracking-tighter leading-tight">{w.t}</h4>
+                    <p className="text-[8px] text-slate-500 font-bold uppercase">{w.d}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -136,13 +146,13 @@ export default function LekhaFlowLanding() {
       {/* ROI CALCULATOR */}
       <section className="py-24">
         <div className={`${containerClass}`}>
-          <div className="bg-slate-900 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20">
+          <div className="bg-slate-900 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20 shadow-2xl">
             <div className="grid lg:grid-cols-2 gap-20 items-center">
               <div className="space-y-8">
                 <h2 className="text-5xl font-black text-white tracking-tighter uppercase italic">ROI Calculator</h2>
                 <div className="space-y-10">
                   <div className="space-y-4">
-                    <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block">Invoices Per Month: <span className="text-white text-xl ml-2">{invoices}</span></label>
+                    <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block">Invoices Per Month: <span className="text-white text-lg ml-2">{invoices}</span></label>
                     <input type="range" min="100" max="5000" step="100" value={invoices} onChange={(e) => setInvoices(parseInt(e.target.value))} className="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500" />
                   </div>
                   <div className="space-y-4">
@@ -157,7 +167,7 @@ export default function LekhaFlowLanding() {
                    <p className="text-6xl font-black text-teal-500 tracking-tighter">{Math.round(timeSaved / 60)} Hrs</p>
                 </div>
                 <div className="bg-teal-500 p-10 rounded-3xl text-center text-black">
-                   <p className="text-teal-900 text-[10px] font-black uppercase tracking-widest mb-2">Estimated Annual Savings</p>
+                   <p className="text-teal-900 text-[10px] font-black uppercase tracking-widest mb-2">Annual Savings</p>
                    <p className="text-6xl font-black tracking-tighter">₹{annualSavings.toLocaleString()}</p>
                 </div>
               </div>
@@ -166,22 +176,18 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* ✅ MEET THE FOUNDER SECTION (UPDATED WITH PHOTO) */}
+      {/* MEET THE FOUNDER SECTION */}
       <section className="py-24 bg-slate-900/30">
         <div className={`${containerClass} max-w-5xl`}>
           <div className="bg-slate-950 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/5 blur-3xl -z-10 group-hover:bg-teal-500/10 transition-all"></div>
             <div className="grid lg:grid-cols-3 gap-16 items-center relative z-10">
               <div className="lg:col-span-1">
-                 <div className="w-full aspect-[3/4] bg-slate-800 rounded-[3rem] border-4 border-teal-500/20 flex items-center justify-center shadow-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
-                    {/* ✅ Jitendra Bharti Photo Integration */}
+                 <div className="w-full aspect-[3/4] bg-slate-800 rounded-[3rem] border-4 border-teal-500/20 shadow-2xl overflow-hidden">
+                    {/* ✅ Founder Photo Fix (Matching exact filename) */}
                     <img 
-                      src="/jitendra-bharti.jpg" 
-                      alt="Jitendra Bharti - Founder LekhaFlow" 
+                      src="/jitendra.bharti.jpg" 
+                      alt="Jitendra Bharti" 
                       className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.currentTarget.src = "https://via.placeholder.com/400x500?text=Jitendra+Bharti";
-                      }}
                     />
                  </div>
               </div>
@@ -193,7 +199,7 @@ export default function LekhaFlowLanding() {
                  <p className="text-xl text-slate-400 font-medium italic leading-relaxed">"10+ Years in automation experience. Helping Indian businesses eliminate repetitive accounting entry once and for all."</p>
                  <div className="bg-[#1e3a8a]/20 p-6 rounded-3xl border border-blue-500/20">
                     <p className="text-blue-400 font-black uppercase text-[10px] mb-2 tracking-widest">Our Vision</p>
-                    <p className="text-white font-bold text-sm">100% Accuracy with Local Founder Support</p>
+                    <p className="text-white font-bold text-sm uppercase">100% Accuracy with Local Founder Support</p>
                  </div>
               </div>
             </div>
@@ -214,7 +220,7 @@ export default function LekhaFlowLanding() {
                     <p className="text-teal-500 font-black text-2xl tracking-tighter">₹{p.price}</p>
                     <p className="text-[9px] text-slate-500 font-bold uppercase">{p.limit} Invoices/yr</p>
                   </div>
-                  <p className="text-[10px] font-bold text-slate-500 italic">{p.tagline}</p>
+                  <p className="text-[10px] font-bold text-slate-400 italic">{p.tagline}</p>
                 </div>
                 <div className="mt-8 space-y-2">
                   <button onClick={() => triggerIntake("demo")} className="w-full py-3 bg-slate-900 border border-slate-800 rounded-xl text-[9px] font-black uppercase tracking-widest">Quotation</button>
@@ -230,7 +236,7 @@ export default function LekhaFlowLanding() {
       <section id="contact" className="py-24 border-t border-slate-900">
         <div className={`${containerClass} grid lg:grid-cols-2 gap-20`}>
            <div className="space-y-12">
-              <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-[1.1]">Connect with our <br />Engineering Desk</h2>
+              <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase italic leading-[1.1]">Connect with <br />Engineering Desk</h2>
               <div className="space-y-6">
                  <div className="flex items-center gap-6 bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 shadow-xl">
                     <Phone className="text-teal-500" />
