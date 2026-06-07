@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next"; // Viewport अलग से इम्पोर्ट करें
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -12,26 +12,35 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ✅ SEO और PWA के लिए सही मेटाडेटा
+// ✅ SEO & Social Sharing Optimization
 export const metadata: Metadata = {
-  title: "LekhaFlow | AI Accounting Automation",
-  description: "Automate Tally Entries with 100% Accuracy",
-  manifest: "/manifest.json", // यहाँ मेनिफेस्ट लिंक करें
+  title: "LekhaFlow | AI-Powered Invoice to Tally Software for MSMEs",
+  description: "GST Accounting Automation in Chhattisgarh, India. Convert PDF/Excel to Tally XML with 100% accuracy. Save 80% time on manual data entry.",
+  manifest: "/manifest.json",
+  keywords: ["GST Accounting Automation", "Invoice to Tally Software", "AI Accounting tool for MSMEs", "Chhattisgarh GST Software", "Automatic data entry for Tally"],
+  openGraph: {
+    title: "LekhaFlow | Stop Manual Data Entry",
+    description: "India's fastest AI-Powered Invoice to Tally Software. Tally Prime 5.0 Ready.",
+    url: "https://lekhaflow.in",
+    siteName: "LekhaFlow",
+    images: [{ url: "/gui_screen_1.png", width: 1200, height: 630 }],
+    locale: "en_IN",
+    type: "website",
+  },
 };
 
-// ✅ मोबाइल थीम कलर के लिए
 export const viewport: Viewport = {
-  themeColor: "#1e3a8a",
+  themeColor: "#020617",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" className="h-full scroll-smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable} min-h-full antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} min-h-full bg-[#020617] text-slate-200 antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>
