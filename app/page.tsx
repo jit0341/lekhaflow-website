@@ -31,7 +31,7 @@ export default function LekhaFlowLanding() {
 
   const WHATSAPP_LINK = "https://wa.me/918770808695";
 
-  // --- 🎯 TRANSLATION DICTIONARY (FIXED: Added missing descriptions) ---
+  // --- 🎯 TRANSLATION DICTIONARY (FULLY SYNCED) ---
   const t = {
     nav: { f: isHindi ? "विशेषताएं" : "Features", p: isHindi ? "प्रक्रिया" : "Process", pr: isHindi ? "कीमत" : "Pricing", req: isHindi ? "डेमो मांगें" : "Request Demo" },
     hero: {
@@ -64,6 +64,7 @@ export default function LekhaFlowLanding() {
     },
     founder: {
       title: isHindi ? "संस्थापक से मिलें" : "Meet The Founder",
+      bio: isHindi ? "स्वचालन (automation) के क्षेत्र में 10+ वर्षों का अनुभव। भारतीय व्यवसायों को थका देने वाली डेटा एंट्री से मुक्त करना।" : "10+ Years in automation experience. Helping Indian businesses eliminate repetitive accounting entry once and for all.",
       vision: isHindi ? "लोकल सपोर्ट के साथ 100% सटीकता" : "100% Accuracy with Local Support"
     },
     roi: {
@@ -75,13 +76,14 @@ export default function LekhaFlowLanding() {
     }
   };
 
+  // --- 🚀 PRODUCT DATA (FIXED: Added missing taglines) ---
   const productData = {
-    lite: { title: "Lite Edition", price: "15,000", limit: "2,000", razorpayUrl: "https://rzp.io/rzp/SkJTqlgi" },
-    standard: { title: "Standard Sync", price: "25,000", limit: "5,000", razorpayUrl: "https://rzp.io/rzp/oVwLNxHT" },
-    premium: { title: "Premium Suite", price: "25,000", limit: "10,000", razorpayUrl: "https://rzp.io/rzp/9HGERapH" },
-    gold: { title: "Gold Advance", price: "30,000", limit: "Unlimited*", razorpayUrl: "https://rzp.io/rzp/sQg7LGy" },
-    erp9_standard: { title: "ERP9 Standard", price: "25,000", limit: "5,000", razorpayUrl: "https://rzp.io/rzp/AZMi622y" },
-    erp9_premium: { title: "ERP9 Premium", price: "35,000", limit: "Unlimited*", razorpayUrl: "https://rzp.io/rzp/BLZgsWB" }
+    lite: { title: "Lite Edition", price: "15,000", limit: "2,000", razorpayUrl: "https://rzp.io/rzp/SkJTqlgi", tagline: isHindi ? "बेसिक एक्सेल मैपर" : "Basic Excel Mapper" },
+    standard: { title: "Standard Sync", price: "25,000", limit: "5,000", razorpayUrl: "https://rzp.io/rzp/oVwLNxHT", tagline: isHindi ? "टैली ऑटो एंट्री" : "Tally Auto Entry" },
+    premium: { title: "Premium Suite", price: "25,000", limit: "10,000", razorpayUrl: "https://rzp.io/rzp/9HGERapH", tagline: isHindi ? "प्रीमियम एआई इंजन" : "Premium AI Engine" },
+    gold: { title: "Gold Advance", price: "30,000", limit: "Unlimited*", razorpayUrl: "https://rzp.io/rzp/sQg7LGy", tagline: isHindi ? "सबसे उन्नत स्वचालन" : "Advanced Automation" },
+    erp9_standard: { title: "ERP9 Standard", price: "25,000", limit: "5,000", razorpayUrl: "https://rzp.io/rzp/AZMi622y", tagline: isHindi ? "लेगेसी सपोर्ट" : "Legacy Support" },
+    erp9_premium: { title: "ERP9 Premium", price: "35,000", limit: "Unlimited*", razorpayUrl: "https://rzp.io/rzp/BLZgsWB", tagline: isHindi ? "ERP9 एडवांस" : "ERP9 Advance" }
   };
 
   const triggerIntake = (type: "demo" | "quotation") => {
@@ -110,7 +112,7 @@ export default function LekhaFlowLanding() {
             <a href="#features" className="hover:text-teal-400">{t.nav.f}</a>
             <a href="#process" className="hover:text-teal-400">{t.nav.p}</a>
             <a href="#pricing" className="hover:text-teal-400">{t.nav.pr}</a>
-            <button onClick={() => setIsHindi(!isHindi)} className="text-teal-500 border border-teal-500/30 px-3 py-1 rounded bg-teal-500/5 font-bold">
+            <button onClick={() => setIsHindi(!isHindi)} className="text-teal-500 border border-teal-500/30 px-3 py-1 rounded bg-teal-500/5 font-bold uppercase transition-all">
               {isHindi ? "ENGLISH" : "हिंदी"}
             </button>
             <button onClick={() => triggerIntake("demo")} className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl shadow-lg uppercase">{t.nav.req}</button>
@@ -150,14 +152,14 @@ export default function LekhaFlowLanding() {
               { s: "05", t: t.process.s5.t, d: t.process.s5.d, i: FileText, c: "border-emerald-500/20", img: "/gui_screen_5.png" },
               { s: "06", t: t.process.s6.t, d: t.process.s6.d, i: Database, c: "border-blue-400/20", img: "/gui_screen_6.png" }
             ].map((step, i) => (
-              <motion.div key={i} whileHover={{ y: -10 }} className={`bg-slate-900 border-2 ${step.c} rounded-[2rem] overflow-hidden group transition-all`}>
+              <motion.div key={i} whileHover={{ y: -10 }} className={`bg-slate-900 border-2 ${step.c} rounded-[2rem] overflow-hidden group transition-all shadow-lg`}>
                 <div className="h-40 bg-slate-800 relative">
-                   <img src={step.img} className="w-full h-full object-contain p-2 opacity-80" alt={step.t} />
+                   <img src={step.img} className="w-full h-full object-contain p-2 opacity-80 group-hover:opacity-100 transition-opacity" alt={step.t} />
                    <span className="absolute top-2 left-4 text-2xl font-black text-white/10">{step.s}</span>
                 </div>
                 <div className="p-4 text-center">
                     <step.i className="mx-auto mb-2 text-teal-500" size={20} />
-                    <h4 className="text-[10px] font-black text-white mb-1 uppercase leading-tight">{step.t}</h4>
+                    <h4 className="text-[10px] font-black text-white mb-1 uppercase leading-tight tracking-tighter">{step.t}</h4>
                     <p className="text-[8px] text-slate-500 font-bold uppercase">{step.d}</p>
                 </div>
               </motion.div>
@@ -166,7 +168,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 4. TRUST GUARANTEE (FIXED ERROR HERE) */}
+      {/* 4. TRUST GUARANTEE (FIXED ERROR) */}
       <section className="py-24 bg-slate-950 border-y border-slate-900 no-print">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -183,7 +185,7 @@ export default function LekhaFlowLanding() {
               <div key={i} className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] flex flex-col items-center">
                  <item.i className={`${item.c} mb-6`} size={40} />
                  <h3 className="text-white font-black uppercase text-sm mb-4">{item.t}</h3>
-                 <p className="text-slate-400 font-bold text-[11px] uppercase italic">{item.d}</p>
+                 <p className="text-slate-400 font-bold text-[11px] uppercase italic tracking-tighter leading-relaxed">{item.d}</p>
               </div>
             ))}
           </div>
@@ -195,7 +197,7 @@ export default function LekhaFlowLanding() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-slate-900 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20 shadow-2xl grid lg:grid-cols-2 gap-20 items-center">
               <div className="space-y-8">
-                <h2 className="text-5xl font-black text-white tracking-tighter uppercase italic">{t.roi.title}</h2>
+                <h2 className="text-5xl font-black text-white uppercase tracking-tighter italic">{t.roi.title}</h2>
                 <div className="space-y-10">
                   <div className="space-y-4">
                     <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block">{t.roi.l1}: <span className="text-white text-xl ml-2">{invoices}</span></label>
@@ -221,7 +223,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 6. MEET THE FOUNDER (FIXED PHOTO PATH) */}
+      {/* 6. MEET THE FOUNDER */}
       <section className="py-24 no-print">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div className="bg-slate-950 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20 relative overflow-hidden group shadow-2xl grid lg:grid-cols-3 gap-16 items-center">
@@ -232,8 +234,8 @@ export default function LekhaFlowLanding() {
               </div>
               <div className="lg:col-span-2 space-y-8 text-center lg:text-left">
                  <h2 className="text-5xl font-black text-white uppercase tracking-tighter leading-none">{t.founder.title}</h2>
-                 <h3 className="text-teal-500 font-black uppercase tracking-[0.3em] text-sm">Jitendra Bharti | LekhaFlow</h3>
-                 <p className="text-xl text-slate-400 font-medium italic leading-relaxed">"10+ Years in automation experience. Helping Indian businesses eliminate repetitive accounting entry once and for all."</p>
+                 <h3 className="text-teal-500 font-black uppercase tracking-[0.3em] text-sm italic">Jitendra Bharti | <span className="text-slate-500">LekhaFlow AI Systems</span></h3>
+                 <p className="text-xl text-slate-400 font-medium italic leading-relaxed">"{t.founder.bio}"</p>
                  <div className="bg-blue-900/20 p-6 rounded-3xl border border-blue-500/20 inline-block text-white font-bold text-sm uppercase">
                     {t.founder.vision}
                  </div>
@@ -242,7 +244,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 7. PRICING GRID */}
+      {/* 7. PRICING GRID (FIXED TAGLINE ERROR) */}
       <section id="pricing" className="py-24 border-t border-slate-900 no-print">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center text-4xl font-black text-white mb-16 uppercase italic">Select Your Edition</h2>
@@ -250,16 +252,16 @@ export default function LekhaFlowLanding() {
             {Object.entries(productData).map(([key, p]) => (
               <div key={key} className={`bg-slate-950 border p-6 rounded-[2.5rem] flex flex-col justify-between transition-all group ${activeTab === key ? 'border-teal-500 ring-4 ring-teal-500/10 shadow-2xl' : 'border-slate-800'}`}>
                 <div className="space-y-4">
-                  <h3 className="text-white font-black text-xs uppercase tracking-widest">{p.title}</h3>
+                  <h3 className="text-white font-black text-[10px] uppercase tracking-widest leading-tight">{p.title}</h3>
                   <div className="py-4 border-y border-slate-800">
                     <p className="text-teal-500 font-black text-2xl tracking-tighter">₹{p.price}</p>
                     <p className="text-[9px] text-slate-500 font-bold uppercase">{p.limit} Limit</p>
                   </div>
-                  <p className="text-[10px] font-bold text-slate-400 italic">{p.tagline}</p>
+                  <p className="text-[10px] font-bold text-slate-400 italic leading-snug">{p.tagline}</p>
                 </div>
                 <div className="mt-8 space-y-2">
-                  <button onClick={() => triggerIntake("demo")} className="w-full py-3 bg-slate-900 border border-slate-800 rounded-xl text-[9px] font-black uppercase">Quotation</button>
-                  <a href={p.razorpayUrl} target="_blank" className="block w-full py-3 bg-teal-500 text-black rounded-xl text-[9px] font-black uppercase text-center shadow-lg">Buy Now</a>
+                  <button onClick={() => triggerIntake("demo")} className="w-full py-3 bg-slate-900 border border-slate-800 rounded-xl text-[9px] font-black uppercase tracking-widest">Quotation</button>
+                  <a href={p.razorpayUrl} target="_blank" className="block w-full py-3 bg-teal-500 text-black rounded-xl text-[9px] font-black uppercase tracking-widest text-center shadow-lg active:scale-95 transition-transform">Buy Now</a>
                 </div>
               </div>
             ))}
@@ -289,11 +291,11 @@ export default function LekhaFlowLanding() {
             <div className="bg-slate-900 border-2 border-teal-500 p-10 rounded-[3.5rem] max-w-md w-full relative shadow-2xl">
                 <button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-500 hover:text-white"><X size={28}/></button>
                 <form onSubmit={handleIntakeSubmit} className="space-y-5">
-                    <h3 className="text-2xl font-black text-white uppercase text-center mb-10">Verification</h3>
-                    <input required placeholder="YOUR FULL NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none" onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}/>
-                    <input required placeholder="COMPANY NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none" onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}/>
-                    <input required placeholder="WHATSAPP NUMBER" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none" onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}/>
-                    <button type="submit" className="w-full py-5 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-xs">DOWNLOAD NOW</button>
+                    <h3 className="text-2xl font-black text-white uppercase text-center mb-10 tracking-widest italic">Verification</h3>
+                    <input required placeholder="YOUR FULL NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}/>
+                    <input required placeholder="COMPANY NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}/>
+                    <input required placeholder="WHATSAPP NUMBER" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}/>
+                    <button type="submit" className="w-full py-5 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest shadow-xl">DOWNLOAD NOW</button>
                 </form>
             </div>
         </div>
