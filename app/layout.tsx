@@ -123,10 +123,9 @@ export const metadata: Metadata = {
     ],
   },
 
-  // ✅ Verification Tags
+  // ✅ Google Search Console Verification (सही format में)
   verification: {
-    google: "<meta name="google-site-verification" content="7sE7N5KU97y2Smf-yL134cohpzckYWzYrNpkIZ_Hlzw" />", // Google Search Console से अपना code डालें
-    yandex: "your-yandex-verification-code", // अगर चाहें तो
+    google: "7sE7N5KU97y2Smf-yL134cohpzckYWzYrNpkIZ_Hlzw",
   },
 };
 
