@@ -22,6 +22,7 @@ export default function LekhaFlowLanding() {
   const [staffCost, setStaffCost] = useState(15000);
 
   // --- 🎯 SEO & Content Dictionary (Hindi/English) ---
+  // ✅ FIXED: Added 'process' property to avoid build errors
   const t = {
     nav: { f: isHindi ? "विशेषताएं" : "Features", p: isHindi ? "प्रक्रिया" : "Process", pr: isHindi ? "कीमत" : "Pricing", req: isHindi ? "डेमो मांगें" : "Request Demo" },
     hero: {
@@ -30,6 +31,15 @@ export default function LekhaFlowLanding() {
       desc: isHindi ? "लेखाफ्लो (LekhaFlow): भारत का सबसे तेज Invoice to Tally Software। किसी भी बिल को सेकंडों में 100% सटीकता के साथ प्रोसेस करें।" : "LekhaFlow: India's fastest AI-Powered Invoice to Tally Software for MSMEs. Convert invoices in seconds with 100% accuracy.",
       btn1: isHindi ? "डेमो देखें" : "Watch Demo",
       btn2: isHindi ? "ट्रायल डाउनलोड करें" : "Download Trial"
+    },
+    process: {
+      title: isHindi ? "प्रक्रिया" : "THE PROCESS",
+      s1: { t: isHindi ? "GUI" : "GUI", d: isHindi ? "यूजर-फ्रेंडली इंटरफेस" : "User-Friendly Interface" },
+      s2: { t: isHindi ? "इनवॉइस अपलोड करें" : "UPLOAD THE INVOICE", d: isHindi ? "PDF / इमेज / एक्सेल" : "PDF / Image / Excel" },
+      s3: { t: isHindi ? "जेनरेट करें" : "GENERATE", d: isHindi ? "एआई डेटा एक्सट्रैक्शन" : "AI Data Extraction" },
+      s4: { t: isHindi ? "आउटपुट" : "OUTPUT", d: isHindi ? "XML फाइलें तैयार" : "XML Files Ready" },
+      s5: { t: isHindi ? "इम्पोर्ट करें" : "IMPORT", d: isHindi ? "एक क्लिक टैली इम्पोर्ट" : "One-Click Tally Import" },
+      s6: { t: isHindi ? "एंट्री हो गई" : "THE ENTRY", d: isHindi ? "वाउचर बन गया" : "Voucher Created" }
     },
     trust: {
       title: isHindi ? "हमारी सुरक्षा और विश्वास गारंटी" : "OUR TRUST GUARANTEE",
@@ -52,6 +62,13 @@ export default function LekhaFlowLanding() {
     founder: {
       title: isHindi ? "संस्थापक: जितेंद्र भारती" : "Meet The Founder: Jitendra Bharti",
       bio: isHindi ? "LekhaFlow AI Systems के संस्थापक। मिशन: भारतीय व्यवसायों से मैन्युअल डेटा एंट्री को खत्म करना।" : "Founder, LekhaFlow AI Systems. Mission: Helping Indian businesses eliminate manual accounting entry."
+    },
+    roi: {
+      title: isHindi ? "बचत कैलकुलेटर" : "ROI Calculator",
+      label1: isHindi ? "प्रति माह इनवॉइस" : "Invoices Per Month",
+      label2: isHindi ? "स्टाफ वेतन" : "Monthly Staff Salary",
+      save1: isHindi ? "प्रति माह बचे हुए घंटे" : "Hours Saved / Month",
+      save2: isHindi ? "सालाना बचत" : "Annual Savings"
     }
   };
 
@@ -77,7 +94,7 @@ export default function LekhaFlowLanding() {
             <a href="#features" className="hover:text-teal-400">{t.nav.f}</a>
             <a href="#process" className="hover:text-teal-400">{t.nav.p}</a>
             <a href="#pricing" className="hover:text-teal-400">{t.nav.pr}</a>
-            <button onClick={() => setIsHindi(!isHindi)} className="text-teal-500 border border-teal-500/30 px-3 py-1 rounded bg-teal-500/5 font-bold uppercase transition-all">
+            <button onClick={() => setIsHindi(!isHindi)} className="text-teal-500 border border-teal-500/30 px-3 py-1 rounded bg-teal-500/5 font-bold uppercase">
               {isHindi ? "ENGLISH" : "हिंदी"}
             </button>
             <button onClick={() => setShowIntakeModal(true)} className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl transition-all shadow-lg">{t.nav.req}</button>
@@ -85,7 +102,7 @@ export default function LekhaFlowLanding() {
         </div>
       </nav>
 
-      {/* 2. HERO SECTION (SEO H1) */}
+      {/* 2. HERO SECTION */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-900/10 via-slate-950 to-slate-950 -z-10"></div>
         <div className={`${containerClass} grid lg:grid-cols-2 gap-16 items-center`}>
@@ -109,7 +126,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 3. THE PROCESS SECTION */}
+      {/* 3. THE PROCESS SECTION (WITH NEW NAMING) */}
       <section id="process" className="py-24 bg-slate-900/20">
         <div className={`${containerClass}`}>
           <h2 className="text-center text-4xl md:text-6xl font-black text-white mb-20 uppercase tracking-tighter italic">{t.process.title}</h2>
@@ -124,10 +141,11 @@ export default function LekhaFlowLanding() {
             ].map((w, i) => (
               <motion.div key={i} whileHover={{ y: -10 }} className={`bg-slate-900 border-2 ${w.color} rounded-[2rem] overflow-hidden flex flex-col group transition-all shadow-lg`}>
                 <div className="h-40 bg-slate-800 relative overflow-hidden">
-                   <img src={w.img} className="w-full h-full object-contain p-2 opacity-80 group-hover:opacity-100 transition-opacity" alt={`LekhaFlow Process Step ${w.s}`} />
+                   <img src={w.img} className="w-full h-full object-contain p-2 opacity-80 group-hover:opacity-100 transition-opacity" alt={w.t} />
+                   <div className="absolute top-2 left-4 text-2xl font-black text-white/20">{w.s}</div>
                 </div>
                 <div className="p-4 text-center">
-                    <h4 className="text-[10px] font-black text-white uppercase tracking-tighter">{w.t}</h4>
+                    <h4 className="text-[10px] font-black text-white mb-1 uppercase tracking-tighter">{w.t}</h4>
                     <p className="text-[8px] text-slate-500 font-bold uppercase">{w.d}</p>
                 </div>
               </motion.div>
@@ -136,7 +154,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 4. 🛡️ OUR TRUST GUARANTEE (NEW) */}
+      {/* 4. 🛡️ OUR TRUST GUARANTEE */}
       <section className="py-24 bg-slate-950 border-y border-slate-900">
         <div className={`${containerClass}`}>
           <div className="text-center mb-20">
@@ -193,7 +211,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 6. ARTICLES / KNOWLEDGE HUB (SEO Section) */}
+      {/* 6. ARTICLES SECTION */}
       <section className="py-24 bg-slate-900/20 no-print">
         <div className={`${containerClass}`}>
           <div className="text-center mb-16">
@@ -229,7 +247,8 @@ export default function LekhaFlowLanding() {
             <div className="grid lg:grid-cols-3 gap-16 items-center relative z-10">
               <div className="lg:col-span-1">
                  <div className="w-full aspect-[3/4] bg-slate-800 rounded-[3rem] border-4 border-teal-500/20 shadow-2xl overflow-hidden">
-                    <img src="/jitendra.bharti.jpg" alt="Jitendra Bharti - Founder of LekhaFlow AI Accounting Automation" className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" />
+                    {/* ✅ FIXED: Use correct path for your photo */}
+                    <img src="/jitendra.bharti.jpg" alt="Jitendra Bharti" className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" />
                  </div>
               </div>
               <div className="lg:col-span-2 space-y-8">
@@ -238,7 +257,7 @@ export default function LekhaFlowLanding() {
                     <p className="text-teal-500 font-black uppercase tracking-[0.3em] text-sm italic">Nexoriva Systems | Surajpur, Chhattisgarh</p>
                  </div>
                  <p className="text-xl text-slate-400 font-medium italic leading-relaxed">"{t.founder.bio}"</p>
-                 <div className="bg-[#1e3a8a]/20 p-6 rounded-3xl border border-blue-500/20">
+                 <div className="bg-[#1e3a8a]/20 p-6 rounded-3xl border border-blue-500/20 text-center">
                     <p className="text-white font-bold text-sm uppercase">{t.founder.vision}</p>
                  </div>
               </div>
