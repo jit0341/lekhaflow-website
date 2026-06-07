@@ -31,7 +31,7 @@ export default function LekhaFlowLanding() {
 
   const WHATSAPP_LINK = "https://wa.me/918770808695";
 
-  // --- 🎯 TRANSLATION DICTIONARY (STRICTLY DEFINED) ---
+  // --- 🎯 TRANSLATION DICTIONARY (FIXED: Added missing descriptions) ---
   const t = {
     nav: { f: isHindi ? "विशेषताएं" : "Features", p: isHindi ? "प्रक्रिया" : "Process", pr: isHindi ? "कीमत" : "Pricing", req: isHindi ? "डेमो मांगें" : "Request Demo" },
     hero: {
@@ -43,20 +43,24 @@ export default function LekhaFlowLanding() {
     },
     process: {
       title: isHindi ? "प्रक्रिया" : "THE PROCESS",
-      s1: { t: "GUI", d: isHindi ? "यूजर इंटरफेस" : "User Interface" },
-      s2: { t: isHindi ? "इनवॉइस अपलोड" : "UPLOAD THE INVOICE", d: isHindi ? "PDF / इमेज" : "PDF / Image" },
-      s3: { t: isHindi ? "जेनरेट" : "GENERATE", d: isHindi ? "एआई एक्सट्रैक्शन" : "AI Extraction" },
-      s4: { t: isHindi ? "आउटपुट" : "OUTPUT", d: isHindi ? "XML तैयार" : "XML Ready" },
-      s5: { t: isHindi ? "इम्पोर्ट" : "IMPORT", d: isHindi ? "टैली इम्पोर्ट" : "Tally Import" },
-      s6: { t: isHindi ? "एंट्री" : "THE ENTRY", d: isHindi ? "वाउचर बन गया" : "Voucher Created" }
+      s1: { t: "01 GUI", d: isHindi ? "यूजर इंटरफेस" : "User Interface" },
+      s2: { t: "02 UPLOAD THE INVOICE", d: isHindi ? "PDF / इमेज" : "PDF / Image" },
+      s3: { t: "03 GENERATE", d: isHindi ? "एआई एक्सट्रैक्शन" : "AI Extraction" },
+      s4: { t: "04 OUTPUT", d: isHindi ? "XML तैयार" : "XML Ready" },
+      s5: { t: "05 IMPORT", d: isHindi ? "टैली इम्पोर्ट" : "Tally Import" },
+      s6: { t: "06 THE ENTRY", d: isHindi ? "वाउचर बन गया" : "Voucher Created" }
     },
     trust: {
       title: isHindi ? "विश्वास गारंटी" : "OUR TRUST GUARANTEE",
       tag: isHindi ? "सुरक्षित GST प्लेटफॉर्म" : "A SECURE GST PLATFORM",
       c1: isHindi ? "डेटा सुरक्षा" : "Data Security",
+      c1_d: isHindi ? "जीरो-डेटा रिटेंशन: हम डेटा स्टोर नहीं करते।" : "Zero-Data Retention Policy.",
       c2: isHindi ? "सटीकता" : "Technical Accuracy",
+      c2_d: isHindi ? "डायनामिक राउंडिंग: 0.01 पैसे का बैलेंस।" : "Dynamic Rounding: Error-free.",
       c3: isHindi ? "उपयोग की शर्तें" : "Usage Rules",
-      c4: isHindi ? "सहायता" : "Direct Support"
+      c3_d: isHindi ? "टैली EDU वर्जन के साथ संगत।" : "Tally EDU Version Compatible.",
+      c4: isHindi ? "सहायता" : "Direct Support",
+      c4_d: isHindi ? "इंजीनियरिंग डेस्क से सीधी मदद।" : "Direct Founder Support Desk."
     },
     founder: {
       title: isHindi ? "संस्थापक से मिलें" : "Meet The Founder",
@@ -103,9 +107,9 @@ export default function LekhaFlowLanding() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
           <div className="text-2xl font-black tracking-tighter text-white uppercase italic">LEKHA<span className="text-teal-500">FLOW</span></div>
           <div className="hidden lg:flex items-center gap-8 text-[10px] font-black uppercase tracking-widest">
-            <a href="#features" className="hover:text-teal-400 transition-colors">{t.nav.f}</a>
-            <a href="#process" className="hover:text-teal-400 transition-colors">{t.nav.p}</a>
-            <a href="#pricing" className="hover:text-teal-400 transition-colors">{t.nav.pr}</a>
+            <a href="#features" className="hover:text-teal-400">{t.nav.f}</a>
+            <a href="#process" className="hover:text-teal-400">{t.nav.p}</a>
+            <a href="#pricing" className="hover:text-teal-400">{t.nav.pr}</a>
             <button onClick={() => setIsHindi(!isHindi)} className="text-teal-500 border border-teal-500/30 px-3 py-1 rounded bg-teal-500/5 font-bold">
               {isHindi ? "ENGLISH" : "हिंदी"}
             </button>
@@ -133,7 +137,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 3. THE PROCESS (FIXED BOXES) */}
+      {/* 3. THE PROCESS */}
       <section id="process" className="py-24 bg-slate-900/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center text-4xl md:text-6xl font-black text-white mb-20 uppercase tracking-tighter italic">{t.process.title}</h2>
@@ -162,7 +166,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 4. TRUST GUARANTEE */}
+      {/* 4. TRUST GUARANTEE (FIXED ERROR HERE) */}
       <section className="py-24 bg-slate-950 border-y border-slate-900 no-print">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -191,7 +195,7 @@ export default function LekhaFlowLanding() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-slate-900 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20 shadow-2xl grid lg:grid-cols-2 gap-20 items-center">
               <div className="space-y-8">
-                <h2 className="text-5xl font-black text-white uppercase tracking-tighter italic">{t.roi.title}</h2>
+                <h2 className="text-5xl font-black text-white tracking-tighter uppercase italic">{t.roi.title}</h2>
                 <div className="space-y-10">
                   <div className="space-y-4">
                     <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block">{t.roi.l1}: <span className="text-white text-xl ml-2">{invoices}</span></label>
@@ -217,19 +221,19 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 6. MEET THE FOUNDER */}
+      {/* 6. MEET THE FOUNDER (FIXED PHOTO PATH) */}
       <section className="py-24 no-print">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div className="bg-slate-950 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20 relative overflow-hidden group shadow-2xl grid lg:grid-cols-3 gap-16 items-center">
               <div className="lg:col-span-1">
                  <div className="w-full aspect-[3/4] bg-slate-800 rounded-[3rem] border-4 border-teal-500/20 shadow-2xl overflow-hidden">
-                    <img src="/jitendra.bharti.jpg" alt="Founder" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                    <img src="/jitendra.bharti.jpg" alt="Jitendra Bharti" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
                  </div>
               </div>
               <div className="lg:col-span-2 space-y-8 text-center lg:text-left">
                  <h2 className="text-5xl font-black text-white uppercase tracking-tighter leading-none">{t.founder.title}</h2>
                  <h3 className="text-teal-500 font-black uppercase tracking-[0.3em] text-sm">Jitendra Bharti | LekhaFlow</h3>
-                 <p className="text-xl text-slate-400 font-medium italic leading-relaxed">"{t.founder.bio}"</p>
+                 <p className="text-xl text-slate-400 font-medium italic leading-relaxed">"10+ Years in automation experience. Helping Indian businesses eliminate repetitive accounting entry once and for all."</p>
                  <div className="bg-blue-900/20 p-6 rounded-3xl border border-blue-500/20 inline-block text-white font-bold text-sm uppercase">
                     {t.founder.vision}
                  </div>
@@ -282,7 +286,7 @@ export default function LekhaFlowLanding() {
       {/* 📥 INTAKE MODAL */}
       {showIntakeModal && (
         <div className="fixed inset-0 z-[150] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4">
-            <div className="bg-slate-900 border-2 border-teal-500 p-10 rounded-[3.5rem] max-w-md w-full relative">
+            <div className="bg-slate-900 border-2 border-teal-500 p-10 rounded-[3.5rem] max-w-md w-full relative shadow-2xl">
                 <button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-500 hover:text-white"><X size={28}/></button>
                 <form onSubmit={handleIntakeSubmit} className="space-y-5">
                     <h3 className="text-2xl font-black text-white uppercase text-center mb-10">Verification</h3>
