@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
+import Link from "next/link";
 import { 
   Zap, AlertCircle, ArrowRight, Play, CheckCircle2, 
   Calculator, BarChart3, Users, ShieldCheck, HelpCircle, 
@@ -26,119 +27,24 @@ export default function LekhaFlowLanding() {
 
   const containerClass = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
 
-  // SEO Schema Data
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "LekhaFlow - AI Accounting Automation for Tally",
-    "description": "LekhaFlow is India's fastest AI-powered Invoice to Tally software for MSMEs. Automate GST accounting, invoice processing, and bank statement reconciliation in seconds.",
-    "url": "https://lekhaflow.in",
-    "image": "https://lekhaflow.in/logo.png",
-    "applicationCategory": "BusinessApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "10000",
-      "priceCurrency": "INR"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "156"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "LekhaFlow AI Systems",
-      "founder": "Jitendra Bharti"
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "India"
-    }
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Does LekhaFlow work with Tally Prime?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, LekhaFlow is fully optimized for all Tally Prime releases including 4.0 and 5.0."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is internet required for LekhaFlow?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Internet is required only during the AI processing phase. Importing XML into Tally is completely offline."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What file formats does LekhaFlow support?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "LekhaFlow supports PDF invoices, scanned images (JPG/PNG), and client Excel files."
-        }
-      }
-    ]
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://lekhaflow.in"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Features",
-        "item": "https://lekhaflow.in#features"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Pricing",
-        "item": "https://lekhaflow.in#pricing"
-      }
-    ]
-  };
-
   return (
     <div className="bg-slate-950 text-slate-200 selection:bg-teal-500 selection:text-white overflow-x-hidden">
       
-      {/* SEO Schema Scripts */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-
-      {/* 1. NAVIGATION */}
+      {/* 1. NAVIGATION - UPDATED WITH BLOG LINK */}
       <nav className="fixed top-0 w-full z-[100] bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
         <div className={`${containerClass} flex justify-between items-center h-20`}>
           <div className="text-2xl font-black tracking-tighter text-white">
             LEKHA<span className="text-teal-500">FLOW</span>
           </div>
           
+          {/* Desktop Navigation - WITH BLOG LINK */}
           <div className="hidden lg:flex items-center gap-8 text-sm font-bold uppercase tracking-widest">
             <a href="#features" className="hover:text-teal-400 transition-colors">Features</a>
             <a href="#how-it-works" className="hover:text-teal-400 transition-colors">Process</a>
+            {/* ✅ BLOG LINK ADDED */}
+            <Link href="/blog" className="text-amber-500 hover:text-amber-400 transition-colors font-black">
+              Insights
+            </Link>
             <a href="#pricing" className="hover:text-teal-400 transition-colors text-teal-500">Pricing</a>
             <button className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl transition-all shadow-lg shadow-teal-900/20">
               Request Demo
@@ -151,7 +57,7 @@ export default function LekhaFlowLanding() {
         </div>
       </nav>
 
-      {/* 1. HERO SECTION (WITH SEO H1) */}
+      {/* 2. HERO SECTION (WITH SEO H1) */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-900/20 via-slate-950 to-slate-950 -z-10"></div>
         
@@ -215,17 +121,12 @@ export default function LekhaFlowLanding() {
                     </div>
                  </div>
               </div>
-              <img 
-                src="/gui_screen_hero.png" 
-                alt="LekhaFlow - AI accounting automation interface showing invoice to Tally XML conversion"
-                className="w-full h-full object-cover rounded-[2rem] opacity-0"
-              />
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* 2. PAIN POINTS */}
+      {/* 3. PAIN POINTS */}
       <section className="py-24 bg-slate-900/30">
         <div className={`${containerClass}`}>
           <div className="text-center mb-16">
@@ -263,7 +164,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 3. HOW IT WORKS */}
+      {/* 4. HOW IT WORKS */}
       <section id="how-it-works" className="py-24">
         <div className={`${containerClass}`}>
           <div className="text-center mb-20">
@@ -292,7 +193,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 5. WHAT LEKHAFLOW CAN DO */}
+      {/* 5. FEATURES */}
       <section id="features" className="py-24 bg-slate-900/20">
         <div className={`${containerClass}`}>
           <div className="text-center mb-16">
@@ -303,89 +204,39 @@ export default function LekhaFlowLanding() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Card 1 */}
-            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
-              <div className="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-500 mb-6">
-                <FileText size={30} />
-              </div>
-              <h3 className="text-2xl font-black text-white mb-4">Invoice Automation</h3>
-              <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-teal-500" /> Sales Invoice Processing</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-teal-500" /> Purchase Bill Processing</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-teal-500" /> Tally XML Generation</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-teal-500" /> Voucher Automation</li>
-              </ul>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
-              <div className="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-500 mb-6">
-                <BarChart3 size={30} />
-              </div>
-              <h3 className="text-2xl font-black text-white mb-4">Bank Statement Reconciliation</h3>
-              <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-500" /> Unlimited Bank Statements</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-500" /> Automatic Ledger Mapping</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-500" /> BUSY & Tally Support</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-500" /> Smart Narration</li>
-              </ul>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
-              <div className="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-500 mb-6">
-                <ShieldCheck size={30} />
-              </div>
-              <h3 className="text-2xl font-black text-white mb-4">GST Intelligence & GSTR Reconciliation</h3>
-              <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-purple-500" /> GSTR-2B Matching</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-purple-500" /> Vendor Tax ID Matching</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-purple-500" /> Purchase Invoice Verification</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-purple-500" /> GST Compliance Reports</li>
-              </ul>
-            </div>
-
-            {/* Card 4 - Advanced Voucher */}
-            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
-              <div className="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center text-amber-500 mb-6">
-                <Cpu size={30} />
-              </div>
-              <h3 className="text-2xl font-black text-white mb-4">Advanced Voucher Creation</h3>
-              <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-amber-500" /> Rule Based Segmentation</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-amber-500" /> High Volume Processing</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-amber-500" /> Large Transaction Handling</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-amber-500" /> Custom Rules Engine</li>
-              </ul>
-            </div>
-
-             {/* Card 5 - Units */}
-             <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
-              <div className="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-500 mb-6">
-                <Download size={30} />
-              </div>
-              <h3 className="text-2xl font-black text-white mb-4">Dynamic Unit Support</h3>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {["KGS", "PCS", "LTR", "JAR", "CASE", "BOX"].map(unit => (
-                  <span key={unit} className="px-3 py-1 bg-slate-800 rounded-lg text-[10px] font-black text-slate-300 border border-slate-700">{unit}</span>
-                ))}
-              </div>
-              <p className="mt-4 text-slate-500 font-bold text-xs uppercase tracking-widest">+ 100+ Custom Units Supported</p>
-            </div>
-
-            {/* Card 6 - Rounding */}
-            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
-              <div className="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-500 mb-6">
-                <Zap size={30} />
-              </div>
-              <h3 className="text-2xl font-black text-white mb-4">Smart Rounding Engine</h3>
-              <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-pink-500" /> Positive Rounding</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-pink-500" /> Negative Rounding</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-pink-500" /> Ledger Auto-Balancing</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-pink-500" /> XML Validation</li>
-              </ul>
-            </div>
+            {[
+              { icon: FileText, title: "Invoice Automation", color: "teal", items: ["Sales Invoice Processing", "Purchase Bill Processing", "Tally XML Generation", "Voucher Automation"] },
+              { icon: BarChart3, title: "Bank Statement Reconciliation", color: "blue", items: ["Unlimited Bank Statements", "Automatic Ledger Mapping", "BUSY & Tally Support", "Smart Narration"] },
+              { icon: ShieldCheck, title: "GST Intelligence & GSTR Reconciliation", color: "purple", items: ["GSTR-2B Matching", "Vendor Tax ID Matching", "Purchase Invoice Verification", "GST Compliance Reports"] },
+              { icon: Cpu, title: "Advanced Voucher Creation", color: "amber", items: ["Rule Based Segmentation", "High Volume Processing", "Large Transaction Handling", "Custom Rules Engine"] },
+              { icon: Download, title: "Dynamic Unit Support", color: "emerald", items: ["KGS, PCS, LTR, JAR", "CASE, BOX Support", "100+ Custom Units", "Full Customization"] },
+              { icon: Zap, title: "Smart Rounding Engine", color: "pink", items: ["Positive Rounding", "Negative Rounding", "Ledger Auto-Balancing", "XML Validation"] }
+            ].map((feature, i) => {
+              const Icon = feature.icon;
+              const colorMap = {
+                teal: "teal",
+                blue: "blue",
+                purple: "purple",
+                amber: "amber",
+                emerald: "emerald",
+                pink: "pink"
+              };
+              return (
+                <div key={i} className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:bg-slate-900 transition-all">
+                  <div className={`w-14 h-14 bg-${colorMap[feature.color as keyof typeof colorMap]}-500/10 rounded-2xl flex items-center justify-center text-${colorMap[feature.color as keyof typeof colorMap]}-500 mb-6`}>
+                    <Icon size={30} />
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-4">{feature.title}</h3>
+                  <ul className="space-y-3 text-slate-400 font-bold text-sm uppercase tracking-wide">
+                    {feature.items.map((item, j) => (
+                      <li key={j} className="flex items-center gap-2">
+                        <CheckCircle2 size={16} className={`text-${colorMap[feature.color as keyof typeof colorMap]}-500`} /> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -456,7 +307,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 7. PRODUCT COMPARISON */}
+      {/* 7. PRICING */}
       <section id="pricing" className="py-24 bg-slate-900/30">
         <div className={`${containerClass}`}>
           <div className="text-center mb-16 space-y-4">
@@ -468,14 +319,13 @@ export default function LekhaFlowLanding() {
 
           <div className="overflow-x-auto">
             <div className="min-w-[800px] grid grid-cols-6 bg-slate-900 border border-slate-800 rounded-3xl p-4">
-               {/* Table Header */}
                <div className="p-4 font-black text-slate-500 uppercase text-[10px]">Features</div>
                <div className="p-4 text-center font-black text-white">Lite Edition</div>
                <div className="p-4 text-center font-black text-white">Standard</div>
                <div className="p-4 text-center font-black text-teal-500">Gold (Popular)</div>
                <div className="p-4 text-center font-black text-white">ERP9 Std</div>
                <div className="p-4 text-center font-black text-white">ERP9 Premium</div>
-                 {/* Rows */}
+                 
                <div className="p-4 border-t border-slate-800 text-xs font-bold uppercase">Annual Price</div>
                <div className="p-4 border-t border-slate-800 text-center font-black">₹10,000</div>
                <div className="p-4 border-t border-slate-800 text-center font-black">₹15,000</div>
@@ -531,7 +381,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 10. BEFORE VS AFTER */}
+      {/* 9. BEFORE VS AFTER */}
       <section className="py-24 bg-slate-900/40">
         <div className={`${containerClass}`}>
           <div className="grid md:grid-cols-2 gap-12">
@@ -561,138 +411,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 11. BLOG SECTION - SEO Articles */}
-      <section className="py-24 bg-slate-900/20">
-        <div className={`${containerClass}`}>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase">
-              Accounting Guides & Knowledge Hub
-            </h2>
-            <p className="text-slate-400 font-medium mt-4">Learn how to streamline your GST accounting workflow</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { 
-                title: "5 Ways to Save Time on GST Accounting", 
-                desc: "Boost your accounting productivity by replacing manual data entry with AI automation. Learn proven strategies used by Indian accounting firms.",
-                img: "/guide_time_saving.png"
-              },
-              { 
-                title: "How Manual Data Entry Kills Your Accounting Profits", 
-                desc: "Discover the hidden costs of manual GST entry. See why automation is the right time to eliminate errors and staff dependency.",
-                img: "/guide_manual_costs.png"
-              },
-              { 
-                title: "Best GST Accounting Software for MSMEs in India", 
-                desc: "Complete guide to choosing the easiest Tally import solution for local businesses in Chhattisgarh and across India.",
-                img: "/guide_best_software.png"
-              }
-            ].map((art, i) => (
-              <article key={i} className="bg-slate-900 border border-slate-800 rounded-[2rem] overflow-hidden hover:border-teal-500 transition-all shadow-xl">
-                 <div className="h-48 bg-slate-800 overflow-hidden">
-                    <img 
-                      src={art.img} 
-                      alt={art.title}
-                      className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity"
-                    />
-                 </div>
-                 <div className="p-8">
-                    <h3 className="text-lg font-black text-white mb-4 uppercase leading-tight tracking-tight">{art.title}</h3>
-                    <p className="text-slate-400 font-bold text-xs mb-6 tracking-wide uppercase leading-relaxed">{art.desc}</p>
-                    <a href="#contact" className="text-teal-500 font-black text-[10px] uppercase flex items-center gap-2 hover:gap-3 transition-all">
-                      Read Full Guide <ArrowRight size={14} />
-                    </a>
-                 </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 12. FAQ */}
-      <section className="py-24">
-        <div className={`${containerClass} max-w-4xl`}>
-          <h2 className="text-3xl font-black text-white text-center mb-12 uppercase tracking-tighter">
-            Frequently Asked Questions About LekhaFlow
-          </h2>
-          <div className="space-y-4">
-            {[
-              { 
-                q: "Does LekhaFlow work with Tally Prime?", 
-                a: "Yes, LekhaFlow is fully optimized for all Tally Prime releases including 4.0 and 5.0. It also supports BUSY ERP9 for legacy users." 
-              },
-              { 
-                q: "Is internet required for LekhaFlow accounting software?", 
-                a: "Internet is required only during the AI invoice processing phase. Importing XML files into Tally Prime or BUSY is completely offline and local." 
-              },
-              { 
-                q: "How is LekhaFlow licensing and installation done?", 
-                a: "We provide machine-locked licenses for maximum security of your confidential accounting data. Installation is local on your computer or server." 
-              },
-              { 
-                q: "What file formats does LekhaFlow support?", 
-                a: "LekhaFlow supports PDF invoices, scanned images (JPG/PNG), client Excel files, and digital invoice formats. Any invoice format you can provide." 
-              },
-              {
-                q: "Is my GST and accounting data safe with LekhaFlow?",
-                a: "Yes, LekhaFlow follows zero-data retention policy. All data processing is local, and we never store your confidential accounting information on cloud servers."
-              }
-            ].map((faq, i) => (
-              <details 
-                key={i} 
-                className="bg-slate-900 border border-slate-800 rounded-2xl p-6 group open:border-teal-500 transition-all"
-              >
-                <summary className="font-black text-white uppercase tracking-widest cursor-pointer flex justify-between items-center list-none">
-                  {faq.q} <ChevronDown className="group-open:rotate-180 transition-transform" />
-                </summary>
-                <p className="mt-4 text-slate-400 font-medium leading-relaxed">{faq.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 13. ABOUT FOUNDER */}
-      <section className="py-24 bg-slate-900/30">
-        <div className={`${containerClass} max-w-5xl`}>
-          <div className="bg-slate-900 border border-slate-800 rounded-[3rem] p-10 lg:p-20 overflow-hidden relative">
-            <div className="grid lg:grid-cols-3 gap-12 items-center relative z-10">
-              <div className="lg:col-span-1">
-                <div className="w-full aspect-square bg-slate-800 rounded-3xl border-4 border-teal-500/20 flex items-center justify-center overflow-hidden">
-                   <img 
-                     src="/jitendra_bharti_founder.jpg" 
-                     alt="Jitendra Bharti - Founder of LekhaFlow AI accounting automation software"
-                     className="w-full h-full object-cover"
-                   />
-                </div>
-              </div>
-              <div className="lg:col-span-2 space-y-6">
-                <div className="space-y-1">
-                   <h2 className="text-4xl font-black text-white uppercase tracking-tighter">Jitendra Bharti</h2>
-                   <p className="text-teal-500 font-black uppercase tracking-[0.2em] text-sm">
-                     Founder & CEO, LekhaFlow AI Systems | Automation Expert
-                   </p>
-                </div>
-                <p className="text-slate-400 text-lg font-medium italic leading-relaxed">
-                  "LekhaFlow's mission is simple yet powerful: Helping Indian businesses eliminate repetitive accounting data entry once and for all. With 10+ years in automation, I've seen how manual Tally entry wastes thousands of crores in productivity across India."
-                </p>
-                <div className="pt-4 flex gap-4">
-                   <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800">
-                      <div className="text-teal-400 font-black uppercase text-[10px] mb-1">Our Vision</div>
-                      <div className="text-white font-bold text-sm">100% Paperless GST Accounting in India</div>
-                   </div>
-                   <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800">
-                      <div className="text-teal-400 font-black uppercase text-[10px] mb-1">Support</div>
-                      <div className="text-white font-bold text-sm">Direct Founder Engineering Support</div>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 14. CONTACT */}
+      {/* 10. CONTACT */}
       <section id="contact" className="py-24 border-t border-slate-900">
         <div className={`${containerClass}`}>
           <div className="grid lg:grid-cols-2 gap-20">
@@ -720,50 +439,12 @@ export default function LekhaFlowLanding() {
                      </div>
                   </div>
                </div>
-
-               <div className="bg-teal-500/10 border border-teal-500/30 p-6 rounded-2xl">
-                 <p className="text-slate-300 font-bold text-sm">
-                   💡 <strong>Pro Tip:</strong> WhatsApp us at +91 87708 08695 for fastest response. We reply within 2 hours!
-                 </p>
-               </div>
             </div>
 
             <div className="bg-white rounded-[2.5rem] p-2 shadow-2xl">
                <div className="bg-slate-950 border border-slate-200/10 rounded-[2.2rem] p-1">
                    <Contact isHindi={false} />
                </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* LOCAL SEO - Service Area */}
-      <section className="py-16 border-t border-slate-900 bg-slate-900/20">
-        <div className={`${containerClass}`}>
-          <div className="text-center">
-            <h2 className="text-2xl font-black text-white uppercase tracking-tighter mb-6">
-              LekhaFlow Accounting Automation - Available Across India
-            </h2>
-            <div className="flex flex-wrap justify-center gap-4">
-              {[
-                "Chhattisgarh",
-                "Madhya Pradesh",
-                "Delhi",
-                "Mumbai",
-                "Bangalore",
-                "Hyderabad",
-                "Chennai",
-                "Pune",
-                "Kolkata",
-                "Ahmedabad"
-              ].map(city => (
-                <span 
-                  key={city} 
-                  className="px-4 py-2 bg-slate-800 rounded-full text-[10px] font-black text-slate-300 uppercase tracking-wide"
-                >
-                  {city}
-                </span>
-              ))}
             </div>
           </div>
         </div>
