@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion"; // Added this import
 import { 
   Zap, AlertCircle, Play, CheckCircle2, 
   Calculator, BarChart3, ShieldCheck, 
@@ -148,7 +149,7 @@ export default function LekhaFlowLanding() {
                <div className="bg-slate-950 rounded-[2.8rem] overflow-hidden aspect-video flex items-center justify-center relative border border-slate-800">
                   <Monitor size={100} className="text-slate-900 opacity-50" />
                   <div className="absolute inset-0 flex items-center justify-center bg-teal-500/5 group-hover:bg-transparent transition-all cursor-pointer">
-                     <div className="w-24 h-24 bg-teal-500 rounded-full flex items-center justify-center text-slate-950 shadow-2xl transform group-hover:scale-110 transition-transform"><Play fill="currentColor" size={36}/></div>
+                      <div className="w-24 h-24 bg-teal-500 rounded-full flex items-center justify-center text-slate-950 shadow-2xl transform group-hover:scale-110 transition-transform"><Play fill="currentColor" size={36}/></div>
                   </div>
                </div>
             </div>
@@ -195,27 +196,27 @@ export default function LekhaFlowLanding() {
       {[
         { 
           s: "01", t: "Upload", d: "PDF / Image / Excel", 
-          img: "/gui_screen_1.png", // आपका फोल्डर सिलेक्शन स्क्रीनशॉट
+          img: "/gui_screen_1.png", 
           color: "border-blue-500/30"
         },
         { 
           s: "02", t: "Read", d: "AI Extraction", 
-          img: "/gui_screen_2.png", // AI प्रोसेसिंग/लाइव आउटपुट स्क्रीनशॉट
+          img: "/gui_screen_2.png", 
           color: "border-teal-500/30"
         },
         { 
           s: "03", t: "Generate", d: "XML Created", 
-          img: "/gui_screen_3.png", // आउटपुट फोल्डर (XML फाइल्स) वाला स्क्रीनशॉट
+          img: "/gui_screen_3.png", 
           color: "border-purple-500/30"
         },
         { 
           s: "04", t: "Import", d: "Into Tally/BUSY", 
-          img: "/gui_screen_4.png", // टैली का इम्पोर्ट मेनू स्क्रीनशॉट
+          img: "/gui_screen_4.png", 
           color: "border-amber-500/30"
         },
         { 
           s: "05", t: "Done", d: "Vouchers Created", 
-          img: "/gui_screen_5.png", // टैली डे-बुक (फाइनल एंट्री) स्क्रीनशॉट
+          img: "/gui_screen_5.png", 
           color: "border-emerald-500/30"
         }
       ].map((w, i) => (
@@ -247,7 +248,7 @@ export default function LekhaFlowLanding() {
                 alt={w.t} 
                 className="w-full h-32 object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                 onError={(e) => {
-                   // अगर इमेज न मिले तो एक साफ़ ग्रे बैकग्राउंड दिखे
+                   // अगर इमेज न मिले तो एक साफ़ ग्रे बैकग्राउंड दिखे
                    e.currentTarget.src = "https://placehold.co/400x300/1e293b/64748b?text=LekhaFlow+UI";
                 }}
               />
@@ -351,17 +352,17 @@ export default function LekhaFlowLanding() {
             <div className="bg-slate-900 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20 relative overflow-hidden">
                <div className="grid lg:grid-cols-3 gap-16 items-center relative z-10">
                   <div className="lg:col-span-1">
-                     <div className="w-full aspect-square bg-slate-800 rounded-[3rem] border-4 border-teal-500/20 flex items-center justify-center shadow-2xl">
-                        <User size={120} className="text-slate-700" />
-                     </div>
+                      <div className="w-full aspect-square bg-slate-800 rounded-[3rem] border-4 border-teal-500/20 flex items-center justify-center shadow-2xl">
+                         <User size={120} className="text-slate-700" />
+                       </div>
                   </div>
                   <div className="lg:col-span-2 space-y-8">
-                     <div className="space-y-2">
-                        <h2 className="text-5xl font-black text-white uppercase tracking-tighter">Jitendra Bharti</h2>
-                        <p className="text-teal-500 font-black uppercase tracking-[0.3em] text-sm">Founder, LekhaFlow AI Systems</p>
-                     </div>
-                     <p className="text-xl text-slate-400 font-medium italic leading-relaxed">"Our mission is simple: Helping Indian businesses eliminate repetitive accounting data entry once and for all."</p>
-                     <div className="flex gap-6">
+                      <div className="space-y-2">
+                         <h2 className="text-5xl font-black text-white uppercase tracking-tighter">Jitendra Bharti</h2>
+                         <p className="text-teal-500 font-black uppercase tracking-[0.3em] text-sm">Founder, LekhaFlow AI Systems</p>
+                      </div>
+                      <p className="text-xl text-slate-400 font-medium italic leading-relaxed">"Our mission is simple: Helping Indian businesses eliminate repetitive accounting data entry once and for all."</p>
+                      <div className="flex gap-6">
                         <div className="bg-slate-950 p-6 rounded-3xl border border-slate-800 flex-1">
                            <p className="text-teal-400 font-black uppercase text-[10px] mb-2 tracking-widest">Our Vision</p>
                            <p className="text-white font-bold text-sm">100% Paperless Tally Entry</p>
@@ -370,7 +371,7 @@ export default function LekhaFlowLanding() {
                            <p className="text-teal-400 font-black uppercase text-[10px] mb-2 tracking-widest">Experience</p>
                            <p className="text-white font-bold text-sm">10+ Yrs in Automation</p>
                         </div>
-                     </div>
+                      </div>
                   </div>
                </div>
             </div>
