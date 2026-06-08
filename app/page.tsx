@@ -29,60 +29,74 @@ export default function LekhaFlowLanding() {
   const containerClass = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
 
   useEffect(() => {
-    document.title = isHindi ? "LekhaFlow | भारत का सबसे तेज इनवॉइस टू टैली सॉफ्टवेयर" : "LekhaFlow | India's Fastest Invoice to Tally AI Software";
+    document.title = isHindi ? "LekhaFlow | इनवॉइस टू टैली सॉफ्टवेयर" : "LekhaFlow | Invoice to Tally AI Software";
   }, [isHindi]);
 
   const WHATSAPP_LINK = "https://wa.me/918770808695";
 
-  // --- 🎯 FULL TRANSLATION DICTIONARY (WITH ALL 6 BLOGS) ---
+  // --- 🎯 FULL TRANSLATION DICTIONARY (FIXED: ALL PROPERTIES ADDED) ---
   const t = {
     nav: { f: isHindi ? "विशेषताएं" : "Features", p: isHindi ? "प्रक्रिया" : "Process", pr: isHindi ? "कीमत" : "Pricing", req: isHindi ? "डेमो मांगें" : "Request Demo" },
     hero: {
       title: isHindi ? "थका देने वाला एकाउंटिंग काम बंद करें" : "Stop Repetitive Accounting Work",
       sub: isHindi ? "Invoice → XML → टैली स्वचालन" : "GST Accounting Automation: Invoice → XML → Tally",
-      desc: isHindi ? "लेखाफ्लो (LekhaFlow): भारत का सबसे तेज Invoice to Tally Software। MSMEs के लिए छत्तीसगढ़ का नंबर 1 AI समाधान।" : "LekhaFlow: India's fastest AI-Powered Invoice to Tally Software for MSMEs. #1 AI Solution in Chhattisgarh."
+      desc: isHindi ? "लेखाफ्लो (LekhaFlow): भारत का सबसे तेज Invoice to Tally Software। सेकंडों में 100% सटीक प्रोसेस।" : "LekhaFlow: India's fastest AI-Powered Invoice to Tally Software. Process in seconds with 100% accuracy.",
+      btn1: isHindi ? "डेमो देखें" : "Watch Demo",
+      btn2: isHindi ? "ट्रायल डाउनलोड करें" : "Download Trial"
     },
     process: {
-      title: isHindi ? "स्वचालन प्रक्रिया" : "THE AUTOMATION PROCESS",
+      title: isHindi ? "प्रक्रिया" : "THE PROCESS",
       steps: [
         { s: "01", t: "01 GUI", d: isHindi ? "यूजर इंटरफेस" : "User Interface", img: "/gui_screen_1.png", i: MousePointer2 },
-        { s: "02", t: "02 UPLOAD THE INVOICE", d: isHindi ? "PDF / इमेज / एक्सेल" : "PDF / Image / Excel", img: "/gui_screen_2.png", i: Download },
-        { s: "03", t: "03 GENERATE", d: isHindi ? "एआई एक्सट्रैक्शन" : "AI Data Extraction", img: "/gui_screen_3.png", i: Zap },
-        { s: "04", t: "04 OUTPUT", d: isHindi ? "XML फाइलें तैयार" : "XML Files Ready", img: "/gui_screen_4.png", i: FolderOutput },
-        { s: "05", t: "05 IMPORT", d: isHindi ? "वन-क्लिक टैली इम्पोर्ट" : "One-Click Tally Import", img: "/gui_screen_5.png", i: FileText },
-        { s: "06", t: "06 THE ENTRY", d: isHindi ? "वाउचर बन गया" : "Voucher Created", img: "/gui_screen_6.png", i: Database }
+        { s: "02", t: isHindi ? "02 इनवॉइस अपलोड" : "02 UPLOAD THE INVOICE", d: "PDF / Image", img: "/gui_screen_2.png", i: Download },
+        { s: "03", t: isHindi ? "03 जेनरेट" : "03 GENERATE", d: isHindi ? "एआई एक्सट्रैक्शन" : "AI Extraction", img: "/gui_screen_3.png", i: Zap },
+        { s: "04", t: isHindi ? "04 आउटपुट" : "04 OUTPUT", d: isHindi ? "XML तैयार" : "XML Ready", img: "/gui_screen_4.png", i: FolderOutput },
+        { s: "05", t: isHindi ? "05 इम्पोर्ट" : "05 IMPORT", d: isHindi ? "टैली इम्पोर्ट" : "Tally Import", img: "/gui_screen_5.png", i: FileText },
+        { s: "06", t: isHindi ? "06 एंट्री" : "06 THE ENTRY", d: isHindi ? "वाउचर बन गया" : "Voucher Created", img: "/gui_screen_6.png", i: Database }
       ]
     },
     trust: {
-      title: isHindi ? "हमारी सुरक्षा और विश्वास गारंटी" : "OUR TRUST GUARANTEE",
-      tag: isHindi ? "CAs के लिए सुरक्षित GST प्लेटफॉर्म" : "A SECURE GST PLATFORM FOR TAX PROFESSIONALS",
+      title: isHindi ? "विश्वास गारंटी" : "OUR TRUST GUARANTEE",
+      tag: isHindi ? "सुरक्षित GST प्लेटफॉर्म" : "A SECURE GST PLATFORM",
       items: [
-        { i: ShieldCheck, t: isHindi ? "डेटा सुरक्षा" : "Data Security", d: isHindi ? "जीरो-डेटा रिटेंशन पॉलिसी।" : "Zero-Data Retention Policy.", c: "text-teal-500" },
-        { i: Target, t: isHindi ? "तकनीकी सटीकता" : "Technical Accuracy", d: isHindi ? "0.01 पैसे का डायनामिक बैलेंस।" : "Dynamic Rounding: Error-free.", c: "text-blue-500" },
-        { i: Cpu, t: isHindi ? "उपयोग की शर्तें" : "Usage Highlights", d: isHindi ? "टैली EDU वर्जन के साथ पूर्ण संगत।" : "Tally EDU Version Compatible.", c: "text-amber-500" },
-        { i: Headphones, t: isHindi ? "ग्राहक सहायता" : "Customer Support", d: isHindi ? "इंजीनियरिंग डेस्क से सीधी मदद।" : "Direct Founder Support Desk.", c: "text-pink-500" }
+        { i: ShieldCheck, t: isHindi ? "डेटा सुरक्षा" : "Data Security", d: isHindi ? "जीरो-डेटा रिटेंशन।" : "Zero-Data Retention Policy.", c: "text-teal-500" },
+        { i: Target, t: isHindi ? "सटीकता" : "Technical Accuracy", d: isHindi ? "0.01 पैसे का बैलेंस।" : "Dynamic Rounding Control.", c: "text-blue-500" },
+        { i: Cpu, t: isHindi ? "उपयोग की शर्तें" : "Usage Rules", d: isHindi ? "टैली EDU वर्जन के साथ संगत।" : "Tally EDU Compatible.", c: "text-amber-500" },
+        { i: Headphones, t: isHindi ? "सहायता" : "Direct Support", d: isHindi ? "इंजीनियरिंग डेस्क से सीधी मदद।" : "Founder Support Desk.", c: "text-pink-500" }
       ]
     },
+    roi: {
+      title: isHindi ? "बचत कैलकुलेटर" : "ROI Calculator",
+      l1: isHindi ? "इनवॉइस/माह" : "Invoices/Month",
+      l2: isHindi ? "स्टाफ वेतन" : "Staff Salary",
+      r1: isHindi ? "बचे हुए घंटे" : "Hours Saved",
+      r2: isHindi ? "सालाना बचत" : "Annual Savings"
+    },
     blog: {
-        title: isHindi ? "नॉलेज हब और लेख" : "KNOWLEDGE HUB & ARTICLES",
-        posts: [
-          { t: isHindi ? "PDF to Tally Import: सम्पूर्ण गाइड 2026" : "PDF to Tally Import: Ultimate 2026 Guide", d: isHindi ? "बैंक स्टेटमेंट और इनवॉइस को बिना टाइप किए टैली में बदलें।" : "Convert bank statements & invoices to Tally without typing.", img: "/gui_screen_1.png" },
-          { t: isHindi ? "MSMEs के लिए इनवॉइस ऑटोमेशन" : "Invoice to Tally Automation for MSMEs", d: isHindi ? "कैसे AI छोटे व्यापारियों का 80% समय बचा रहा है।" : "How AI saves 80% time for small business owners.", img: "/gui_screen_2.png" },
-          { t: isHindi ? "TallyPrime में बल्क वाउचर इम्पोर्ट" : "Bulk Voucher Import in TallyPrime 5.0", d: isHindi ? "हजारों एंट्रीज को एक क्लिक में टैली प्राइम में डालें।" : "Import thousands of entries into TallyPrime in one click.", img: "/gui_screen_3.png" },
-          { t: isHindi ? "टैली डेटा एंट्री ऑटोमेशन के लाभ" : "Tally Data Entry Automation Benefits", d: isHindi ? "स्टाफ की निर्भरता खत्म करें और गलतियों को जीरो करें।" : "Eliminate staff dependency and zero human errors.", img: "/gui_screen_4.png" },
-          { t: isHindi ? "एआई और एकाउंटिंग का भविष्य" : "The Future of AI Accounting in India", d: isHindi ? "चार्टर्ड अकाउंटेंट्स के लिए एआई कैसे गेम चेंजर है।" : "How AI is a game changer for Chartered Accountants.", img: "/gui_screen_5.png" },
-          { t: isHindi ? "GST इनवॉइस इम्पोर्ट: GSTR-2B रिकॉन्सिलिएशन" : "GST Invoice Import: GSTR-2B Recon", d: isHindi ? "अपनी GST खरीद एंट्रीज को ऑटोमेट कर टैक्स बचाएं।" : "Automate GST purchase entries for perfect reconciliation.", img: "/gui_screen_6.png" }
-        ]
+      title: isHindi ? "नॉलेज हब" : "KNOWLEDGE HUB",
+      posts: [
+        { t: "PDF to Tally Guide", d: "Ultimate 2026 Manual.", img: "/gui_screen_1.png" },
+        { t: "MSME Automation", d: "Saving 80% Admin Costs.", img: "/gui_screen_2.png" },
+        { t: "TallyPrime 5.0 Bulk", d: "One-click voucher import.", img: "/gui_screen_3.png" },
+        { t: "Clerical Error Fix", d: "Zero human errors in Tally.", img: "/gui_screen_4.png" },
+        { t: "AI Future", d: "Role of CAs in AI era.", img: "/gui_screen_5.png" },
+        { t: "GSTR-2B Recon", d: "Perfect GST reconciliation.", img: "/gui_screen_6.png" }
+      ]
+    },
+    founder: {
+      title: isHindi ? "संस्थापक" : "Meet The Founder",
+      bio: isHindi ? "स्वचालन के क्षेत्र में 10+ वर्षों का अनुभव।" : "10+ Years in automation experience.",
+      vision: isHindi ? "लोकल सपोर्ट के साथ 100% सटीकता" : "100% Accuracy with Local Support"
     }
   };
 
   const productData = {
-    lite: { title: "Lite Edition", price: "15,000", limit: "2,000", razorpayUrl: "https://rzp.io/rzp/SkJTqlgi", tagline: isHindi ? "बेसिक एक्सेल मैपर" : "Basic Excel Mapper" },
-    standard: { title: "Standard Sync", price: "25,000", limit: "5,000", razorpayUrl: "https://rzp.io/rzp/oVwLNxHT", tagline: isHindi ? "टैली ऑटो एंट्री" : "Tally Auto Entry" },
-    premium: { title: "Premium Suite", price: "25,000", limit: "10,000", razorpayUrl: "https://rzp.io/rzp/9HGERapH", tagline: isHindi ? "प्रीमियम एआई इंजन" : "Premium AI Engine" },
-    gold: { title: "Gold Advance", price: "30,000", limit: "Unlimited*", razorpayUrl: "https://rzp.io/rzp/sQg7LGy", tagline: isHindi ? "सबसे उन्नत स्वचालन" : "Advanced Automation" },
-    erp9_standard: { title: "ERP9 Standard", price: "25,000", limit: "5,000", razorpayUrl: "https://rzp.io/rzp/AZMi622y", tagline: isHindi ? "लेगेसी सपोर्ट" : "Legacy Support" },
-    erp9_premium: { title: "ERP9 Premium", price: "35,000", limit: "Unlimited*", razorpayUrl: "https://rzp.io/rzp/BLZgsWB", tagline: isHindi ? "ERP9 एडवांस" : "ERP9 Advance" }
+    lite: { title: "Lite Edition", price: "15,000", limit: "2,000", razorpayUrl: "https://rzp.io/rzp/SkJTqlgi", tagline: "Basic Excel Mapper" },
+    standard: { title: "Standard Sync", price: "25,000", limit: "5,000", razorpayUrl: "https://rzp.io/rzp/oVwLNxHT", tagline: "Tally Auto Entry" },
+    premium: { title: "Premium Suite", price: "25,000", limit: "10,000", razorpayUrl: "https://rzp.io/rzp/9HGERapH", tagline: "Premium AI Engine" },
+    gold: { title: "Gold Advance", price: "30,000", limit: "Unlimited*", razorpayUrl: "https://rzp.io/rzp/sQg7LGy", tagline: "Advanced Automation" },
+    erp9_standard: { title: "ERP9 Standard", price: "25,000", limit: "5,000", razorpayUrl: "https://rzp.io/rzp/AZMi622y", tagline: "Legacy Support" },
+    erp9_premium: { title: "ERP9 Premium", price: "35,000", limit: "Unlimited*", razorpayUrl: "https://rzp.io/rzp/BLZgsWB", tagline: "ERP9 Advance" }
   };
 
   const triggerIntake = (type: "demo" | "quotation") => {
@@ -104,42 +118,41 @@ export default function LekhaFlowLanding() {
     <div className="bg-[#020617] text-slate-200 selection:bg-teal-500 selection:text-white overflow-x-hidden">
       
       {/* 1. NAVIGATION */}
-      <nav className="fixed top-0 w-full z-[100] bg-[#020617]/80 backdrop-blur-md border-b border-slate-800 no-print">
+      <nav className="fixed top-0 w-full z-[100] bg-[#020617]/80 backdrop-blur-md border-b border-slate-800">
         <div className={containerClass + " flex justify-between items-center h-20"}>
           <div className="text-2xl font-black tracking-tighter text-white uppercase italic">LEKHA<span className="text-teal-500">FLOW</span></div>
           <div className="hidden lg:flex items-center gap-8 text-[10px] font-black uppercase tracking-widest">
             <a href="#features" className="hover:text-teal-400">Features</a>
             <a href="#process" className="hover:text-teal-400">Process</a>
-            <Link href="/blog" className="text-amber-500 hover:text-amber-400 underline underline-offset-4">Insights / Blog</Link>
+            <Link href="/blog" className="text-amber-500 hover:text-amber-400 underline underline-offset-4 font-black">Insights / Blog</Link>
             <a href="#pricing" className="hover:text-teal-400">Pricing</a>
-            <button onClick={() => setIsHindi(!isHindi)} className="text-teal-500 border border-teal-500/30 px-3 py-1 rounded bg-teal-500/5 font-bold uppercase transition-all">{isHindi ? "ENGLISH" : "हिंदी"}</button>
-            <button onClick={() => triggerIntake("demo")} className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl shadow-lg uppercase">{t.nav.req}</button>
+            <button onClick={() => setIsHindi(!isHindi)} className="text-teal-500 border border-teal-500/30 px-3 py-1 rounded bg-teal-500/5 font-bold">{isHindi ? "ENGLISH" : "हिंदी"}</button>
+            <button onClick={() => triggerIntake("demo")} className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl shadow-lg uppercase font-black">{t.nav.req}</button>
           </div>
         </div>
       </nav>
 
-      {/* 2. HERO SECTION */}
-      <section className="relative pt-40 pb-20 lg:pt-56 lg:pb-32 no-print">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-900/10 via-slate-950 to-slate-950 -z-10"></div>
+      {/* 2. HERO (Workable Buttons) */}
+      <section className="relative pt-40 pb-20 lg:pt-56 lg:pb-32">
         <div className={containerClass + " grid lg:grid-cols-2 gap-16 items-center"}>
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
+          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="space-y-8 text-center lg:text-left">
             <h1 className="text-5xl md:text-7xl font-black text-white leading-tight tracking-tighter uppercase italic">{t.hero.title}</h1>
             <h2 className="text-2xl font-bold text-teal-500 uppercase tracking-widest">{t.hero.sub}</h2>
             <p className="text-xl text-slate-400 font-medium leading-relaxed">{t.hero.desc}</p>
-            <div className="flex flex-wrap gap-4">
-              <button onClick={() => triggerIntake("demo")} className="bg-white text-black px-10 py-5 rounded-2xl font-black uppercase hover:bg-teal-500 transition-all shadow-2xl">{isHindi ? "डेमो देखें" : "Watch Demo"}</button>
-              <button onClick={() => triggerIntake("demo")} className="bg-slate-900 border border-slate-700 text-white px-10 py-5 rounded-2xl font-black uppercase">{isHindi ? "ट्रायल डाउनलोड" : "Download Trial"}</button>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+              <button onClick={() => triggerIntake("demo")} className="bg-white text-black px-10 py-5 rounded-2xl font-black uppercase hover:bg-teal-500 transition-all shadow-2xl active:scale-95">{t.hero.btn1}</button>
+              <button onClick={() => triggerIntake("demo")} className="bg-slate-900 border border-slate-700 text-white px-10 py-5 rounded-2xl font-black uppercase hover:bg-slate-800 transition-all">{t.hero.btn2}</button>
             </div>
           </motion.div>
-          <div className="relative aspect-video bg-slate-900 rounded-[3rem] border border-slate-700 overflow-hidden shadow-2xl group cursor-pointer">
-            <img src="/gui_screen_1.png" className="w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity" alt="GST Accounting Automation for Tally in Chhattisgarh" />
-            <Play fill="currentColor" size={60} className="text-teal-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:scale-110 transition-transform" />
+          <div className="relative aspect-video bg-slate-900 rounded-[3rem] border border-slate-700 overflow-hidden shadow-2xl group cursor-pointer" onClick={() => triggerIntake("demo")}>
+            <img src="/gui_screen_1.png" className="w-full h-full object-cover opacity-30" alt="Dashboard" />
+            <Play fill="currentColor" size={60} className="text-teal-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:scale-125 transition-transform" />
           </div>
         </div>
       </section>
 
-      {/* 3. THE PROCESS */}
-      <section id="process" className="py-24 bg-slate-900/20 no-print">
+      {/* 3. THE PROCESS (Update per request) */}
+      <section id="process" className="py-24 bg-slate-900/20">
         <div className={containerClass}>
           <h2 className="text-center text-4xl md:text-6xl font-black text-white mb-20 uppercase tracking-tighter italic">{t.process.title}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -151,7 +164,7 @@ export default function LekhaFlowLanding() {
                 </div>
                 <div className="p-4 text-center">
                     <step.i className="mx-auto mb-2 text-teal-500" size={20} />
-                    <h4 className="text-[10px] font-black text-white mb-1 uppercase leading-tight">{step.t}</h4>
+                    <h4 className="text-[10px] font-black text-white mb-1 uppercase leading-tight tracking-tighter">{step.t}</h4>
                     <p className="text-[8px] text-slate-500 font-bold uppercase">{step.d}</p>
                 </div>
               </motion.div>
@@ -196,12 +209,12 @@ export default function LekhaFlowLanding() {
                   </div>
                 </div>
               </div>
-              <div className="grid gap-6">
-                <div className="bg-slate-950 p-10 rounded-3xl border border-slate-800 text-center">
+              <div className="grid gap-6 text-center">
+                <div className="bg-slate-950 p-10 rounded-3xl border border-slate-800">
                    <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{t.roi.r1}</p>
                    <p className="text-6xl font-black text-teal-500 tracking-tighter">{Math.round(timeSavedValue / 60)} Hrs</p>
                 </div>
-                <div className="bg-teal-500 p-10 rounded-3xl text-center text-black shadow-xl">
+                <div className="bg-teal-500 p-10 rounded-3xl text-black shadow-xl">
                    <p className="text-teal-900 text-[10px] font-black uppercase tracking-widest mb-2">{t.roi.r2}</p>
                    <p className="text-6xl font-black tracking-tighter">₹{annualSavingsValue.toLocaleString()}</p>
                 </div>
@@ -215,19 +228,17 @@ export default function LekhaFlowLanding() {
         <div className={containerClass}>
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase italic">{t.blog.title}</h2>
-            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs mt-4">Expert Insights on Accounting Automation</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {t.blog.posts.map((post, i) => (
               <article key={i} className="bg-slate-900 border border-slate-800 rounded-[2.5rem] overflow-hidden hover:border-teal-500 transition-all shadow-xl group">
                  <div className="h-48 bg-slate-800 overflow-hidden relative">
                     <img src={post.img} className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" alt={post.t} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
                  </div>
                  <div className="p-8">
                     <h3 className="text-lg font-black text-white mb-4 uppercase leading-tight group-hover:text-teal-400 transition-colors">{post.t}</h3>
                     <p className="text-slate-400 font-bold text-xs mb-6 tracking-wide uppercase leading-relaxed">{post.d}</p>
-                    <Link href="/blog" className="text-teal-500 font-black text-[10px] uppercase flex items-center gap-2 hover:gap-3 transition-all">Read Full Article <ArrowRight size={14} /></Link>
+                    <Link href="/blog" className="text-teal-500 font-black text-[10px] uppercase flex items-center gap-2 hover:gap-3 transition-all">Read Guide <ArrowRight size={14} /></Link>
                  </div>
               </article>
             ))}
@@ -235,20 +246,20 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 7. MEET THE FOUNDER */}
+      {/* 7. MEET THE FOUNDER (With Colored Photo) */}
       <section className="py-24 no-print">
         <div className={containerClass + " max-w-5xl"}>
           <div className="bg-slate-950 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20 relative overflow-hidden group shadow-2xl grid lg:grid-cols-3 gap-16 items-center">
               <div className="lg:col-span-1">
                  <div className="w-full aspect-[3/4] bg-slate-800 rounded-[3rem] border-4 border-teal-500/20 shadow-2xl overflow-hidden">
-                    <img src="/jitendra.bharti.jpg" alt="Jitendra Bharti LekhaFlow AI Founder" className="w-full h-full object-cover" />
+                    <img src="/jitendra.bharti.jpg" alt="Founder" className="w-full h-full object-cover grayscale-0" />
                  </div>
               </div>
               <div className="lg:col-span-2 space-y-8 text-center lg:text-left">
                  <h2 className="text-5xl font-black text-white uppercase tracking-tighter leading-none">{t.founder.title}</h2>
-                 <h3 className="text-teal-500 font-black uppercase tracking-[0.3em] text-sm italic">Jitendra Bharti | <span className="text-slate-500">LekhaFlow AI Systems</span></h3>
+                 <h3 className="text-teal-500 font-black uppercase tracking-[0.3em] text-sm italic">Jitendra Bharti | LekhaFlow</h3>
                  <p className="text-xl text-slate-400 font-medium italic leading-relaxed">"{t.founder.bio}"</p>
-                 <div className="bg-blue-900/20 p-6 rounded-3xl border border-blue-500/20 inline-block text-white font-bold text-sm uppercase tracking-widest shadow-md">
+                 <div className="bg-blue-900/20 p-6 rounded-3xl border border-blue-500/20 inline-block text-white font-bold text-sm uppercase tracking-widest">
                     {t.founder.vision}
                  </div>
               </div>
@@ -256,7 +267,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 8. PRICING */}
+      {/* 8. PRICING GRID */}
       <section id="pricing" className="py-24 border-t border-slate-900 no-print">
         <div className={containerClass}>
           <h2 className="text-center text-4xl font-black text-white mb-16 uppercase italic">Select Your Edition</h2>
@@ -264,16 +275,16 @@ export default function LekhaFlowLanding() {
             {Object.entries(productData).map(([key, p]) => (
               <div key={key} className={`bg-slate-950 border p-6 rounded-[2.5rem] flex flex-col justify-between transition-all group ${activeTab === key ? 'border-teal-500 ring-4 ring-teal-500/10 shadow-2xl scale-[1.02]' : 'border-slate-800 hover:border-slate-700'}`}>
                 <div className="space-y-4 text-center lg:text-left">
-                  <h3 className="text-white font-black text-[10px] uppercase tracking-widest leading-tight">{p.title}</h3>
+                  <h3 className="text-white font-black text-[10px] uppercase tracking-widest">{p.title}</h3>
                   <div className="py-4 border-y border-slate-800">
                     <p className="text-teal-500 font-black text-2xl tracking-tighter">₹{p.price}</p>
-                    <p className="text-[9px] text-slate-500 font-bold uppercase">{p.limit} Limit</p>
+                    <p className="text-[9px] text-slate-500 font-bold uppercase">{p.limit} Invoices/yr</p>
                   </div>
                   <p className="text-[10px] font-bold text-slate-400 italic leading-snug">{p.tagline}</p>
                 </div>
                 <div className="mt-8 space-y-2">
-                  <button onClick={() => triggerIntake("demo")} className="w-full py-3 bg-slate-900 border border-slate-800 rounded-xl text-[9px] font-black uppercase">Quotation</button>
-                  <a href={p.razorpayUrl} target="_blank" rel="noreferrer" className="block w-full py-3 bg-teal-500 text-black rounded-xl text-[9px] font-black uppercase text-center shadow-lg transition-transform active:scale-95">Buy Now</a>
+                  <button onClick={() => triggerIntake("demo")} className="w-full py-3 bg-slate-900 border border-slate-800 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-800">Quotation</button>
+                  <a href={p.razorpayUrl} target="_blank" rel="noreferrer" className="block w-full py-3 bg-teal-500 text-black rounded-xl text-[9px] font-black uppercase text-center shadow-lg active:scale-95 transition-transform">Buy Now</a>
                 </div>
               </div>
             ))}
@@ -286,7 +297,7 @@ export default function LekhaFlowLanding() {
         <div className={containerClass + " grid lg:grid-cols-2 gap-20"}>
            <div className="space-y-12">
               <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase italic leading-[1.1]">Engineering Desk</h2>
-              <div className="flex items-center gap-6 bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 shadow-xl hover:border-teal-500/30 transition-all">
+              <div className="flex items-center gap-6 bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 shadow-xl">
                  <Phone className="text-teal-500" />
                  <div><p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Hotline</p><p className="text-white font-black text-xl">+91 87708 08695</p></div>
               </div>
@@ -297,10 +308,6 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      <footer className="py-16 border-t border-slate-900 text-center uppercase no-print">
-        <p className="text-slate-500 text-[10px] font-black tracking-[0.5em]">Nexoriva Systems © 2026 | Developed by Jitendra Bharti | India 🇮🇳</p>
-      </footer>
-      
       {/* 📥 INTAKE MODAL */}
       {showIntakeModal && (
         <div className="fixed inset-0 z-[150] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4">
@@ -317,6 +324,10 @@ export default function LekhaFlowLanding() {
         </div>
       )}
 
+      <footer className="py-16 border-t border-slate-900 text-center uppercase no-print">
+        <p className="text-slate-500 text-[10px] font-black tracking-[0.5em]">Nexoriva Systems © 2026 | Developed by Jitendra Bharti | Built in India 🇮🇳</p>
+      </footer>
+      
       <WhatsAppButton />
     </div>
   );
