@@ -4,12 +4,18 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Clock } from "lucide-react";
 
 const blogList = [
-  { slug: "pdf-to-tally-import", title: "PDF to Tally Import: Ultimate 2026 Guide", desc: "Learn how to convert bank statements and invoices from PDF to Tally XML.", time: "8 min" },
-  { slug: "invoice-to-tally-automation", title: "Invoice to Tally Automation for MSMEs", desc: "How AI-powered automation is helping small businesses scale.", time: "7 min" },
-  { slug: "bulk-voucher-import-tallyprime", title: "Bulk Voucher Import in TallyPrime 5.0", desc: "Import thousands of entries into TallyPrime in one click.", time: "10 min" },
-  { slug: "tally-data-entry-automation", title: "Tally Data Entry Automation Benefits", desc: "Eliminate staff dependency and human errors with AI.", time: "6 min" },
-  { slug: "ai-accounting-automation", title: "The Future of AI Accounting in India", desc: "How AI is a game changer for Chartered Accountants.", time: "9 min" },
-  { slug: "gst-invoice-import-to-tally", title: "GST Invoice Import: GSTR-2B Recon", desc: "Automate GST purchase entries for perfect reconciliation.", time: "12 min" },
+  { slug: "pdf-to-tally-import", title: "PDF to Tally Import: Ultimate 2026 Guide" },
+  { slug: "invoice-to-tally-automation", title: "Invoice to Tally Automation for MSMEs" },
+  { slug: "bulk-voucher-import", title: "Bulk Voucher Import in TallyPrime 5.0" },
+  { slug: "tally-data-entry-automation", title: "Save 80% Time in Tally Data Entry" },
+  { slug: "ai-accounting-future", title: "The Future of AI Accounting in India" },
+  { slug: "gst-reconciliation-gstr2b", title: "Automate GSTR-2B Reconciliation in Tally" },
+  { slug: "bank-statement-automation", title: "Convert Bank PDF to Tally XML Instantly" },
+  { slug: "busy-accounting-automation", title: "Busy Accounting Software Data Entry Tool" },
+  { slug: "scaling-ca-firms", title: "How CA Firms can Scale with Automation" },
+  { slug: "digital-accounting-msme", title: "Digital Transformation for Indian Traders" },
+  { slug: "human-error-bookkeeping", title: "Zero Error Bookkeeping with AI" },
+  { slug: "xml-import-tally-guide", title: "Technical Guide: XML Voucher Structures" },
 ];
 
 export default function BlogIndex() {
