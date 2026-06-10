@@ -29,7 +29,7 @@ export default function BlogIndex() {
               <div>
                 <BookOpen className="text-teal-500 mb-6" />
                 <h2 className="text-xl font-black text-white mb-4 leading-tight">{post.title}</h2>
-                <p className="text-slate-400 text-xs font-bold uppercase mb-8">{post.desc}</p>
+                <p className="text-slate-400 text-[10px] font-bold uppercase mb-8 leading-relaxed">{post.desc}</p>
               </div>
               <div className="flex justify-between items-center border-t border-slate-800 pt-6">
                  <span className="text-[10px] text-slate-500 font-black flex items-center gap-1 uppercase"><Clock size={12}/> {post.time}</span>
