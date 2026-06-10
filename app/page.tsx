@@ -3,9 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link"; 
 import { 
-  Zap, AlertCircle, Play, CheckCircle2, 
-  Calculator, BarChart3, ShieldCheck, Target, Headphones,
-  User, MessageCircle, Phone, Mail, Download, Menu, X, ChevronDown, Monitor, Cpu, Info, FileText, Printer, Globe, ArrowRight, MousePointer2, FolderOutput, Database, BookOpen
+  Zap, AlertCircle, Play, CheckCircle2, Calculator, BarChart3, ShieldCheck, Target, Headphones,
+  User, MessageCircle, Phone, Mail, Download, Menu, X, ChevronDown, Monitor, Cpu, Info, FileText, Globe, ArrowRight, MousePointer2, FolderOutput, Database
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Contact from "@/components/contact";
@@ -17,8 +16,7 @@ export default function LekhaFlowLanding() {
   const [isHindi, setIsHindi] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<Variant>("gold");
   const [showIntakeModal, setShowIntakeModal] = useState<boolean>(false);
-  const [intakeTarget, setIntakeTarget] = useState<"demo" | "quotation">("demo");
-  const [clientForm, setClientForm] = useState({ clientName: "", companyName: "", mobileNumber: "", clientEmail: "" });
+  const [clientForm, setClientForm] = useState({ clientName: "", companyName: "", mobileNumber: "" });
   const [invoices, setInvoices] = useState(500);
   const [staffCost, setStaffCost] = useState(15000);
 
@@ -31,8 +29,8 @@ export default function LekhaFlowLanding() {
   const t = {
     nav: { f: isHindi ? "विशेषताएं" : "Features", p: isHindi ? "प्रक्रिया" : "Process", pr: isHindi ? "कीमत" : "Pricing", req: isHindi ? "डेमो" : "Request Demo" },
     hero: {
-      title: isHindi ? "3 घंटे की data entry को 3 मिनट में बदलने वाला टूल" : "Turns 3 hours of data entry into 3 minutes",
-      desc: isHindi ? "LekhaFlow (लेखाफ्लो) भारत का सबसे तेज Invoice to Tally AI Software है। 100% सटीक प्रोसेस।" : "LekhaFlow: India's fastest AI-Powered Invoice to Tally Software. Process in seconds with 100% accuracy.",
+      title: isHindi ? "3 घंटे की data entry को 3 मिनट में बदलने वाला स्वचालन टूल" : "An automation tool that turns 3 hours of data entry into 3 minutes",
+      desc: isHindi ? "LekhaFlow (लेखाफ्लो) भारत का सबसे तेज AI-Powered Invoice to Tally Software है। 100% सटीक प्रोसेस।" : "LekhaFlow: India's fastest AI-Powered Invoice to Tally Software. Process bills in seconds with 100% accuracy.",
       btn1: isHindi ? "डेमो देखें" : "Watch Demo",
       btn2: isHindi ? "ट्रायल" : "Trial"
     },
@@ -47,17 +45,25 @@ export default function LekhaFlowLanding() {
         { s: "06", t: isHindi ? "06 एंट्री" : "06 THE ENTRY", d: isHindi ? "वाउचर बन गया" : "Voucher Created", img: "/gui_screen_6.png", i: Database }
       ]
     },
-    roi: { title: isHindi ? "बचत कैलकुलेटर" : "ROI Calculator", l1: isHindi ? "इनवॉइस/माह" : "Invoices/Month", l2: isHindi ? "स्टाफ वेतन" : "Staff Salary", r1: isHindi ? "बचे हुए घंटे" : "Hours Saved", r2: isHindi ? "सालाना बचत" : "Annual Savings" },
-    trust: { title: isHindi ? "विश्वास गारंटी" : "OUR TRUST GUARANTEE", tag: isHindi ? "सुरक्षित GST प्लेटफॉर्म" : "A SECURE GST PLATFORM", c1: isHindi ? "डेटा सुरक्षा" : "Data Security", c1_d: isHindi ? "जीरो-डेटा रिटेंशन।" : "Zero-Data Retention.", c2: isHindi ? "सटीकता" : "Accuracy", c2_d: isHindi ? "0.01 पैसे का बैलेंस।" : "0.01 Penny Balance.", c3: isHindi ? "EDU मोड" : "EDU Mode", c3_d: isHindi ? "एजुकेशनल वर्जन सपोर्ट।" : "Educational Support.", c4: isHindi ? "सहायता" : "Support", c4_d: isHindi ? "फाउंडर डेस्क से मदद।" : "Founder Support Desk." }
-  };
-
-  const productData = {
-    lite: { title: "Lite Edition", price: "15,000", limit: "2,000", tagline: "Basic Excel Mapper" },
-    standard: { title: "Standard Sync", price: "25,000", limit: "5,000", tagline: "Tally Auto Entry" },
-    premium: { title: "Premium Suite", price: "25,000", limit: "10,000", tagline: "Premium AI Engine" },
-    gold: { title: "Gold Advance", price: "30,000", limit: "Unlimited*", tagline: "Advanced Automation" },
-    erp9_standard: { title: "ERP9 Standard", price: "25,000", limit: "5,000", tagline: "Legacy Support" },
-    erp9_premium: { title: "ERP9 Premium", price: "35,000", limit: "Unlimited*", tagline: "ERP9 Advance" }
+    trust: {
+      title: isHindi ? "विश्वास गारंटी" : "OUR TRUST GUARANTEE",
+      tag: isHindi ? "सुरक्षित GST प्लेटफॉर्म" : "A SECURE GST PLATFORM",
+      c1: isHindi ? "डेटा सुरक्षा" : "Data Security",
+      c1_d: isHindi ? "जीरो-डेटा रिटेंशन।" : "Zero-Data Retention Policy.",
+      c2: isHindi ? "सटीकता" : "Accuracy",
+      c2_d: isHindi ? "0.01 पैसे का बैलेंस।" : "0.01 Penny Rounding.",
+      c3: isHindi ? "EDU मोड" : "EDU Mode",
+      c3_d: isHindi ? "एजुकेशनल वर्जन सपोर्ट।" : "Tally EDU Compatible.",
+      c4: isHindi ? "सहायता" : "Support",
+      c4_d: isHindi ? "डायरेक्ट फाउंडर डेस्क।" : "Direct Founder Help Desk."
+    },
+    roi: {
+      title: isHindi ? "बचत कैलकुलेटर" : "ROI Calculator",
+      l1: isHindi ? "इनवॉइस / माह" : "Invoices / Month",
+      l2: isHindi ? "स्टाफ वेतन" : "Staff Salary",
+      r1: isHindi ? "बचे हुए घंटे" : "Hours Saved",
+      r2: isHindi ? "सालाना बचत" : "Annual Savings"
+    }
   };
 
   const timeSavedValue = invoices * 3; 
@@ -65,11 +71,11 @@ export default function LekhaFlowLanding() {
   const annualSavingsValue = moneySavedValue * 12;
 
   return (
-    <div className="bg-[#020617] text-slate-200 selection:bg-teal-500 overflow-x-hidden">
+    <div className="bg-[#020617] text-slate-200 selection:bg-teal-500 overflow-x-hidden font-sans">
       <nav className="fixed top-0 w-full z-[100] bg-[#020617]/80 backdrop-blur-md border-b border-slate-800">
         <div className={containerClass + " flex justify-between items-center h-20"}>
-          <div className="text-2xl font-black text-white italic uppercase">LEKHA<span className="text-teal-500">FLOW</span></div>
-          <div className="hidden lg:flex items-center gap-6 text-[10px] font-black uppercase">
+          <div className="text-2xl font-black text-white italic uppercase tracking-tighter">LEKHA<span className="text-teal-500">FLOW</span></div>
+          <div className="hidden lg:flex items-center gap-6 text-[10px] font-black uppercase tracking-widest">
             <Link href="/blog" className="text-amber-500 hover:text-amber-400">Insights / Blog</Link>
             <button onClick={() => setIsHindi(!isHindi)} className="text-teal-500 border border-teal-500/30 px-2 rounded uppercase">{isHindi ? "EN" : "HI"}</button>
             <button onClick={() => setShowIntakeModal(true)} className="bg-teal-600 px-4 py-2 rounded-lg">{t.nav.req}</button>
@@ -77,36 +83,36 @@ export default function LekhaFlowLanding() {
         </div>
       </nav>
 
-      <section className="pt-40 pb-20 lg:pt-56 lg:pb-32">
-        <div className={containerClass + " grid lg:grid-cols-2 gap-16 items-center"}>
+      <section className="pt-40 pb-20 lg:pt-56 lg:pb-32 no-print">
+        <div className={containerClass + " grid lg:grid-cols-2 gap-12 items-center"}>
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
             <h1 className="text-3xl md:text-5xl font-black text-white leading-tight uppercase italic border-l-8 border-teal-500 pl-6">{t.hero.title}</h1>
             <p className="text-lg text-slate-400 font-medium leading-relaxed">{t.hero.desc}</p>
             <div className="flex gap-4">
-              <button onClick={() => setShowIntakeModal(true)} className="bg-white text-black px-8 py-4 rounded-2xl font-black uppercase text-xs">{t.hero.btn1}</button>
+              <button onClick={() => setShowIntakeModal(true)} className="bg-white text-black px-10 py-5 rounded-2xl font-black uppercase text-xs hover:bg-teal-500 transition-all">{t.hero.btn1}</button>
               <button onClick={() => setShowIntakeModal(true)} className="bg-slate-900 border border-slate-700 px-8 py-4 rounded-2xl font-black uppercase text-xs">{t.hero.btn2}</button>
             </div>
           </motion.div>
-          <div className="relative aspect-video bg-slate-900 rounded-[3rem] border border-slate-700 overflow-hidden shadow-2xl">
+          <div className="relative aspect-video bg-slate-900 rounded-[3rem] border border-slate-700 overflow-hidden shadow-2xl group cursor-pointer">
             <img src="/gui_screen_1.png" className="w-full h-full object-cover opacity-30" alt="Dashboard" />
-            <Play fill="currentColor" size={50} className="text-teal-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <Play fill="currentColor" size={50} className="text-teal-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:scale-125 transition-transform" />
           </div>
         </div>
       </section>
 
       {/* --- 🚀 THE PROCESS --- */}
-      <section id="process" className="py-24 bg-slate-900/20">
+      <section id="process" className="py-24 bg-slate-900/20 no-print">
         <div className={containerClass}>
           <h2 className="text-center text-4xl md:text-6xl font-black text-white mb-20 uppercase tracking-tighter italic">{t.process.title}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {t.process.steps.map((step, i) => (
-              <motion.div key={i} whileHover={{ y: -10 }} className="bg-slate-900 border border-slate-800 rounded-[2rem] overflow-hidden shadow-lg">
-                <div className="h-40 bg-slate-800 relative">
+              <motion.div key={i} whileHover={{ y: -10 }} className="bg-slate-900 border border-slate-800 rounded-[2rem] overflow-hidden group transition-all shadow-lg flex flex-col">
+                <div className="h-40 bg-slate-800 relative overflow-hidden">
                    <img src={step.img} className="w-full h-full object-contain p-2 opacity-80" alt={step.t} />
                    <span className="absolute top-2 left-4 text-2xl font-black text-white/10">{step.s}</span>
                 </div>
                 <div className="p-4 text-center">
-                    <h4 className="text-[9px] font-black text-white mb-1 uppercase">{step.t}</h4>
+                    <h4 className="text-[9px] font-black text-white mb-1 uppercase leading-tight">{step.t}</h4>
                     <p className="text-[7px] text-slate-500 font-bold uppercase">{step.d}</p>
                 </div>
               </motion.div>
@@ -116,23 +122,28 @@ export default function LekhaFlowLanding() {
       </section>
 
       {/* --- 🛡️ TRUST --- */}
-      <section className="py-24 bg-slate-950 border-y border-slate-900">
+      <section className="py-24 bg-slate-950 border-y border-slate-900 no-print">
         <div className={containerClass}>
           <h2 className="text-3xl font-black text-white text-center mb-16 uppercase italic">{t.trust.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {t.trust.items.map((item, i) => (
+            {[
+              { i: ShieldCheck, t: t.trust.c1, d: t.trust.c1_d, c: "text-teal-500" },
+              { i: Target, t: t.trust.c2, d: t.trust.c2_d, c: "text-blue-500" },
+              { i: Cpu, t: t.trust.c3, d: t.trust.c3_d, c: "text-amber-500" },
+              { i: Headphones, t: t.trust.c4, d: t.trust.c4_d, c: "text-pink-500" }
+            ].map((item, i) => (
               <div key={i} className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] flex flex-col items-center text-center">
                  <item.i className={`${item.c} mb-6`} size={40} />
-                 <h3 className="text-white font-black uppercase text-sm mb-4">{item.t}</h3>
-                 <p className="text-slate-400 font-bold text-[10px] uppercase italic">{item.d}</p>
+                 <h3 className="text-white font-black uppercase text-sm mb-4 tracking-widest">{item.t}</h3>
+                 <p className="text-slate-400 font-bold text-[11px] uppercase italic tracking-tighter">{item.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* --- ROI --- */}
-      <section className="py-24">
+      {/* --- ROI CALCULATOR --- */}
+      <section className="py-24 no-print">
         <div className={containerClass}>
           <div className="bg-slate-900 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20 shadow-2xl grid lg:grid-cols-2 gap-20 items-center">
               <div className="space-y-8">
@@ -162,7 +173,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* --- FOUNDER --- */}
+      {/* --- MEET THE FOUNDER --- */}
       <section className="py-24 no-print">
         <div className={containerClass + " max-w-5xl"}>
           <div className="bg-slate-950 border-2 border-slate-800 rounded-[4rem] p-10 lg:p-20 relative overflow-hidden group shadow-2xl grid lg:grid-cols-3 gap-16 items-center">
@@ -183,11 +194,24 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="py-16 border-t border-slate-900 text-center uppercase">
+      <footer className="py-16 border-t border-slate-900 text-center uppercase no-print">
         <p className="text-slate-500 text-[10px] font-black tracking-[0.5em]">LekhaFlow AI | Built in India 🇮🇳</p>
       </footer>
       
+      {/* 📥 INTAKE MODAL */}
+      {showIntakeModal && (
+        <div className="fixed inset-0 z-[150] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4">
+            <div className="bg-slate-900 border-2 border-teal-500 p-10 rounded-[3.5rem] max-w-md w-full relative shadow-2xl">
+                <button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-500 hover:text-white"><X size={28}/></button>
+                <form className="space-y-6">
+                    <h3 className="text-2xl font-black text-white uppercase text-center mb-10 tracking-widest">Verification</h3>
+                    <input required placeholder="YOUR FULL NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" />
+                    <button type="submit" className="w-full py-5 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest shadow-xl">DOWNLOAD NOW</button>
+                </form>
+            </div>
+        </div>
+      )}
+
       <WhatsAppButton />
     </div>
   );
