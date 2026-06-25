@@ -265,7 +265,152 @@ export default function LekhaFlowLanding() {
           </div>
         </div>
       </section>
+      // ⬇️ यह code अपने page.tsx में add करो
+// Pricing section से पहले (लगभग line 268 के बाद)
 
+      {/* 📥 FREE DEMO SECTION - BEFORE PRICING */}
+      <section className="py-24 bg-gradient-to-br from-teal-950/30 via-slate-900 to-slate-950 border-t border-teal-500/30 no-print">
+        <div className={containerClass}>
+          <div className="max-w-4xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-16">
+              <div className="inline-block mb-6 px-4 py-2 bg-teal-500/10 border border-teal-500/30 rounded-full">
+                <p className="text-teal-400 text-[11px] font-black uppercase tracking-widest">🎁 Free Trial</p>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tighter">
+                Try LekhaFlow Free for 7 Days
+              </h2>
+              <p className="text-xl text-slate-400 font-semibold">
+                No credit card needed. All features included. Machine-locked for security.
+              </p>
+            </div>
+
+            {/* Demo Features Grid */}
+            <div className="grid md:grid-cols-4 gap-4 mb-12">
+              <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 text-center">
+                <div className="text-3xl font-black text-teal-500 mb-2">7</div>
+                <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Days Validity</p>
+              </div>
+              <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 text-center">
+                <div className="text-3xl font-black text-blue-500 mb-2">60</div>
+                <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Invoices Limit</p>
+              </div>
+              <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 text-center">
+                <div className="text-3xl font-black text-emerald-500 mb-2">✓</div>
+                <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">All Features</p>
+              </div>
+              <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 text-center">
+                <div className="text-3xl font-black text-amber-500 mb-2">🔐</div>
+                <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Machine Locked</p>
+              </div>
+            </div>
+
+            {/* What You Get */}
+            <div className="bg-slate-950 border border-slate-800 rounded-[2.5rem] p-10 mb-12">
+              <h3 className="text-2xl font-black text-white mb-8 uppercase tracking-tighter">What's Included</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="flex items-start gap-4">
+                  <CheckCircle2 className="text-teal-500 flex-shrink-0 mt-1" size={24} />
+                  <div>
+                    <p className="font-black text-white text-sm mb-1">Invoice to Tally Conversion</p>
+                    <p className="text-slate-400 text-xs">Process PDF/Image invoices in seconds</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <CheckCircle2 className="text-teal-500 flex-shrink-0 mt-1" size={24} />
+                  <div>
+                    <p className="font-black text-white text-sm mb-1">GST Auto-Detection</p>
+                    <p className="text-slate-400 text-xs">CGST/SGST/IGST handling</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <CheckCircle2 className="text-teal-500 flex-shrink-0 mt-1" size={24} />
+                  <div>
+                    <p className="font-black text-white text-sm mb-1">XML Generation</p>
+                    <p className="text-slate-400 text-xs">Ready for Tally import</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <CheckCircle2 className="text-teal-500 flex-shrink-0 mt-1" size={24} />
+                  <div>
+                    <p className="font-black text-white text-sm mb-1">Zero Data Retention</p>
+                    <p className="text-slate-400 text-xs">Your data stays on your machine</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Security Features */}
+            <div className="bg-blue-950/20 border border-blue-500/20 rounded-[2.5rem] p-10 mb-12">
+              <h3 className="text-xl font-black text-blue-400 mb-6 uppercase tracking-tighter flex items-center gap-3">
+                <ShieldCheck size={24} />
+                Enterprise-Grade Security
+              </h3>
+              <div className="grid md:grid-cols-3 gap-6 text-sm">
+                <div>
+                  <p className="font-black text-white mb-2">🔐 Machine Lock</p>
+                  <p className="text-slate-400 text-xs">Demo locked to your computer. Works on one device only.</p>
+                </div>
+                <div>
+                  <p className="font-black text-white mb-2">⏰ Clock Tampering Detection</p>
+                  <p className="text-slate-400 text-xs">System won't reset if you change system date.</p>
+                </div>
+                <div>
+                  <p className="font-black text-white mb-2">📊 Usage Tracking</p>
+                  <p className="text-slate-400 text-xs">Transparent limits. 7 days or 60 invoices, whichever comes first.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Download Button */}
+            <div className="bg-gradient-to-br from-teal-500 to-emerald-600 rounded-[2.5rem] p-12 text-center shadow-2xl">
+              <p className="text-white/80 text-[11px] font-black uppercase tracking-widest mb-4">Step 1: Download</p>
+              <h3 className="text-3xl font-black text-white mb-8 uppercase tracking-tighter leading-none">
+                Get Your Free Demo
+              </h3>
+              <a 
+                href="https://PASTE_YOUR_DEMO_DOWNLOAD_URL_HERE" 
+                target="_blank" 
+                rel="noreferrer"
+                className="inline-block px-10 py-5 bg-black text-teal-400 font-black text-sm uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 transition-all shadow-lg active:scale-95 mb-6"
+              >
+                ⬇️ Download Setup (Windows)
+              </a>
+              
+              <div className="border-t border-white/20 pt-6">
+                <p className="text-white/70 text-xs font-semibold">
+                  Step 2: Install on your computer<br />
+                  Step 3: Auto machine-locked for your device<br />
+                  Step 4: Start testing immediately
+                </p>
+              </div>
+            </div>
+
+            {/* FAQ */}
+            <div className="mt-16">
+              <h3 className="text-2xl font-black text-white mb-8 uppercase tracking-tighter text-center">Demo FAQ</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6">
+                  <p className="font-black text-white mb-3 text-sm">❓ Can I use demo on multiple devices?</p>
+                  <p className="text-slate-400 text-xs">No. Demo is machine-locked to your first computer for security.</p>
+                </div>
+                <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6">
+                  <p className="font-black text-white mb-3 text-sm">❓ What happens after 7 days?</p>
+                  <p className="text-slate-400 text-xs">Upgrade to any paid plan. Then you get unlimited invoices forever.</p>
+                </div>
+                <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6">
+                  <p className="font-black text-white mb-3 text-sm">❓ Can I extend demo?</p>
+                  <p className="text-slate-400 text-xs">No. Demo expires after 7 days. But upgrade anytime from our pricing page.</p>
+                </div>
+                <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6">
+                  <p className="font-black text-white mb-3 text-sm">❓ Is it really free?</p>
+                  <p className="text-slate-400 text-xs">Yes! 100% free. No credit card required. No hidden charges.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* 8. PRICING */}
       <section id="pricing" className="py-24 border-t border-slate-900 no-print">
         <div className={containerClass}>

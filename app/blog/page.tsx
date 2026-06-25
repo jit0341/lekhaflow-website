@@ -1,61 +1,42 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Clock, Globe } from "lucide-react";
+import { ArrowRight, BookOpen, Clock, FileText, Zap, ShieldCheck, Database, Layout, TrendingUp } from "lucide-react";
 
-// ✅ Type Definition to stop Vercel Errors
-interface BlogPost {
-  slug: string;
-  title: string;
-  desc: string;
-  time: string;
-}
-
-const blogList: BlogPost[] = [
-  { slug: "pdf-to-tally-import", title: "PDF to Tally Import: Ultimate 2026 Guide", desc: "Convert bank statements & invoices from PDF to Tally XML.", time: "12 min" },
-  { slug: "invoice-to-tally-automation", title: "Invoice to Tally Automation for MSMEs", desc: "How AI-powered automation is helping small businesses scale.", time: "10 min" },
-  { slug: "bulk-voucher-import", title: "Bulk Voucher Import in TallyPrime 5.0", desc: "Import thousands of entries into TallyPrime in one click.", time: "15 min" },
-  { slug: "tally-data-entry-automation", title: "Tally Data Entry Automation Benefits", desc: "Eliminate staff dependency and human errors with AI.", time: "8 min" },
-  { slug: "ai-accounting-future", title: "The Future of AI Accounting in India", desc: "How AI is a game changer for Chartered Accountants.", time: "11 min" },
-  { slug: "gst-reconciliation-gstr2b", title: "Automate GSTR-2B Reconciliation in Tally", desc: "Automate GST purchase entries for perfect reconciliation.", time: "13 min" },
-  { slug: "bank-statement-automation", title: "Convert Bank PDF to Tally XML Instantly", desc: "No more manual mapping of complex bank statements.", time: "9 min" },
-  { slug: "busy-accounting-automation", title: "Busy Accounting Software Data Entry Tool", desc: "Automate entries for BUSY software users easily.", time: "7 min" },
-  { slug: "scaling-ca-firms", title: "How CA Firms can Scale with Automation", desc: "Manage more clients with the same small team.", time: "10 min" },
-  { slug: "digital-accounting-msme", title: "Digital Transformation for Indian Traders", desc: "Why going digital is mandatory for MSMEs in 2026.", time: "14 min" },
-  { slug: "human-error-bookkeeping", title: "Zero Error Bookkeeping with AI", desc: "The cost of a single zero error and how to avoid it.", time: "6 min" },
-  { slug: "xml-import-tally-guide", title: "Technical Guide: XML Voucher Structures", desc: "Understand the hierarchy of Tally XML import data.", time: "18 min" }
+// 🚀 12 Blogs Metadata
+const blogList = [
+  { slug: "gst-invoices-to-tally-manual-vs-automation", title: "How to Convert GST Invoices into Tally – Manual vs Automation", icon: Zap },
+  { slug: "record-gst-entries-tally-guide", title: "How to Record GST Entries in Tally – CGST, SGST & IGST", icon: ShieldCheck },
+  { slug: "high-volume-invoice-processing-best-practices", title: "Best Practices for Processing High-Volume Invoices", icon: TrendingUp },
+  { slug: "tallyprime-vs-tally-erp9", title: "TallyPrime vs Tally ERP 9 – Which is Right for You?", icon: Layout },
+  { slug: "accounting-automation-for-msmes", title: "Why Accounting Automation is Essential for MSMEs", icon: Database },
+  { slug: "pdf-invoice-data-extraction-methods", title: "PDF Invoice Extraction – Manual vs AI Methods", icon: FileText },
+  { slug: "ca-role-software-implementation", title: "Role of CAs in Accounting Software Implementation", icon: BookOpen },
+  { slug: "bank-reconciliation-tally-guide", title: "Bank Reconciliation in Tally – Step-by-Step Guide", icon: ShieldCheck },
+  { slug: "invoice-deduplication-prevention", title: "Invoice Deduplication – Prevent Duplicate Entries", icon: Zap },
+  { slug: "cloud-vs-desktop-accounting-msme", title: "Cloud vs Desktop Accounting for Indian MSMEs", icon: Layout },
+  { slug: "technology-in-gst-compliance", title: "The Role of Technology in GST Compliance", icon: Database },
+  { slug: "accounting-automation-roi-guide", title: "How Much Time Automation Saves? – ROI Guide", icon: TrendingUp },
 ];
 
 export default function BlogIndex() {
-  const [isHindi, setIsHindi] = useState(false);
-
   return (
-    <div className="bg-[#020617] min-h-screen text-slate-200">
-      <nav className="fixed top-0 w-full z-[100] bg-[#020617]/80 backdrop-blur-md border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-20">
-          <Link href="/" className="text-2xl font-black text-white italic">LEKHA<span className="text-teal-500">FLOW</span></Link>
-          <button onClick={() => setIsHindi(!isHindi)} className="text-teal-500 border border-teal-500/30 px-3 py-1 rounded font-black text-xs">
-            {isHindi ? "ENGLISH" : "हिंदी"}
-          </button>
+    <div className="bg-[#020617] min-h-screen py-32 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-6xl font-black text-white italic uppercase tracking-tighter mb-4">LekhaFlow Insights</h1>
+            <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Professional Guides for Modern Accountants</p>
         </div>
-      </nav>
-
-      <div className="max-w-7xl mx-auto px-4 pt-32 pb-24">
-        <h1 className="text-4xl md:text-6xl font-black text-white mb-16 italic uppercase tracking-tighter">
-          {isHindi ? "नॉलेज हब" : "Knowledge Hub"}
-        </h1>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogList.map((post) => (
-            <div key={post.slug} className="bg-slate-900 border border-slate-800 p-8 rounded-[2.5rem] hover:border-teal-500 transition-all flex flex-col justify-between shadow-xl group">
+            <div key={post.slug} className="bg-slate-900/50 border border-slate-800 p-8 rounded-[2.5rem] hover:border-teal-500 transition-all flex flex-col justify-between group shadow-xl">
               <div>
-                <BookOpen className="text-teal-500 mb-6 group-hover:scale-110 transition-transform" />
-                <h2 className="text-xl font-black text-white mb-4 leading-tight">{post.title}</h2>
-                <p className="text-slate-400 text-[10px] font-bold uppercase mb-8 leading-relaxed tracking-wider">{post.desc}</p>
+                <post.icon className="text-teal-500 mb-6 group-hover:scale-110 transition-transform" />
+                <h2 className="text-lg font-black text-white leading-tight mb-6">{post.title}</h2>
               </div>
-              <div className="flex justify-between items-center border-t border-slate-800 pt-6">
-                 <span className="text-[10px] text-slate-500 font-black flex items-center gap-1 uppercase"><Clock size={12}/> {post.time}</span>
-                 <Link href={`/blog/${post.slug}`} className="text-teal-500 font-black text-[10px] uppercase flex items-center gap-2 hover:gap-3 transition-all underline underline-offset-4">Read Article <ArrowRight size={14} /></Link>
-              </div>
+              <Link href={`/blog/${post.slug}`} className="flex items-center gap-2 text-teal-500 font-black text-[10px] uppercase tracking-widest hover:gap-4 transition-all">
+                Read Article <ArrowRight size={14} />
+              </Link>
             </div>
           ))}
         </div>
