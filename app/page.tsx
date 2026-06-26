@@ -265,9 +265,7 @@ export default function LekhaFlowLanding() {
           </div>
         </div>
       </section>
-      // ⬇️ यह code अपने page.tsx में add करो
-// Pricing section से पहले (लगभग line 268 के बाद)
-
+      
       {/* 📥 FREE DEMO SECTION - BEFORE PRICING */}
       <section className="py-24 bg-gradient-to-br from-teal-950/30 via-slate-900 to-slate-950 border-t border-teal-500/30 no-print">
         <div className={containerClass}>
@@ -369,7 +367,7 @@ export default function LekhaFlowLanding() {
                 Get Your Free Demo
               </h3>
               <a 
-                href="https://PASTE_YOUR_DEMO_DOWNLOAD_URL_HERE" 
+                href="https://www.dropbox.com/scl/fi/ohioomgparvihfaarts1l/lekhaflow_standard_trial_setup.rar?rlkey=denyibj7xwpmlojs5i9yhlhwk&st=oy81kvfj&dl=0" 
                 target="_blank" 
                 rel="noreferrer"
                 className="inline-block px-10 py-5 bg-black text-teal-400 font-black text-sm uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 transition-all shadow-lg active:scale-95 mb-6"
