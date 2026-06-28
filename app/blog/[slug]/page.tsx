@@ -3212,11 +3212,24 @@ ________________________________________
   }
 };
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = POSTS_DATA[params.slug];
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  const post = POSTS_DATA[slug];
+console.log("Slug:", slug);
+console.log("Keys:", Object.keys(POSTS_DATA));
+console.log("Post:", POSTS_DATA[slug]);
 
   if (!post) {
-    return <div className="min-h-screen bg-[#020617] flex items-center justify-center text-white font-black uppercase">Article Updating...</div>;
+    return (
+      <div className="min-h-screen bg-[#020617] flex items-center justify-center text-white font-black uppercase">
+        Article Updating...
+      </div>
+    );
   }
 
   return (
