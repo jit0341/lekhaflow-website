@@ -1,5 +1,7 @@
 "use client";
 
+import Hero from "@/components/Hero";
+import ProblemSection from "@/components/ProblemSection";
 import React, { useState, useEffect } from "react";
 import Link from "next/link"; 
 import { 
@@ -136,27 +138,17 @@ export default function LekhaFlowLanding() {
         </div>
       </nav>
 
-      {/* 2. HERO */}
-      <section className="relative pt-40 pb-20 lg:pt-56 lg:pb-32 no-print">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-900/10 via-slate-950 to-slate-950 -z-10"></div>
-        <div className={containerClass + " grid lg:grid-cols-2 gap-12 items-center"}>
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
-            <h1 className="text-3xl md:text-5xl font-black text-white leading-tight uppercase italic border-l-8 border-teal-500 pl-6">{t.hero.title}</h1>
-            <p className="text-xl text-slate-400 font-medium leading-relaxed max-w-xl">{t.hero.desc}</p>
-            <div className="flex gap-4">
-              <button onClick={() => triggerIntake("demo")} className="bg-white text-black px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-teal-500 transition-all shadow-2xl active:scale-95">{t.hero.btn1}</button>
-              <button onClick={() => triggerIntake("demo")} className="bg-slate-900 border border-slate-700 text-white px-10 py-5 rounded-2xl font-black uppercase hover:bg-slate-800 transition-all">{t.hero.btn2}</button>
-            </div>
-          </motion.div>
-          <div className="relative aspect-video bg-slate-900 rounded-[3rem] border border-slate-700 overflow-hidden shadow-2xl group cursor-pointer" onClick={() => triggerIntake("demo")}>
-            <img src="/gui_screen_1.png" className="w-full h-full object-cover opacity-30" alt="Dashboard" />
-            <Play fill="currentColor" size={60} className="text-teal-500 group-hover:scale-125 transition-transform absolute" />
-          </div>
-        </div>
-      </section>
+      <Hero
+  isHindi={isHindi}
+  triggerIntake={triggerIntake}
+/>
 
-      {/* 3. THE PROCESS */}
-      <section id="process" className="py-24 bg-slate-900/20 no-print">
+<ProblemSection
+  isHindi={isHindi}
+/>
+
+{/* 3. THE PROCESS */}
+<section id="process" className="py-24 bg-slate-900/20 no-print">
         <div className={containerClass}>
           <h2 className="text-center text-4xl md:text-6xl font-black text-white mb-20 uppercase tracking-tighter italic">{t.process.title}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
