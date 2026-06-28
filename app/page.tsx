@@ -12,12 +12,12 @@ import Contact from "@/components/contact";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 // --- Types ---
-type Variant = "lite" | "standard" | "premium" | "gold" | "erp9_standard" | "erp9_premium";
+type Variant = "standard";
 
 export default function LekhaFlowLanding() {
   // 1. STATES
   const [isHindi, setIsHindi] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<Variant>("gold");
+  const [activeTab, setActiveTab] = useState<Variant>("standard");
   const [quotationData, setQuotationData] = useState<any | null>(null);
   const [showIntakeModal, setShowIntakeModal] = useState<boolean>(false);
   const [intakeTarget, setIntakeTarget] = useState<"demo" | "quotation">("demo");
@@ -91,13 +91,16 @@ export default function LekhaFlowLanding() {
     }
   };
 
+  // ✅ UPDATED: Only Demo and Standard Full Version
   const productData = {
-    lite: { title: "Lite Edition", price: "15,000", limit: "2,000", razorpayUrl: "https://rzp.io/rzp/SkJTqlgi", tagline: "Basic Excel Mapper" },
-    standard: { title: "Standard Sync", price: "25,000", limit: "5,000", razorpayUrl: "https://rzp.io/rzp/oVwLNxHT", tagline: "Tally Auto Entry" },
-    premium: { title: "Premium Suite", price: "25,000", limit: "10,000", razorpayUrl: "https://rzp.io/rzp/9HGERapH", tagline: "Premium AI Engine" },
-    gold: { title: "Gold Advance", price: "30,000", limit: "Unlimited*", razorpayUrl: "https://rzp.io/rzp/sQg7LGy", tagline: "Advanced Automation" },
-    erp9_standard: { title: "ERP9 Standard", price: "25,000", limit: "5,000", razorpayUrl: "https://rzp.io/rzp/AZMi622y", tagline: "Legacy Support" },
-    erp9_premium: { title: "ERP9 Premium", price: "35,000", limit: "Unlimited*", razorpayUrl: "https://rzp.io/rzp/BLZgsWB", tagline: "ERP9 Advance" }
+    standard: { 
+      title: "LekhaFlow Standard Full", 
+      price: "15,000", 
+      limit: "10,000 Invoices/Year", 
+      razorpayUrl: "https://pages.razorpay.com/pl_SshDcz10pz7Leq/view",
+      downloadUrl: "https://www.dropbox.com/scl/fi/r2pngajegwqj3wludvk0y/Lekhaflow_standard_setup.rar?rlkey=m8c6o5kmut4aagbvpny6jtu9t&st=lkyqs9kl&dl=0",
+      tagline: "Tally Auto Entry - Full Version with License" 
+    }
   };
 
   const triggerIntake = (type: "demo" | "quotation") => {
@@ -108,7 +111,8 @@ export default function LekhaFlowLanding() {
   const handleIntakeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setShowIntakeModal(false);
-    window.open("https://www.dropbox.com/scl/fi/tyv7sepqejvkvfn7mjvzq/Lekhaflow_Gold_setup.rar?dl=1", "_blank");
+    // ✅ Demo version download
+    window.open("https://www.dropbox.com/scl/fi/ohioomgparvihfaarts1l/lekhaflow_standard_trial_setup.rar?rlkey=denyibj7xwpmlojs5i9yhlhwk&st=x9u8u57m&dl=0", "_blank");
   };
 
   const timeSavedValue = invoices * 3; 
@@ -394,11 +398,11 @@ export default function LekhaFlowLanding() {
                 </div>
                 <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6">
                   <p className="font-black text-white mb-3 text-sm">❓ What happens after 7 days?</p>
-                  <p className="text-slate-400 text-xs">Upgrade to any paid plan. Then you get unlimited invoices forever.</p>
+                  <p className="text-slate-400 text-xs">Upgrade to LekhaFlow Standard Full. Then you get 5000 invoices/year forever.</p>
                 </div>
                 <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6">
                   <p className="font-black text-white mb-3 text-sm">❓ Can I extend demo?</p>
-                  <p className="text-slate-400 text-xs">No. Demo expires after 7 days. But upgrade anytime from our pricing page.</p>
+                  <p className="text-slate-400 text-xs">No. Demo expires after 7 days. But upgrade anytime from our pricing below.</p>
                 </div>
                 <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6">
                   <p className="font-black text-white mb-3 text-sm">❓ Is it really free?</p>
@@ -409,24 +413,51 @@ export default function LekhaFlowLanding() {
           </div>
         </div>
       </section>
+
       {/* 8. PRICING */}
       <section id="pricing" className="py-24 border-t border-slate-900 no-print">
         <div className={containerClass}>
-          <h2 className="text-center text-4xl font-black text-white mb-16 uppercase italic tracking-tighter">Select Your Edition</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <h2 className="text-center text-4xl font-black text-white mb-16 uppercase italic tracking-tighter">Upgrade to Full Version</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
             {Object.entries(productData).map(([key, p]) => (
-              <div key={key} className={`bg-slate-950 border p-6 rounded-[2.5rem] flex flex-col justify-between transition-all group ${activeTab === key ? 'border-teal-500 ring-4 ring-teal-500/10 shadow-2xl scale-[1.02]' : 'border-slate-800 hover:border-slate-700'}`}>
-                <div className="space-y-4 text-center lg:text-left">
-                  <h3 className="text-white font-black text-[10px] uppercase tracking-widest">{p.title}</h3>
-                  <div className="py-4 border-y border-slate-800">
-                    <p className="text-teal-500 font-black text-2xl tracking-tighter">₹{p.price}</p>
-                    <p className="text-[9px] text-slate-500 font-bold uppercase">{p.limit} Limit</p>
+              <div key={key} className={`bg-slate-950 border-2 p-8 rounded-[2.5rem] flex flex-col justify-between transition-all group ${activeTab === key ? 'border-teal-500 ring-4 ring-teal-500/10 shadow-2xl' : 'border-slate-800 hover:border-slate-700'}`}>
+                <div className="space-y-4">
+                  <h3 className="text-white font-black text-[12px] uppercase tracking-widest">{p.title}</h3>
+                  <div className="py-6 border-y border-slate-800">
+                    <p className="text-teal-500 font-black text-4xl tracking-tighter mb-2">₹{p.price}</p>
+                    <p className="text-[10px] text-slate-500 font-bold uppercase">{p.limit}</p>
                   </div>
-                  <p className="text-[10px] font-bold text-slate-400 italic leading-snug">{p.tagline}</p>
+                  <p className="text-[11px] font-bold text-slate-400 italic leading-snug">{p.tagline}</p>
+                  <ul className="text-[10px] text-slate-400 space-y-2 mt-4">
+                    <li>✅ 10,000 invoices per year</li>
+                    <li>✅ License.dat included</li>
+                    <li>✅ 1 year validity</li>
+                    <li>✅ Free updates & support</li>
+                  </ul>
                 </div>
                 <div className="mt-8 space-y-2">
-                  <button onClick={() => triggerIntake("demo")} className="w-full py-3 bg-slate-900 border border-slate-800 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] shadow-sm">Get Quote</button>
-                  <a href={p.razorpayUrl} target="_blank" rel="noreferrer" className="block w-full py-3 bg-teal-500 text-black rounded-xl text-[9px] font-black uppercase text-center shadow-lg active:scale-95 transition-transform">Buy Now</a>
+                  <a 
+                    href={p.razorpayUrl} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="block w-full py-3 bg-teal-500 text-black rounded-xl text-[10px] font-black uppercase text-center shadow-lg active:scale-95 transition-transform hover:bg-teal-600"
+                  >
+                    💳 Buy Now (Razorpay)
+                  </a>
+                  <a 
+                    href={p.downloadUrl} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="block w-full py-3 bg-blue-600 text-white rounded-xl text-[10px] font-black uppercase text-center shadow-lg active:scale-95 transition-transform hover:bg-blue-700"
+                  >
+                    ⬇️ Download Full Version
+                  </a>
+                  <button 
+                    onClick={() => triggerIntake("quotation")} 
+                    className="w-full py-3 bg-slate-900 border border-slate-800 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-sm hover:bg-slate-800 transition-all"
+                  >
+                    📧 Get License.dat
+                  </button>
                 </div>
               </div>
             ))}
@@ -444,11 +475,11 @@ export default function LekhaFlowLanding() {
             <div className="bg-slate-900 border-2 border-teal-500 p-10 rounded-[3.5rem] max-w-md w-full relative shadow-2xl">
                 <button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-500 hover:text-white"><X size={28}/></button>
                 <form onSubmit={handleIntakeSubmit} className="space-y-5">
-                    <h3 className="text-2xl font-black text-white uppercase text-center mb-10 tracking-widest italic">Verification</h3>
+                    <h3 className="text-2xl font-black text-white uppercase text-center mb-10 tracking-widest italic">Get Demo</h3>
                     <input required placeholder="YOUR FULL NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}/>
                     <input required placeholder="COMPANY NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}/>
                     <input required placeholder="WHATSAPP NUMBER" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}/>
-                    <button type="submit" className="w-full py-5 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest shadow-xl">DOWNLOAD NOW</button>
+                    <button type="submit" className="w-full py-5 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest shadow-xl">DOWNLOAD DEMO</button>
                 </form>
             </div>
         </div>
