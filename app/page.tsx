@@ -2,6 +2,7 @@
 
 import Hero from "@/components/Hero";
 import ProblemSection from "@/components/ProblemSection";
+import ProcessSection from "@/components/ProcessSection";
 import React, { useState, useEffect } from "react";
 import Link from "next/link"; 
 import { 
@@ -146,27 +147,11 @@ export default function LekhaFlowLanding() {
 <ProblemSection
   isHindi={isHindi}
 />
+<ProcessSection
+  isHindi={isHindi}
+/>
 
-{/* 3. THE PROCESS */}
-<section id="process" className="py-24 bg-slate-900/20 no-print">
-        <div className={containerClass}>
-          <h2 className="text-center text-4xl md:text-6xl font-black text-white mb-20 uppercase tracking-tighter italic">{t.process.title}</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {t.process.steps.map((step, i) => (
-              <motion.div key={i} whileHover={{ y: -10 }} className={`bg-slate-900 border-2 ${step.c} rounded-[2rem] overflow-hidden group transition-all shadow-lg flex flex-col`}>
-                <div className="h-40 bg-slate-800 relative overflow-hidden">
-                   <img src={step.img} className="w-full h-full object-contain p-2 opacity-80 group-hover:opacity-100 transition-opacity" alt={step.t} />
-                   <span className="absolute top-2 left-4 text-2xl font-black text-white/10">{step.s}</span>
-                </div>
-                <div className="p-4 text-center">
-                    <h4 className="text-[9px] font-black text-white mb-1 uppercase leading-tight tracking-tighter">{step.t}</h4>
-                    <p className="text-[7px] text-slate-500 font-bold uppercase">{step.d}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* 4. TRUST GUARANTEE */}
       <section className="py-24 bg-slate-950 border-y border-slate-900 no-print">

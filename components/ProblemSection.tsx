@@ -20,7 +20,7 @@ export default function ProblemSection({
 
 <section
 id="problem"
-className="bg-[#07131f] py-28"
+className="bg-[#07131f] py-2"
 >
 
 <div className="max-w-7xl mx-auto px-6">
@@ -60,7 +60,7 @@ className="bg-[#07131f] py-28"
 
 {/* Two Columns */}
 
-<div className="grid lg:grid-cols-2 gap-14 mt-20">
+<div className="grid lg:grid-cols-2 gap-14 mt-10">
 
 {/* LEFT */}
 

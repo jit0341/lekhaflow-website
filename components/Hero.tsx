@@ -18,7 +18,7 @@ type HeroProps = {
 
 export default function Hero({ isHindi, triggerIntake }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-[#020617] pt-40 pb-32">
+    <section className="relative overflow-hidden bg-[#020617] pt-40 pb-2">
       <div className="absolute inset-0 bg-gradient-to-br from-[#020617] via-[#061522] to-[#04111b]" />
       <div className="absolute right-0 top-0 h-[650px] w-[650px] rounded-full bg-teal-500/10 blur-[140px]" />
 
@@ -65,19 +65,19 @@ export default function Hero({ isHindi, triggerIntake }: HeroProps) {
               
               {/* Vertical Stack of Cards - Positioned Further Left and Reduced Size */}
               <div className="absolute -left-40 top-0 flex flex-col gap-4">
-                <div className="flex items-center gap-2 rounded-xl border border-teal-500/30 bg-slate-900/90 px-3 py-2 backdrop-blur-xl shadow-2xl w-36">
+                <div className="flex items-center gap-2 rounded-xl border border-teal-500/30 bg-slate-900/90 px-3 py-2 backdrop-blur-xl shadow-2xl w-30">
                   <ShieldCheck className="text-teal-400 shrink-0" size={16} />
                   <p className="font-bold text-white text-[10px]">GST Ready</p>
                 </div>
-                <div className="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/90 px-3 py-2 backdrop-blur-xl shadow-2xl w-36">
+                <div className="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/90 px-3 py-2 backdrop-blur-xl shadow-2xl w-30">
                   <Cpu className="text-violet-400 shrink-0" size={16} />
                   <p className="font-bold text-white text-[10px]">AI Processing</p>
                 </div>
-                <div className="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/90 px-3 py-2 backdrop-blur-xl shadow-2xl w-36">
+                <div className="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/90 px-3 py-2 backdrop-blur-xl shadow-2xl w-30">
                   <FileCode2 className="text-blue-400 shrink-0" size={16} />
                   <p className="font-bold text-white text-[10px]">XML Generated</p>
                 </div>
-                <div className="flex items-center gap-2 rounded-xl border border-teal-500/30 bg-slate-900/90 px-3 py-2 backdrop-blur-xl shadow-2xl w-36">
+                <div className="flex items-center gap-2 rounded-xl border border-teal-500/30 bg-slate-900/90 px-3 py-2 backdrop-blur-xl shadow-2xl w-30">
                   <Clock3 className="text-teal-400 shrink-0" size={16} />
                   <p className="font-bold text-white text-[10px]">~3 Minutes</p>
                 </div>
