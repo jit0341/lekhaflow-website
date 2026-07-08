@@ -115,8 +115,10 @@ export default function LekhaFlowLanding() {
     e.preventDefault();
     setShowIntakeModal(false);
     // ✅ Demo version download
-    window.open("https://www.dropbox.com/scl/fi/ohioomgparvihfaarts1l/lekhaflow_standard_trial_setup.rar?rlkey=denyibj7xwpmlojs5i9yhlhwk&st=x9u8u57m&dl=0", "_blank");
-  };
+    window.open(
+  "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe",
+  "_blank"
+);
 
   const timeSavedValue = invoices * 3; 
   const moneySavedValue = Math.round((timeSavedValue / 60) * (staffCost / 160));
@@ -348,8 +350,8 @@ export default function LekhaFlowLanding() {
                 Get Your Free Demo
               </h3>
               <a 
-                href="https://www.dropbox.com/scl/fi/ohioomgparvihfaarts1l/lekhaflow_standard_trial_setup.rar?rlkey=denyibj7xwpmlojs5i9yhlhwk&st=oy81kvfj&dl=0" 
-                target="_blank" 
+                href= "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe",
+  		"_blank"
                 rel="noreferrer"
                 className="inline-block px-10 py-5 bg-black text-teal-400 font-black text-sm uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 transition-all shadow-lg active:scale-95 mb-6"
               >
