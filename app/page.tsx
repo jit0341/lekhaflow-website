@@ -111,18 +111,20 @@ export default function LekhaFlowLanding() {
     setShowIntakeModal(true);
   };
 
-  const handleIntakeSubmit = (e: React.FormEvent) => {
+ const handleIntakeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setShowIntakeModal(false);
-    // ✅ Demo version download
-    window.open(
-  "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe",
-  "_blank"
-);
 
-  const timeSavedValue = invoices * 3; 
-  const moneySavedValue = Math.round((timeSavedValue / 60) * (staffCost / 160));
-  const annualSavingsValue = moneySavedValue * 12;
+    setShowIntakeModal(false);
+
+    window.open(
+      "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe",
+      "_blank"
+    );
+};
+
+const timeSavedValue = invoices * 3;
+const moneySavedValue = Math.round((timeSavedValue / 60) * (staffCost / 160));
+const annualSavingsValue = moneySavedValue * 12;
 
   return (
     <div className="bg-[#020617] text-slate-200 selection:bg-teal-500 overflow-x-hidden font-sans">
@@ -350,9 +352,9 @@ export default function LekhaFlowLanding() {
                 Get Your Free Demo
               </h3>
               <a 
-                href= "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe",
-  		"_blank"
-                rel="noreferrer"
+                 href="https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe"
+ 	        target="_blank"
+  	        rel="noreferrer"
                 className="inline-block px-10 py-5 bg-black text-teal-400 font-black text-sm uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 transition-all shadow-lg active:scale-95 mb-6"
               >
                 ⬇️ Download Setup (Windows)
