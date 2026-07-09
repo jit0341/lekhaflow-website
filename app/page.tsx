@@ -110,15 +110,79 @@ export default function LekhaFlowLanding() {
     setShowIntakeModal(true);
   };
 
- const handleIntakeSubmit = (e: React.FormEvent) => {
+const handleIntakeSubmit = async (e: React.FormEvent) => {
+
     e.preventDefault();
 
     setShowIntakeModal(false);
 
-    window.open(
-      "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe",
-      "_blank"
-    );
+    // ===============================
+    // DEMO DOWNLOAD
+    // ===============================
+    if (intakeTarget === "demo") {
+
+        window.open(
+            "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe",
+            "_blank"
+        );
+
+        return;
+    }
+
+    // ===============================
+    // LICENSE REQUEST
+    // ===============================
+
+    const response = await fetch("/api/generate_license", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            ...clientForm,
+
+            licenseType: "FULL",
+
+            planType: "STANDARD"
+
+        })
+
+    });
+
+    if (!response.ok) {
+
+        alert("License generation failed.");
+
+        return;
+
+    }
+
+    // Download license.dat automatically
+
+    const blob = await response.blob();
+
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+
+    a.download = "license.dat";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+    window.URL.revokeObjectURL(url);
+
+    alert("License.dat downloaded successfully.");
+
 };
 
 const timeSavedValue = invoices * 3;
@@ -455,11 +519,19 @@ const annualSavingsValue = moneySavedValue * 12;
             <div className="bg-slate-900 border-2 border-teal-500 p-10 rounded-[3.5rem] max-w-md w-full relative shadow-2xl">
                 <button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-500 hover:text-white"><X size={28}/></button>
                 <form onSubmit={handleIntakeSubmit} className="space-y-5">
-                    <h3 className="text-2xl font-black text-white uppercase text-center mb-10 tracking-widest italic">Get Demo</h3>
+                    <h3 className="text-2xl font-black text-white uppercase text-center mb-10 tracking-widest italic">
+                     {intakeTarget === "demo"? "Get Demo": "Request License.dat"}
+		     </h3>
                     <input required placeholder="YOUR FULL NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}/>
                     <input required placeholder="COMPANY NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}/>
                     <input required placeholder="WHATSAPP NUMBER" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}/>
-                    <button type="submit" className="w-full py-5 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest shadow-xl">DOWNLOAD DEMO</button>
+		    <input required type="email" placeholder="EMAIL ADDRESS"
+    		    className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest"
+    		    onChange={(e)=>
+        	    setClientForm({...clientForm,clientEmail:e.target.value})}/>
+                    <button type="submit"
+		    className="w-full py-5 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest shadow-xl">
+		    {intakeTarget==="demo"? "DOWNLOAD DEMO": "REQUEST LICENSE"}</button>
                 </form>
             </div>
         </div>
