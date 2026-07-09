@@ -95,17 +95,16 @@ export default function LekhaFlowLanding() {
   };
 
   // ✅ UPDATED: Only Demo and Standard Full Version
-  const productData = {
-    standard: { 
-      title: "LekhaFlow Standard Full", 
-      price: "15,000", 
-      limit: "10,000 Invoices/Year", 
-      razorpayUrl: "https://pages.razorpay.com/pl_SshDcz10pz7Leq/view",
-      downloadUrl: "https://www.dropbox.com/scl/fi/r2pngajegwqj3wludvk0y/Lekhaflow_standard_setup.rar?rlkey=m8c6o5kmut4aagbvpny6jtu9t&st=lkyqs9kl&dl=0",
-      tagline: "Tally Auto Entry - Full Version with License" 
-    }
-  };
-
+ const productData = {
+  standard: {
+    title: "LekhaFlow Standard Full",
+    price: "15,000",
+    limit: "10,000 Invoices/Year",
+    razorpayUrl: "https://pages.razorpay.com/pl_SshDcz10pz7Leq/view",
+    downloadUrl: "https://github.com/jit0341/lekhaflow-website/releases/download/V1FULL/Lekhaflow_Standard_V1.0_setup.exe",
+    tagline: "Tally Auto Entry - Full Version with License"
+  }
+};
   const triggerIntake = (type: "demo" | "quotation") => {
     setIntakeTarget(type);
     setShowIntakeModal(true);
