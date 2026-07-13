@@ -139,6 +139,7 @@ const handleIntakeSubmit = async (e: React.FormEvent) => {
 
         headers: {
             "Content-Type": "application/json"
+		
         },
 
         body: JSON.stringify({
@@ -496,12 +497,11 @@ const annualSavingsValue = moneySavedValue * 12;
                   >
                     ⬇️ Download Full Version
                   </a>
-                  <button 
-                    onClick={() => triggerIntake("quotation")} 
-                    className="w-full py-3 bg-slate-900 border border-slate-800 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-sm hover:bg-slate-800 transition-all"
-                  >
-                    📧 Get License.dat
-                  </button>
+                  <button
+  		   disabled
+ 		   className="w-full py-3 bg-gray-500 text-gray-300 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] cursor-not-allowed opacity-70">
+  		   🔒 License Available After Payment Verification
+		 </button>
                 </div>
               </div>
             ))}
