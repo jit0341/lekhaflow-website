@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 const WEBHOOK_SECRET = process.env.RAZORPAY_WEBHOOK_SECRET!;
 const SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL!;
+
+// Development Testing
+const DEV_MODE = true;
+
 function verifySignature(body: string, signature: string) {
 
     const expected = crypto
@@ -23,25 +27,26 @@ export async function POST(req: NextRequest) {
         if (!SCRIPT_URL) {
             throw new Error("GOOGLE_SCRIPT_URL missing");
         }
-        
+
         const body = await req.text();
 
         const signature =
             req.headers.get("x-razorpay-signature") || "";
 
-        if (!verifySignature(body, signature)) {
+        if (!DEV_MODE && !verifySignature(body, signature)) {
 
-            return NextResponse.json(
-                {
-                    success: false,
-                    message: "Invalid Signature"
-                },
-                {
-                    status: 401
-                }
-            );
-
+    return NextResponse.json(
+        {
+            success: false,
+            message: "Invalid Signature"
+        },
+        {
+            status: 401
         }
+    );
+
+}
+
 
         const event = JSON.parse(body);
         // Ignore all other events
