@@ -35,7 +35,9 @@ export default function LekhaFlowLanding() {
     demo: "",
     gold: ""
   });
+ const [latestVersion, setLatestVersion] = useState("");
 
+ const [publishedAt, setPublishedAt] = useState("");
   // Constants
   useEffect(() => {
 
@@ -50,15 +52,13 @@ export default function LekhaFlowLanding() {
             if (data.success) {
 
                 setDownloadLinks({
-
                     standard: data.standard || "",
-
                     demo: data.demo || "",
-
                     gold: data.gold || ""
-
                 });
 
+                setLatestVersion(data.version || "");
+                setPublishedAt(data.publishedAt || "");
             }
 
         } catch (err) {
@@ -71,7 +71,22 @@ export default function LekhaFlowLanding() {
 
     loadDownloads();
 
-  }, []);
+}, []);
+
+const formatDate = (date: string) => {
+
+    if (!date) return "";
+
+    return new Date(date).toLocaleDateString("en-GB", {
+
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+
+    });
+
+};
+    
   const containerClass = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
   const WHATSAPP_LINK = "https://wa.me/918770808695";
 
@@ -453,31 +468,57 @@ const annualSavingsValue = moneySavedValue * 12;
             </div>
 
             {/* Download Button */}
-            <div className="bg-gradient-to-br from-teal-500 to-emerald-600 rounded-[2.5rem] p-12 text-center shadow-2xl">
-              <p className="text-white/80 text-[11px] font-black uppercase tracking-widest mb-4">Step 1: Download</p>
-              <h3 className="text-3xl font-black text-white mb-8 uppercase tracking-tighter leading-none">
-                Get Your Free Demo
-              </h3>
-              <a 
-                 href={
-    			downloadLinks.demo ||
-   			 "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe"
-		 }
- 	        target="_blank"
-  	        rel="noreferrer"
-                className="inline-block px-10 py-5 bg-black text-teal-400 font-black text-sm uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 transition-all shadow-lg active:scale-95 mb-6"
-              >
-                ⬇️ Download Setup (Windows)
-              </a>
-              
-              <div className="border-t border-white/20 pt-6">
-                <p className="text-white/70 text-xs font-semibold">
-                  Step 2: Install on your computer<br />
-                  Step 3: Auto machine-locked for your device<br />
-                  Step 4: Start testing immediately
-                </p>
-              </div>
-            </div>
+	<div className="bg-gradient-to-br from-teal-500 to-emerald-600 rounded-[2.5rem] p-12 text-center shadow-2xl">
+
+ 	 <p className="text-white/80 text-[11px] font-black uppercase tracking-widest mb-4">
+    Step 1: Download
+  </p>
+
+  <h3 className="text-3xl font-black text-white mb-8 uppercase tracking-tighter leading-none">
+    Get Your Free Demo
+  </h3>
+
+  {/* Latest Version Card */}
+  <div className="bg-slate-900 border border-slate-700 rounded-xl p-4 mb-6">
+
+    <p className="text-xs uppercase tracking-widest text-slate-400">
+      Latest Release
+    </p>
+
+    <p className="text-xl font-bold text-white mt-2">
+      {latestVersion || "Loading..."}
+    </p>
+
+    <p className="text-sm text-slate-400 mt-1">
+      Released : {formatDate(publishedAt)}
+    </p>
+
+  </div>
+
+  {/* Download Button */}
+  <a
+    href={
+      downloadLinks.demo ||
+      "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/Lekhaflow_standard_trial_setup.exe"
+    }
+    target="_blank"
+    rel="noreferrer"
+    className="inline-block px-10 py-5 bg-black text-teal-400 font-black text-sm uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 transition-all shadow-lg active:scale-95 mb-6"
+  >
+    ⬇️ Download Setup (Windows)
+  </a>
+
+  <div className="border-t border-white/20 pt-6">
+    <p className="text-white/70 text-xs font-semibold">
+      Step 2: Install on your computer
+      <br />
+      Step 3: Auto machine-locked for your device
+      <br />
+      Step 4: Start testing immediately
+    </p>
+  </div>
+
+</div>
 
             {/* FAQ */}
             <div className="mt-16">

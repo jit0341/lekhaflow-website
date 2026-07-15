@@ -76,17 +76,22 @@ export async function GET() {
 
         }
 
-        return NextResponse.json({
+       return NextResponse.json({
 
-            success: true,
+    success: true,
 
-            standard,
+    version: releases[0]?.tag_name || "",
 
-            demo,
+    publishedAt: releases[0]?.published_at || "",
 
-            gold
+    standard,
 
-        });
+    demo,
+
+    gold
+
+});
+
 
     }
 
