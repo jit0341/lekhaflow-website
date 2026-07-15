@@ -4,64 +4,105 @@ const OWNER = "jit0341";
 const REPO = "lekhaflow-website";
 
 export async function GET() {
-  try {
-    const response = await fetch(
-      `https://api.github.com/repos/${OWNER}/${REPO}/releases/latest`,
-      {
-        headers: {
-          Accept: "application/vnd.github+json",
-        },
-        cache: "no-store",
-      }
-    );
 
-    if (!response.ok) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Unable to fetch latest release",
-        },
-        { status: 500 }
-      );
+    try {
+
+        const response = await fetch(
+            `https://api.github.com/repos/${OWNER}/${REPO}/releases`,
+            {
+                headers: {
+                    Accept: "application/vnd.github+json",
+                },
+                cache: "no-store",
+            }
+        );
+
+        if (!response.ok) {
+
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "Unable to fetch releases"
+                },
+                {
+                    status: 500
+                }
+            );
+
+        }
+
+        const releases = await response.json();
+
+        let standard = null;
+        let demo = null;
+        let gold = null;
+
+        for (const release of releases) {
+
+            const tag = String(release.tag_name).toUpperCase();
+
+            if (tag === "V1FULL") {
+
+                if (release.assets.length > 0) {
+
+                    standard =
+                        release.assets[0].browser_download_url;
+
+                }
+
+            }
+
+            else if (tag === "V1.0") {
+
+                if (release.assets.length > 0) {
+
+                    demo =
+                        release.assets[0].browser_download_url;
+
+                }
+
+            }
+
+            else if (tag === "VGOLD") {
+
+                if (release.assets.length > 0) {
+
+                    gold =
+                        release.assets[0].browser_download_url;
+
+                }
+
+            }
+
+        }
+
+        return NextResponse.json({
+
+            success: true,
+
+            standard,
+
+            demo,
+
+            gold
+
+        });
+
     }
 
-    const release = await response.json();
+    catch (err) {
 
-    const assets = release.assets || [];
+        console.error(err);
 
-const standard = assets.find((a: any) =>
-    a.name.toLowerCase().includes("standard")
-);
+        return NextResponse.json(
+            {
+                success: false
+            },
+            {
+                status: 500
+            }
+        );
 
-const demo = assets.find((a: any) =>
-    a.name.toLowerCase().includes("demo")
-);
+    }
 
-const gold = assets.find((a: any) =>
-    a.name.toLowerCase().includes("gold")
-);
-
-return NextResponse.json({
-    success: true,
-    version: release.tag_name,
-
-    standard: standard?.browser_download_url || null,
-
-    demo: demo?.browser_download_url || null,
-
-    gold: gold?.browser_download_url || null
-});
-  } catch (err) {
-    console.error(err);
-
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Server Error",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
 }
