@@ -27,12 +27,30 @@ export async function GET() {
 
     const release = await response.json();
 
-    return NextResponse.json({
-      success: true,
-      tag: release.tag_name,
-      releaseName: release.name,
-      assets: release.assets,
-    });
+    const assets = release.assets || [];
+
+const standard = assets.find((a: any) =>
+    a.name.toLowerCase().includes("standard")
+);
+
+const demo = assets.find((a: any) =>
+    a.name.toLowerCase().includes("demo")
+);
+
+const gold = assets.find((a: any) =>
+    a.name.toLowerCase().includes("gold")
+);
+
+return NextResponse.json({
+    success: true,
+    version: release.tag_name,
+
+    standard: standard?.browser_download_url || null,
+
+    demo: demo?.browser_download_url || null,
+
+    gold: gold?.browser_download_url || null
+});
   } catch (err) {
     console.error(err);
 
