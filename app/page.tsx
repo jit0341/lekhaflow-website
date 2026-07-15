@@ -30,7 +30,48 @@ export default function LekhaFlowLanding() {
   const [invoices, setInvoices] = useState(500);
   const [staffCost, setStaffCost] = useState(15000);
 
+  const [downloadLinks, setDownloadLinks] = useState({
+    standard: "",
+    demo: "",
+    gold: ""
+  });
+
   // Constants
+  useEffect(() => {
+
+    async function loadDownloads() {
+
+        try {
+
+            const response = await fetch("/api/github-release");
+
+            const data = await response.json();
+
+            if (data.success) {
+
+                setDownloadLinks({
+
+                    standard: data.standard || "",
+
+                    demo: data.demo || "",
+
+                    gold: data.gold || ""
+
+                });
+
+            }
+
+        } catch (err) {
+
+            console.error(err);
+
+        }
+
+    }
+
+    loadDownloads();
+
+  }, []);
   const containerClass = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
   const WHATSAPP_LINK = "https://wa.me/918770808695";
 
@@ -101,7 +142,9 @@ export default function LekhaFlowLanding() {
     price: "15,000",
     limit: "10,000 Invoices/Year",
     razorpayUrl: "https://pages.razorpay.com/pl_SshDcz10pz7Leq/view",
-    downloadUrl: "https://github.com/jit0341/lekhaflow-website/releases/download/V1FULL/Lekhaflow_Standard_V1.0_setup.exe",
+    downloadUrl:
+    downloadLinks.standard ||
+    "https://github.com/jit0341/lekhaflow-website/releases/download/V1FULL/Lekhaflow_standard_setup.exe",
     tagline: "Tally Auto Entry - Full Version with License"
   }
 };
@@ -122,10 +165,10 @@ const handleIntakeSubmit = async (e: React.FormEvent) => {
     if (intakeTarget === "demo") {
 
         window.open(
-            "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe",
-            "_blank"
-        );
-
+    		downloadLinks.demo ||
+    		"https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe",
+    		"_blank"
+	);
         return;
     }
 
@@ -416,7 +459,10 @@ const annualSavingsValue = moneySavedValue * 12;
                 Get Your Free Demo
               </h3>
               <a 
-                 href="https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe"
+                 href={
+    			downloadLinks.demo ||
+   			 "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/lekhaflow_standard_trial_v1.0_setup.exe"
+		 }
  	        target="_blank"
   	        rel="noreferrer"
                 className="inline-block px-10 py-5 bg-black text-teal-400 font-black text-sm uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 transition-all shadow-lg active:scale-95 mb-6"
@@ -443,7 +489,7 @@ const annualSavingsValue = moneySavedValue * 12;
                 </div>
                 <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6">
                   <p className="font-black text-white mb-3 text-sm">❓ What happens after 7 days?</p>
-                  <p className="text-slate-400 text-xs">Upgrade to LekhaFlow Standard Full. Then you get 5000 invoices/year forever.</p>
+                  <p className="text-slate-400 text-xs">Upgrade to LekhaFlow Standard Full.Then you get 10,000 invoices per year..</p>
                 </div>
                 <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6">
                   <p className="font-black text-white mb-3 text-sm">❓ Can I extend demo?</p>
@@ -474,7 +520,7 @@ const annualSavingsValue = moneySavedValue * 12;
                   </div>
                   <p className="text-[11px] font-bold text-slate-400 italic leading-snug">{p.tagline}</p>
                   <ul className="text-[10px] text-slate-400 space-y-2 mt-4">
-                    <li>✅ 10,000 invoices per year</li>
+                    <li>✅ {p.limit}</li>
                     <li>✅ License.dat included</li>
                     <li>✅ 1 year validity</li>
                     <li>✅ Free updates & support</li>
