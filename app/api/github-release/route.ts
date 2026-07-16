@@ -33,64 +33,92 @@ export async function GET() {
 
         const releases = await response.json();
 
-        let standard = null;
-        let demo = null;
-        let gold = null;
+        const result = {
+   		 standard: {
+        	 version: "",
+       		 publishedAt: "",
+       		 url: ""
+    	},
 
-        for (const release of releases) {
+    	demo: {
+        	version: "",
+        	publishedAt: "",
+        	url: ""
+   	 },
 
-            const tag = String(release.tag_name).toUpperCase();
+    	gold: {
+        	version: "",
+       	 	publishedAt: "",
+        	url: ""
+    	}
+   };
 
-            if (tag === "V1FULL") {
+       for (const release of releases) {
 
-                if (release.assets.length > 0) {
+   		 const tag = String(release.tag_name).toUpperCase();
 
-                    standard =
-                        release.assets[0].browser_download_url;
+    		if (!release.assets || release.assets.length === 0) {
+    			continue;
+		}
 
-                }
+    	const asset = release.assets[0];
 
-            }
+   		 if (tag === "V1FULL") {
 
-            else if (tag === "V1.0") {
+        		result.standard = {
 
-                if (release.assets.length > 0) {
+           		 version: release.tag_name,
 
-                    demo =
-                        release.assets[0].browser_download_url;
+            		publishedAt: release.published_at,
 
-                }
+           		 url: asset.browser_download_url
 
-            }
+       		 };
 
-            else if (tag === "VGOLD") {
+    	}
 
-                if (release.assets.length > 0) {
+   		 else if (tag === "V1.0") {
 
-                    gold =
-                        release.assets[0].browser_download_url;
+       			 result.demo = {
 
-                }
+           		 version: release.tag_name,
 
-            }
+            		publishedAt: release.published_at,
 
-        }
+           		url: asset.browser_download_url
+
+       		 };
+
+    }
+
+    		else if (tag.includes("GOLD")) {
+
+        		result.gold = {
+
+            		version: release.tag_name,
+
+           		 publishedAt: release.published_at,
+
+            		url: asset.browser_download_url
+
+        	};
+
+    }
+
+}
+        
 
        return NextResponse.json({
 
-    success: true,
+    		success: true,
 
-    version: releases[0]?.tag_name || "",
+    		standard: result.standard,
 
-    publishedAt: releases[0]?.published_at || "",
+    		demo: result.demo,
 
-    standard,
+    		gold: result.gold
 
-    demo,
-
-    gold
-
-});
+	});
 
 
     }

@@ -57,7 +57,7 @@ export default function LekhaFlowLanding() {
                     gold: data.gold || ""
                 });
 
-                setLatestVersion(data.version || "");
+                set (data.version || "");
                 setPublishedAt(data.publishedAt || "");
             }
 
@@ -157,9 +157,7 @@ const formatDate = (date: string) => {
     price: "15,000",
     limit: "10,000 Invoices/Year",
     razorpayUrl: "https://pages.razorpay.com/pl_SshDcz10pz7Leq/view",
-    downloadUrl:
-    downloadLinks.standard ||
-    "https://github.com/jit0341/lekhaflow-website/releases/download/V1FULL/Lekhaflow_standard_setup.exe",
+    downloadUrl:downloadLinks.standard ||"https://github.com/jit0341/lekhaflow-website/releases/download/V1FULL/Lekhaflow_standard_setup.exe",
     tagline: "Tally Auto Entry - Full Version with License"
   }
 };
@@ -568,28 +566,53 @@ const annualSavingsValue = moneySavedValue * 12;
                   </ul>
                 </div>
                 <div className="mt-8 space-y-2">
-                  <a 
-                    href={p.razorpayUrl} 
-                    target="_blank" 
-                    rel="noreferrer" 
-                    className="block w-full py-3 bg-teal-500 text-black rounded-xl text-[10px] font-black uppercase text-center shadow-lg active:scale-95 transition-transform hover:bg-teal-600"
-                  >
-                    💳 Buy Now (Razorpay)
-                  </a>
-                  <a 
-                    href={p.downloadUrl} 
-                    target="_blank" 
-                    rel="noreferrer" 
-                    className="block w-full py-3 bg-blue-600 text-white rounded-xl text-[10px] font-black uppercase text-center shadow-lg active:scale-95 transition-transform hover:bg-blue-700"
-                  >
-                    ⬇️ Download Full Version
-                  </a>
-                  <button
-  		   disabled
- 		   className="w-full py-3 bg-gray-500 text-gray-300 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] cursor-not-allowed opacity-70">
-  		   🔒 License Available After Payment Verification
-		 </button>
-                </div>
+
+    {/* Latest Version Card */}
+    <div className="bg-slate-900 border border-slate-700 rounded-xl p-4 mb-4">
+
+        <p className="text-xs uppercase tracking-widest text-slate-400">
+            Latest Full Version
+        </p>
+
+        <p className="text-xl font-bold text-white mt-2">
+            {latestVersion || "Loading..."}
+        </p>
+
+        <p className="text-sm text-slate-400 mt-1">
+            Released : {formatDate(publishedAt)}
+        </p>
+
+    </div>
+
+    {/* Buy Now */}
+    <a
+        href={p.razorpayUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="block w-full py-3 bg-teal-500 text-black rounded-xl text-[10px] font-black uppercase text-center shadow-lg active:scale-95 transition-transform hover:bg-teal-600"
+    >
+        💳 Buy Now (Razorpay)
+    </a>
+
+    {/* Download */}
+    <a
+        href={p.downloadUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="block w-full py-3 bg-blue-600 text-white rounded-xl text-[10px] font-black uppercase text-center shadow-lg active:scale-95 transition-transform hover:bg-blue-700"
+    >
+        ⬇️ Download Full Version
+    </a>
+
+    {/* License Button */}
+    <button
+        disabled
+        className="w-full py-3 bg-gray-500 text-gray-300 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] cursor-not-allowed opacity-70"
+    >
+        🔒 License Available After Payment Verification
+    </button>
+
+  </div>
               </div>
             ))}
           </div>
