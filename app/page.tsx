@@ -57,7 +57,7 @@ export default function LekhaFlowLanding() {
                     gold: data.gold || ""
                 });
 
-                set (data.version || "");
+                setLatestVersion(data.version || "");
                 setPublishedAt(data.publishedAt || "");
             }
 
