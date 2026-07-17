@@ -116,7 +116,16 @@ export default function LekhaFlowLanding() {
             <Link href="/downloads" className="group flex items-center gap-3 px-10 py-5 bg-teal-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest shadow-2xl shadow-teal-600/20 hover:bg-teal-500 hover:-translate-y-1 transition-all">
               Start Free Trial <Download size={18} className="group-hover:translate-y-1 transition-transform" />
             </Link>
-            <button onClick={() => setIntakeTarget("demo") || setShowIntakeModal(true)} className="px-10 py-5 bg-slate-900 text-white font-black rounded-2xl uppercase text-xs tracking-widest border border-slate-800 hover:bg-slate-800 transition-all">
+           <button 
+              onClick={() => {
+                 setIntakeTarget("demo");
+                  setShowIntakeModal(true);
+              }} 
+              className="px-10 py-5 bg-slate-900 text-white font-black rounded-2xl uppercase text-xs tracking-widest border border-slate-800 hover:bg-slate-800 transition-all"
+>
+              Request Live Demo
+          </button>
+          
               Request Live Demo
             </button>
           </div>
