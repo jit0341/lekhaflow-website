@@ -1,123 +1,43 @@
-import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
-const WEBHOOK_SECRET = process.env.RAZORPAY_WEBHOOK_SECRET!;
-const SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL!;
+// app/api/webhook/razorpay/route.ts
+// ... (imports)
 
-// Development Testing
-const DEV_MODE = true;
-
-function verifySignature(body: string, signature: string) {
-
-    const expected = crypto
-        .createHmac("sha256", WEBHOOK_SECRET)
-        .update(body)
-        .digest("hex");
-
-    return expected === signature;
-
-}
 export async function POST(req: NextRequest) {
-
     try {
-         // Check Environment Variables
-        if (!WEBHOOK_SECRET) {
-            throw new Error("RAZORPAY_WEBHOOK_SECRET missing");
-        }
-
-        if (!SCRIPT_URL) {
-            throw new Error("GOOGLE_SCRIPT_URL missing");
-        }
-
         const body = await req.text();
+        const signature = req.headers.get("x-razorpay-signature") || "";
 
-        const signature =
-            req.headers.get("x-razorpay-signature") || "";
-
-        if (!DEV_MODE && !verifySignature(body, signature)) {
-
-    return NextResponse.json(
-        {
-            success: false,
-            message: "Invalid Signature"
-        },
-        {
-            status: 401
+        if (!verifySignature(body, signature)) {
+            return NextResponse.json({ success: false, message: "Invalid Signature" }, { status: 401 });
         }
-    );
-
-}
-
 
         const event = JSON.parse(body);
-        // Ignore all other events
-if (event.event !== "payment.captured") {
-    return NextResponse.json({
-        success: true,
-        message: "Ignored"
-    });
-}
+        if (event.event !== "payment.captured") {
+            return NextResponse.json({ success: true, message: "Ignored" });
+        }
 
-const payment = event.payload.payment.entity;
+        const payment = event.payload.payment.entity;
 
-const gsResponse = await fetch(SCRIPT_URL, {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        action: "SAVE_PAYMENT",
-        paymentId: payment.id,
-        orderId: payment.order_id || "",
-        customerName:
-            payment.customer_details?.name || "",
-        company: "",
-        email:
-            payment.email ||
-            payment.customer_details?.email ||
-            "",
-        mobile:
-            payment.contact ||
-            payment.customer_details?.contact ||
-            "",
-        plan: "STANDARD",
-        amount: payment.amount / 100
-    })
-});
+        // ✅ IMPORTANT: Get plan and customer details from notes
+        const plan = payment.notes?.plan || "STANDARD";
+        const customerName = payment.notes?.customerName || "Valued Client";
 
-let gsResult = {};
+        const gsResponse = await fetch(SCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                action: "SAVE_PAYMENT",
+                paymentId: payment.id,
+                orderId: payment.order_id || "",
+                customerName: customerName,
+                email: payment.email,
+                mobile: payment.contact,
+                plan: plan.toUpperCase(),
+                amount: payment.amount / 100
+            })
+        });
 
-try {
-    gsResult = await gsResponse.json();
-} catch (e) {
-    console.error("Apps Script Response Error", e);
-}
-
-console.log(gsResult);
-
-
-        console.log("Webhook Verified");
-
-        return NextResponse.json({
-    success: true,
-    google: gsResult
-});
-
-
+        return NextResponse.json({ success: true });
+    } catch (err: any) {
+        return NextResponse.json({ success: false, error: err.message }, { status: 500 });
     }
-
-    catch (err) {
-
-        console.error(err);
-
-        return NextResponse.json(
-            {
-                success: false
-            },
-            {
-                status: 500
-            }
-        );
-
-    }
-
 }

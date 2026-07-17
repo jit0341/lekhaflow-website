@@ -1,43 +1,53 @@
-"use client";
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Clock, FileText, Zap, ShieldCheck, Database, Layout, TrendingUp } from "lucide-react";
+import { ArrowRight, Zap, ShieldCheck, TrendingUp, Layout, Database, FileText, BookOpen } from "lucide-react";
 
-// 🚀 12 Blogs Metadata
+export const metadata = {
+  title: "Accounting Insights & Tally Guides",
+  description: "Learn how to automate GST accounting, improve Tally efficiency, and scale your CA firm with LekhaFlow AI guides.",
+};
+
 const blogList = [
-  { slug: "gst-invoices-to-tally-manual-vs-automation", title: "How to Convert GST Invoices into Tally – Manual vs Automation", icon: Zap },
-  { slug: "record-gst-entries-tally-guide", title: "How to Record GST Entries in Tally – CGST, SGST & IGST", icon: ShieldCheck },
-  { slug: "high-volume-invoice-processing-best-practices", title: "Best Practices for Processing High-Volume Invoices", icon: TrendingUp },
-  { slug: "tallyprime-vs-tally-erp9", title: "TallyPrime vs Tally ERP 9 – Which is Right for You?", icon: Layout },
-  { slug: "accounting-automation-for-msmes", title: "Why Accounting Automation is Essential for MSMEs", icon: Database },
-  { slug: "pdf-invoice-data-extraction-methods", title: "PDF Invoice Extraction – Manual vs AI Methods", icon: FileText },
-  { slug: "ca-role-software-implementation", title: "Role of CAs in Accounting Software Implementation", icon: BookOpen },
-  { slug: "bank-reconciliation-tally-guide", title: "Bank Reconciliation in Tally – Step-by-Step Guide", icon: ShieldCheck },
-  { slug: "invoice-deduplication-prevention", title: "Invoice Deduplication – Prevent Duplicate Entries", icon: Zap },
-  { slug: "cloud-vs-desktop-accounting-msme", title: "Cloud vs Desktop Accounting for Indian MSMEs", icon: Layout },
-  { slug: "technology-in-gst-compliance", title: "The Role of Technology in GST Compliance", icon: Database },
-  { slug: "accounting-automation-roi-guide", title: "How Much Time Automation Saves? – ROI Guide", icon: TrendingUp },
+  { 
+    slug: "gst-invoices-to-tally-manual-vs-automation", 
+    title: "How to Convert GST Invoices into Tally – Manual vs Automation", 
+    desc: "Compare manual data entry with AI automation. Discover which method saves more time for MSMEs.",
+    icon: Zap 
+  },
+  { 
+    slug: "record-gst-entries-tally-guide", 
+    title: "Complete Guide to Recording CGST, SGST & IGST in Tally", 
+    desc: "A step-by-step tutorial on mastering GST bifurcation and ledger setup in Tally Prime.",
+    icon: ShieldCheck 
+  },
+  // ... अन्य पोस्ट्स यहाँ जोड़ें
 ];
 
 export default function BlogIndex() {
   return (
     <div className="bg-[#020617] min-h-screen py-32 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-black text-white italic uppercase tracking-tighter mb-4">LekhaFlow Insights</h1>
-            <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Professional Guides for Modern Accountants</p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <header className="text-center mb-20">
+            <h1 className="text-5xl md:text-7xl font-black text-white italic uppercase tracking-tighter mb-6">
+              LekhaFlow <span className="text-teal-500">Insights</span>
+            </h1>
+            <p className="text-slate-400 font-bold uppercase tracking-[0.3em] text-sm">Professional Guides for the Modern Accountant</p>
+        </header>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogList.map((post) => (
-            <div key={post.slug} className="bg-slate-900/50 border border-slate-800 p-8 rounded-[2.5rem] hover:border-teal-500 transition-all flex flex-col justify-between group shadow-xl">
+            <article key={post.slug} className="bg-slate-900/40 border border-slate-800 p-8 rounded-[3rem] hover:border-teal-500/50 transition-all flex flex-col justify-between group">
               <div>
-                <post.icon className="text-teal-500 mb-6 group-hover:scale-110 transition-transform" />
-                <h2 className="text-lg font-black text-white leading-tight mb-6">{post.title}</h2>
+                <div className="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-teal-500/20 transition-colors">
+                   <post.icon className="text-teal-500" size={28} />
+                </div>
+                <h2 className="text-2xl font-black text-white leading-tight mb-4 group-hover:text-teal-400 transition-colors">{post.title}</h2>
+                <p className="text-slate-400 text-sm leading-relaxed mb-8">{post.desc}</p>
               </div>
-              <Link href={`/blog/${post.slug}`} className="flex items-center gap-2 text-teal-500 font-black text-[10px] uppercase tracking-widest hover:gap-4 transition-all">
-                Read Article <ArrowRight size={14} />
+              <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-3 text-teal-500 font-black text-xs uppercase tracking-widest group-hover:gap-5 transition-all">
+                Read Full Guide <ArrowRight size={16} />
               </Link>
-            </div>
+            </article>
           ))}
         </div>
       </div>
