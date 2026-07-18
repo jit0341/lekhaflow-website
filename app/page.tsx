@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link"; 
 import { 
   Zap, ShieldCheck, Target, Headphones,
-  Download, X, ChevronDown, Cpu, FileText, ArrowRight, Database, CheckCircle2, Laptop
+  Download, X, Cpu, ArrowRight, Database, CheckCircle2, Laptop
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -48,7 +48,32 @@ export default function LekhaFlowLanding() {
     
   const containerClass = "max-w-7xl mx-auto px-6 lg:px-8";
 
-  // --- 🎯 PROFESSIONAL WORDING DICTIONARY ---
+  // ✅ UPDATED: Product Tiers with Gold Full Version
+  const productData = {
+    standard: {
+      title: "LekhaFlow Standard Full",
+      price: "15,000",
+      limit: "10,000 Invoices/Year",
+      razorpayUrl: "https://pages.razorpay.com/pl_SshDcz10pz7Leq/view",
+      downloadUrl: "/downloads",
+      tagline: "Essential AI Automation for MSMEs",
+      features: ["License.dat included", "Fast AI Engine Access", "Standard Tally XML", "Email Support"],
+      color: "border-blue-500",
+      accent: "text-blue-500"
+    },
+    gold: {
+      title: "LekhaFlow Gold Full",
+      price: "25,000",
+      limit: "Unlimited Invoices/Year",
+      razorpayUrl: "https://pages.razorpay.com/pl_your_gold_link/view", // अपना लिंक यहाँ डालें
+      downloadUrl: "/downloads",
+      tagline: "Enterprise Grade Automation with Recon",
+      features: ["GSTR-2B Reconciliation", "Advanced Auto-Mapping", "Multi-Company Support", "Direct Founder Support"],
+      color: "border-amber-500",
+      accent: "text-amber-500"
+    }
+  };
+
   const t = {
     hero: {
       badge: isHindi ? "एआई-संचालित शून्य-त्रुटि लेखांकन" : "AI-POWERED ZERO-ERROR ACCOUNTING",
@@ -96,7 +121,7 @@ export default function LekhaFlowLanding() {
         </div>
       </nav>
 
-      {/* 2. HERO SECTION (Stretched & Professional) */}
+      {/* 2. HERO SECTION */}
       <section className="pt-44 pb-32 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.08)_0,transparent_70%)] pointer-events-none" />
         <div className={containerClass + " text-center relative z-10"}>
@@ -116,18 +141,14 @@ export default function LekhaFlowLanding() {
             <Link href="/downloads" className="group flex items-center gap-3 px-10 py-5 bg-teal-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest shadow-2xl shadow-teal-600/20 hover:bg-teal-500 hover:-translate-y-1 transition-all">
               Start Free Trial <Download size={18} className="group-hover:translate-y-1 transition-transform" />
             </Link>
-           <button
-               onClick={() => {
-                  setIntakeTarget("demo");
-                  setShowIntakeModal(true);
-               }}
-               className="px-10 py-5 bg-slate-900 text-white font-black rounded-2xl uppercase text-xs tracking-widest border border-slate-800 hover:bg-slate-800 transition-all">
-               Request Live Demo
-          </button>
+            <button 
+              onClick={() => { setIntakeTarget("demo"); setShowIntakeModal(true); }}
+              className="px-10 py-5 bg-slate-900 text-white font-black rounded-2xl uppercase text-xs tracking-widest border border-slate-800 hover:bg-slate-800 transition-all">
+              Request Live Demo
+            </button>
           </div>
 
-          {/* Quick Metrics */}
-          <div className="mt-24 flex flex-wrap justify-center gap-12 border-t border-slate-900 pt-12">
+          <div className="mt-24 flex flex-wrap justify-center gap-12 border-t border-slate-900 pt-12 text-nowrap">
             {[
                 { l: "Accuracy", v: "100%", i: Target },
                 { l: "Efficiency", v: "80x Faster", i: Zap },
@@ -148,7 +169,7 @@ export default function LekhaFlowLanding() {
       <ProblemSection isHindi={isHindi} />
       <ProcessSection isHindi={isHindi} />
 
-      {/* 3. CORE BENEFITS (Redesigned Trust Section) */}
+      {/* 3. CORE BENEFITS */}
       <section className="py-24 bg-slate-950 border-y border-slate-900">
         <div className={containerClass}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -163,7 +184,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 4. ROI CALCULATOR (Financial Impact) */}
+      {/* 4. ROI CALCULATOR */}
       <section className="py-28">
         <div className={containerClass}>
           <div className="bg-slate-900 border border-slate-800 rounded-[4rem] p-10 lg:p-20 shadow-2xl grid lg:grid-cols-2 gap-20 items-center">
@@ -212,7 +233,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* 6. ENTERPRISE PRICING */}
+      {/* 6. ENTERPRISE PRICING (Updated with Gold) */}
       <section id="pricing" className="py-32 bg-slate-950 border-t border-slate-900">
         <div className={containerClass}>
           <div className="text-center mb-20">
@@ -220,30 +241,33 @@ export default function LekhaFlowLanding() {
             <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Unlock full-scale automation capabilities</p>
           </div>
           
-          <div className="max-w-md mx-auto">
-              <div className="bg-slate-900 border-2 border-teal-500 p-10 rounded-[3.5rem] shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 bg-teal-500 text-black px-6 py-1 text-[9px] font-black uppercase tracking-widest">Most Popular</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+            {Object.entries(productData).map(([key, p]) => (
+              <div key={key} className={`bg-slate-900 border-2 ${p.color} p-10 rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col justify-between group`}>
+                {key === 'gold' && <div className="absolute top-0 right-0 bg-amber-500 text-black px-6 py-1 text-[9px] font-black uppercase tracking-widest">Most Advanced</div>}
                 <div className="space-y-6">
-                  <h3 className="text-white font-black text-xs uppercase tracking-[0.3em]">LekhaFlow Standard Full</h3>
+                  <h3 className="text-white font-black text-xs uppercase tracking-[0.3em]">{p.title}</h3>
                   <div className="py-8 border-y border-slate-800">
-                    <p className="text-teal-500 font-black text-6xl tracking-tighter mb-2">₹15,000</p>
-                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">10,000 Invoices / Year</p>
+                    <p className={`${p.accent} font-black text-6xl tracking-tighter mb-2`}>₹{p.price}</p>
+                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{p.limit}</p>
                   </div>
+                  <p className="text-[11px] font-bold text-slate-400 italic leading-snug">{p.tagline}</p>
                   <ul className="space-y-4 py-4">
-                    {["License.dat included", "Full AI Engine Access", "Direct Founder Support", "Free Version 15.0 Updates"].map((li, i) => (
-                        <li key={i} className="flex items-center gap-3 text-[11px] font-bold text-slate-400">
-                            <CheckCircle2 size={14} className="text-teal-500" /> {li}
+                    {p.features.map((feature, i) => (
+                        <li key={i} className="flex items-center gap-3 text-[11px] font-bold text-slate-300">
+                            <CheckCircle2 size={14} className="text-teal-500" /> {feature}
                         </li>
                     ))}
                   </ul>
-                  <div className="pt-6 space-y-4">
-                    <a href="https://pages.razorpay.com/pl_SshDcz10pz7Leq/view" target="_blank" className="block w-full py-5 bg-teal-600 text-white rounded-2xl font-black uppercase text-xs text-center tracking-widest hover:bg-teal-500 transition-all shadow-xl shadow-teal-600/10">Buy Commercial License</a>
-                    <Link href="/downloads" className="block w-full py-5 bg-slate-950 text-white rounded-2xl font-black uppercase text-[10px] text-center tracking-widest border border-slate-800 hover:border-slate-600 transition-all">Download Full Installer</Link>
-                  </div>
+                </div>
+                <div className="pt-6 space-y-4">
+                  <a href={p.razorpayUrl} target="_blank" className={`block w-full py-5 ${key === 'gold' ? 'bg-amber-500 text-black' : 'bg-teal-600 text-white'} rounded-2xl font-black uppercase text-xs text-center tracking-widest hover:opacity-90 transition-all`}>Buy Commercial License</a>
+                  <Link href="/downloads" className="block w-full py-5 bg-slate-950 text-white rounded-2xl font-black uppercase text-[10px] text-center tracking-widest border border-slate-800 hover:border-slate-600 transition-all">Download Setup</Link>
                 </div>
               </div>
-              <p className="text-center mt-10 text-slate-600 text-[10px] font-bold uppercase tracking-widest">Latest Version: {latestVersion} | Released: {formatDate(publishedAt)}</p>
+            ))}
           </div>
+          <p className="text-center mt-12 text-slate-600 text-[10px] font-bold uppercase tracking-widest">Latest Stable Build: {latestVersion} | Released: {formatDate(publishedAt)}</p>
         </div>
       </section>
 
@@ -263,14 +287,14 @@ export default function LekhaFlowLanding() {
                     <button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-500 hover:text-white"><X size={28}/></button>
                     <form onSubmit={handleIntakeSubmit} className="space-y-6">
                         <div className="text-center mb-10">
-                            <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic">Request Access</h3>
+                            <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic">Access Portal</h3>
                             <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-2">Get started with LekhaFlow Professional</p>
                         </div>
                         <input required placeholder="YOUR FULL NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}/>
                         <input required placeholder="COMPANY NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}/>
                         <input required placeholder="WHATSAPP NUMBER" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}/>
                         <input required type="email" placeholder="EMAIL ADDRESS" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientEmail: e.target.value})}/>
-                        <button type="submit" className="w-full py-6 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-[10px] tracking-[0.2em] shadow-xl shadow-teal-600/20">ENTER DOWNLOAD CENTER</button>
+                        <button type="submit" className="w-full py-6 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-[10px] tracking-[0.2em] shadow-xl">CONTINUE TO DOWNLOAD CENTER</button>
                     </form>
                 </motion.div>
             </motion.div>

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Download, ShieldCheck, Zap, Laptop, ArrowLeft } from "lucide-react";
+import { Download, ShieldCheck, Zap, Laptop, ArrowLeft, Trophy, Star } from "lucide-react";
 import Link from "next/link";
 
 export default function DownloadsPage() {
@@ -15,27 +15,50 @@ export default function DownloadsPage() {
     getLinks();
   }, []);
 
-  const products = [
+  const downloadCategories = [
     {
-      id: "gold",
-      name: "LekhaFlow Gold",
-      desc: "Enterprise AI Automation with GSTR-2B Recon & Advanced Mapping.",
-      color: "border-amber-500",
-      btn: "bg-amber-600 hover:bg-amber-700",
+      title: "Full Commercial Versions",
+      subtitle: "Requires a valid License.dat (After Purchase)",
+      items: [
+        {
+          id: "gold",
+          name: "LekhaFlow Gold Full",
+          desc: "Enterprise version with GSTR-2B Recon and Advanced Mapping.",
+          color: "border-amber-500",
+          btn: "bg-amber-600 hover:bg-amber-700",
+          icon: <Trophy className="text-amber-500" size={32} />
+        },
+        {
+          id: "standard",
+          name: "LekhaFlow Standard Full",
+          desc: "Professional AI extraction for high-speed data entry.",
+          color: "border-blue-500",
+          btn: "bg-blue-600 hover:bg-blue-700",
+          icon: <Star className="text-blue-500" size={32} />
+        }
+      ]
     },
     {
-      id: "standard",
-      name: "LekhaFlow Standard",
-      desc: "Fast Invoice to Tally conversion for small firms and accountants.",
-      color: "border-blue-500",
-      btn: "bg-blue-600 hover:bg-blue-700",
-    },
-    {
-      id: "demo",
-      name: "LekhaFlow Free Trial",
-      desc: "7-Day fully functional trial. Machine-locked for security.",
-      color: "border-teal-500",
-      btn: "bg-teal-600 hover:bg-teal-700",
+      title: "Free Evaluation Trials",
+      subtitle: "Machine-locked for 7 days (Testing Purpose)",
+      items: [
+        {
+          id: "gold_trial", // Ensure your API returns this or map to gold demo
+          name: "LekhaFlow Gold Trial",
+          desc: "Test advanced reconciliation and multi-company features.",
+          color: "border-teal-500",
+          btn: "bg-teal-600 hover:bg-teal-700",
+          icon: <Zap className="text-teal-500" size={32} />
+        },
+        {
+          id: "demo",
+          name: "LekhaFlow Standard Trial",
+          desc: "Try the core AI engine and XML generation for free.",
+          color: "border-slate-500",
+          btn: "bg-slate-700 hover:bg-slate-800",
+          icon: <Zap className="text-slate-400" size={32} />
+        }
+      ]
     }
   ];
 
@@ -48,51 +71,49 @@ export default function DownloadsPage() {
 
         <div className="text-center mb-20">
           <h1 className="text-5xl md:text-7xl font-black text-white italic uppercase tracking-tighter mb-6">
-            Download <span className="text-teal-500">Center</span>
+            LekhaFlow <span className="text-teal-500">Hub</span>
           </h1>
-          <p className="text-slate-400 font-bold uppercase tracking-widest text-sm max-w-2xl mx-auto">
-            Get the latest digitally signed builds of LekhaFlow. Secure, Fast, and AI-Ready.
-          </p>
+          <p className="text-slate-400 font-bold uppercase tracking-widest text-sm">Download the latest digitally signed builds</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {products.map((p) => (
-            <div key={p.id} className={`bg-slate-900/40 border-2 ${p.color} p-8 rounded-[3rem] shadow-2xl flex flex-col justify-between hover:scale-[1.02] transition-transform`}>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase mb-4 tracking-tighter">{p.name}</h2>
-                <p className="text-slate-400 text-sm leading-relaxed mb-10">{p.desc}</p>
-                <div className="space-y-4 mb-10">
-                  <div className="flex items-center gap-3 text-[10px] font-black uppercase text-slate-500">
-                    <Laptop size={14}/> Windows 10/11 Only
+        {downloadCategories.map((cat, idx) => (
+          <div key={idx} className="mb-20">
+            <div className="mb-8 border-l-4 border-teal-500 pl-6">
+                <h2 className="text-2xl font-black text-white uppercase tracking-tighter">{cat.title}</h2>
+                <p className="text-slate-500 text-sm font-bold uppercase tracking-widest">{cat.subtitle}</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {cat.items.map((p) => (
+                <div key={p.id} className={`bg-slate-900/40 border-2 ${p.color} p-8 rounded-[3rem] shadow-2xl flex flex-col justify-between hover:scale-[1.01] transition-all`}>
+                  <div>
+                    <div className="mb-6">{p.icon}</div>
+                    <h3 className="text-2xl font-black text-white uppercase mb-4 tracking-tighter">{p.name}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed mb-10">{p.desc}</p>
+                    <div className="space-y-3 mb-10 text-[10px] font-black uppercase text-slate-600">
+                      <div className="flex items-center gap-2"><Laptop size={14}/> Windows 10/11</div>
+                      <div className="flex items-center gap-2"><ShieldCheck size={14}/> Digitally Signed</div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 text-[10px] font-black uppercase text-slate-500">
-                    <ShieldCheck size={14}/> Digitally Signed
+
+                  <div>
+                    <a
+                      href={releases?.[p.id]?.url || releases?.demo?.url || "#"}
+                      className={`flex items-center justify-between w-full p-5 ${p.btn} text-white rounded-2xl font-black uppercase text-xs tracking-widest transition-all`}
+                    >
+                      Download Now <Download size={18} />
+                    </a>
+                    {releases?.[p.id]?.publishedAt && (
+                      <p className="mt-4 text-[9px] text-center text-slate-600 font-bold uppercase tracking-widest">
+                        Last Update: {new Date(releases[p.id].publishedAt).toLocaleDateString()}
+                      </p>
+                    )}
                   </div>
                 </div>
-              </div>
-
-              <div>
-                <a
-                  href={releases?.[p.id]?.url || "#"}
-                  className={`flex items-center justify-between w-full p-5 ${p.btn} text-white rounded-2xl font-black uppercase text-xs tracking-widest transition-all shadow-lg`}
-                >
-                  Download {p.id === 'demo' ? 'Trial' : 'Full'} <Download size={18} />
-                </a>
-                {releases?.[p.id]?.publishedAt && (
-                  <p className="mt-4 text-[9px] text-center text-slate-600 font-bold uppercase">
-                    Latest Build: {new Date(releases[p.id].publishedAt).toLocaleDateString("en-GB")}
-                  </p>
-                )}
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
-
-        <div className="mt-20 p-10 bg-slate-950 border border-slate-800 rounded-[2.5rem] text-center">
-            <h3 className="text-white font-black uppercase tracking-widest mb-4">Need help with installation?</h3>
-            <p className="text-slate-500 text-sm mb-8">Contact our direct founder desk for remote setup support via AnyDesk or TeamViewer.</p>
-            <a href="https://wa.me/918770808695" className="text-teal-500 font-black uppercase text-xs border-b border-teal-500 pb-1">Chat with Technical Support</a>
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
