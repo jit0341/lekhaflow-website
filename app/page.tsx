@@ -181,8 +181,8 @@ export default function LekhaFlowLanding() {
           <div className="max-w-5xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-2 shadow-2xl">
             <div className="bg-slate-950 rounded-2xl overflow-hidden aspect-[16/9] flex items-center justify-center border border-slate-800/50">
               <p className="text-slate-600 text-sm font-bold uppercase tracking-widest text-center px-4">
-                [Bank Intelligence Dashboard Screenshot]<br/>
-                <span className="text-slate-700 text-[10px] normal-case">Upload screenshot to /public/bank-intelligence.png</span>
+                [<img src="/bank-intelligence.png" alt="Bank Intelligence Dashboard" className="w-full h-full object-cover" />]<br/>
+                <span className="text-slate-700 text-[10px] normal-case">/span>
               </p>
             </div>
           </div>
