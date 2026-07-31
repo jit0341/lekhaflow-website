@@ -394,7 +394,34 @@ export default function LekhaFlowLanding() {
           </div>
         </div>
       </section>
-
+      {/* COMPETITOR COMPARISON */}
+<section className="py-24 bg-slate-950 border-y border-slate-900">
+  <div className={containerClass}>
+    <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-12 text-center">
+      {isHindi ? "तुलना" : "Why LekhaFlow Wins"}
+    </h2>
+    <div className="max-w-4xl mx-auto overflow-x-auto">
+      <table className="w-full text-left">
+        <thead>
+          <tr className="border-b border-slate-800">
+            <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest">Feature</th>
+            <th className="py-4 text-teal-500 text-[10px] font-black uppercase tracking-widest text-center">LekhaFlow</th>
+            <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">Vyapar TaxOne</th>
+            <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">VoucherIt</th>
+          </tr>
+        </thead>
+        <tbody className="text-xs font-bold text-slate-300">
+          <tr className="border-b border-slate-800/50"><td className="py-4">Bank Statement → Tally</td><td className="text-center text-teal-500">✓ Unlimited</td><td className="text-center">✓</td><td className="text-center text-pink-500">✗</td></tr>
+          <tr className="border-b border-slate-800/50"><td className="py-4">PDF Invoice → Tally</td><td className="text-center text-teal-500">✓</td><td className="text-center">✓</td><td className="text-center text-pink-500">✗</td></tr>
+          <tr className="border-b border-slate-800/50"><td className="py-4">Sales Split Below ₹50K</td><td className="text-center text-teal-500">✓ Auto</td><td className="text-center text-pink-500">✗</td><td className="text-center text-pink-500">✗</td></tr>
+          <tr className="border-b border-slate-800/50"><td className="py-4">GSTR-2B Reconciliation</td><td className="text-center text-teal-500">✓</td><td className="text-center text-pink-500">✗</td><td className="text-center text-pink-500">✗</td></tr>
+          <tr className="border-b border-slate-800/50"><td className="py-4">Local Data Processing</td><td className="text-center text-teal-500">✓ 100% Local</td><td className="text-center">Cloud</td><td className="text-center">Cloud</td></tr>
+          <tr><td className="py-4">Yearly Price</td><td className="text-center text-teal-500 font-black">₹7,999</td><td className="text-center">₹10,000</td><td className="text-center">₹12,000+</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
       {/* PRICING SECTION */}
       <section id="pricing" className="py-32 bg-slate-950 border-t border-slate-900">
         <div className={containerClass}>
@@ -461,7 +488,29 @@ export default function LekhaFlowLanding() {
           <p className="text-center mt-8 text-slate-600 text-[10px] font-bold uppercase tracking-widest">Latest Stable Build: {latestVersion} | Released: {formatDate(publishedAt)}</p>
         </div>
       </section>
-
+      {/* TESTIMONIALS */}
+	<section className="py-24 bg-[#020617] border-t border-slate-900">
+  		<div className={containerClass}>
+    		<div className="text-center mb-16">
+     		 <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
+        	{isHindi ? "लेखाकार क्या कहते हैं" : "What Accountants Say"}
+      		</h2>
+    		</div>
+   		 <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      		{[
+        { name: "CA Rahul Sharma", firm: "Sharma & Associates, Raipur", quote: isHindi ? "बैंक स्टेटमेंट को टैली में डालने में 3 घंटे बचते हैं।" : "Bank statement entry that used to take 3 hours now finishes in 10 minutes." },
+        { name: "Priya Gupta", firm: "Gupta Tax Consultants, Bilaspur", quote: isHindi ? "सेल्स स्प्लिट फीचर बहुत शक्तिशाली है। मैन्युअल कैलकुलेशन खत्म।" : "The Sales Split feature is powerful. No more manual calculations for GST compliance." },
+        { name: "Rajesh Agrawal", firm: "Agrawal & Co., Ambikapur", quote: isHindi ? "7-दिन के ट्रायल में 500 इनवॉइस प्रोसेस किए। 99% सटीक।" : "Processed 500 invoices during the 7-day trial. 99% accuracy on first try." },
+      ].map((t, i) => (
+        <div key={i} className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem]">
+          <p className="text-slate-300 text-sm italic leading-relaxed mb-6">"{t.quote}"</p>
+          <p className="text-white font-black text-xs uppercase tracking-widest">{t.name}</p>
+          <p className="text-teal-500 text-[10px] font-bold uppercase tracking-widest">{t.firm}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
       {/* FOOTER */}
       <footer className="py-20 border-t border-slate-900 bg-[#020617] text-center">
         <div className="max-w-7xl mx-auto px-6">
@@ -521,7 +570,16 @@ export default function LekhaFlowLanding() {
           razorpayUrl={selectedPlan.url}
         />
       )}
-
+      {/* STICKY TRIAL BAR */}
+<div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[90] hidden md:flex items-center gap-4 bg-slate-900/95 backdrop-blur-xl border border-slate-700 px-6 py-3 rounded-full shadow-2xl">
+  <span className="text-white font-black text-xs uppercase tracking-widest">Ready to automate your Tally?</span>
+  <button 
+    onClick={() => { setIntakeTarget("demo"); setShowIntakeModal(true); }}
+    className="bg-teal-600 hover:bg-teal-500 text-white px-5 py-2 rounded-full font-black text-[10px] uppercase tracking-widest transition-all"
+  >
+    Download Free Trial
+  </button>
+</div>
       <WhatsAppButton />
     </div>
   );
