@@ -1,92 +1,102 @@
-// app/api/generate_license/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
-import fs from "fs";
-import path from "path";
 
-// TODO: Replace this with your actual license generation logic from license_generator.py
-// Paste your Python file content and I will convert it to TypeScript exactly.
+const LICENSE_SECRET = process.env.LICENSE_SECRET || "LekhaFlow_Secret_Key_2026";
 
-function generateLicenseDat(machineId: string, plan: string, expiryDays: number): Buffer {
-  // ============================================================
-  // PLACEHOLDER: This is where your license_generator.py logic goes
-  // ============================================================
-  // Current placeholder creates a signed JSON file.
-  // Replace with your actual encryption/signing algorithm.
+function generateLicenseHash(machineId: string, plan: string, expiryDate: string): string {
+  const data = `${machineId}:${plan}:${expiryDate}:${LICENSE_SECRET}`;
+  return crypto.createHash("sha256").update(data).digest("hex").substring(0, 16).toUpperCase();
+}
 
-  const licenseData = {
-    machine_id: machineId,
-    plan: plan,
-    issued_at: new Date().toISOString(),
-    expires_at: new Date(Date.now() + expiryDays * 24 * 60 * 60 * 1000).toISOString(),
-    version: "15.0",
-    signature: ""
-  };
+function generateLicenseFile(machineId: string, plan: string, expiryDays: number): string {
+  const expiryDate = new Date();
+  expiryDate.setDate(expiryDate.getDate() + expiryDays);
+  const expiryStr = expiryDate.toISOString().split("T")[0]; // YYYY-MM-DD
 
-  // Create a simple HMAC signature (replace with your actual logic)
-  const secret = process.env.LICENSE_SECRET || "lekhaflow-secret-key-2026";
-  const payload = JSON.stringify(licenseData);
-  licenseData.signature = crypto.createHmac("sha256", secret).update(payload).digest("hex");
+  const signature = generateLicenseHash(machineId, plan, expiryStr);
 
-  // Return as buffer (your software may expect binary format)
-  return Buffer.from(JSON.stringify(licenseData, null, 2));
+  // Format matches desktop app expectation
+  const licenseContent = [
+    "=== LEKHAFLOW LICENSE FILE ===",
+    `MACHINE_ID=${machineId}`,
+    `PLAN=${plan.toUpperCase()}`,
+    `EXPIRY=${expiryStr}`,
+    `ISSUED=${new Date().toISOString()}`,
+    `SIGNATURE=${signature}`,
+    "=== END LICENSE ==="
+  ].join("\n");
+
+  return licenseContent;
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { machineId, plan, paymentId, email, mobile } = body;
+    const { machineId, plan, paymentId, customerEmail, customerMobile } = body;
 
-    // Validation
     if (!machineId || !plan || !paymentId) {
       return NextResponse.json(
-        { success: false, message: "Missing required fields: machineId, plan, paymentId" },
+        { success: false, error: "Missing required fields: machineId, plan, paymentId" },
         { status: 400 }
       );
     }
 
     // Validate plan
-    const validPlans = ["STANDARD", "GOLD", "TRIAL"];
-    if (!validPlans.includes(plan.toUpperCase())) {
+    const validPlans = ["standard", "gold", "trial"];
+    if (!validPlans.includes(plan.toLowerCase())) {
       return NextResponse.json(
-        { success: false, message: "Invalid plan. Must be STANDARD, GOLD, or TRIAL" },
+        { success: false, error: "Invalid plan. Must be standard, gold, or trial" },
         { status: 400 }
       );
     }
 
-    // Determine expiry based on plan
-    const expiryDays = plan.toUpperCase() === "TRIAL" ? 7 : 365;
+    // Determine expiry
+    const expiryDays = plan.toLowerCase() === "trial" ? 7 : 365;
 
-    // Generate license.dat file
-    const licenseBuffer = generateLicenseDat(machineId, plan.toUpperCase(), expiryDays);
+    // Generate license content
+    const licenseContent = generateLicenseFile(machineId, plan, expiryDays);
 
-    // Save to temp location (optional - for record keeping)
-    const tempDir = path.join(process.cwd(), "temp_licenses");
-    if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
-    const fileName = `license_${machineId}_${Date.now()}.dat`;
-    const filePath = path.join(tempDir, fileName);
-    fs.writeFileSync(filePath, licenseBuffer);
+    // Log to console (in production, send to Google Sheet or DB)
+    console.log("[LICENSE GENERATED]", {
+      paymentId,
+      machineId,
+      plan,
+      expiryDays,
+      timestamp: new Date().toISOString(),
+    });
 
-    // Return license data as base64 for email attachment
-    const base64License = licenseBuffer.toString("base64");
+    // Send to Google Apps Script for record keeping
+    try {
+      const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
+      if (googleScriptUrl) {
+        await fetch(googleScriptUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "MARK_LICENSE_ISSUED",
+            paymentId,
+            machineId,
+            licenseContent: licenseContent.replace(/\n/g, " | "),
+            issuedAt: new Date().toISOString(),
+          }),
+        });
+      }
+    } catch (err) {
+      console.error("Google Script update failed:", err);
+      // Non-blocking — license is still generated
+    }
 
     return NextResponse.json({
       success: true,
-      message: "License generated successfully",
-      data: {
-        paymentId,
-        machineId,
-        plan: plan.toUpperCase(),
-        fileName: "license.dat",
-        fileBase64: base64License,
-        expiresInDays: expiryDays
-      }
+      licenseContent,
+      filename: `license_${machineId.substring(0, 8)}.dat`,
+      expiryDays,
     });
 
-  } catch (err: any) {
-    console.error("License Generation Error:", err);
+  } catch (error) {
+    console.error("License generation error:", error);
     return NextResponse.json(
-      { success: false, message: err.message },
+      { success: false, error: "Internal server error" },
       { status: 500 }
     );
   }

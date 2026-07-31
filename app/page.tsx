@@ -2,14 +2,16 @@
 
 import ProblemSection from "@/components/ProblemSection";
 import React, { useState, useEffect } from "react";
-import Link from "next/link"; 
+import Link from "next/link";
 import { 
   Zap, ShieldCheck, Target, Headphones,
   Download, X, Cpu, Database, CheckCircle2, Laptop,
-  ArrowRight, FileText, Landmark, Send
+  ArrowRight, FileText, Landmark, Send, MessageCircleQuestion,
+  RefreshCcw, Shield
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PaymentModal from "@/components/PaymentModal";
 
 export default function LekhaFlowLanding() {
   const [isHindi, setIsHindi] = useState<boolean>(false);
@@ -21,6 +23,10 @@ export default function LekhaFlowLanding() {
   const [downloadLinks, setDownloadLinks] = useState({ standard: "", demo: "", gold: "" });
   const [latestVersion, setLatestVersion] = useState("");
   const [publishedAt, setPublishedAt] = useState("");
+
+  // Payment modal state
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<{key: string; name: string; price: string; url: string} | null>(null);
 
   useEffect(() => {
     async function loadDownloads() {
@@ -45,7 +51,7 @@ export default function LekhaFlowLanding() {
     if (!date) return "";
     return new Date(date).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
   };
-    
+
   const containerClass = "max-w-7xl mx-auto px-6 lg:px-8";
 
   const productData = {
@@ -97,7 +103,7 @@ export default function LekhaFlowLanding() {
       ),
       desc: isHindi 
         ? "सब से बेहतर। बैंक स्टेटमेंट के साथ-साथ इनवॉइस, सेल्स स्प्लिट और GSTR-2B रिकंसिलिएशन भी।" 
-        : "Better than any other tools. Bank statements + PDF Invoices + Sales Split + GSTR-2B Reconciliation — all in one tool.",
+        : "Better than Any other tools. Bank statements + PDF Invoices + Sales Split + GSTR-2B Reconciliation — all in one tool.",
     },
     trust: [
         { i: ShieldCheck, t: isHindi ? "डेटा गोपनीयता" : "Enterprise Security", d: isHindi ? "आपका डेटा आपके सिस्टम पर।" : "Zero-retention local processing.", c: "text-teal-500" },
@@ -116,9 +122,19 @@ export default function LekhaFlowLanding() {
   const timeSavedValue = invoices * 3;
   const annualSavingsValue = Math.round((timeSavedValue / 60) * (staffCost / 160)) * 12;
 
+  const openPayment = (key: string, plan: typeof productData.standard) => {
+    setSelectedPlan({
+      key,
+      name: plan.title,
+      price: plan.offerPrice,
+      url: plan.razorpayUrl,
+    });
+    setPaymentModalOpen(true);
+  };
+
   return (
     <div className="bg-[#020617] text-slate-200 selection:bg-teal-500 font-sans">
-      
+
       {/* NAVIGATION */}
       <nav className="fixed top-0 w-full z-[100] bg-[#020617]/90 backdrop-blur-xl border-b border-slate-800">
         <div className={containerClass + " flex justify-between items-center h-20"}>
@@ -128,6 +144,7 @@ export default function LekhaFlowLanding() {
             <Link href="#pricing" className="hover:text-white transition-colors">{isHindi ? "मूल्य निर्धारण" : "Pricing"}</Link>
             <Link href="/blog" className="text-amber-500 hover:text-amber-400 font-black">{isHindi ? "ब्लॉग" : "Insights"}</Link>
             <Link href="/downloads" className="hover:text-white transition-colors">{isHindi ? "डाउनलोड" : "Download Center"}</Link>
+            <Link href="/faq" className="hover:text-white transition-colors">{isHindi ? "सहायता" : "FAQ"}</Link>
             <button onClick={() => setIsHindi(!isHindi)} className="text-teal-500 border border-teal-500/30 px-3 py-1 rounded hover:bg-teal-500/10">{isHindi ? "ENGLISH" : "हिंदी"}</button>
             <Link href="/downloads" className="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-xl shadow-lg font-black transition-all">{isHindi ? "ट्रायल लें" : "Get Trial"}</Link>
           </div>
@@ -138,11 +155,11 @@ export default function LekhaFlowLanding() {
       <section className="pt-36 pb-24 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.08)_0,transparent_70%)] pointer-events-none" />
         <div className={containerClass + " text-center relative z-10"}>
-          
+
           <div className="inline-block mb-8 px-5 py-2 bg-teal-500/5 border border-teal-500/20 rounded-full">
             <p className="text-teal-400 text-[10px] font-black uppercase tracking-[0.4em]">{t.hero.badge}</p>
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05] uppercase tracking-tighter mb-8 max-w-6xl mx-auto">
             {t.hero.title}
           </h1>
@@ -181,8 +198,8 @@ export default function LekhaFlowLanding() {
           <div className="max-w-5xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-2 shadow-2xl">
             <div className="bg-slate-950 rounded-2xl overflow-hidden aspect-[16/9] flex items-center justify-center border border-slate-800/50">
               <p className="text-slate-600 text-sm font-bold uppercase tracking-widest text-center px-4">
-                [<img src="/bank-intelligence.png" alt="Bank Intelligence Dashboard" className="w-full h-full object-cover" />]<br/>
-                <span className="text-slate-700 text-[10px] normal-case"></span>
+                [Bank Intelligence Dashboard Screenshot]<br/>
+                <span className="text-slate-700 text-[10px] normal-case">Upload screenshot to /public/bank-intelligence.png and replace this div with &lt;img&gt;</span>
               </p>
             </div>
           </div>
@@ -213,7 +230,7 @@ export default function LekhaFlowLanding() {
           <div className="text-center mb-20">
             <div className="inline-block mb-6 px-5 py-2 bg-teal-500/5 border border-teal-500/20 rounded-full">
               <p className="text-teal-400 text-[10px] font-black uppercase tracking-[0.4em]">
-                {isHindi ? "4 सरल चरण" : "4 Simple Steps"}
+                {isHindi ? "4 सरल चरण" : "4 SIMPLE STEPS"}
               </p>
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
@@ -228,44 +245,16 @@ export default function LekhaFlowLanding() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {[
-              { 
-                num: "01", 
-                icon: FileText,
-                title: isHindi ? "PDF अपलोड करें" : "Upload Bank Statement", 
-                desc: isHindi 
-                  ? "अपना बैंक स्टेटमेंट PDF चुनें। सॉफ्टवेयर स्वचालित रूप से बैंक का पता लगा लेगा।" 
-                  : "Select your bank statement PDF. The software auto-detects the bank format." 
-              },
-              { 
-                num: "02", 
-                icon: Cpu,
-                title: isHindi ? "AI पढ़ता और वर्गीकृत करता है" : "AI Reads & Categorizes", 
-                desc: isHindi 
-                  ? "AI प्रत्येक लेन-देन को पढ़ता है, नैरेशन को समझता है, और डेबिट/क्रेडिट को वर्गीकृत करता है।" 
-                  : "AI reads every transaction, understands narration, and classifies Dr/Cr automatically." 
-              },
-              { 
-                num: "03", 
-                icon: Landmark,
-                title: isHindi ? "ग्रिड में समीक्षा करें" : "Review in Smart Grid", 
-                desc: isHindi 
-                  ? "सभी लेन-देन एक साफ ग्रिड में दिखाई देते हैं। ओपनिंग/क्लोजिंग बैलेंस ऑटो-वैलिडेटेड।" 
-                  : "All transactions appear in a clean grid. Opening/closing balance auto-validated." 
-              },
-              { 
-                num: "04", 
-                icon: Send,
-                title: isHindi ? "वन-क्लिक में टैली भेजें" : "One-Click to Tally", 
-                desc: isHindi 
-                  ? "'Send to Tally' दबाएं। सभी वाउचर सीधे आपके टैली में बन जाते हैं — कोई XML इम्पोर्ट नहीं।" 
-                  : "Hit 'Send to Tally'. All vouchers are created directly in your Tally — no XML import needed." 
-              },
+              { num: "01", icon: FileText, title: isHindi ? "PDF अपलोड करें" : "Upload Bank Statement", desc: isHindi ? "अपना बैंक स्टेटमेंट PDF चुनें। सॉफ्टवेयर स्वचालित रूप से बैंक का पता लगा लेगा।" : "Select your bank statement PDF. The software auto-detects the bank format." },
+              { num: "02", icon: Cpu, title: isHindi ? "AI पढ़ता है" : "AI Reads & Categorizes", desc: isHindi ? "AI प्रत्येक लेन-देन को पढ़ता है, नैरेशन को समझता है, और डेबिट/क्रेडिट को वर्गीकृत करता है।" : "AI reads every transaction, understands narration, and classifies Dr/Cr automatically." },
+              { num: "03", icon: Landmark, title: isHindi ? "ग्रिड में समीक्षा करें" : "Review in Smart Grid", desc: isHindi ? "सभी लेन-देन एक साफ ग्रिड में दिखाई देते हैं। ओपनिंग/क्लोजिंग बैलेंस ऑटो-वैलिडेटेड।" : "All transactions appear in a clean grid. Opening/closing balance auto-validated." },
+              { num: "04", icon: Send, title: isHindi ? "वन-क्लिक टैली" : "One-Click to Tally", desc: isHindi ? "'Send to Tally' दबाएं। सभी वाउचर सीधे आपके टैली में बन जाते हैं।" : "Hit 'Send to Tally'. All vouchers are created directly in your Tally — no XML import needed." },
             ].map((step, i) => (
               <div key={i} className="group bg-slate-900/40 border border-slate-800 p-10 rounded-[2.5rem] hover:bg-slate-900 hover:border-teal-500/30 transition-all text-center relative">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-950 border border-slate-800 px-4 py-1 rounded-full">
                   <span className="text-teal-500 font-black text-xs tracking-widest">{step.num}</span>
                 </div>
-                <div className="w-16 h-16 mx-auto bg-teal-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-teal-500/20 transition-colors">
+                <div className="w-16 h-16 mx-auto bg-teal-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-teal-500/20 transition-colors mt-4">
                   <step.icon className="text-teal-500" size={28} />
                 </div>
                 <h3 className="text-white font-black uppercase text-sm mb-4 tracking-widest">{step.title}</h3>
@@ -426,7 +415,7 @@ export default function LekhaFlowLanding() {
               {isHindi ? "31 अगस्त 2026 तक वैध" : "Valid till 31st August 2026"}
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
             {Object.entries(productData).map(([key, p]) => (
               <div key={key} className={`bg-slate-900 border-2 ${p.color} p-10 rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col justify-between group`}>
@@ -448,9 +437,12 @@ export default function LekhaFlowLanding() {
                   </ul>
                 </div>
                 <div className="pt-6 space-y-4">
-                  <a href={p.razorpayUrl} target="_blank" className={`block w-full py-5 ${key === 'gold' ? 'bg-amber-500 text-black hover:bg-amber-400' : 'bg-teal-600 text-white hover:bg-teal-500'} rounded-2xl font-black uppercase text-xs text-center tracking-widest transition-all`}>
+                  <button
+                    onClick={() => openPayment(key, p)}
+                    className={`block w-full py-5 ${key === 'gold' ? 'bg-amber-500 text-black hover:bg-amber-400' : 'bg-teal-600 text-white hover:bg-teal-500'} rounded-2xl font-black uppercase text-xs text-center tracking-widest transition-all`}
+                  >
                     {isHindi ? "खरीदें" : "Buy Now"} — ₹{p.offerPrice}
-                  </a>
+                  </button>
                   <Link href="/downloads" className="block w-full py-5 bg-slate-950 text-white rounded-2xl font-black uppercase text-[10px] text-center tracking-widest border border-slate-800 hover:border-slate-600 transition-all">
                     {isHindi ? "सेटअप डाउनलोड करें" : "Download Setup"}
                   </Link>
@@ -473,14 +465,30 @@ export default function LekhaFlowLanding() {
 
       {/* FOOTER */}
       <footer className="py-20 border-t border-slate-900 bg-[#020617] text-center">
-        <div className="flex justify-center gap-8 mb-10 opacity-30 grayscale hover:opacity-100 transition-all duration-700">
-            <Laptop size={24} /> <Database size={24} /> <Cpu size={24} /> <ShieldCheck size={24} />
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-wrap justify-center gap-8 mb-10">
+            <Link href="/privacy" className="text-slate-500 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+              <Shield size={14} /> Privacy Policy
+            </Link>
+            <Link href="/refund" className="text-slate-500 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+              <RefreshCcw size={14} /> Refund Policy
+            </Link>
+            <Link href="/faq" className="text-slate-500 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+              <MessageCircleQuestion size={14} /> FAQ
+            </Link>
+            <Link href="/blog" className="text-slate-500 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+              <ArrowRight size={14} /> Blog
+            </Link>
+          </div>
+          <div className="flex justify-center gap-8 mb-10 opacity-30 grayscale hover:opacity-100 transition-all duration-700">
+              <Laptop size={24} /> <Database size={24} /> <Cpu size={24} /> <ShieldCheck size={24} />
+          </div>
+          <p className="text-slate-500 text-[10px] font-black tracking-[0.5em] uppercase italic">
+            {isHindi ? "लेखाफ्लो AI | भारतीय लेखांकन का भविष्य" : "LekhaFlow AI | Engineering the Future of Indian Accounting 🇮🇳"}
+          </p>
         </div>
-        <p className="text-slate-500 text-[10px] font-black tracking-[0.5em] uppercase italic">
-          {isHindi ? "लेखाफ्लो AI | भारतीय लेखांकन का भविष्य" : "LekhaFlow AI | Engineering the Future of Indian Accounting 🇮🇳"}
-        </p>
       </footer>
-      
+
       {/* INTAKE MODAL */}
       <AnimatePresence>
         {showIntakeModal && (
@@ -502,6 +510,18 @@ export default function LekhaFlowLanding() {
             </motion.div>
         )}
       </AnimatePresence>
+
+      {/* PAYMENT MODAL */}
+      {selectedPlan && (
+        <PaymentModal
+          isOpen={paymentModalOpen}
+          onClose={() => setPaymentModalOpen(false)}
+          plan={selectedPlan.key as "standard" | "gold"}
+          planName={selectedPlan.name}
+          price={selectedPlan.price}
+          razorpayUrl={selectedPlan.url}
+        />
+      )}
 
       <WhatsAppButton />
     </div>

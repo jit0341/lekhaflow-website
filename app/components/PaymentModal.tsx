@@ -1,139 +1,254 @@
 "use client";
 
-import React, { useState } from "react";
-import { X, Cpu, CreditCard, ShieldCheck } from "lucide-react";
+import { useState } from "react";
+import { X, CreditCard, Smartphone, Building2, Loader2, CheckCircle2, Copy } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  plan: "STANDARD" | "GOLD";
+  plan: "standard" | "gold";
+  planName: string;
   price: string;
   razorpayUrl: string;
 }
 
-export default function PaymentModal({ isOpen, onClose, plan, price, razorpayUrl }: PaymentModalProps) {
-  const [machineId, setMachineId] = useState("");
-  const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [name, setName] = useState("");
-  const [step, setStep] = useState<"form" | "confirm">("form");
+export default function PaymentModal({ isOpen, onClose, plan, planName, price, razorpayUrl }: PaymentModalProps) {
+  const [step, setStep] = useState<"form" | "payment" | "success">("form");
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    mobile: "",
+    machineId: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [paymentId, setPaymentId] = useState("");
 
-  if (!isOpen) return null;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
 
-  const handleProceed = () => {
-    if (!machineId.trim() || !email.trim() || !mobile.trim() || !name.trim()) {
-      alert("Please fill all fields");
-      return;
+    // Save lead to Google Sheet before redirecting
+    try {
+      await fetch("/api/save_lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          plan,
+          price,
+          source: "payment_modal",
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch (err) {
+      console.error("Lead save error:", err);
     }
-    setStep("confirm");
+
+    setLoading(false);
+    setStep("payment");
   };
 
-  const handlePayment = () => {
-    // Store details in localStorage for webhook reference
-    localStorage.setItem("lekhaflow_payment", JSON.stringify({
-      machineId, email, mobile, name, plan, timestamp: Date.now()
-    }));
-
-    // Open Razorpay with pre-filled notes
-    // Note: For Razorpay Pages, you need to pass notes via URL or use Razorpay Checkout API
-    // This is a simplified flow - ideally use Razorpay Checkout API for full control
-    window.open(razorpayUrl, "_blank");
-    onClose();
+  const copyMachineId = () => {
+    navigator.clipboard.writeText(formData.machineId);
   };
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4">
-      <div className="bg-slate-900 border-2 border-teal-500 p-8 rounded-[2.5rem] max-w-md w-full relative shadow-2xl">
-        <button onClick={onClose} className="absolute top-6 right-6 text-slate-500 hover:text-white">
-          <X size={24}/>
-        </button>
-
-        {step === "form" ? (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <div className="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <CreditCard className="text-teal-500" size={28} />
-              </div>
-              <h3 className="text-2xl font-black text-white uppercase tracking-tighter">{plan} License</h3>
-              <p className="text-teal-400 font-black text-3xl mt-2">₹{price}</p>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block mb-2">Full Name</label>
-                <input 
-                  value={name} 
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your Name" 
-                  className="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl text-white font-bold text-sm outline-none focus:border-teal-500 transition-all"
-                />
-              </div>
-              <div>
-                <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block mb-2">Email</label>
-                <input 
-                  type="email"
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="email@company.com" 
-                  className="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl text-white font-bold text-sm outline-none focus:border-teal-500 transition-all"
-                />
-              </div>
-              <div>
-                <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block mb-2">WhatsApp Number</label>
-                <input 
-                  value={mobile} 
-                  onChange={(e) => setMobile(e.target.value)}
-                  placeholder="+91-XXXXXXXXXX" 
-                  className="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl text-white font-bold text-sm outline-none focus:border-teal-500 transition-all"
-                />
-              </div>
-              <div>
-                <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block mb-2 flex items-center gap-2">
-                  <Cpu size={12}/> Machine Hardware ID
-                </label>
-                <input 
-                  value={machineId} 
-                  onChange={(e) => setMachineId(e.target.value)}
-                  placeholder="Paste Machine ID from software" 
-                  className="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl text-white font-bold text-sm outline-none focus:border-teal-500 transition-all"
-                />
-                <p className="text-slate-600 text-[10px] mt-2">Open LekhaFlow → Copy Hardware ID → Paste here</p>
-              </div>
-            </div>
-
-            <button 
-              onClick={handleProceed}
-              className="w-full py-5 bg-teal-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-teal-500 transition-all"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4"
+        >
+          <motion.div
+            initial={{ scale: 0.9, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            className="bg-slate-900 border-2 border-teal-500 p-8 md:p-10 rounded-[3rem] max-w-lg w-full relative shadow-2xl max-h-[90vh] overflow-y-auto"
+          >
+            <button
+              onClick={onClose}
+              className="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors"
             >
-              Proceed to Payment
+              <X size={24} />
             </button>
-          </div>
-        ) : (
-          <div className="space-y-6 text-center">
-            <ShieldCheck className="mx-auto text-teal-500" size={48} />
-            <h3 className="text-xl font-black text-white uppercase">Confirm Details</h3>
 
-            <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-left space-y-3">
-              <p className="text-slate-400 text-sm"><span className="text-slate-600 font-bold">Name:</span> {name}</p>
-              <p className="text-slate-400 text-sm"><span className="text-slate-600 font-bold">Email:</span> {email}</p>
-              <p className="text-slate-400 text-sm"><span className="text-slate-600 font-bold">Mobile:</span> {mobile}</p>
-              <p className="text-slate-400 text-sm"><span className="text-slate-600 font-bold">Machine ID:</span> <span className="text-teal-400 font-mono text-xs">{machineId}</span></p>
-              <p className="text-slate-400 text-sm"><span className="text-slate-600 font-bold">Plan:</span> <span className="text-amber-400 font-bold">{plan}</span></p>
-            </div>
+            {step === "form" && (
+              <>
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic">
+                    Buy {planName}
+                  </h3>
+                  <p className="text-teal-500 font-black text-3xl tracking-tighter mt-2">₹{price}</p>
+                  <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Yearly Subscription</p>
+                </div>
 
-            <p className="text-slate-500 text-xs">License.dat will be emailed & WhatsApped within 2 hours of payment.</p>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block mb-2">Full Name *</label>
+                    <input
+                      required
+                      type="text"
+                      placeholder="Jitendra Bharti"
+                      className="w-full bg-slate-950 border border-slate-800 p-4 rounded-2xl text-white font-bold text-xs outline-none focus:border-teal-500 transition-all"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block mb-2">Company / Firm Name *</label>
+                    <input
+                      required
+                      type="text"
+                      placeholder="Bharti & Associates"
+                      className="w-full bg-slate-950 border border-slate-800 p-4 rounded-2xl text-white font-bold text-xs outline-none focus:border-teal-500 transition-all"
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block mb-2">Email *</label>
+                    <input
+                      required
+                      type="email"
+                      placeholder="you@company.com"
+                      className="w-full bg-slate-950 border border-slate-800 p-4 rounded-2xl text-white font-bold text-xs outline-none focus:border-teal-500 transition-all"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block mb-2">WhatsApp Number *</label>
+                    <input
+                      required
+                      type="tel"
+                      placeholder="+91 98765 43210"
+                      className="w-full bg-slate-950 border border-slate-800 p-4 rounded-2xl text-white font-bold text-xs outline-none focus:border-teal-500 transition-all"
+                      value={formData.mobile}
+                      onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block mb-2">Machine ID (from software) *</label>
+                    <div className="relative">
+                      <input
+                        required
+                        type="text"
+                        placeholder="LF-XXXX-XXXX-XXXX"
+                        className="w-full bg-slate-950 border border-slate-800 p-4 pr-12 rounded-2xl text-white font-bold text-xs outline-none focus:border-teal-500 transition-all"
+                        value={formData.machineId}
+                        onChange={(e) => setFormData({ ...formData, machineId: e.target.value })}
+                      />
+                      <button
+                        type="button"
+                        onClick={copyMachineId}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-teal-500"
+                      >
+                        <Copy size={16} />
+                      </button>
+                    </div>
+                    <p className="text-slate-600 text-[10px] mt-2">Open LekhaFlow → Click &quot;About&quot; → Copy Machine ID</p>
+                  </div>
 
-            <div className="flex gap-3">
-              <button onClick={() => setStep("form")} className="flex-1 py-4 bg-slate-800 text-white font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-slate-700 transition-all">
-                Back
-              </button>
-              <button onClick={handlePayment} className="flex-1 py-4 bg-teal-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-teal-500 transition-all">
-                Pay ₹{price}
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full py-5 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-[10px] tracking-[0.2em] shadow-xl hover:shadow-teal-500/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {loading ? <Loader2 size={16} className="animate-spin" /> : <CreditCard size={16} />}
+                    {loading ? "Processing..." : "Continue to Payment"}
+                  </button>
+                </form>
+              </>
+            )}
+
+            {step === "payment" && (
+              <>
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic">Complete Payment</h3>
+                  <p className="text-slate-400 text-xs mt-2">Your details have been saved. Choose a payment method:</p>
+                </div>
+
+                <div className="space-y-4">
+                  <a
+                    href={razorpayUrl}
+                    target="_blank"
+                    className="flex items-center gap-4 w-full p-5 bg-slate-950 border border-slate-800 rounded-2xl hover:border-teal-500 transition-all group"
+                  >
+                    <div className="w-12 h-12 bg-teal-500/10 rounded-xl flex items-center justify-center group-hover:bg-teal-500/20">
+                      <CreditCard className="text-teal-500" size={24} />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-white font-black text-sm uppercase tracking-widest">Pay via Razorpay</p>
+                      <p className="text-slate-500 text-[10px]">UPI, Card, NetBanking, Wallet</p>
+                    </div>
+                  </a>
+
+                  <div className="flex items-center gap-4 w-full p-5 bg-slate-950 border border-slate-800 rounded-2xl">
+                    <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center">
+                      <Smartphone className="text-amber-500" size={24} />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-white font-black text-sm uppercase tracking-widest">UPI / Bank Transfer</p>
+                      <p className="text-slate-500 text-[10px]">WhatsApp us for manual payment</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 w-full p-5 bg-slate-950 border border-slate-800 rounded-2xl">
+                    <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center">
+                      <Building2 className="text-blue-500" size={24} />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-white font-black text-sm uppercase tracking-widest">NEFT / IMPS</p>
+                      <p className="text-slate-500 text-[10px]">For CA firms requiring GST invoice</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-4 bg-amber-500/5 border border-amber-500/20 rounded-2xl">
+                  <p className="text-amber-400 text-[10px] font-bold uppercase tracking-widest text-center">
+                    After payment, share screenshot on WhatsApp for instant license delivery
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setStep("success")}
+                  className="w-full mt-4 py-4 bg-slate-800 text-white font-black rounded-2xl uppercase text-[10px] tracking-widest hover:bg-slate-700 transition-all"
+                >
+                  I Have Completed Payment
+                </button>
+              </>
+            )}
+
+            {step === "success" && (
+              <div className="text-center py-10">
+                <CheckCircle2 size={64} className="text-teal-500 mx-auto mb-6" />
+                <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic mb-4">Payment Received!</h3>
+                <p className="text-slate-400 text-sm mb-6">
+                  Thank you for subscribing to {planName}. We will verify your payment and send the license.dat file to your email and WhatsApp within 10 minutes.
+                </p>
+                <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 mb-6">
+                  <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">Next Steps</p>
+                  <ol className="text-left text-slate-400 text-xs space-y-2">
+                    <li>1. Check your email for license.dat</li>
+                    <li>2. Save it to D:/lekhaflow_data/ or Documents/lekhaflow_data/</li>
+                    <li>3. Restart LekhaFlow — it will activate automatically</li>
+                  </ol>
+                </div>
+                <a
+                  href="https://wa.me/918770808695"
+                  target="_blank"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-teal-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-teal-500 transition-all"
+                >
+                  <Smartphone size={16} /> Contact on WhatsApp
+                </a>
+              </div>
+            )}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
