@@ -84,7 +84,7 @@ export default function LekhaFlowLanding() {
       features: [
         isHindi ? "स्टैंडर्ड में सब कुछ" : "Everything in Standard",
         isHindi ? "GSTR-2B रिकंसिलिएशन" : "GSTR-2B Reconciliation",
-        isHindi ? "₹50,000 से कम सेल्स स्प्लिट" : "Sales Split Below ₹50,000",
+        isHindi ? "₹10,000,₹30,000, ₹50,000 से कम सेल्स स्प्लिट" : "Sales Split Below ₹10,000,₹30,000 or ₹50,000",
         isHindi ? "मल्टी-कंपनी सपोर्ट" : "Multi-Company Support",
         isHindi ? "फाउंडर से सीधा व्हाट्सएप सपोर्ट" : "Direct WhatsApp Support from Founder"
       ],
