@@ -121,62 +121,72 @@ export default function LekhaFlowLanding() {
 
   const timeSavedValue = invoices * 3;
   const annualSavingsValue = Math.round((timeSavedValue / 60) * (staffCost / 160)) * 12;
-
-         {/* PAYMENT MODAL */}
-      {paymentModalOpen && selectedPlan && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 max-w-md w-full relative shadow-2xl">
-            <button 
-              onClick={() => setPaymentModalOpen(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white"
-            >
-              <X size={24} />
-            </button>
-            
-            <div className="text-center space-y-6">
-              <div className="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto">
-                <ShieldCheck size={32} className="text-amber-500" />
-              </div>
-              
-              <h3 className="text-2xl font-black text-white uppercase tracking-tight">
-                Secure Payment
-              </h3>
-              
-              <p className="text-slate-400 text-sm leading-relaxed">
-                You are about to purchase <strong className="text-white">{selectedPlan.name}</strong> for <strong className="text-amber-500">₹{selectedPlan.price}</strong>.
-              </p>
-
-              <div className="bg-slate-950 rounded-xl p-4 border border-slate-800">
-                <p className="text-xs text-slate-400 text-center mb-2">
-                  After successful payment:
-                </p>
-                <ol className="text-xs text-slate-300 space-y-2 text-left list-decimal list-inside">
-                  <li>Install the software from Downloads page.</li>
-                  <li>Copy the <strong>Machine ID</strong> shown in the software.</li>
-                  <li>Send it to us on WhatsApp.</li>
-                  <li>We will send your <strong>license.dat</strong> file instantly.</li>
-                </ol>
-              </div>
-
-              <button
-                onClick={() => {
-                  if (selectedPlan.url) {
-                    window.open(selectedPlan.url, '_blank');
-                  }
-                  setPaymentModalOpen(false);
-                }}
-                className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-black rounded-xl font-black uppercase text-sm tracking-widest transition-all shadow-lg shadow-amber-500/20"
-              >
-                Proceed to Pay ₹{selectedPlan.price}
-              </button>
-              
-              <p className="text-[10px] text-slate-500 uppercase tracking-widest">
-                Secured by Razorpay
-              </p>
-            </div>
-          </div>
+{/* PAYMENT MODAL */}
+{paymentModalOpen && selectedPlan && (
+  <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+    <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 max-w-md w-full relative shadow-2xl">
+      <button 
+        onClick={() => setPaymentModalOpen(false)}
+        className="absolute top-4 right-4 text-slate-400 hover:text-white"
+      >
+        <X size={24} />
+      </button>
+      
+      <div className="text-center space-y-6">
+        <div className="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto">
+          <ShieldCheck size={32} className="text-amber-500" />
         </div>
-      )}
+        
+        <h3 className="text-2xl font-black text-white uppercase tracking-tight">
+          Confirm Purchase
+        </h3>
+        
+        <p className="text-slate-400 text-sm leading-relaxed">
+          You are about to purchase <strong className="text-white">{selectedPlan.name}</strong> for <strong className="text-amber-500">₹{selectedPlan.price}</strong>.
+        </p>
+
+        {/* ✅ Machine ID Input हटा दिया गया है */}
+        <div className="bg-slate-950 rounded-xl p-4 border border-slate-800">
+          <p className="text-xs text-slate-300 text-center leading-relaxed">
+            ✅ After payment, install the software from the Downloads page.<br/>
+            📩 The software will show a <strong>Machine ID</strong>. Send that ID on WhatsApp to receive your <code>license.dat</code> file instantly.
+          </p>
+        </div>
+
+        {/* ✅ Owner के लिए Skip Payment Button (केवल Development/Test के लिए) */}
+        {process.env.NEXT_PUBLIC_SKIP_PAYMENT === "true" && (
+          <button
+            onClick={async () => {
+              alert("Test Mode: Payment Skipped! Redirecting to download...");
+              // यहाँ आप चाहे तो सीधे डाउनलोड लिंक पर भेज सकते हैं या सिर्फ मोडल बंद कर सकते हैं
+              setPaymentModalOpen(false);
+              window.location.href = "/downloads";
+            }}
+            className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-bold uppercase text-xs tracking-widest transition-all border border-slate-600"
+          >
+            ⚠️ Skip Payment (Test Mode)
+          </button>
+        )}
+
+        <button
+          onClick={() => {
+            if (selectedPlan.url) {
+              window.open(selectedPlan.url, '_blank');
+            }
+            setPaymentModalOpen(false);
+          }}
+          className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-black rounded-xl font-black uppercase text-sm tracking-widest transition-all shadow-lg shadow-amber-500/20"
+        >
+          Proceed to Pay ₹{selectedPlan.price}
+        </button>
+        
+        <p className="text-[10px] text-slate-500 uppercase tracking-widest">
+          Secured by Razorpay
+        </p>
+      </div>
+    </div>
+  </div>
+)}
 
       {/* NAVIGATION */}
       <nav className="fixed top-0 w-full z-[100] bg-[#020617]/90 backdrop-blur-xl border-b border-slate-800">
