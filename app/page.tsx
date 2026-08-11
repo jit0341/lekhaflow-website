@@ -130,7 +130,7 @@ export default function LekhaFlowLanding() {
         className="absolute top-4 right-4 text-slate-400 hover:text-white"
       >
         <X size={24} />
-      </button>
+      </button> 
       
       <div className="text-center space-y-6">
         <div className="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto">
