@@ -122,20 +122,61 @@ export default function LekhaFlowLanding() {
   const timeSavedValue = invoices * 3;
   const annualSavingsValue = Math.round((timeSavedValue / 60) * (staffCost / 160)) * 12;
 
-   const openPayment = (key: string, plan: typeof productData.standard) => {
-    // Gold Plan ke liye direct Razorpay link
-    if (key === 'gold') {
-      window.open(plan.razorpayUrl, '_blank');
-      return;
-    }
+         {/* PAYMENT MODAL */}
+      {paymentModalOpen && selectedPlan && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 max-w-md w-full relative shadow-2xl">
+            <button 
+              onClick={() => setPaymentModalOpen(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white"
+            >
+              <X size={24} />
+            </button>
+            
+            <div className="text-center space-y-6">
+              <div className="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto">
+                <ShieldCheck size={32} className="text-amber-500" />
+              </div>
+              
+              <h3 className="text-2xl font-black text-white uppercase tracking-tight">
+                Secure Payment
+              </h3>
+              
+              <p className="text-slate-400 text-sm leading-relaxed">
+                You are about to purchase <strong className="text-white">{selectedPlan.name}</strong> for <strong className="text-amber-500">₹{selectedPlan.price}</strong>.
+              </p>
 
-    // Standard Plan ke liye WhatsApp redirect (Temporary)
-    if (key === 'standard') {
-      const message = encodeURIComponent(`Hi, I am interested in buying LekhaFlow Standard License for ₹7,999.`);
-      window.open(`https://wa.me/918770808695?text=${message}`, '_blank');
-      return;
-    }
-  };
+              <div className="bg-slate-950 rounded-xl p-4 border border-slate-800">
+                <p className="text-xs text-slate-400 text-center mb-2">
+                  After successful payment:
+                </p>
+                <ol className="text-xs text-slate-300 space-y-2 text-left list-decimal list-inside">
+                  <li>Install the software from Downloads page.</li>
+                  <li>Copy the <strong>Machine ID</strong> shown in the software.</li>
+                  <li>Send it to us on WhatsApp.</li>
+                  <li>We will send your <strong>license.dat</strong> file instantly.</li>
+                </ol>
+              </div>
+
+              <button
+                onClick={() => {
+                  if (selectedPlan.url) {
+                    window.open(selectedPlan.url, '_blank');
+                  }
+                  setPaymentModalOpen(false);
+                }}
+                className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-black rounded-xl font-black uppercase text-sm tracking-widest transition-all shadow-lg shadow-amber-500/20"
+              >
+                Proceed to Pay ₹{selectedPlan.price}
+              </button>
+              
+              <p className="text-[10px] text-slate-500 uppercase tracking-widest">
+                Secured by Razorpay
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* NAVIGATION */}
       <nav className="fixed top-0 w-full z-[100] bg-[#020617]/90 backdrop-blur-xl border-b border-slate-800">
