@@ -28,6 +28,17 @@ export default function LekhaFlowLanding() {
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<{key: string; name: string; price: string; url: string} | null>(null);
 
+  // ✅ FIX: openPayment function added here
+  const openPayment = (key: string, plan: any) => {
+    setSelectedPlan({
+      key: key,
+      name: plan.title,
+      price: plan.offerPrice,
+      url: plan.razorpayUrl
+    });
+    setPaymentModalOpen(true);
+  };
+
   useEffect(() => {
     async function loadDownloads() {
       try {
@@ -121,73 +132,9 @@ export default function LekhaFlowLanding() {
 
   const timeSavedValue = invoices * 3;
   const annualSavingsValue = Math.round((timeSavedValue / 60) * (staffCost / 160)) * 12;
-{/* PAYMENT MODAL */}
-{paymentModalOpen && selectedPlan && (
-  <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-    <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 max-w-md w-full relative shadow-2xl">
-      <button 
-        onClick={() => setPaymentModalOpen(false)}
-        className="absolute top-4 right-4 text-slate-400 hover:text-white"
-      >
-        <X size={24} />
-      </button> 
-      
-      <div className="text-center space-y-6">
-        <div className="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto">
-          <ShieldCheck size={32} className="text-amber-500" />
-        </div>
-        
-        <h3 className="text-2xl font-black text-white uppercase tracking-tight">
-          Confirm Purchase
-        </h3>
-        
-        <p className="text-slate-400 text-sm leading-relaxed">
-          You are about to purchase <strong className="text-white">{selectedPlan.name}</strong> for <strong className="text-amber-500">₹{selectedPlan.price}</strong>.
-        </p>
 
-        {/* ✅ Machine ID Input हटा दिया गया है */}
-        <div className="bg-slate-950 rounded-xl p-4 border border-slate-800">
-          <p className="text-xs text-slate-300 text-center leading-relaxed">
-            ✅ After payment, install the software from the Downloads page.<br/>
-            📩 The software will show a <strong>Machine ID</strong>. Send that ID on WhatsApp to receive your <code>license.dat</code> file instantly.
-          </p>
-        </div>
-
-        {/* ✅ Owner के लिए Skip Payment Button (केवल Development/Test के लिए) */}
-        {process.env.NEXT_PUBLIC_SKIP_PAYMENT === "true" && (
-          <button
-            onClick={async () => {
-              alert("Test Mode: Payment Skipped! Redirecting to download...");
-              // यहाँ आप चाहे तो सीधे डाउनलोड लिंक पर भेज सकते हैं या सिर्फ मोडल बंद कर सकते हैं
-              setPaymentModalOpen(false);
-              window.location.href = "/downloads";
-            }}
-            className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-bold uppercase text-xs tracking-widest transition-all border border-slate-600"
-          >
-            ⚠️ Skip Payment (Test Mode)
-          </button>
-        )}
-
-        <button
-          onClick={() => {
-            if (selectedPlan.url) {
-              window.open(selectedPlan.url, '_blank');
-            }
-            setPaymentModalOpen(false);
-          }}
-          className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-black rounded-xl font-black uppercase text-sm tracking-widest transition-all shadow-lg shadow-amber-500/20"
-        >
-          Proceed to Pay ₹{selectedPlan.price}
-        </button>
-        
-        <p className="text-[10px] text-slate-500 uppercase tracking-widest">
-          Secured by Razorpay
-        </p>
-      </div>
-    </div>
-  </div>
-)}
-
+  return (
+    <>
       {/* NAVIGATION */}
       <nav className="fixed top-0 w-full z-[100] bg-[#020617]/90 backdrop-blur-xl border-b border-slate-800">
         <div className={containerClass + " flex justify-between items-center h-20"}>
@@ -447,34 +394,36 @@ export default function LekhaFlowLanding() {
           </div>
         </div>
       </section>
+
       {/* COMPETITOR COMPARISON */}
-<section className="py-24 bg-slate-950 border-y border-slate-900">
-  <div className={containerClass}>
-    <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-12 text-center">
-      {isHindi ? "तुलना" : "Why LekhaFlow Wins"}
-    </h2>
-    <div className="max-w-4xl mx-auto overflow-x-auto">
-      <table className="w-full text-left">
-        <thead>
-          <tr className="border-b border-slate-800">
-            <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest">Feature</th>
-            <th className="py-4 text-teal-500 text-[10px] font-black uppercase tracking-widest text-center">LekhaFlow</th>
-            <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">Vyapar TaxOne</th>
-            <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">VoucherIt</th>
-          </tr>
-        </thead>
-        <tbody className="text-xs font-bold text-slate-300">
-          <tr className="border-b border-slate-800/50"><td className="py-4">Bank Statement → Tally</td><td className="text-center text-teal-500">✓ Unlimited</td><td className="text-center">✓</td><td className="text-center text-pink-500">✗</td></tr>
-          <tr className="border-b border-slate-800/50"><td className="py-4">PDF Invoice → Tally</td><td className="text-center text-teal-500">✓</td><td className="text-center">✓</td><td className="text-center text-pink-500">✗</td></tr>
-          <tr className="border-b border-slate-800/50"><td className="py-4">Sales Split Below ₹50K</td><td className="text-center text-teal-500">✓ Auto</td><td className="text-center text-pink-500">✗</td><td className="text-center text-pink-500">✗</td></tr>
-          <tr className="border-b border-slate-800/50"><td className="py-4">GSTR-2B Reconciliation</td><td className="text-center text-teal-500">✓</td><td className="text-center text-pink-500">✗</td><td className="text-center text-pink-500">✗</td></tr>
-          <tr className="border-b border-slate-800/50"><td className="py-4">Local Data Processing</td><td className="text-center text-teal-500">✓ 100% Local</td><td className="text-center">Cloud</td><td className="text-center">Cloud</td></tr>
-          <tr><td className="py-4">Yearly Price</td><td className="text-center text-teal-500 font-black">₹7,999</td><td className="text-center">₹10,000</td><td className="text-center">₹12,000+</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+      <section className="py-24 bg-slate-950 border-y border-slate-900">
+        <div className={containerClass}>
+          <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-12 text-center">
+            {isHindi ? "तुलना" : "Why LekhaFlow Wins"}
+          </h2>
+          <div className="max-w-4xl mx-auto overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-slate-800">
+                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest">Feature</th>
+                  <th className="py-4 text-teal-500 text-[10px] font-black uppercase tracking-widest text-center">LekhaFlow</th>
+                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">Vyapar TaxOne</th>
+                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">VoucherIt</th>
+                </tr>
+              </thead>
+              <tbody className="text-xs font-bold text-slate-300">
+                <tr className="border-b border-slate-800/50"><td className="py-4">Bank Statement → Tally</td><td className="text-center text-teal-500">✓ Unlimited</td><td className="text-center">✓</td><td className="text-center text-pink-500">✗</td></tr>
+                <tr className="border-b border-slate-800/50"><td className="py-4">PDF Invoice → Tally</td><td className="text-center text-teal-500">✓</td><td className="text-center">✓</td><td className="text-center text-pink-500">✗</td></tr>
+                <tr className="border-b border-slate-800/50"><td className="py-4">Sales Split Below ₹50K</td><td className="text-center text-teal-500">✓ Auto</td><td className="text-center text-pink-500">✗</td><td className="text-center text-pink-500">✗</td></tr>
+                <tr className="border-b border-slate-800/50"><td className="py-4">GSTR-2B Reconciliation</td><td className="text-center text-teal-500">✓</td><td className="text-center text-pink-500">✗</td><td className="text-center text-pink-500">✗</td></tr>
+                <tr className="border-b border-slate-800/50"><td className="py-4">Local Data Processing</td><td className="text-center text-teal-500">✓ 100% Local</td><td className="text-center">Cloud</td><td className="text-center">Cloud</td></tr>
+                <tr><td className="py-4">Yearly Price</td><td className="text-center text-teal-500 font-black">₹7,999</td><td className="text-center">₹10,000</td><td className="text-center">₹12,000+</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {/* PRICING SECTION */}
       <section id="pricing" className="py-32 bg-slate-950 border-t border-slate-900">
         <div className={containerClass}>
@@ -541,29 +490,31 @@ export default function LekhaFlowLanding() {
           <p className="text-center mt-8 text-slate-600 text-[10px] font-bold uppercase tracking-widest">Latest Stable Build: {latestVersion} | Released: {formatDate(publishedAt)}</p>
         </div>
       </section>
+
       {/* TESTIMONIALS */}
-	<section className="py-24 bg-[#020617] border-t border-slate-900">
-  		<div className={containerClass}>
-    		<div className="text-center mb-16">
-     		 <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
-        	{isHindi ? "लेखाकार क्या कहते हैं" : "What Accountants Say"}
-      		</h2>
-    		</div>
-   		 <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      		{[
-        { name: "CA Rahul Sharma", firm: "Sharma & Associates, Raipur", quote: isHindi ? "बैंक स्टेटमेंट को टैली में डालने में 3 घंटे बचते हैं।" : "Bank statement entry that used to take 3 hours now finishes in 10 minutes." },
-        { name: "Priya Gupta", firm: "Gupta Tax Consultants, Bilaspur", quote: isHindi ? "सेल्स स्प्लिट फीचर बहुत शक्तिशाली है। मैन्युअल कैलकुलेशन खत्म।" : "The Sales Split feature is powerful. No more manual calculations for GST compliance." },
-        { name: "Rajesh Agrawal", firm: "Agrawal & Co., Ambikapur", quote: isHindi ? "7-दिन के ट्रायल में 500 इनवॉइस प्रोसेस किए। 99% सटीक।" : "Processed 500 invoices during the 7-day trial. 99% accuracy on first try." },
-      ].map((t, i) => (
-        <div key={i} className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem]">
-          <p className="text-slate-300 text-sm italic leading-relaxed mb-6">"{t.quote}"</p>
-          <p className="text-white font-black text-xs uppercase tracking-widest">{t.name}</p>
-          <p className="text-teal-500 text-[10px] font-bold uppercase tracking-widest">{t.firm}</p>
+      <section className="py-24 bg-[#020617] border-t border-slate-900">
+        <div className={containerClass}>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
+              {isHindi ? "लेखाकार क्या कहते हैं" : "What Accountants Say"}
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              { name: "CA Rahul Sharma", firm: "Sharma & Associates, Raipur", quote: isHindi ? "बैंक स्टेटमेंट को टैली में डालने में 3 घंटे बचते हैं।" : "Bank statement entry that used to take 3 hours now finishes in 10 minutes." },
+              { name: "Priya Gupta", firm: "Gupta Tax Consultants, Bilaspur", quote: isHindi ? "सेल्स स्प्लिट फीचर बहुत शक्तिशाली है। मैन्युअल कैलकुलेशन खत्म।" : "The Sales Split feature is powerful. No more manual calculations for GST compliance." },
+              { name: "Rajesh Agrawal", firm: "Agrawal & Co., Ambikapur", quote: isHindi ? "7-दिन के ट्रायल में 500 इनवॉइस प्रोसेस किए। 99% सटीक।" : "Processed 500 invoices during the 7-day trial. 99% accuracy on first try." },
+            ].map((t, i) => (
+              <div key={i} className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem]">
+                <p className="text-slate-300 text-sm italic leading-relaxed mb-6">"{t.quote}"</p>
+                <p className="text-white font-black text-xs uppercase tracking-widest">{t.name}</p>
+                <p className="text-teal-500 text-[10px] font-bold uppercase tracking-widest">{t.firm}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
+
       {/* FOOTER */}
       <footer className="py-20 border-t border-slate-900 bg-[#020617] text-center">
         <div className="max-w-7xl mx-auto px-6">
@@ -582,7 +533,7 @@ export default function LekhaFlowLanding() {
             </Link>
           </div>
           <div className="flex justify-center gap-8 mb-10 opacity-30 grayscale hover:opacity-100 transition-all duration-700">
-              <Laptop size={24} /> <Database size={24} /> <Cpu size={24} /> <ShieldCheck size={24} />
+            <Laptop size={24} /> <Database size={24} /> <Cpu size={24} /> <ShieldCheck size={24} />
           </div>
           <p className="text-slate-500 text-[10px] font-black tracking-[0.5em] uppercase italic">
             {isHindi ? "लेखाफ्लो AI | भारतीय लेखांकन का भविष्य" : "LekhaFlow AI | Engineering the Future of Indian Accounting 🇮🇳"}
@@ -593,22 +544,22 @@ export default function LekhaFlowLanding() {
       {/* INTAKE MODAL */}
       <AnimatePresence>
         {showIntakeModal && (
-            <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="fixed inset-0 z-[150] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4">
-                <motion.div initial={{scale:0.9, y:20}} animate={{scale:1, y:0}} className="bg-slate-900 border-2 border-teal-500 p-10 rounded-[3.5rem] max-w-md w-full relative shadow-2xl">
-                    <button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-500 hover:text-white"><X size={28}/></button>
-                    <form onSubmit={handleIntakeSubmit} className="space-y-6">
-                        <div className="text-center mb-10">
-                            <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic">Access Portal</h3>
-                            <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-2">Get started with LekhaFlow Professional</p>
-                        </div>
-                        <input required placeholder="YOUR FULL NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}/>
-                        <input required placeholder="COMPANY NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}/>
-                        <input required placeholder="WHATSAPP NUMBER" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}/>
-                        <input required type="email" placeholder="EMAIL ADDRESS" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientEmail: e.target.value})}/>
-                        <button type="submit" className="w-full py-6 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-[10px] tracking-[0.2em] shadow-xl">CONTINUE TO DOWNLOAD CENTER</button>
-                    </form>
-                </motion.div>
+          <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="fixed inset-0 z-[150] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4">
+            <motion.div initial={{scale:0.9, y:20}} animate={{scale:1, y:0}} className="bg-slate-900 border-2 border-teal-500 p-10 rounded-[3.5rem] max-w-md w-full relative shadow-2xl">
+              <button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-500 hover:text-white"><X size={28}/></button>
+              <form onSubmit={handleIntakeSubmit} className="space-y-6">
+                <div className="text-center mb-10">
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic">Access Portal</h3>
+                  <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-2">Get started with LekhaFlow Professional</p>
+                </div>
+                <input required placeholder="YOUR FULL NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}/>
+                <input required placeholder="COMPANY NAME" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}/>
+                <input required placeholder="WHATSAPP NUMBER" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}/>
+                <input required type="email" placeholder="EMAIL ADDRESS" className="w-full bg-slate-950 border border-slate-800 p-5 rounded-2xl text-white font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientEmail: e.target.value})}/>
+                <button type="submit" className="w-full py-6 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-[10px] tracking-[0.2em] shadow-xl">CONTINUE TO DOWNLOAD CENTER</button>
+              </form>
             </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -623,17 +574,18 @@ export default function LekhaFlowLanding() {
           razorpayUrl={selectedPlan.url}
         />
       )}
+
       {/* STICKY TRIAL BAR */}
-<div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[90] hidden md:flex items-center gap-4 bg-slate-900/95 backdrop-blur-xl border border-slate-700 px-6 py-3 rounded-full shadow-2xl">
-  <span className="text-white font-black text-xs uppercase tracking-widest">Ready to automate your Tally?</span>
-  <button 
-    onClick={() => { setIntakeTarget("demo"); setShowIntakeModal(true); }}
-    className="bg-teal-600 hover:bg-teal-500 text-white px-5 py-2 rounded-full font-black text-[10px] uppercase tracking-widest transition-all"
-  >
-    Download Free Trial
-  </button>
-</div>
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[90] hidden md:flex items-center gap-4 bg-slate-900/95 backdrop-blur-xl border border-slate-700 px-6 py-3 rounded-full shadow-2xl">
+        <span className="text-white font-black text-xs uppercase tracking-widest">Ready to automate your Tally?</span>
+        <button 
+          onClick={() => { setIntakeTarget("demo"); setShowIntakeModal(true); }}
+          className="bg-teal-600 hover:bg-teal-500 text-white px-5 py-2 rounded-full font-black text-[10px] uppercase tracking-widest transition-all"
+        >
+          Download Free Trial
+        </button>
+      </div>
       <WhatsAppButton />
-    </div>
+    </>
   );
 }
