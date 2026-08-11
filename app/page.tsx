@@ -122,18 +122,20 @@ export default function LekhaFlowLanding() {
   const timeSavedValue = invoices * 3;
   const annualSavingsValue = Math.round((timeSavedValue / 60) * (staffCost / 160)) * 12;
 
-  const openPayment = (key: string, plan: typeof productData.standard) => {
-    setSelectedPlan({
-      key,
-      name: plan.title,
-      price: plan.offerPrice,
-      url: plan.razorpayUrl,
-    });
-    setPaymentModalOpen(true);
-  };
+   const openPayment = (key: string, plan: typeof productData.standard) => {
+    // Gold Plan ke liye direct Razorpay link
+    if (key === 'gold') {
+      window.open(plan.razorpayUrl, '_blank');
+      return;
+    }
 
-  return (
-    <div className="bg-[#020617] text-slate-200 selection:bg-teal-500 font-sans">
+    // Standard Plan ke liye WhatsApp redirect (Temporary)
+    if (key === 'standard') {
+      const message = encodeURIComponent(`Hi, I am interested in buying LekhaFlow Standard License for ₹7,999.`);
+      window.open(`https://wa.me/918770808695?text=${message}`, '_blank');
+      return;
+    }
+  };
 
       {/* NAVIGATION */}
       <nav className="fixed top-0 w-full z-[100] bg-[#020617]/90 backdrop-blur-xl border-b border-slate-800">
