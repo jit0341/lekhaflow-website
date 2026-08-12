@@ -24,6 +24,7 @@ export default function LekhaFlowLanding() {
   const [latestVersion, setLatestVersion] = useState("");
   const [publishedAt, setPublishedAt] = useState("");
 
+
   // Payment modal state
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<{key: string; name: string; price: string; url: string} | null>(null);
