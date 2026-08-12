@@ -1,92 +1,61 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+import fs from 'fs';
+import path from 'path';
 
-const OWNER = "jit0341";
-const REPO = "lekhaflow-website";
+const execAsync = promisify(exec);
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const response = await fetch(
-      `https://api.github.com/repos/${OWNER}/${REPO}/releases`,
-      {
-        headers: {
-          Accept: "application/vnd.github+json",
+    // Fetch latest release from GitHub
+    const response = await fetch('https://api.github.com/repos/jito341/lekhalfow-website/releases/latest');
+    const data = await response.json();
+
+    if (data.tag_name) {
+      return NextResponse.json({
+        success: true,
+        latestVersion: data.tag_name,
+        publishedAt: data.published_at,
+        gold: {
+          url: data.assets.find((a: any) => a.name.includes('gold') && !a.name.includes('trial'))?.https://github.com/jit0341/lekhaflow-website/releases/download/v2.0/Lekhaflow_setup.exe || '',
         },
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      return NextResponse.json(
-        { success: false, message: "Unable to fetch releases" },
-        { status: 500 }
-      );
+        goldTrial: {
+          url: data.assets.find((a: any) => a.name.includes('gold') && a.name.includes('trial'))?.https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/Trial_setup.exe|| '',
+        },
+        standard: {
+          url: data.assets.find((a: any) => a.name.includes('standard'))?.browser_download_url || '',
+        },
+        changelog: data.body || '',
+      });
     }
 
-    const releases = await response.json();
+    return NextResponse.json({ success: false, error: 'No release found' });
+  } catch (error) {
+    console.error('GitHub release fetch error:', error);
+    return NextResponse.json({ success: false, error: 'Failed to fetch releases' });
+  }
+}
 
-    const result = {
-      standard: { version: "", publishedAt: "", url: "" },
-      demo: { version: "", publishedAt: "", url: "" },
-      gold: { version: "", publishedAt: "", url: "" },
-      gold_trial: { version: "", publishedAt: "", url: "" }, // For downloads page
-    };
+// New: Handle updates
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { action, version } = body;
 
-    for (const release of releases) {
-      const tag = String(release.tag_name).toUpperCase();
+    if (action === 'update') {
+      // Trigger update process
+      await execAsync(`python3 update_software.py ${version || 'latest'}`);
       
-      if (!release.assets || release.assets.length === 0) {
-        continue;
-      }
-
-      const asset = release.assets[0];
-
-      if (tag === "V1FULL" || tag === "STANDARD") {
-        result.standard = {
-          version: release.tag_name,
-          publishedAt: release.published_at,
-          url: asset.browser_download_url,
-        };
-        // Also map to gold_trial if needed
-        if (!result.gold_trial.url) {
-          result.gold_trial = {
-            version: release.tag_name,
-            publishedAt: release.published_at,
-            url: asset.browser_download_url,
-          };
-        }
-      } else if (tag === "V1.0" || tag === "DEMO") {
-        result.demo = {
-          version: release.tag_name,
-          publishedAt: release.published_at,
-          url: asset.browser_download_url,
-        };
-      } else if (tag.includes("GOLD") || tag === "GOLD") {
-        result.gold = {
-          version: release.tag_name,
-          publishedAt: release.published_at,
-          url: asset.browser_download_url,
-        };
-        // Also map to gold_trial
-        result.gold_trial = {
-          version: release.tag_name,
-          publishedAt: release.published_at,
-          url: asset.browser_download_url,
-        };
-      }
+      return NextResponse.json({
+        success: true,
+        message: 'Update triggered successfully',
+      });
     }
 
-    return NextResponse.json({
-      success: true,
-      standard: result.standard,
-      demo: result.demo,
-      gold: result.gold,
-      gold_trial: result.gold_trial,
-    });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json(
-      { success: false },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: 'Invalid action' });
+  } catch (error) {
+    console.error('Update error:', error);
+    return NextResponse.json({ success: false, error: 'Update failed' });
   }
 }
