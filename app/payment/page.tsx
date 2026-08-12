@@ -1,10 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { CheckCircle2, XCircle, Loader2, Download } from "lucide-react";
 import Link from "next/link";
 
-export default function PaymentStatusPage() {
+// ✅ Separate component that uses useSearchParams
+function PaymentContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [status, setStatus] = useState<"loading" | "success" | "failed">("loading");
@@ -22,7 +24,6 @@ export default function PaymentStatusPage() {
       return;
     }
 
-    // Verify payment with our backend
     async function verifyPayment() {
       try {
         const response = await fetch("/api/verify-payment", {
@@ -41,7 +42,6 @@ export default function PaymentStatusPage() {
           setStatus("success");
           setLicenseData(data);
           
-          // Auto-download license file
           if (data.licenseContent) {
             downloadLicense(data.licenseContent, data.filename);
           }
@@ -165,5 +165,23 @@ export default function PaymentStatusPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+// ✅ Main Page Component with Suspense Boundary
+export default function PaymentStatusPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#020617] flex items-center justify-center p-4">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 text-teal-500 animate-spin mx-auto mb-6" />
+          <h2 className="text-2xl font-black text-white uppercase tracking-tighter">
+            Loading...
+          </h2>
+        </div>
+      </div>
+    }>
+      <PaymentContent />
+    </Suspense>
   );
 }
