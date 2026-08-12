@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { X, CreditCard, Smartphone, Building2, Loader2, CheckCircle2, Copy } from "lucide-react";
+import { X, CreditCard, Smartphone, Building2, Loader2, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface PaymentModalProps {
@@ -20,7 +20,6 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
     company: "",
     email: "",
     mobile: "",
-    machineId: "",
   });
   const [loading, setLoading] = useState(false);
   const [paymentId, setPaymentId] = useState("");
@@ -48,10 +47,6 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
 
     setLoading(false);
     setStep("payment");
-  };
-
-  const copyMachineId = () => {
-    navigator.clipboard.writeText(formData.machineId);
   };
 
   return (
@@ -130,27 +125,8 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
                       onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
                     />
                   </div>
-                  <div>
-                    <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block mb-2">Machine ID (from software) *</label>
-                    <div className="relative">
-                      <input
-                        required
-                        type="text"
-                        placeholder="LF-XXXX-XXXX-XXXX"
-                        className="w-full bg-slate-950 border border-slate-800 p-4 pr-12 rounded-2xl text-white font-bold text-xs outline-none focus:border-teal-500 transition-all"
-                        value={formData.machineId}
-                        onChange={(e) => setFormData({ ...formData, machineId: e.target.value })}
-                      />
-                      <button
-                        type="button"
-                        onClick={copyMachineId}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-teal-500"
-                      >
-                        <Copy size={16} />
-                      </button>
-                    </div>
-                    <p className="text-slate-600 text-[10px] mt-2">Open LekhaFlow → Click &quot;About&quot; → Copy Machine ID</p>
-                  </div>
+
+                  {/* ✅ Machine ID Section REMOVED */}
 
                   <button
                     type="submit"
@@ -175,6 +151,7 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
                   <a
                     href={razorpayUrl}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-4 w-full p-5 bg-slate-950 border border-slate-800 rounded-2xl hover:border-teal-500 transition-all group"
                   >
                     <div className="w-12 h-12 bg-teal-500/10 rounded-xl flex items-center justify-center group-hover:bg-teal-500/20">
@@ -240,6 +217,7 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
                 <a
                   href="https://wa.me/918770808695"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 px-8 py-4 bg-teal-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-teal-500 transition-all"
                 >
                   <Smartphone size={16} /> Contact on WhatsApp
