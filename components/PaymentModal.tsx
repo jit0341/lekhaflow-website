@@ -16,19 +16,18 @@ interface PaymentModalProps {
 export default function PaymentModal({ isOpen, onClose, plan, planName, price, razorpayUrl }: PaymentModalProps) {
   const [step, setStep] = useState<"form" | "payment" | "success">("form");
   const [formData, setFormData] = useState({
-    name: "",
-    company: "",
-    email: "",
-    mobile: "",
+    name: "Jitendra Bharti",
+    company: "Nexoriva Systems",
+    email: "jitendrablog6@gmail.com",
+    mobile: "+91 8770808695",
   });
   const [loading, setLoading] = useState(false);
-  const [paymentId, setPaymentId] = useState("");
+  const [showSkipOption, setShowSkipOption] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    // Save lead to Google Sheet before redirecting
     try {
       await fetch("/api/save_lead", {
         method: "POST",
@@ -47,6 +46,48 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
 
     setLoading(false);
     setStep("payment");
+  };
+
+  // ✅ Founder Skip Payment Function
+  const handleSkipPayment = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/generate_license", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          mobile: formData.mobile,
+          plan: planName,
+          amount: price,
+          paymentId: "SKIPPED_" + Date.now(),
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setStep("success");
+        // Download license file
+        if (data.licenseContent) {
+          const blob = new Blob([data.licenseContent], { type: "text/plain" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "license.dat";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+      }
+    } catch (error) {
+      console.error("Skip payment error:", error);
+      alert("Failed to generate license. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -79,6 +120,22 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
                   <p className="text-teal-500 font-black text-3xl tracking-tighter mt-2">₹{price}</p>
                   <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Yearly Subscription</p>
                 </div>
+
+                {/* ✅ Skip Payment Option - Only for Founder */}
+                {showSkipOption && (
+                  <div className="mb-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-2xl">
+                    <p className="text-amber-400 text-[10px] font-bold uppercase tracking-widest text-center">
+                      🚀 Founder Mode: Skip Payment & Get License Instantly
+                    </p>
+                    <button
+                      onClick={handleSkipPayment}
+                      disabled={loading}
+                      className="w-full mt-2 py-2 bg-amber-500 text-black font-black rounded-xl uppercase text-[10px] tracking-widest hover:bg-amber-400 transition-all disabled:opacity-50"
+                    >
+                      {loading ? <Loader2 size={16} className="animate-spin mx-auto" /> : "⚡ Skip Payment & Generate License"}
+                    </button>
+                  </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
@@ -125,8 +182,6 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
                       onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
                     />
                   </div>
-
-                  {/* ✅ Machine ID Section REMOVED */}
 
                   <button
                     type="submit"
