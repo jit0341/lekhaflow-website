@@ -273,7 +273,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* TRUST BADGE SECTION */}
+      {/* TRUST BADGE SECTION - ✅ FIXED */}
       <section className="py-12 bg-slate-950/50 border-y border-slate-900">
         <div className={containerClass}>
           <div className="flex flex-wrap justify-center items-center gap-12">
@@ -282,7 +282,7 @@ export default function LekhaFlowLanding() {
               <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">CAs & Firms Trust Us</p>
             </div>
             <div className="text-center">
-              <p className="text-4xl font-black text-teal-500">minimum charge
+              <p className="text-4xl font-black text-teal-500">₹0.10</p>
               <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Per Invoice Processing</p>
             </div>
             <div className="text-center">
@@ -458,8 +458,8 @@ export default function LekhaFlowLanding() {
                  </h3>
                  <p className="text-slate-400 italic text-sm leading-relaxed mb-4">
                    {isHindi 
-                     ? "भारतीय लेखा समुदाय को क्लर्कियल बोझ कम करके सशक्त बनाना हमारा मिशन है। हम  इनवॉइस की प्रोसेसिंग लागत और 100% डेटा अखंडता को लक्षित कर रहे हैं।" 
-                     : "Our mission is to empower the Indian accounting community by reducing the clerical burden. We are targeting a processing cost minimum voice with 100% data integrity."}
+                     ? "भारतीय लेखा समुदाय को क्लर्कियल बोझ कम करके सशक्त बनाना हमारा मिशन है। हम इनवॉइस की प्रोसेसिंग लागत और 100% डेटा अखंडता को लक्षित कर रहे हैं।" 
+                     : "Our mission is to empower the Indian accounting community by reducing the clerical burden. We are targeting a processing cost with 100% data integrity."}
                  </p>
                  <p className="text-teal-500 font-bold text-[10px] uppercase tracking-[0.2em]">
                    {isHindi ? "जितेंद्र भारती — संस्थापक, लेखाफ्लो" : "Jitendra Bharti — Founder, LekhaFlow"}
