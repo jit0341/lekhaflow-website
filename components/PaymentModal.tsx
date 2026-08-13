@@ -23,8 +23,10 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
   });
   const [loading, setLoading] = useState(false);
 
-  // ✅ Check if user is the founder (based on email)
-  const isFounder = formData.email === "jitendrablog@gmail.com";
+  // ✅ Founder Mode - ONLY enabled in local development
+  // Production में NEXT_PUBLIC_ENABLE_FOUNDER_MODE = false होना चाहिए
+  const isFounderMode = process.env.NEXT_PUBLIC_ENABLE_FOUNDER_MODE === "true";
+  const isFounder = isFounderMode && formData.email === "jitendrablog@gmail.com";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +54,6 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
 
   // ✅ Founder Skip Payment Function
   const handleSkipPayment = () => {
-    // Generate license instantly
     fetch("/api/generate_license", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -155,14 +156,14 @@ export default function PaymentModal({ isOpen, onClose, plan, planName, price, r
                     />
                   </div>
 
-                  {/* ✅ Founder Mode: Skip Payment Button (Only visible to founder) */}
+                  {/* ✅ Founder Skip Payment - ONLY in Local Development */}
                   {isFounder && (
                     <button
                       type="button"
                       onClick={handleSkipPayment}
                       className="w-full py-5 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-black rounded-2xl uppercase text-[10px] tracking-[0.2em] shadow-xl hover:shadow-purple-500/20 transition-all flex items-center justify-center gap-2"
                     >
-                      ⚡ Skip Payment & Generate License
+                      ⚡ Skip Payment & Generate License (Dev Mode)
                     </button>
                   )}
 
