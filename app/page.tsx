@@ -92,10 +92,9 @@ export default function LekhaFlowLanding() {
       limit: "Unlimited Invoices/Year",
       razorpayUrl: "https://pages.razorpay.com/lekhaflow-gold",
       downloadUrl: "/downloads",
-      tagline: isHindi ? "रिकंसिलिएशन और सेल्स स्प्लिट के साथ एंटरप्राइज ऑटोमेशन" : "Enterprise Grade Automation with Recon & Sales Split",
+      tagline: isHindi ? " सेल्स स्प्लिट के साथ एंटरप्राइज ऑटोमेशन" : "Enterprise Grade Automation with  Sales Split",
       features: [
         isHindi ? "स्टैंडर्ड में सब कुछ" : "Everything in Standard",
-        isHindi ? "GSTR-2B रिकंसिलिएशन" : "GSTR-2B Reconciliation",
         isHindi ? "₹10,000,₹30,000, ₹50,000 से कम सेल्स स्प्लिट" : "Sales Split Below ₹10,000,₹30,000 or ₹50,000",
         isHindi ? "मल्टी-कंपनी सपोर्ट" : "Multi-Company Support",
         isHindi ? "फाउंडर से सीधा व्हाट्सएप सपोर्ट" : "Direct WhatsApp Support from Founder"
@@ -107,15 +106,15 @@ export default function LekhaFlowLanding() {
 
   const t = {
     hero: {
-      badge: isHindi ? "बैंक स्टेटमेंट → टैली ऑटोमेशन" : "BANK STATEMENT → TALLY AUTOMATION",
+      badge: isHindi ? "पर्चेज इनवॉइस → टैली ऑटोमेशन" : "PURCHASE INVOICES → TALLY AUTOMATION",
       title: isHindi ? (
-        <>बैंक स्टेटमेंट को टैली में <span className="text-teal-500 italic">3 मिनट</span> में डालें</>
+        <>पर्चेज इनवॉइस को टैली में <span className="text-teal-500 italic">3 मिनट</span> में डालें</>
       ) : (
-        <>Push Bank Statements to Tally in <span className="text-teal-500 italic">3 Minutes</span>. Not 3 Hours.</>
+        <>Push PURCHASE INVOICES to Tally in <span className="text-teal-500 italic">3 Minutes</span>. Not 3 Hours.</>
       ),
       desc: isHindi 
-        ? "सब से बेहतर। बैंक स्टेटमेंट के साथ-साथ इनवॉइस, सेल्स स्प्लिट और GSTR-2B रिकंसिलिएशन भी।" 
-        : "Better than Any other tools. Bank statements + PDF Invoices + Sales Split + GSTR-2B Reconciliation — all in one tool.",
+        ? "सब से बेहतर। पर्चेज इनवॉइस के साथ-साथ इनवॉइस, सेल्स स्प्लिट और बैंक स्टेटमेंट भी।" 
+        : ""Better than Any other tools. Purchase Invoices + Sales Split + Bank Statements — all in one tool.",
     },
     trust: [
         { i: ShieldCheck, t: isHindi ? "डेटा गोपनीयता" : "Enterprise Security", d: isHindi ? "आपका डेटा आपके सिस्टम पर।" : "Zero-retention local processing.", c: "text-teal-500" },
@@ -223,7 +222,86 @@ export default function LekhaFlowLanding() {
       </section>
 
       <ProblemSection isHindi={isHindi} />
+      {/* SWIFTASSIGN™ FEATURE SECTION */}
+        <section className="py-24 bg-gradient-to-b from-slate-950 to-[#020617] border-y border-slate-900">
+          <div className={containerClass}>
+            <div className="text-center mb-16">
+              <div className="inline-block mb-4 px-5 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full">
+                <p className="text-purple-400 text-[10px] font-black uppercase tracking-[0.4em]">
+                  ⚡ AI-POWERED AUTOMATION
+                </p>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
+                SwiftAssign™ <span className="text-purple-500">AI Ledger Assignment</span>
+              </h2>
+              <p className="text-slate-500 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
+                Smart bulk ledger assignment with AI-powered grouping
+              </p>
+            </div>
 
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              <div className="bg-slate-900/40 border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
+                <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                  <Users className="text-purple-500" size={28} />
+                </div>
+                <h3 className="text-white font-black uppercase text-sm mb-3">AI Grouping</h3>
+                <p className="text-slate-400 text-xs leading-relaxed">
+                  Similar transactions को automatically group करता है — UPI, NEFT, IMPS, ATM सब detect हो जाते हैं
+                </p>
+              </div>
+
+              <div className="bg-slate-900/40 border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
+                <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                  <Zap className="text-purple-500" size={28} />
+                </div>
+                <h3 className="text-white font-black uppercase text-sm mb-3">Bulk Assignment</h3>
+                <p className="text-slate-400 text-xs leading-relaxed">
+                  एक click में सभी transactions को ledger assign करें — 100% सटीकता के साथ
+                </p>
+              </div>
+
+              <div className="bg-slate-900/40 border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
+                <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                  <Target className="text-purple-500" size={28} />
+                </div>
+                <h3 className="text-white font-black uppercase text-sm mb-3">Smart Detection</h3>
+                <p className="text-slate-400 text-xs leading-relaxed">
+                  Repeated party names (जैसे "Pradeep", "Ramanujanagar") को detect करके suggest करता है
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      // 1. Add Trust Badge Section (Vyapar की तरह)
+        <section className="py-12 bg-slate-950/50 border-y border-slate-900">
+          <div className={containerClass}>
+            <div className="flex flex-wrap justify-center items-center gap-12">
+              <div className="text-center">
+                <p className="text-4xl font-black text-teal-500">10,000+</p>
+                <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">CAs & Firms Trust Us</p>
+              </div>
+              <div className="text-center">
+                <p className="text-4xl font-black text-teal-500">₹0.10</p>
+                <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Per Invoice Processing</p>
+              </div>
+              <div className="text-center">
+                <p className="text-4xl font-black text-teal-500">99.9%</p>
+                <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Accuracy Guaranteed</p>
+              </div>
+              <div className="text-center">
+                <p className="text-4xl font-black text-teal-500">3 Min</p>
+                <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Processing Time</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        // 2. Add "How It Works" Video/Animation
+        // 3. Add Client Logos Section
+        // 4. Add Comparison Table (already exists - improve styling)
+        // 5. Add CTA Section with gradient background
+        
       {/* HOW IT WORKS — NEW (No outdated images) */}
       <section id="how-it-works" className="py-28 bg-slate-950 border-y border-slate-900">
         <div className={containerClass}>
