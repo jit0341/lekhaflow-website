@@ -282,7 +282,7 @@ export default function LekhaFlowLanding() {
               <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">CAs & Firms Trust Us</p>
             </div>
             <div className="text-center">
-              <p className="text-4xl font-black text-teal-500">₹0.10</p>
+              <p className="text-4xl font-black text-teal-500">minimum</p>
               <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Per Invoice Processing</p>
             </div>
             <div className="text-center">
