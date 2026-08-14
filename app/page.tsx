@@ -105,21 +105,21 @@ export default function LekhaFlowLanding() {
 
   const t = {
     hero: {
-      badge: isHindi ? "पर्चेज इनवॉइस → टैली ऑटोमेशन" : "PURCHASE INVOICES → TALLY AUTOMATION",
+      badge: isHindi ? "AI अकाउंटिंग ऑटोमेशन → टैली" : "AI-POWERED ACCOUNTING AUTOMATION → TALLY",
       title: isHindi ? (
-        <>पर्चेज इनवॉइस को टैली में <span className="text-teal-500 italic">3 मिनट</span> में डालें</>
+        <>टैली के लिए <span className="text-teal-500 italic">AI-पावर्ड अकाउंटिंग ऑटोमेशन</span></>
       ) : (
-        <>Push Purchase Invoices to Tally in <span className="text-teal-500 italic">3 Minutes</span>. Not 3 Hours.</>
+        <>AI-Powered Accounting Automation <span className="text-teal-500 italic">for Tally</span></>
       ),
       desc: isHindi 
-        ? "सब से बेहतर। पर्चेज इनवॉइस, सेल्स स्प्लिट और बैंक स्टेटमेंट — सब एक टूल में।" 
-        : "Better than Any other tools. Purchase Invoices + Sales Split + Bank Statements — all in one tool.",
+        ? "पर्चेज और सेल्स इनवॉइस, बैंक स्टेटमेंट और अकाउंटिंग डॉक्यूमेंट को AI से प्रोसेस करें, रिजल्ट को रिव्यू करें और Tally में भेजें।" 
+        : "Automate Purchase & Sales Invoices, Bank Statements and Accounting Documents — then review the results and send them to Tally.",
     },
     trust: [
-        { i: ShieldCheck, t: isHindi ? "डेटा गोपनीयता" : "Enterprise Security", d: isHindi ? "आपका डेटा आपके सिस्टम पर।" : "Zero-retention local processing.", c: "text-teal-500" },
-        { i: Target, t: isHindi ? "शून्य त्रुटि सटीकता" : "Zero-Error Accuracy", d: isHindi ? "99.9% तकनीकी संतुलन।" : "Dynamic balance validation.", c: "text-blue-500" },
-        { i: Cpu, t: isHindi ? "स्मार्ट मैपिंग" : "Smart Auto-Mapping", d: isHindi ? "डुप्लीकेट एंट्री से सुरक्षा।" : "Automatic Ledger matching.", c: "text-amber-500" },
-        { i: Headphones, t: isHindi ? "प्राथमिकता सहायता" : "Priority Support", d: isHindi ? "सीधे फाउंडर डेस्क से।" : "Direct expert technical desk.", c: "text-pink-500" }
+        { i: Cpu, t: isHindi ? "AI अकाउंटिंग ऑटोमेशन" : "AI-Powered Automation", d: isHindi ? "इनवॉइस, बैंक स्टेटमेंट और PDF से अकाउंटिंग डेटा तैयार करें।" : "Process invoices, bank statements and accounting documents with AI.", c: "text-purple-500" },
+        { i: ShieldCheck, t: isHindi ? "क्लाइंट डेटा कंट्रोल" : "Client-Side Data Control", d: isHindi ? "गोपनीय क्लाइंट डेटा पर आपका नियंत्रण।" : "Designed around client-side processing and data control.", c: "text-teal-500" },
+        { i: Target, t: isHindi ? "रिव्यू से टैली तक" : "Review Before Tally", d: isHindi ? "AI तैयार करे, आप रिव्यू करें, फिर Tally में भेजें।" : "AI prepares. You review. Then send the final entries to Tally.", c: "text-blue-500" },
+        { i: Zap, t: isHindi ? "यूनिक सेल्स स्प्लिट" : "Sales Split Advantage", d: isHindi ? "सेल्स टोटल को कई वाउचर में ऑटोमैटिकली स्प्लिट करें।" : "Automatically split a sales total into multiple vouchers.", c: "text-amber-500" }
     ]
   };
 
@@ -169,13 +169,13 @@ export default function LekhaFlowLanding() {
 
           <div className="flex flex-wrap justify-center gap-6 mb-14 text-nowrap">
             <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-widest">
-              <ShieldCheck className="text-teal-500" size={16} /> {isHindi ? "100% सटीक" : "100% Accurate"}
+              <Cpu className="text-teal-500" size={16} /> {isHindi ? "AI Powered" : "AI Powered"}
             </div>
             <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-widest">
-              <Zap className="text-teal-500" size={16} /> {isHindi ? "असीमित एंट्री मुफ्त" : "Unlimited Entries FREE"}
+              <ShieldCheck className="text-teal-500" size={16} /> {isHindi ? "क्लाइंट डेटा कंट्रोल" : "Client-Side Data Control"}
             </div>
             <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-widest">
-              <Target className="text-teal-500" size={16} /> {isHindi ? "₹50K से कम सेल्स स्प्लिट" : "Sales Split Below ₹50K"}
+              <Target className="text-teal-500" size={16} /> {isHindi ? "यूनिक सेल्स स्प्लिट" : "Sales Split Advantage"}
             </div>
           </div>
 
@@ -278,21 +278,43 @@ export default function LekhaFlowLanding() {
         <div className={containerClass}>
           <div className="flex flex-wrap justify-center items-center gap-12">
             <div className="text-center">
-              <p className="text-4xl font-black text-teal-500">10,000+</p>
-              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">CAs & Firms Trust Us</p>
+              <p className="text-4xl font-black text-teal-500">AI</p>
+              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Accounting Automation</p>
             </div>
             <div className="text-center">
-              <p className="text-4xl font-black text-teal-500">minimum</p>
-              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Per Invoice Processing</p>
+              <p className="text-4xl font-black text-teal-500">AI</p>
+              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Invoice & Bank Processing</p>
             </div>
             <div className="text-center">
-              <p className="text-4xl font-black text-teal-500">99.9%</p>
-              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Accuracy Guaranteed</p>
+              <p className="text-4xl font-black text-teal-500">Tally</p>
+              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Ready Workflow</p>
             </div>
             <div className="text-center">
-              <p className="text-4xl font-black text-teal-500">3 Min</p>
-              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Processing Time</p>
+              <p className="text-4xl font-black text-teal-500">Local</p>
+              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Data Control</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PRIVACY / DATA CONTROL MESSAGE */}
+      <section className="py-20 bg-slate-950 border-y border-slate-900">
+        <div className={containerClass}>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-5 py-2 bg-teal-500/5 border border-teal-500/20 rounded-full mb-6">
+              <ShieldCheck className="text-teal-500" size={16} />
+              <span className="text-teal-400 text-[10px] font-black uppercase tracking-[0.3em]">
+                {isHindi ? "प्राइवेसी और डेटा कंट्रोल" : "PRIVACY & DATA CONTROL"}
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-6">
+              {isHindi ? "आपके क्लाइंट का डेटा, आपका नियंत्रण" : "Your Client Data. Your Control."}
+            </h2>
+            <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+              {isHindi
+                ? "LekhaFlow उन प्रोफेशनल्स के लिए बनाया गया है जो संवेदनशील अकाउंटिंग डेटा संभालते हैं। हमारा workflow client-side processing और data control को ध्यान में रखकर बनाया गया है।"
+                : "LekhaFlow is built for professionals who handle confidential accounting data. The workflow is designed around client-side processing and keeping control of sensitive accounting information with the client environment."}
+            </p>
           </div>
         </div>
       </section>
@@ -307,12 +329,12 @@ export default function LekhaFlowLanding() {
               </p>
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
-              {isHindi ? "बैंक इंटेलिजेंस कैसे काम करता है" : "How Bank Intelligence Works"}
+              {isHindi ? "लेखाफ्लो कैसे काम करता है" : "How LekhaFlow Works"}
             </h2>
             <p className="text-slate-500 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
               {isHindi 
-                ? "कोई मैन्युअल टाइपिंग नहीं। बस PDF अपलोड करें और टैली में देखें।" 
-                : "No manual typing. Just upload your PDF and watch it appear in Tally."}
+                ? "इनवॉइस, बैंक स्टेटमेंट और अकाउंटिंग डॉक्यूमेंट से AI ऑटोमेशन — रिव्यू करें और Tally में भेजें।" 
+                : "From invoices and bank statements to accounting entries — AI processes the work, you review it, then send it to Tally."}
             </p>
           </div>
 
@@ -339,8 +361,8 @@ export default function LekhaFlowLanding() {
           <div className="mt-16 text-center">
             <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest mb-6">
               {isHindi 
-                ? "यही प्रक्रिया पर्चेज इनवॉइस और सेल्स स्प्लिट के लिए भी काम करती है।" 
-                : "The same process works for Purchase Invoices and Sales Split too."}
+                ? "यही workflow Purchase Invoices, Sales Invoices, Bank Statements और Sales Split के लिए बनाया गया है।" 
+                : "The same workflow extends across Purchase Invoices, Sales Invoices, Bank Statements and Sales Split."}
             </p>
             <div className="inline-flex items-center gap-3 px-6 py-3 bg-slate-900 border border-slate-800 rounded-2xl">
               <Zap size={16} className="text-amber-500" />
@@ -473,7 +495,7 @@ export default function LekhaFlowLanding() {
       <section className="py-24 bg-slate-950 border-y border-slate-900">
         <div className={containerClass}>
           <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-12 text-center">
-            {isHindi ? "तुलना" : "Why LekhaFlow Wins"}
+            {isHindi ? "लेखाफ्लो क्यों अलग है" : "Built Differently for Tally Professionals"}
           </h2>
           <div className="max-w-4xl mx-auto overflow-x-auto">
             <table className="w-full text-left">
@@ -482,7 +504,7 @@ export default function LekhaFlowLanding() {
                   <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest">Feature</th>
                   <th className="py-4 text-teal-500 text-[10px] font-black uppercase tracking-widest text-center">LekhaFlow</th>
                   <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">Vyapar TaxOne</th>
-                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">VoucherIt</th>
+                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">Vouchrit</th>
                 </tr>
               </thead>
               <tbody className="text-xs font-bold text-slate-300">
