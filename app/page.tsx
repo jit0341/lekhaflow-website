@@ -138,7 +138,9 @@ export default function LekhaFlowLanding() {
 
   return (
     <>
+      {/* ============================================================ */}
       {/* NAVIGATION */}
+      {/* ============================================================ */}
       <nav className="fixed top-0 w-full z-[100] bg-[#020617]/90 backdrop-blur-xl border-b border-slate-800">
         <div className={containerClass + " flex justify-between items-center h-20"}>
           <Link href="/" className="text-xl font-black text-white tracking-tighter uppercase">LEKHA<span className="text-teal-500">FLOW</span></Link>
@@ -156,7 +158,7 @@ export default function LekhaFlowLanding() {
       </nav>
 
       {/* ============================================================ */}
-      {/* HERO SECTION — UPDATED with Privacy + Sales Split */}
+      {/* HERO SECTION — Updated with Privacy + Sales Split + Video */}
       {/* ============================================================ */}
       <section className="pt-36 pb-24 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.08)_0,transparent_70%)] pointer-events-none" />
@@ -178,7 +180,7 @@ export default function LekhaFlowLanding() {
             {t.hero.desc}
           </p>
 
-          {/* 🔥 NEW: Hero Sub-message — Privacy + Sales Split */}
+          {/* Hero Sub-message — Privacy + Sales Split */}
           <p className="text-teal-400/80 text-sm md:text-base font-bold max-w-3xl mx-auto leading-relaxed mb-8 bg-slate-900/50 border border-teal-500/20 rounded-2xl py-4 px-6 inline-block">
             {isHindi ? (
               <>
@@ -207,21 +209,36 @@ export default function LekhaFlowLanding() {
             </div>
           </div>
 
+          {/* ========================================================== */}
+          {/* BUTTONS — Direct Download + License + WhatsApp */}
+          {/* ========================================================== */}
           <div className="flex flex-wrap justify-center gap-5 mb-20">
-            <button 
-              onClick={() => { setIntakeTarget("demo"); setShowIntakeModal(true); }}
+            {/* Direct Download Button */}
+            <a 
+              href="/downloads" 
               className="group flex items-center gap-3 px-10 py-5 bg-teal-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest shadow-2xl shadow-teal-600/20 hover:bg-teal-500 hover:-translate-y-1 transition-all"
             >
-              <Download size={18} /> {isHindi ? "7-दिन का फ्री ट्रायल डाउनलोड करें" : "Download 7-Day Free Trial"}
+              <Download size={18} /> {isHindi ? "फ्री ट्रायल डाउनलोड करें" : "Download Free Trial"}
+            </a>
+            
+            {/* License Button */}
+            <button 
+              onClick={() => { setIntakeTarget("demo"); setShowIntakeModal(true); }}
+              className="px-10 py-5 bg-slate-800 text-white font-black rounded-2xl uppercase text-xs tracking-widest border border-slate-700 hover:bg-slate-700 transition-all"
+            >
+              {isHindi ? "लाइसेंस लें" : "Get License"}
             </button>
+            
+            {/* WhatsApp */}
             <button 
               onClick={() => window.open("https://wa.me/918770808695", "_blank")}
-              className="px-10 py-5 bg-slate-900 text-white font-black rounded-2xl uppercase text-xs tracking-widest border border-slate-800 hover:bg-slate-800 transition-all"
+              className="px-10 py-5 bg-green-600/20 text-green-400 font-black rounded-2xl uppercase text-xs tracking-widest border border-green-500/30 hover:bg-green-600/30 transition-all"
             >
-              {isHindi ? "व्हाट्सएप पर संपर्क करें" : "Talk to Founder on WhatsApp"}
+              💬 {isHindi ? "व्हाट्सएप पर पूछें" : "Ask on WhatsApp"}
             </button>
           </div>
 
+          {/* Main Image */}
           <div className="max-w-5xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-2 shadow-2xl">
             <img 
               src="/bank-intelligence.png" 
@@ -230,6 +247,27 @@ export default function LekhaFlowLanding() {
             />
           </div>
 
+          {/* ========================================================== */}
+          {/* DEMO VIDEO — Add after main image */}
+          {/* ========================================================== */}
+          <div className="mt-8 max-w-4xl mx-auto">
+            <div className="relative bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+              <video 
+                src="/demo.mp4" 
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                className="w-full"
+                poster="/demo-poster.png"
+              />
+              <div className="absolute bottom-4 right-4 bg-black/80 px-3 py-1 rounded-full text-[10px] text-white font-bold tracking-widest">
+                ▶ 60 sec demo
+              </div>
+            </div>
+          </div>
+
+          {/* Stats */}
           <div className="mt-16 flex flex-wrap justify-center gap-12 border-t border-slate-900 pt-12 text-nowrap">
             {[
                 { l: isHindi ? "सटीकता" : "Accuracy", v: "100%", i: Target },
@@ -251,7 +289,7 @@ export default function LekhaFlowLanding() {
       <ProblemSection isHindi={isHindi} />
 
       {/* ============================================================ */}
-      {/* 🔥 NEW: SALES SPLIT FEATURE — UNIQUE USP */}
+      {/* SALES SPLIT FEATURE — UNIQUE USP */}
       {/* ============================================================ */}
       <section id="features" className="py-24 bg-gradient-to-b from-slate-950 to-[#020617] border-y border-amber-500/20">
         <div className={containerClass}>
@@ -328,7 +366,9 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* SwiftAssign™ Feature Section */}
+      {/* ============================================================ */}
+      {/* SwiftAssign™ AI Ledger Assignment */}
+      {/* ============================================================ */}
       <section className="py-24 bg-gradient-to-b from-slate-950 to-[#020617] border-y border-slate-900">
         <div className={containerClass}>
           <div className="text-center mb-16">
@@ -380,7 +420,104 @@ export default function LekhaFlowLanding() {
       </section>
 
       {/* ============================================================ */}
-      {/* 🔥 UPDATED: PRIVACY SECTION — Stronger + More Prominent */}
+      {/* WHY LEKHAFLOW — Enhanced Trust Section */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-slate-950 border-y border-slate-900">
+        <div className={containerClass}>
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4 px-5 py-2 bg-teal-500/10 border border-teal-500/30 rounded-full">
+              <p className="text-teal-400 text-[10px] font-black uppercase tracking-[0.4em]">
+                {isHindi ? "💪 क्यों चुनें लेखाफ्लो" : "💪 WHY CHOOSE LEKHAFLOW"}
+              </p>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
+              {isHindi ? "लेखाफ्लो क्यों चुनें" : "Why Choose LekhaFlow?"}
+            </h2>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
+              {isHindi 
+                ? "AI स्पीड + डेस्कटॉप कंट्रोल + प्राइवेसी"
+                : "AI Speed + Desktop Control + Privacy"}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="bg-slate-900/40 border border-slate-800 p-10 rounded-[3rem] hover:border-teal-500/30 transition-all">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-teal-500/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Shield className="text-teal-500" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-white font-black uppercase text-sm mb-2 tracking-widest">
+                    {isHindi ? "100% क्लाइंट डेटा प्राइवेसी" : "100% Client Data Privacy"}
+                  </h3>
+                  <p className="text-slate-500 text-xs leading-relaxed">
+                    {isHindi 
+                      ? "आपका डेटा आपके सिस्टम पर रहता है। कोई क्लाउड स्टोरेज नहीं। CAs के लिए बिल्कुल सुरक्षित।"
+                      : "Your data stays on your system. No cloud storage. Completely safe for CAs."}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-slate-900/40 border border-slate-800 p-10 rounded-[3rem] hover:border-teal-500/30 transition-all">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-amber-500/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Split className="text-amber-500" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-white font-black uppercase text-sm mb-2 tracking-widest">
+                    {isHindi ? "यूनिक सेल्स स्प्लिट" : "Unique Sales Split"}
+                  </h3>
+                  <p className="text-slate-500 text-xs leading-relaxed">
+                    {isHindi 
+                      ? "एक सेल्स इनवॉइस को कई वाउचर में ऑटोमैटिकली स्प्लिट करें। कोई और नहीं देता।"
+                      : "Automatically split one sales invoice into multiple vouchers. Nobody else offers this."}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-slate-900/40 border border-slate-800 p-10 rounded-[3rem] hover:border-teal-500/30 transition-all">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Cpu className="text-purple-500" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-white font-black uppercase text-sm mb-2 tracking-widest">
+                    {isHindi ? "AI-पावर्ड ऑटोमेशन" : "AI-Powered Automation"}
+                  </h3>
+                  <p className="text-slate-500 text-xs leading-relaxed">
+                    {isHindi 
+                      ? "इनवॉइस, बैंक स्टेटमेंट, PDF — सब AI पढ़ता है। आप सिर्फ रिव्यू करें।"
+                      : "Invoices, bank statements, PDFs — AI reads everything. You just review."}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-slate-900/40 border border-slate-800 p-10 rounded-[3rem] hover:border-teal-500/30 transition-all">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Zap className="text-blue-500" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-white font-black uppercase text-sm mb-2 tracking-widest">
+                    {isHindi ? "80x तेज़" : "80x Faster"}
+                  </h3>
+                  <p className="text-slate-500 text-xs leading-relaxed">
+                    {isHindi 
+                      ? "मैन्युअल एंट्री की तुलना में 80 गुना तेज़। घंटों का काम मिनटों में।"
+                      : "80 times faster than manual entry. Hours of work in minutes."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* PRIVACY SECTION — Stronger + More Prominent */}
       {/* ============================================================ */}
       <section className="py-20 bg-gradient-to-b from-slate-950 to-[#020617] border-y-2 border-teal-500/20">
         <div className={containerClass}>
@@ -400,7 +537,7 @@ export default function LekhaFlowLanding() {
                 : "LekhaFlow is built for professionals who handle confidential accounting data. The workflow is designed around client-side processing and keeping control of sensitive accounting information with the client environment."}
             </p>
             
-            {/* 🔥 NEW: Privacy Bullet Points */}
+            {/* Privacy Bullet Points */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto text-left">
               <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-start gap-4">
                 <Shield className="text-teal-500 flex-shrink-0 mt-1" size={20} />
@@ -440,31 +577,116 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* TRUST BADGE SECTION */}
-      <section className="py-12 bg-slate-950/50 border-y border-slate-900">
+      {/* ============================================================ */}
+      {/* USE CASES SECTION — Who Is It For */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-slate-950 border-y border-slate-900">
         <div className={containerClass}>
-          <div className="flex flex-wrap justify-center items-center gap-12">
-            <div className="text-center">
-              <p className="text-4xl font-black text-teal-500">AI</p>
-              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Accounting Automation</p>
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4 px-5 py-2 bg-teal-500/10 border border-teal-500/30 rounded-full">
+              <p className="text-teal-400 text-[10px] font-black uppercase tracking-[0.4em]">
+                {isHindi ? "🎯 किसके लिए है" : "🎯 WHO IS IT FOR"}
+              </p>
             </div>
-            <div className="text-center">
-              <p className="text-4xl font-black text-teal-500">AI</p>
-              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Invoice & Bank Processing</p>
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
+              {isHindi ? "लेखाफ्लो किसके लिए है" : "Who Is LekhaFlow For?"}
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Tally Users */}
+            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:border-teal-500/30 transition-all text-center">
+              <div className="w-16 h-16 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6">
+                <Users className="text-blue-500" size={28} />
+              </div>
+              <h3 className="text-white font-black uppercase text-sm mb-3">
+                {isHindi ? "टैली यूज़र्स" : "Tally Users"}
+              </h3>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                {isHindi 
+                  ? "रोज़ाना के वाउचर एंट्री को तेज़ करें। बैंक स्टेटमेंट, इनवॉइस सब एक जगह।"
+                  : "Speed up daily voucher entry. Bank statements, invoices, all in one place."}
+              </p>
             </div>
-            <div className="text-center">
-              <p className="text-4xl font-black text-teal-500">Tally</p>
-              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Ready Workflow</p>
+
+            {/* CA Firms */}
+            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:border-teal-500/30 transition-all text-center">
+              <div className="w-16 h-16 mx-auto bg-teal-500/10 rounded-2xl flex items-center justify-center mb-6">
+                <Building2 className="text-teal-500" size={28} />
+              </div>
+              <h3 className="text-white font-black uppercase text-sm mb-3">
+                {isHindi ? "CA फर्म्स" : "CA Firms"}
+              </h3>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                {isHindi 
+                  ? "क्लाइंट डेटा की गोपनीयता बनाए रखें। ऑटोमेशन के साथ कंट्रोल भी।"
+                  : "Maintain client data confidentiality. Automation with control."}
+              </p>
             </div>
-            <div className="text-center">
-              <p className="text-4xl font-black text-teal-500">Local</p>
-              <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Data Control</p>
+
+            {/* Tax Consultants */}
+            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] hover:border-teal-500/30 transition-all text-center">
+              <div className="w-16 h-16 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6">
+                <FileText className="text-amber-500" size={28} />
+              </div>
+              <h3 className="text-white font-black uppercase text-sm mb-3">
+                {isHindi ? "टैक्स कंसल्टेंट्स" : "Tax Consultants"}
+              </h3>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                {isHindi 
+                  ? "GST रिकंसिलिएशन, इनवॉइस प्रोसेसिंग, सेल्स स्प्लिट — सब एक टूल में।"
+                  : "GST reconciliation, invoice processing, sales split — all in one tool."}
+              </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* ============================================================ */}
+      {/* TRUST BADGES — Service Providers */}
+      {/* ============================================================ */}
+      <section className="py-12 bg-[#020617] border-y border-slate-900">
+        <div className={containerClass}>
+          <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.5em] text-center mb-8">
+            {isHindi ? "इन प्लेटफॉर्म्स के साथ काम करता है" : "WORKS WITH"}
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700">
+            <span className="text-slate-400 font-black text-sm uppercase tracking-widest">Tally</span>
+            <span className="text-slate-400 font-black text-sm uppercase tracking-widest">GST</span>
+            <span className="text-slate-400 font-black text-sm uppercase tracking-widest">MSME</span>
+            <span className="text-slate-400 font-black text-sm uppercase tracking-widest">Windows 10/11</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* SOCIAL PROOF — Recent Activity */}
+      {/* ============================================================ */}
+      <section className="py-12 bg-[#020617] border-y border-slate-900">
+        <div className={containerClass}>
+          <p className="text-slate-600 text-[10px] font-black uppercase tracking-[0.5em] text-center mb-6">
+            {isHindi ? "हाल ही में डाउनलोड किया" : "RECENTLY DOWNLOADED"}
+          </p>
+          <div className="flex flex-wrap justify-center gap-6 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              CA Firm, Delhi — 15 mins ago
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              Tax Consultant, Mumbai — 1 hour ago
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              Tally User, Raipur — 3 hours ago
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
       {/* HOW IT WORKS */}
+      {/* ============================================================ */}
       <section id="how-it-works" className="py-28 bg-slate-950 border-y border-slate-900">
         <div className={containerClass}>
           <div className="text-center mb-20">
@@ -519,7 +741,9 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
+      {/* ============================================================ */}
       {/* DEMO FLOW SECTION */}
+      {/* ============================================================ */}
       <section className="py-24 bg-[#020617]">
         <div className={containerClass}>
           <div className="text-center mb-16">
@@ -556,7 +780,9 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
+      {/* ============================================================ */}
       {/* CORE BENEFITS */}
+      {/* ============================================================ */}
       <section className="py-24 bg-slate-950 border-y border-slate-900">
         <div className={containerClass}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -572,7 +798,7 @@ export default function LekhaFlowLanding() {
       </section>
 
       {/* ============================================================ */}
-      {/* 🔥 UPDATED: COMPETITOR COMPARISON — Stronger Differentiation */}
+      {/* COMPETITOR COMPARISON — Stronger Differentiation */}
       {/* ============================================================ */}
       <section className="py-24 bg-slate-950 border-y-2 border-slate-900">
         <div className={containerClass}>
@@ -623,7 +849,7 @@ export default function LekhaFlowLanding() {
       </section>
 
       {/* ============================================================ */}
-      {/* 🔥 NEW: GSTR-2B COMING SOON BANNER */}
+      {/* GSTR-2B COMING SOON BANNER */}
       {/* ============================================================ */}
       <section className="py-16 bg-gradient-to-r from-slate-950 to-slate-900 border-y border-blue-500/20">
         <div className={containerClass}>
@@ -657,7 +883,9 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
+      {/* ============================================================ */}
       {/* ROI CALCULATOR */}
+      {/* ============================================================ */}
       <section className="py-28">
         <div className={containerClass}>
           <div className="bg-slate-900 border border-slate-800 rounded-[4rem] p-10 lg:p-20 shadow-2xl grid lg:grid-cols-2 gap-20 items-center">
@@ -698,7 +926,76 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
+      {/* ============================================================ */}
+      {/* FAQ SECTION — Dedicated */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-slate-950 border-y border-slate-900">
+        <div className={containerClass}>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
+              {isHindi ? "अक्सर पूछे जाने वाले सवाल" : "Frequently Asked Questions"}
+            </h2>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
+              {isHindi ? "जवाब जो आपको चाहिए" : "Answers you need"}
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-4">
+            {[
+              {
+                q: isHindi ? "क्या LekhaFlow क्लाउड-आधारित है?" : "Is LekhaFlow cloud-based?",
+                a: isHindi 
+                  ? "नहीं। LekhaFlow एक डेस्कटॉप सॉफ्टवेयर है। आपका डेटा आपके कंप्यूटर पर ही रहता है। हमारे सर्वर पर कोई डेटा नहीं जाता।"
+                  : "No. LekhaFlow is desktop software. Your data stays on your computer. No data goes to our servers."
+              },
+              {
+                q: isHindi ? "क्या यह ऑफलाइन काम करता है?" : "Does it work offline?",
+                a: isHindi 
+                  ? "हाँ। डाउनलोड के बाद इंटरनेट की जरूरत नहीं है। आप ऑफलाइन काम कर सकते हैं।"
+                  : "Yes. No internet required after download. You can work offline."
+              },
+              {
+                q: isHindi ? "कौन सी Tally versions सपोर्ट करता है?" : "Which Tally versions are supported?",
+                a: isHindi 
+                  ? "Tally Prime, Tally ERP 9, और सभी हालिया वर्जन सपोर्ट करता है।"
+                  : "Supports Tally Prime, Tally ERP 9, and all recent versions."
+              },
+              {
+                q: isHindi ? "GSTR-2B रिकंसिलिएशन कब आएगा?" : "When will GSTR-2B reconciliation come?",
+                a: isHindi 
+                  ? "GSTR-2B रिकंसिलिएशन अगले अपडेट में आ रहा है। हम इस पर काम कर रहे हैं।"
+                  : "GSTR-2B reconciliation is coming in the next update. We're working on it."
+              },
+              {
+                q: isHindi ? "क्या मैं खरीदने से पहले ट्रायल कर सकता हूँ?" : "Can I try before buying?",
+                a: isHindi 
+                  ? "हाँ। 7-दिन का फ्री ट्रायल डाउनलोड करें और अपने डेटा के साथ टेस्ट करें।"
+                  : "Yes. Download the 7-day free trial and test it with your own data."
+              },
+              {
+                q: isHindi ? "LekhaFlow Vouchrit या TaxOne से कैसे अलग है?" : "How is LekhaFlow different from Vouchrit or TaxOne?",
+                a: isHindi 
+                  ? "LekhaFlow डेस्कटॉप-फर्स्ट, प्राइवेसी-फोकस्ड है, और सेल्स स्प्लिट फीचर देता है — जो दोनों कंपटीटर्स में नहीं है।"
+                  : "LekhaFlow is desktop-first, privacy-focused, and offers unique sales split — which neither competitor provides."
+              },
+            ].map((faq, i) => (
+              <details key={i} className="group bg-slate-900/40 border border-slate-800 rounded-2xl transition-all hover:border-teal-500/30">
+                <summary className="flex justify-between items-center p-6 cursor-pointer">
+                  <span className="text-white font-black text-sm uppercase tracking-widest">{faq.q}</span>
+                  <span className="text-teal-500 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <div className="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-slate-800 pt-4">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
       {/* FOUNDER VISION */}
+      {/* ============================================================ */}
       <section className="py-20">
         <div className={containerClass + " max-w-4xl"}>
           <div className="bg-slate-900/40 border border-slate-800 rounded-[3rem] p-10 flex flex-col md:flex-row items-center gap-10">
@@ -722,7 +1019,9 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
+      {/* ============================================================ */}
       {/* PRICING SECTION */}
+      {/* ============================================================ */}
       <section id="pricing" className="py-32 bg-slate-950 border-t border-slate-900">
         <div className={containerClass}>
           <div className="text-center mb-20">
@@ -785,11 +1084,18 @@ export default function LekhaFlowLanding() {
             </p>
           </div>
 
+          {/* Money-Back Guarantee */}
+          <p className="text-center mt-6 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+            🔒 {isHindi ? "7-दिन का रिफंड गारंटी — अगर पसंद नहीं आया तो पैसे वापस" : "7-Day Money-Back Guarantee — Not satisfied? Full refund"}
+          </p>
+
           <p className="text-center mt-8 text-slate-600 text-[10px] font-bold uppercase tracking-widest">Latest Stable Build: {latestVersion} | Released: {formatDate(publishedAt)}</p>
         </div>
       </section>
 
+      {/* ============================================================ */}
       {/* TESTIMONIALS */}
+      {/* ============================================================ */}
       <section className="py-24 bg-[#020617] border-t border-slate-900">
         <div className={containerClass}>
           <div className="text-center mb-16">
@@ -813,7 +1119,9 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
+      {/* ============================================================ */}
       {/* FOOTER */}
+      {/* ============================================================ */}
       <footer className="py-20 border-t border-slate-900 bg-[#020617] text-center">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-wrap justify-center gap-8 mb-10">
@@ -839,7 +1147,9 @@ export default function LekhaFlowLanding() {
         </div>
       </footer>
 
+      {/* ============================================================ */}
       {/* INTAKE MODAL */}
+      {/* ============================================================ */}
       <AnimatePresence>
         {showIntakeModal && (
           <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="fixed inset-0 z-[150] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4">
@@ -861,7 +1171,9 @@ export default function LekhaFlowLanding() {
         )}
       </AnimatePresence>
 
+      {/* ============================================================ */}
       {/* PAYMENT MODAL */}
+      {/* ============================================================ */}
       {selectedPlan && (
         <PaymentModal
           isOpen={paymentModalOpen}
@@ -873,15 +1185,17 @@ export default function LekhaFlowLanding() {
         />
       )}
 
+      {/* ============================================================ */}
       {/* STICKY TRIAL BAR */}
+      {/* ============================================================ */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[90] hidden md:flex items-center gap-4 bg-slate-900/95 backdrop-blur-xl border border-slate-700 px-6 py-3 rounded-full shadow-2xl">
         <span className="text-white font-black text-xs uppercase tracking-widest">Ready to automate your Tally?</span>
-        <button 
-          onClick={() => { setIntakeTarget("demo"); setShowIntakeModal(true); }}
+        <a 
+          href="/downloads"
           className="bg-teal-600 hover:bg-teal-500 text-white px-5 py-2 rounded-full font-black text-[10px] uppercase tracking-widest transition-all"
         >
           Download Free Trial
-        </button>
+        </a>
       </div>
       <WhatsAppButton />
     </>
