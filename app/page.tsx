@@ -529,7 +529,7 @@ export default function LekhaFlowLanding() {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-6">
-              {isHindi ? "आपके क्लाइंट का डेटा, आपका नियंत्रण" : "Your Client Data. Your Control."}
+              {isHindi ? " क्लाइंट का डेटा, क्लाइंट का नियंत्रण" : " Client's Data. Client's own control."}
             </h2>
             <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-8">
               {isHindi
