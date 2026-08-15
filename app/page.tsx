@@ -7,7 +7,8 @@ import {
   Zap, ShieldCheck, Target, Headphones,
   Download, X, Cpu, Database, CheckCircle2, Laptop,
   ArrowRight, FileText, Landmark, Send, MessageCircleQuestion,
-  RefreshCcw, Shield, Users
+  RefreshCcw, Shield, Users, Sparkles, Clock, Lock, FileSearch,
+  Split, Building2, BadgeCheck, Eye
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -114,6 +115,9 @@ export default function LekhaFlowLanding() {
       desc: isHindi 
         ? "पर्चेज और सेल्स इनवॉइस, बैंक स्टेटमेंट और अकाउंटिंग डॉक्यूमेंट को AI से प्रोसेस करें, रिजल्ट को रिव्यू करें और Tally में भेजें।" 
         : "Automate Purchase & Sales Invoices, Bank Statements and Accounting Documents — then review the results and send them to Tally.",
+      sub: isHindi
+        ? "✅ क्लाइंट डेटा आपके सिस्टम पर रहता है। ✅ सेल्स टोटल को ऑटोमैटिकली कई वाउचर में स्प्लिट करें। ✅ कोई क्लाउड स्टोरेज नहीं।"
+        : "✅ Client data stays on your system. ✅ Automatically split sales totals into multiple vouchers. ✅ No cloud storage."
     },
     trust: [
         { i: Cpu, t: isHindi ? "AI अकाउंटिंग ऑटोमेशन" : "AI-Powered Automation", d: isHindi ? "इनवॉइस, बैंक स्टेटमेंट और PDF से अकाउंटिंग डेटा तैयार करें।" : "Process invoices, bank statements and accounting documents with AI.", c: "text-purple-500" },
@@ -140,6 +144,7 @@ export default function LekhaFlowLanding() {
           <Link href="/" className="text-xl font-black text-white tracking-tighter uppercase">LEKHA<span className="text-teal-500">FLOW</span></Link>
           <div className="hidden lg:flex items-center gap-10 text-[11px] font-bold uppercase tracking-widest text-slate-400">
             <Link href="#how-it-works" className="hover:text-white transition-colors">{isHindi ? "काम कैसे करता है" : "How It Works"}</Link>
+            <Link href="#features" className="hover:text-white transition-colors">{isHindi ? "फीचर्स" : "Features"}</Link>
             <Link href="#pricing" className="hover:text-white transition-colors">{isHindi ? "मूल्य निर्धारण" : "Pricing"}</Link>
             <Link href="/blog" className="text-amber-500 hover:text-amber-400 font-black">{isHindi ? "ब्लॉग" : "Insights"}</Link>
             <Link href="/downloads" className="hover:text-white transition-colors">{isHindi ? "डाउनलोड" : "Download Center"}</Link>
@@ -150,7 +155,9 @@ export default function LekhaFlowLanding() {
         </div>
       </nav>
 
-      {/* HERO SECTION */}
+      {/* ============================================================ */}
+      {/* HERO SECTION — UPDATED with Privacy + Sales Split */}
+      {/* ============================================================ */}
       <section className="pt-36 pb-24 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.08)_0,transparent_70%)] pointer-events-none" />
         <div className={containerClass + " text-center relative z-10"}>
@@ -159,12 +166,33 @@ export default function LekhaFlowLanding() {
             <p className="text-teal-400 text-[10px] font-black uppercase tracking-[0.4em]">{t.hero.badge}</p>
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05] uppercase tracking-tighter mb-8 max-w-6xl mx-auto">
-            {t.hero.title}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05] uppercase tracking-tighter mb-6 max-w-6xl mx-auto">
+            {isHindi ? (
+              <>AI-पावर्ड <span className="text-teal-500 italic">डेस्कटॉप सॉफ्टवेयर</span> टैली वर्कफ्लो के लिए</>
+            ) : (
+              <>AI-Powered <span className="text-teal-500 italic">Desktop Software</span> for Tally Workflows</>
+            )}
           </h1>
 
-          <p className="text-slate-400 text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed mb-6">
+          <p className="text-slate-400 text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed mb-4">
             {t.hero.desc}
+          </p>
+
+          {/* 🔥 NEW: Hero Sub-message — Privacy + Sales Split */}
+          <p className="text-teal-400/80 text-sm md:text-base font-bold max-w-3xl mx-auto leading-relaxed mb-8 bg-slate-900/50 border border-teal-500/20 rounded-2xl py-4 px-6 inline-block">
+            {isHindi ? (
+              <>
+                ✅ क्लाइंट डेटा आपके सिस्टम पर रहता है · 
+                ✅ सेल्स टोटल को ऑटोमैटिकली कई वाउचर में स्प्लिट करें · 
+                ✅ कोई क्लाउड स्टोरेज नहीं
+              </>
+            ) : (
+              <>
+                ✅ Client data stays on your system · 
+                ✅ Automatically split sales totals into multiple vouchers · 
+                ✅ No cloud storage
+              </>
+            )}
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 mb-14 text-nowrap">
@@ -175,7 +203,7 @@ export default function LekhaFlowLanding() {
               <ShieldCheck className="text-teal-500" size={16} /> {isHindi ? "क्लाइंट डेटा कंट्रोल" : "Client-Side Data Control"}
             </div>
             <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-widest">
-              <Target className="text-teal-500" size={16} /> {isHindi ? "यूनिक सेल्स स्प्लिट" : "Sales Split Advantage"}
+              <Split className="text-amber-500" size={16} /> {isHindi ? "यूनिक सेल्स स्प्लिट" : "Unique Sales Split"}
             </div>
           </div>
 
@@ -206,7 +234,7 @@ export default function LekhaFlowLanding() {
             {[
                 { l: isHindi ? "सटीकता" : "Accuracy", v: "100%", i: Target },
                 { l: isHindi ? "गति" : "Efficiency", v: "80x Faster", i: Zap },
-                { l: isHindi ? "GST तैयार" : "GST Ready", v: "GST Ready", i: ShieldCheck }
+                { l: isHindi ? "डेटा प्राइवेसी" : "Data Privacy", v: "100% Local", i: ShieldCheck }
             ].map((m, i) => (
                 <div key={i} className="flex items-center gap-3">
                     <m.i className="text-teal-500" size={20} />
@@ -222,7 +250,85 @@ export default function LekhaFlowLanding() {
 
       <ProblemSection isHindi={isHindi} />
 
-      {/* SWIFTASSIGN™ FEATURE SECTION */}
+      {/* ============================================================ */}
+      {/* 🔥 NEW: SALES SPLIT FEATURE — UNIQUE USP */}
+      {/* ============================================================ */}
+      <section id="features" className="py-24 bg-gradient-to-b from-slate-950 to-[#020617] border-y border-amber-500/20">
+        <div className={containerClass}>
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4 px-5 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full">
+              <p className="text-amber-400 text-[10px] font-black uppercase tracking-[0.4em]">
+                ⚡ {isHindi ? "यूनिक फीचर — कोई और नहीं देता" : "UNIQUE FEATURE — NOBODY ELSE OFFERS"}
+              </p>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
+              {isHindi ? "सेल्स टोटल → कई वाउचर" : "Sales Total → Multiple Vouchers"}
+            </h2>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
+              {isHindi 
+                ? "एक सेल्स इनवॉइस को ₹10,000, ₹30,000 या ₹50,000 से कम वाउचर में ऑटोमैटिकली स्प्लिट करें"
+                : "Automatically split a single sales invoice into vouchers below ₹10,000, ₹30,000 or ₹50,000"}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="bg-slate-900/40 border border-amber-500/20 p-8 rounded-[2.5rem] hover:border-amber-500/50 transition-all text-center">
+              <div className="w-16 h-16 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6">
+                <Split className="text-amber-500" size={28} />
+              </div>
+              <h3 className="text-white font-black uppercase text-sm mb-3">
+                {isHindi ? "ऑटोमैटिक स्प्लिट" : "Automatic Split"}
+              </h3>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                {isHindi 
+                  ? "₹75,000 का इनवॉइस → ₹40,000 + ₹35,000 — बिना मैन्युअल कैलकुलेशन के"
+                  : "₹75,000 Invoice → ₹40,000 + ₹35,000 — no manual calculation needed"}
+              </p>
+            </div>
+
+            <div className="bg-slate-900/40 border border-amber-500/20 p-8 rounded-[2.5rem] hover:border-amber-500/50 transition-all text-center">
+              <div className="w-16 h-16 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6">
+                <Clock className="text-amber-500" size={28} />
+              </div>
+              <h3 className="text-white font-black uppercase text-sm mb-3">
+                {isHindi ? "घंटों की बचत" : "Save Hours"}
+              </h3>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                {isHindi 
+                  ? "CAs और accountants के लिए सबसे बड़ी टाइम-सेवर — क्लाइंट के GST कंप्लायंस के लिए"
+                  : "The biggest time-saver for CAs and accountants — perfect for client GST compliance"}
+              </p>
+            </div>
+
+            <div className="bg-slate-900/40 border border-amber-500/20 p-8 rounded-[2.5rem] hover:border-amber-500/50 transition-all text-center">
+              <div className="w-16 h-16 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6">
+                <BadgeCheck className="text-amber-500" size={28} />
+              </div>
+              <h3 className="text-white font-black uppercase text-sm mb-3">
+                {isHindi ? "100% सटीक" : "100% Accurate"}
+              </h3>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                {isHindi 
+                  ? "हर स्प्लिट एकदम सही — मैन्युअल एरर का कोई चांस नहीं"
+                  : "Every split is perfectly calculated — zero chance of manual errors"}
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-slate-900 border border-amber-500/30 rounded-2xl">
+              <Sparkles size={16} className="text-amber-500" />
+              <span className="text-slate-300 text-xs font-bold uppercase tracking-widest">
+                {isHindi 
+                  ? "🔥 यह फीचर Vouchrit या Vyapar TaxOne में नहीं है — केवल LekhaFlow में"
+                  : "🔥 This feature is NOT in Vouchrit or Vyapar TaxOne — only LekhaFlow"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SwiftAssign™ Feature Section */}
       <section className="py-24 bg-gradient-to-b from-slate-950 to-[#020617] border-y border-slate-900">
         <div className={containerClass}>
           <div className="text-center mb-16">
@@ -273,7 +379,68 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* TRUST BADGE SECTION - ✅ FIXED */}
+      {/* ============================================================ */}
+      {/* 🔥 UPDATED: PRIVACY SECTION — Stronger + More Prominent */}
+      {/* ============================================================ */}
+      <section className="py-20 bg-gradient-to-b from-slate-950 to-[#020617] border-y-2 border-teal-500/20">
+        <div className={containerClass}>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-5 py-2 bg-teal-500/10 border border-teal-500/30 rounded-full mb-6">
+              <Lock className="text-teal-500" size={16} />
+              <span className="text-teal-400 text-[10px] font-black uppercase tracking-[0.3em]">
+                {isHindi ? "🔒 प्राइवेसी-फर्स्ट डिज़ाइन" : "🔒 PRIVACY-FIRST DESIGN"}
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-6">
+              {isHindi ? "आपके क्लाइंट का डेटा, आपका नियंत्रण" : "Your Client Data. Your Control."}
+            </h2>
+            <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-8">
+              {isHindi
+                ? "LekhaFlow उन प्रोफेशनल्स के लिए बनाया गया है जो संवेदनशील अकाउंटिंग डेटा संभालते हैं। हमारा workflow client-side processing और data control को ध्यान में रखकर बनाया गया है।"
+                : "LekhaFlow is built for professionals who handle confidential accounting data. The workflow is designed around client-side processing and keeping control of sensitive accounting information with the client environment."}
+            </p>
+            
+            {/* 🔥 NEW: Privacy Bullet Points */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto text-left">
+              <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-start gap-4">
+                <Shield className="text-teal-500 flex-shrink-0 mt-1" size={20} />
+                <div>
+                  <p className="text-white font-black text-xs uppercase tracking-widest">
+                    {isHindi ? "कोई क्लाउड स्टोरेज नहीं" : "No Cloud Storage"}
+                  </p>
+                  <p className="text-slate-500 text-[10px] leading-relaxed">
+                    {isHindi ? "डेटा कभी हमारे सर्वर पर नहीं जाता" : "Data never leaves your system"}
+                  </p>
+                </div>
+              </div>
+              <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-start gap-4">
+                <Eye className="text-teal-500 flex-shrink-0 mt-1" size={20} />
+                <div>
+                  <p className="text-white font-black text-xs uppercase tracking-widest">
+                    {isHindi ? "पूरा नियंत्रण" : "Full Control"}
+                  </p>
+                  <p className="text-slate-500 text-[10px] leading-relaxed">
+                    {isHindi ? "आप तय करें कि कौन देखे" : "You decide who accesses what"}
+                  </p>
+                </div>
+              </div>
+              <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-start gap-4">
+                <BadgeCheck className="text-teal-500 flex-shrink-0 mt-1" size={20} />
+                <div>
+                  <p className="text-white font-black text-xs uppercase tracking-widest">
+                    {isHindi ? "CAs के लिए बनाया गया" : "Built for CAs"}
+                  </p>
+                  <p className="text-slate-500 text-[10px] leading-relaxed">
+                    {isHindi ? "गोपनीयता पेशेवर ज़िम्मेदारी है" : "Privacy is a professional responsibility"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TRUST BADGE SECTION */}
       <section className="py-12 bg-slate-950/50 border-y border-slate-900">
         <div className={containerClass}>
           <div className="flex flex-wrap justify-center items-center gap-12">
@@ -293,28 +460,6 @@ export default function LekhaFlowLanding() {
               <p className="text-4xl font-black text-teal-500">Local</p>
               <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Data Control</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PRIVACY / DATA CONTROL MESSAGE */}
-      <section className="py-20 bg-slate-950 border-y border-slate-900">
-        <div className={containerClass}>
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-5 py-2 bg-teal-500/5 border border-teal-500/20 rounded-full mb-6">
-              <ShieldCheck className="text-teal-500" size={16} />
-              <span className="text-teal-400 text-[10px] font-black uppercase tracking-[0.3em]">
-                {isHindi ? "प्राइवेसी और डेटा कंट्रोल" : "PRIVACY & DATA CONTROL"}
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-6">
-              {isHindi ? "आपके क्लाइंट का डेटा, आपका नियंत्रण" : "Your Client Data. Your Control."}
-            </h2>
-            <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
-              {isHindi
-                ? "LekhaFlow उन प्रोफेशनल्स के लिए बनाया गया है जो संवेदनशील अकाउंटिंग डेटा संभालते हैं। हमारा workflow client-side processing और data control को ध्यान में रखकर बनाया गया है।"
-                : "LekhaFlow is built for professionals who handle confidential accounting data. The workflow is designed around client-side processing and keeping control of sensitive accounting information with the client environment."}
-            </p>
           </div>
         </div>
       </section>
@@ -364,10 +509,10 @@ export default function LekhaFlowLanding() {
                 ? "यही workflow Purchase Invoices, Sales Invoices, Bank Statements और Sales Split के लिए बनाया गया है।" 
                 : "The same workflow extends across Purchase Invoices, Sales Invoices, Bank Statements and Sales Split."}
             </p>
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-slate-900 border border-slate-800 rounded-2xl">
-              <Zap size={16} className="text-amber-500" />
-              <span className="text-slate-400 text-xs font-bold uppercase tracking-widest">
-                {isHindi ? "सेल्स स्प्लिट: ₹75,000 का इनवॉइस → 2 वाउचर (₹40K + ₹35K) ऑटोमेटिक" : "Sales Split: ₹75,000 Invoice → 2 Vouchers (₹40K + ₹35K) Automatic"}
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-slate-900 border border-amber-500/30 rounded-2xl">
+              <Sparkles size={16} className="text-amber-500" />
+              <span className="text-slate-300 text-xs font-bold uppercase tracking-widest">
+                {isHindi ? "🔥 सेल्स स्प्लिट: ₹75,000 का इनवॉइस → 2 वाउचर (₹40K + ₹35K) ऑटोमेटिक" : "🔥 Sales Split: ₹75,000 Invoice → 2 Vouchers (₹40K + ₹35K) Automatic"}
               </span>
             </div>
           </div>
@@ -422,6 +567,92 @@ export default function LekhaFlowLanding() {
                  <p className="text-slate-500 font-medium text-xs leading-relaxed">{item.d}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 🔥 UPDATED: COMPETITOR COMPARISON — Stronger Differentiation */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-slate-950 border-y-2 border-slate-900">
+        <div className={containerClass}>
+          <div className="text-center mb-12">
+            <div className="inline-block mb-4 px-5 py-2 bg-teal-500/10 border border-teal-500/30 rounded-full">
+              <p className="text-teal-400 text-[10px] font-black uppercase tracking-[0.4em]">
+                {isHindi ? "📊 लेखाफ्लो बनाम कंपटीटर्स" : "📊 LEKHAFLOW VS COMPETITORS"}
+              </p>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
+              {isHindi ? "लेखाफ्लो क्यों अलग है" : "Built Differently for Tally Professionals"}
+            </h2>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
+              {isHindi 
+                ? "Vouchrit AI-ledger पर फोकस करता है, Vyapar TaxOne practice management पर — LekhaFlow desktop workflow + privacy + sales split पर"
+                : "Vouchrit focuses on AI-ledger prediction, Vyapar TaxOne on practice management — LekhaFlow owns desktop workflow + privacy + sales split"}
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-slate-800">
+                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest">Feature</th>
+                  <th className="py-4 text-teal-500 text-[10px] font-black uppercase tracking-widest text-center">LekhaFlow</th>
+                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">Vyapar TaxOne</th>
+                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">Vouchrit</th>
+                </tr>
+              </thead>
+              <tbody className="text-xs font-bold text-slate-300">
+                <tr className="border-b border-slate-800/50"><td className="py-4">Bank Statement → Tally</td><td className="text-center text-teal-500">✓ Unlimited</td><td className="text-center">✓</td><td className="text-center text-pink-500">✗</td></tr>
+                <tr className="border-b border-slate-800/50"><td className="py-4">PDF Invoice → Tally</td><td className="text-center text-teal-500">✓</td><td className="text-center">✓</td><td className="text-center text-pink-500">✗</td></tr>
+                <tr className="border-b border-slate-800/50"><td className="py-4">Sales Split Below ₹50K</td><td className="text-center text-amber-500 font-black">✓ Auto</td><td className="text-center text-pink-500">✗</td><td className="text-center text-pink-500">✗</td></tr>
+                <tr className="border-b border-slate-800/50"><td className="py-4">Client Data Privacy</td><td className="text-center text-teal-500 font-black">✓ 100% Local</td><td className="text-center">Cloud</td><td className="text-center">Cloud</td></tr>
+                <tr className="border-b border-slate-800/50"><td className="py-4">Desktop-First Design</td><td className="text-center text-teal-500">✓</td><td className="text-center text-pink-500">✗</td><td className="text-center text-pink-500">✗</td></tr>
+                <tr className="border-b border-slate-800/50"><td className="py-4">Practice Management</td><td className="text-center text-pink-500">✗</td><td className="text-center text-teal-500">✓</td><td className="text-center text-pink-500">✗</td></tr>
+                <tr><td className="py-4">Yearly Price</td><td className="text-center text-teal-500 font-black">₹7,999</td><td className="text-center">₹10,000+</td><td className="text-center">₹12,000+</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="text-center mt-8">
+            <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+              {isHindi 
+                ? "🔥 Vouchrit AI-ledger पर, Vyapar TaxOne practice management पर — LekhaFlow desktop workflow + privacy + unique sales split पर" 
+                : "🔥 Vouchrit owns AI-ledger prediction, Vyapar TaxOne owns practice management — LekhaFlow owns desktop workflow + privacy + unique sales split"}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 🔥 NEW: GSTR-2B COMING SOON BANNER */}
+      {/* ============================================================ */}
+      <section className="py-16 bg-gradient-to-r from-slate-950 to-slate-900 border-y border-blue-500/20">
+        <div className={containerClass}>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-5 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full mb-4">
+              <Sparkles className="text-blue-400" size={16} />
+              <span className="text-blue-400 text-[10px] font-black uppercase tracking-[0.3em]">
+                {isHindi ? "🔜 अपडेट आ रहा है" : "🔜 COMING SOON"}
+              </span>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-black text-white uppercase italic tracking-tighter">
+              {isHindi ? "GSTR-2B रिकंसिलिएशन" : "GSTR-2B Reconciliation"}
+            </h3>
+            <p className="text-slate-400 text-sm max-w-2xl mx-auto mt-3">
+              {isHindi 
+                ? "पर्चेज इनवॉइस को GSTR-2B से ऑटो-मैच करें। मिसमैच को आसानी से पहचानें। अगले अपडेट में आ रहा है।"
+                : "Auto-match purchase invoices with GSTR-2B. Identify mismatches easily. Coming in the next update."}
+            </p>
+            <div className="mt-4 flex justify-center gap-4">
+              <span className="text-slate-600 text-[10px] font-bold uppercase tracking-widest border border-slate-800 px-4 py-2 rounded-full">
+                {isHindi ? "✅ पर्चेज इनवॉइस" : "✅ Purchase Invoices"}
+              </span>
+              <span className="text-slate-600 text-[10px] font-bold uppercase tracking-widest border border-slate-800 px-4 py-2 rounded-full">
+                {isHindi ? "✅ GSTR-2B मैचिंग" : "✅ GSTR-2B Matching"}
+              </span>
+              <span className="text-slate-600 text-[10px] font-bold uppercase tracking-widest border border-slate-800 px-4 py-2 rounded-full">
+                {isHindi ? "✅ मिसमैच डिटेक्शन" : "✅ Mismatch Detection"}
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -487,34 +718,6 @@ export default function LekhaFlowLanding() {
                    {isHindi ? "जितेंद्र भारती — संस्थापक, लेखाफ्लो" : "Jitendra Bharti — Founder, LekhaFlow"}
                  </p>
               </div>
-          </div>
-        </div>
-      </section>
-
-      {/* COMPETITOR COMPARISON */}
-      <section className="py-24 bg-slate-950 border-y border-slate-900">
-        <div className={containerClass}>
-          <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-12 text-center">
-            {isHindi ? "लेखाफ्लो क्यों अलग है" : "Built Differently for Tally Professionals"}
-          </h2>
-          <div className="max-w-4xl mx-auto overflow-x-auto">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b border-slate-800">
-                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest">Feature</th>
-                  <th className="py-4 text-teal-500 text-[10px] font-black uppercase tracking-widest text-center">LekhaFlow</th>
-                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">Vyapar TaxOne</th>
-                  <th className="py-4 text-slate-500 text-[10px] font-black uppercase tracking-widest text-center">Vouchrit</th>
-                </tr>
-              </thead>
-              <tbody className="text-xs font-bold text-slate-300">
-                <tr className="border-b border-slate-800/50"><td className="py-4">Bank Statement → Tally</td><td className="text-center text-teal-500">✓ Unlimited</td><td className="text-center">✓</td><td className="text-center text-pink-500">✗</td></tr>
-                <tr className="border-b border-slate-800/50"><td className="py-4">PDF Invoice → Tally</td><td className="text-center text-teal-500">✓</td><td className="text-center">✓</td><td className="text-center text-pink-500">✗</td></tr>
-                <tr className="border-b border-slate-800/50"><td className="py-4">Sales Split Below ₹50K</td><td className="text-center text-teal-500">✓ Auto</td><td className="text-center text-pink-500">✗</td><td className="text-center text-pink-500">✗</td></tr>
-                <tr className="border-b border-slate-800/50"><td className="py-4">Local Data Processing</td><td className="text-center text-teal-500">✓ 100% Local</td><td className="text-center">Cloud</td><td className="text-center">Cloud</td></tr>
-                <tr><td className="py-4">Yearly Price</td><td className="text-center text-teal-500 font-black">₹7,999</td><td className="text-center">₹10,000</td><td className="text-center">₹12,000+</td></tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </section>
