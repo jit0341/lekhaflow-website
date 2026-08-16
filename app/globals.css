@@ -1,8 +1,15 @@
+/* app/globals.css */
+
 @import "tailwindcss";
 
+/* ✅ सभी :root प्रॉपर्टीज को एक ही जगह मर्ज करें */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 🌙 ब्राउज़र के ऑटो-डार्क मोड को रोकें */
+  color-scheme: only dark !important;
+  
+  /* 🎨 Tailwind CSS वेरिएबल्स - अपने डार्क कलर्स सेट करें */
+  --background: #020617;
+  --foreground: #e2e8f0;
 }
 
 @theme inline {
@@ -12,12 +19,15 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* ❌ इस @media ब्लॉक को हटा दें - क्योंकि आप खुद डार्क फोर्स कर रहे हैं */
+/* 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
+*/
 
 body {
   background: var(--background);

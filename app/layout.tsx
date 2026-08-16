@@ -36,6 +36,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="h-full scroll-smooth">
       <head>
+        {/* ✅ ब्राउज़र के ऑटो-डार्क मोड को रोकने के लिए */}
+        <meta name="color-scheme" content="dark" />
+        
         {/* Structured Data for Google */}
         <script
           type="application/ld+json"
@@ -46,8 +49,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "name": "LekhaFlow",
               "operatingSystem": "Windows",
               "applicationCategory": "AccountingSoftware",
-              "offers": { "@type": "Offer", "price": "15000", "priceCurrency": "INR" },
-              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "120" }
+              "offers": { 
+                "@type": "Offer", 
+                "price": "15000", 
+                "priceCurrency": "INR" 
+              },
+              "aggregateRating": { 
+                "@type": "AggregateRating", 
+                "ratingValue": "4.9", 
+                "ratingCount": "120" 
+              }
             }),
           }}
         />
