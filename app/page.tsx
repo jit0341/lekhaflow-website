@@ -1002,80 +1002,80 @@ export default function LekhaFlowLanding() {
       </section>
 
      {/* ============================================================ */}
-{/* PRICING SECTION */}
-{/* ============================================================ */}
-<section id="pricing" className="py-32 bg-slate-950 border-t border-slate-900">
-  <div className={containerClass}>
-    <div className="text-center mb-20">
-      <div className="inline-block mb-4 px-4 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-full">
-        <p className="text-amber-400 text-[10px] font-black uppercase tracking-[0.3em]">
-          {isHindi ? "स्वतंत्रता दिवस लॉन्च ऑफर" : "Independence Day Launch Offer"}
-        </p>
-      </div>
-      <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
-        {isHindi ? "प्रोफेशनल लाइसेंस" : "Professional Licenses"}
-      </h2>
-      <p className="text-slate-500 font-bold uppercase tracking-widest text-xs mb-2">
-        {isHindi ? "पहले 50 ग्राहकों के लिए विशेष मूल्य" : "Special pricing for first 50 clients only"}
-      </p>
-      <p className="text-amber-500 text-[10px] font-black uppercase tracking-widest">
-        {isHindi ? "31 अगस्त 2026 तक वैध" : "Valid till 31st August 2026"}
-      </p>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-1 gap-10 max-w-3xl mx-auto">
-      {Object.entries(productData).filter(([key]) => key === 'standard').map(([key, p]) => (
-        <div key={key} className={`bg-slate-900 border-2 ${p.color} p-10 rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col justify-between group max-w-lg mx-auto w-full`}>
-          <div className="absolute top-0 right-0 bg-amber-500 text-black px-6 py-1 text-[9px] font-black uppercase tracking-widest">
-            {isHindi ? "सबसे लोकप्रिय" : "Most Popular"}
-          </div>
-          <div className="space-y-6">
-            <h3 className="text-white font-black text-xs uppercase tracking-[0.3em]">{p.title}</h3>
-            <div className="py-8 border-y border-slate-800">
-              <p className={`text-slate-500 font-black text-2xl tracking-tighter mb-1 line-through`}>₹{p.originalPrice}</p>
-              <p className={`${p.accent} font-black text-6xl tracking-tighter mb-2`}>₹{p.offerPrice}</p>
-              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{p.limit}</p>
+      {/* PRICING SECTION */}
+      {/* ============================================================ */}
+      <section id="pricing" className="py-32 bg-slate-950 border-t border-slate-900">
+        <div className={containerClass}>
+          <div className="text-center mb-20">
+            <div className="inline-block mb-4 px-4 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-full">
+              <p className="text-amber-400 text-[10px] font-black uppercase tracking-[0.3em]">
+                {isHindi ? "स्वतंत्रता दिवस लॉन्च ऑफर" : "Independence Day Launch Offer"}
+              </p>
             </div>
-            <p className="text-[11px] font-bold text-slate-400 italic leading-snug">{p.tagline}</p>
-            <ul className="space-y-4 py-4">
-              {p.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3 text-[11px] font-bold text-slate-300">
-                      <CheckCircle2 size={14} className="text-teal-500" /> {feature}
-                  </li>
-              ))}
-            </ul>
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
+              {isHindi ? "प्रोफेशनल लाइसेंस" : "Professional Licenses"}
+            </h2>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs mb-2">
+              {isHindi ? "पहले 50 ग्राहकों के लिए विशेष मूल्य" : "Special pricing for first 50 clients only"}
+            </p>
+            <p className="text-amber-500 text-[10px] font-black uppercase tracking-widest">
+              {isHindi ? "31 अगस्त 2026 तक वैध" : "Valid till 31st August 2026"}
+            </p>
           </div>
-          <div className="pt-6 space-y-4">
-            <button
-              onClick={() => openPayment(key, p)}
-              className={`block w-full py-5 bg-teal-600 text-white hover:bg-teal-500 rounded-2xl font-black uppercase text-xs text-center tracking-widest transition-all`}
-            >
-              {isHindi ? "खरीदें" : "Buy Now"} — ₹{p.offerPrice}
-            </button>
-            <Link href="/downloads" className="block w-full py-5 bg-slate-950 text-white rounded-2xl font-black uppercase text-[10px] text-center tracking-widest border border-slate-800 hover:border-slate-600 transition-all">
-              {isHindi ? "सेटअप डाउनलोड करें" : "Download Setup"}
-            </Link>
+
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-10 max-w-3xl mx-auto">
+            {Object.entries(productData).filter(([key]) => key === 'standard').map(([key, p]) => (
+              <div key={key} className={`bg-slate-900 border-2 ${p.color} p-10 rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col justify-between group max-w-lg mx-auto w-full`}>
+                <div className="absolute top-0 right-0 bg-amber-500 text-black px-6 py-1 text-[9px] font-black uppercase tracking-widest">
+                  {isHindi ? "सबसे लोकप्रिय" : "Most Popular"}
+                </div>
+                <div className="space-y-6">
+                  <h3 className="text-white font-black text-xs uppercase tracking-[0.3em]">{p.title}</h3>
+                  <div className="py-8 border-y border-slate-800">
+                    <p className={`text-slate-500 font-black text-2xl tracking-tighter mb-1 line-through`}>₹{p.originalPrice}</p>
+                    <p className={`${p.accent} font-black text-6xl tracking-tighter mb-2`}>₹{p.offerPrice}</p>
+                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{p.limit}</p>
+                  </div>
+                  <p className="text-[11px] font-bold text-slate-400 italic leading-snug">{p.tagline}</p>
+                  <ul className="space-y-4 py-4">
+                    {p.features.map((feature, i) => (
+                        <li key={i} className="flex items-center gap-3 text-[11px] font-bold text-slate-300">
+                            <CheckCircle2 size={14} className="text-teal-500" /> {feature}
+                        </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="pt-6 space-y-4">
+                  <button
+                    onClick={() => openPayment(key, p)}
+                    className={`block w-full py-5 bg-teal-600 text-white hover:bg-teal-500 rounded-2xl font-black uppercase text-xs text-center tracking-widest transition-all`}
+                  >
+                    {isHindi ? "खरीदें" : "Buy Now"} — ₹{p.offerPrice}
+                  </button>
+                  <Link href="/downloads" className="block w-full py-5 bg-slate-950 text-white rounded-2xl font-black uppercase text-[10px] text-center tracking-widest border border-slate-800 hover:border-slate-600 transition-all">
+                    {isHindi ? "सेटअप डाउनलोड करें" : "Download Setup"}
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
+
+          <div className="text-center mt-12 max-w-2xl mx-auto">
+            <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
+              {isHindi 
+                ? "पहले 50 ग्राहकों को lifetime यही मूल्य मिलेगा। 1 सितंबर से ₹9,999 हो जाएगा।" 
+                : "First 50 clients lock this price for life. From 1st Sept, price becomes ₹9,999."}
+            </p>
+          </div>
+
+          {/* Money-Back Guarantee */}
+          <p className="text-center mt-6 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+            🔒 {isHindi ? "7-दिन का रिफंड गारंटी — अगर पसंद नहीं आया तो पैसे वापस" : "7-Day Money-Back Guarantee — Not satisfied? Full refund"}
+          </p>
+
+          <p className="text-center mt-8 text-slate-600 text-[10px] font-bold uppercase tracking-widest">Latest Stable Build: {latestVersion} | Released: {formatDate(publishedAt)}</p>
         </div>
-      ))}
-    </div>
-
-    <div className="text-center mt-12 max-w-2xl mx-auto">
-      <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
-        {isHindi 
-          ? "पहले 50 ग्राहकों को lifetime यही मूल्य मिलेगा। 1 सितंबर से ₹9,999 हो जाएगा।" 
-          : "First 50 clients lock this price for life. From 1st Sept, price becomes ₹9,999."}
-      </p>
-    </div>
-
-    {/* Money-Back Guarantee */}
-    <p className="text-center mt-6 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
-      🔒 {isHindi ? "7-दिन का रिफंड गारंटी — अगर पसंद नहीं आया तो पैसे वापस" : "7-Day Money-Back Guarantee — Not satisfied? Full refund"}
-    </p>
-
-    <p className="text-center mt-8 text-slate-600 text-[10px] font-bold uppercase tracking-widest">Latest Stable Build: {latestVersion} | Released: {formatDate(publishedAt)}</p>
-  </div>
-</section>
+      </section>
 
           {/* Money-Back Guarantee */}
           <p className="text-center mt-6 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
