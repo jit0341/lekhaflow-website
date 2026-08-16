@@ -350,58 +350,58 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-      {/* ============================================================ */}
-      {/* SwiftAssign™ AI Ledger Assignment */}
-      {/* ============================================================ */}
-      <section className="py-24 bg-gradient-to-b from-slate-950 to-[#020617] border-y border-slate-900">
-        <div className={containerClass}>
-          <div className="text-center mb-16">
-            <div className="inline-block mb-4 px-5 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full">
-              <p className="text-purple-400 text-[10px] font-black uppercase tracking-[0.4em]">
-                ⚡ AI-POWERED AUTOMATION
-              </p>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
-              SwiftAssign™ <span className="text-purple-500">AI Ledger Assignment</span>
-            </h2>
-            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
-              Smart bulk ledger assignment with AI-powered grouping
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="bg-slate-900/40 border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
-              <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
-                <Users className="text-purple-500" size={28} />
+          {/* ============================================================ */}
+          {/* SwiftAssign™ AI Ledger Assignment */}
+          {/* ============================================================ */}
+          <section className="py-24 bg-gradient-to-b from-slate-950 to-[#020617] border-y border-slate-900">
+            <div className={containerClass}>
+              <div className="text-center mb-16">
+                <div className="inline-block mb-4 px-5 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full">
+                  <p className="text-purple-400 text-[10px] font-black uppercase tracking-[0.4em]">
+                    ⚡ AI-POWERED AUTOMATION
+                  </p>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">
+                  SwiftAssign™ <span className="text-purple-500">AI Ledger Assignment</span>
+                </h2>
+                <p className="text-slate-500 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
+                  Smart bulk ledger assignment with AI-powered grouping
+                </p>
               </div>
-              <h3 className="text-white font-black uppercase text-sm mb-3">AI Grouping</h3>
-              <p className="text-slate-400 text-xs leading-relaxed">
-                Similar transactions को automatically group करता है — UPI, NEFT, IMPS, ATM सब detect हो जाते हैं
-              </p>
-            </div>
 
-            <div className="bg-slate-900/40 border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
-              <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
-                <Zap className="text-purple-500" size={28} />
-              </div>
-              <h3 className="text-white font-black uppercase text-sm mb-3">Bulk Assignment</h3>
-              <p className="text-slate-400 text-xs leading-relaxed">
-                एक click में सभी transactions को ledger assign करें — 100% सटीकता के साथ
-              </p>
-            </div>
+              <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div className="bg-slate-900/40 border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
+                  <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                    <Users className="text-purple-500" size={28} />
+                  </div>
+                  <h3 className="text-white font-black uppercase text-sm mb-3">AI Grouping</h3>
+                  <p className="text-slate-400 text-xs leading-relaxed">
+                    Similar transactions are automatically grouped together — UPI, NEFT, IMPS, ATM all get detected
+                  </p>
+                </div>
 
-            <div className="bg-slate-900/40 border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
-              <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
-                <Target className="text-purple-500" size={28} />
+                <div className="bg-slate-900/40 border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
+                  <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                    <Zap className="text-purple-500" size={28} />
+                  </div>
+                  <h3 className="text-white font-black uppercase text-sm mb-3">Bulk Assignment</h3>
+                  <p className="text-slate-400 text-xs leading-relaxed">
+                    Assign ledgers to all transactions in one click — with 100% accuracy
+                  </p>
+                </div>
+
+                <div className="bg-slate-900/40 border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
+                  <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                    <Target className="text-purple-500" size={28} />
+                  </div>
+                  <h3 className="text-white font-black uppercase text-sm mb-3">Smart Detection</h3>
+                  <p className="text-slate-400 text-xs leading-relaxed">
+                    Detects and suggests repeated party names (e.g. "Pradeep", "Ramanujanagar") automatically
+                  </p>
+                </div>
               </div>
-              <h3 className="text-white font-black uppercase text-sm mb-3">Smart Detection</h3>
-              <p className="text-slate-400 text-xs leading-relaxed">
-                Repeated party names (जैसे "Pradeep", "Ramanujanagar") को detect करके suggest करता है
-              </p>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
       {/* ============================================================ */}
       {/* WHY LEKHAFLOW — Enhanced Trust Section */}
