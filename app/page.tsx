@@ -1001,7 +1001,7 @@ export default function LekhaFlowLanding() {
         </div>
       </section>
 
-     {/* ============================================================ */}
+           {/* ============================================================ */}
       {/* PRICING SECTION */}
       {/* ============================================================ */}
       <section id="pricing" className="py-32 bg-slate-950 border-t border-slate-900">
@@ -1068,7 +1068,6 @@ export default function LekhaFlowLanding() {
             </p>
           </div>
 
-          {/* Money-Back Guarantee */}
           <p className="text-center mt-6 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
             🔒 {isHindi ? "7-दिन का रिफंड गारंटी — अगर पसंद नहीं आया तो पैसे वापस" : "7-Day Money-Back Guarantee — Not satisfied? Full refund"}
           </p>
@@ -1076,16 +1075,6 @@ export default function LekhaFlowLanding() {
           <p className="text-center mt-8 text-slate-600 text-[10px] font-bold uppercase tracking-widest">Latest Stable Build: {latestVersion} | Released: {formatDate(publishedAt)}</p>
         </div>
       </section>
-
-          {/* Money-Back Guarantee */}
-          <p className="text-center mt-6 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
-            🔒 {isHindi ? "7-दिन का रिफंड गारंटी — अगर पसंद नहीं आया तो पैसे वापस" : "7-Day Money-Back Guarantee — Not satisfied? Full refund"}
-          </p>
-
-          <p className="text-center mt-8 text-slate-600 text-[10px] font-bold uppercase tracking-widest">Latest Stable Build: {latestVersion} | Released: {formatDate(publishedAt)}</p>
-        </div>
-      </section>
-
       {/* ============================================================ */}
       {/* TESTIMONIALS */}
       {/* ============================================================ */}
