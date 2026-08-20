@@ -132,9 +132,21 @@ export default function LekhaFlowLanding() {
   <img src="/logo.png" alt="LekhaFlow" className="h-10 w-10 object-contain flex-shrink-0" />
   {/* Brand name baad mein */}
   <span>LEKHA<span className="text-teal-500">FLOW</span></span>
+<Link
+  href="/"
+  className="flex items-center gap-2.5"
+>
+  <img
+    src="/logo.png"
+    alt="LekhaFlow"
+    width={36}
+    height={36}
+    className="h-9 w-9 rounded-lg object-contain"
+  />
+  <span className="text-xl font-black text-white tracking-tighter uppercase">
+    LEKHA<span className="text-teal-500">FLOW</span>
+  </span>
 </Link>
-          <div className="hidden lg:flex items-center gap-10 text-[11px] font-bold uppercase tracking-widest text-slate-400">
-            <Link href="#how-it-works" className="hover:text-white transition-colors">{isHindi ? "काम कैसे करता है" : "How It Works"}</Link>
             <Link href="#features" className="hover:text-white transition-colors">{isHindi ? "फीचर्स" : "Features"}</Link>
             <Link href="#pricing" className="hover:text-white transition-colors">{isHindi ? "मूल्य निर्धारण" : "Pricing"}</Link>
             <Link href="/blog" className="text-amber-500 hover:text-amber-400 font-black">{isHindi ? "ब्लॉग" : "Insights"}</Link>
