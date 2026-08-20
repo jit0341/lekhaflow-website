@@ -158,11 +158,11 @@ export default function LekhaFlowLanding() {
             </Link>
             <Link href="/faq" className="hover:text-slate-900 transition-colors">
               {isHindi ? "सहायता" : "FAQ"}
-
-             <Link href="#partner" className="hover:text-slate-900 transition-colors">
-                {isHindi ? "पार्टनर" : "Partner"}
-              </Link>
             </Link>
+            <Link href="#partner" className="hover:text-slate-900 transition-colors">
+              {isHindi ? "पार्टनर" : "Partner"}
+            </Link>
+            
             <button
               onClick={() => setIsHindi(!isHindi)}
               className="text-teal-600 border border-teal-500/40 px-3 py-1 rounded hover:bg-teal-50"
@@ -178,7 +178,6 @@ export default function LekhaFlowLanding() {
           </div>
         </div>
       </nav>
-
       {/* ============================================================ */}
       {/* HERO SECTION — Balanced Font Sizes + All Features */}
       {/* ============================================================ */}
