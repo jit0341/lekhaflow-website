@@ -9,9 +9,9 @@ export default function DownloadsPage() {
 
   // ✅ Correct Download Links
   const downloadLinks = {
-    gold: {
-      full: "https://github.com/jit0341/lekhaflow-website/releases/download/v2.0/Lekhaflow_setup.exe",
-      trial: "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/Trial_setup.exe"
+    standard: {
+      full: "https://github.com/jit0341/lekhaflow-website/releases/download/v2.0/Lekhaflow_standard_setup.exe",
+      trial: "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/standard_trial_setup.exe"
     }
   };
 
@@ -54,7 +54,7 @@ export default function DownloadsPage() {
               </li>
             </ul>
             <a
-              href={downloadLinks.gold.full}
+              href={downloadLinks.standard.full}
               download
               className="flex items-center justify-center gap-3 w-full py-5 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:shadow-lg hover:shadow-amber-500/20 transition-all"
             >
@@ -66,14 +66,14 @@ export default function DownloadsPage() {
           <div className="bg-slate-900 border-2 border-teal-500 p-8 rounded-[3rem] shadow-2xl">
             <div className="flex items-center gap-3 mb-4">
               <Clock className="text-teal-500" size={24} />
-              <h2 className="text-2xl font-black text-white uppercase tracking-tighter">LekhaFlow Gold</h2>
+              <h2 className="text-2xl font-black text-white uppercase tracking-tighter">LekhaFlow Standard</h2>
             </div>
             <div className="bg-teal-500/10 border border-teal-500/30 rounded-full px-4 py-1 inline-block mb-4">
               <span className="text-teal-400 text-[10px] font-black uppercase tracking-widest">7-Day Free Trial</span>
             </div>
             <ul className="space-y-3 mb-8">
               <li className="flex items-center gap-3 text-slate-300 text-sm">
-                <CheckCircle2 size={16} className="text-teal-500" /> All Gold Features
+                <CheckCircle2 size={16} className="text-teal-500" /> All Standard Features
               </li>
               <li className="flex items-center gap-3 text-slate-300 text-sm">
                 <CheckCircle2 size={16} className="text-teal-500" /> 7 Days Full Access
@@ -86,7 +86,7 @@ export default function DownloadsPage() {
               </li>
             </ul>
             <a
-              href={downloadLinks.gold.trial}
+              href={downloadLinks.standard.trial}
               download
               className="flex items-center justify-center gap-3 w-full py-5 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest hover:shadow-lg hover:shadow-teal-500/20 transition-all"
             >
