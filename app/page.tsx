@@ -70,7 +70,7 @@ export default function LekhaFlowLanding() {
   standard: {
     title: "LekhaFlow Standard",
     originalPrice: "15,000",
-    offerPrice: "7,999",
+    offerPrice: "9,999",
     limit: "10,000 Invoices/Year",
     razorpayUrl: "https://pages.razorpay.com/lekhaflow-standard",
     downloadUrl: "/downloads",
