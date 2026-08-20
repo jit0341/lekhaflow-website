@@ -72,7 +72,7 @@ export default function LekhaFlowLanding() {
     originalPrice: "15,000",
     offerPrice: "7,999",
     limit: "10,000 Invoices/Year",
-    razorpayUrl: "https://pages.razorpay.com/lekhaflow-gold",
+    razorpayUrl: "https://pages.razorpay.com/lekhaflow-standard",
     downloadUrl: "/downloads",
     tagline: isHindi ? "MSME के लिए आवश्यक AI ऑटोमेशन" : "Essential AI Automation for MSMEs",
     features: [
