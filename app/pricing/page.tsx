@@ -19,7 +19,7 @@ export default function PricingPage() {
     standard: {
       id: "standard",
       name: "LekhaFlow Standard",
-      price: 9999,
+      price: 7999, // Aapki original price ke hisaab se adjust kar sakte hain
       originalPrice: 15000,
       limit: "10,000 Invoices/Year",
       razorpayKey: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -31,10 +31,10 @@ export default function PricingPage() {
         "Email Support",
       ],
     },
-    standard: {
-      id: "standard",
-      name: "LekhaFlow Standard",
-      price: 9999,
+    gold: { // ✅ Yahan 'standard' ki jagah 'gold' kiya hai
+      id: "gold",
+      name: "LekhaFlow Gold",
+      price: 14999,
       originalPrice: 25000,
       limit: "Unlimited Invoices/Year",
       razorpayKey: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -48,7 +48,7 @@ export default function PricingPage() {
     },
   };
 
-  const handlePayment = (planKey: "standard" | "standard") => {
+  const handlePayment = (planKey: "standard" | "gold") => {
     const plan = plans[planKey];
     setSelectedPlan(planKey);
     setLoading(true);
@@ -164,7 +164,7 @@ export default function PricingPage() {
               </div>
 
               <button
-                onClick={() => handlePayment(key as "standard" | "standard")}
+                onClick={() => handlePayment(key as "standard" | "gold")}
                 disabled={loading && selectedPlan === key}
                 className={`w-full py-5 ${
                   key === "standard" ? "bg-amber-500 text-black hover:bg-amber-400" : "bg-teal-600 text-white hover:bg-teal-500"
