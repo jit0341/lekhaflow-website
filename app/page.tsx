@@ -158,6 +158,7 @@ export default function LekhaFlowLanding() {
             </Link>
             <Link href="/faq" className="hover:text-slate-900 transition-colors">
               {isHindi ? "सहायता" : "FAQ"}
+
              <Link href="#partner" className="hover:text-slate-900 transition-colors">
                 {isHindi ? "पार्टनर" : "Partner"}
               </Link>
@@ -1100,8 +1101,8 @@ export default function LekhaFlowLanding() {
           <div className="text-center mt-12 max-w-2xl mx-auto">
             <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
               {isHindi 
-                ? "पहले 50 ग्राहकों को lifetime यही मूल्य मिलेगा। 1 सितंबर से ₹9,999 हो जाएगा।" 
-                : "First 50 clients lock this price for life. From 1st Sept, price becomes ₹9,999."}
+                ? "पहले 50 ग्राहकों को lifetime यही मूल्य मिलेगा। 1 सितंबर से ₹11999 हो जाएगा।" 
+                : "First 50 clients lock this price for life. From 1st Sept, price becomes ₹11,999."}
             </p>
           </div>
 

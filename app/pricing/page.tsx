@@ -19,7 +19,7 @@ export default function PricingPage() {
     standard: {
       id: "standard",
       name: "LekhaFlow Standard",
-      price: 7999,
+      price: 9999,
       originalPrice: 15000,
       limit: "10,000 Invoices/Year",
       razorpayKey: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -31,10 +31,10 @@ export default function PricingPage() {
         "Email Support",
       ],
     },
-    gold: {
-      id: "gold",
-      name: "LekhaFlow Gold",
-      price: 7999,
+    standard: {
+      id: "standard",
+      name: "LekhaFlow Standard",
+      price: 9999,
       originalPrice: 25000,
       limit: "Unlimited Invoices/Year",
       razorpayKey: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -48,7 +48,7 @@ export default function PricingPage() {
     },
   };
 
-  const handlePayment = (planKey: "standard" | "gold") => {
+  const handlePayment = (planKey: "standard" | "standard") => {
     const plan = plans[planKey];
     setSelectedPlan(planKey);
     setLoading(true);
@@ -128,10 +128,10 @@ export default function PricingPage() {
             <div
               key={key}
               className={`bg-slate-900 border-2 ${
-                key === "gold" ? "border-amber-500" : "border-blue-500"
+                key === "standard" ? "border-amber-500" : "border-blue-500"
               } p-10 rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col`}
             >
-              {key === "gold" && (
+              {key === "standard" && (
                 <div className="absolute top-0 right-0 bg-amber-500 text-black px-6 py-1 text-[9px] font-black uppercase tracking-widest">
                   Most Popular
                 </div>
@@ -145,7 +145,7 @@ export default function PricingPage() {
                   <p className="text-slate-500 font-black text-2xl tracking-tighter mb-1 line-through">
                     ₹{plan.originalPrice.toLocaleString()}
                   </p>
-                  <p className={`${key === "gold" ? "text-amber-500" : "text-blue-500"} font-black text-6xl tracking-tighter mb-2`}>
+                  <p className={`${key === "standard" ? "text-amber-500" : "text-blue-500"} font-black text-6xl tracking-tighter mb-2`}>
                     ₹{plan.price.toLocaleString()}
                   </p>
                   <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
@@ -164,10 +164,10 @@ export default function PricingPage() {
               </div>
 
               <button
-                onClick={() => handlePayment(key as "standard" | "gold")}
+                onClick={() => handlePayment(key as "standard" | "standard")}
                 disabled={loading && selectedPlan === key}
                 className={`w-full py-5 ${
-                  key === "gold" ? "bg-amber-500 text-black hover:bg-amber-400" : "bg-teal-600 text-white hover:bg-teal-500"
+                  key === "standard" ? "bg-amber-500 text-black hover:bg-amber-400" : "bg-teal-600 text-white hover:bg-teal-500"
                 } rounded-2xl font-black uppercase text-xs text-center tracking-widest transition-all disabled:opacity-50`}
               >
                 {loading && selectedPlan === key ? "Processing..." : `Buy Now — ₹${plan.price.toLocaleString()}`}
