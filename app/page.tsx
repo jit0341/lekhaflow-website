@@ -1,5 +1,5 @@
 "use client";
-
+import PartnerForm from "@/components/PartnerForm";
 import ProblemSection from "@/components/ProblemSection";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -158,6 +158,9 @@ export default function LekhaFlowLanding() {
             </Link>
             <Link href="/faq" className="hover:text-slate-900 transition-colors">
               {isHindi ? "सहायता" : "FAQ"}
+             <Link href="#partner" className="hover:text-slate-900 transition-colors">
+                {isHindi ? "पार्टनर" : "Partner"}
+              </Link>
             </Link>
             <button
               onClick={() => setIsHindi(!isHindi)}
@@ -303,7 +306,7 @@ export default function LekhaFlowLanding() {
           </div>
         </div>
       </section>
-
+      <PartnerForm isHindi={isHindi} />
       <ProblemSection isHindi={isHindi} />
 
       {/* ============================================================ */}

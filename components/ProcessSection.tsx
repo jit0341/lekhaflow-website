@@ -81,44 +81,28 @@ export default function ProcessSection({ isHindi }: Props) {
   return (
     <section
       id="process"
-      className="relative overflow-hidden bg-[#050B18] py-24"
+      className="relative overflow-hidden bg-white py-24 border-y border-slate-200"
     >
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,184,166,.08),transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,184,166,.06),transparent_70%)]" />
 
       <div className="relative mx-auto max-w-7xl px-6">
-
-        {/* Heading */}
-
         <div className="mx-auto mb-16 max-w-3xl text-center">
-
-          <div className="inline-flex rounded-full border border-teal-500/30 bg-teal-500/10 px-5 py-2">
-
-            <span className="text-xs font-bold uppercase tracking-[3px] text-teal-400">
+          <div className="inline-flex rounded-full border border-teal-300 bg-teal-50 px-5 py-2">
+            <span className="text-xs font-bold uppercase tracking-[3px] text-teal-800">
               {isHindi ? "प्रोसेस" : "How It Works"}
             </span>
-
           </div>
 
-          <h2 className="mt-6 text-5xl font-black uppercase italic text-white">
-
-            {isHindi
-              ? "केवल 6 आसान स्टेप"
-              : "Only 6 Simple Steps"}
-
+          <h2 className="mt-6 text-5xl font-black uppercase italic text-slate-900">
+            {isHindi ? "केवल 6 आसान स्टेप" : "Only 6 Simple Steps"}
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-400">
-
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-700">
             {isHindi
               ? "Invoice से Tally तक पूरा Accounting Process केवल कुछ मिनटों में पूरा हो जाता है।"
               : "Convert Invoice into Tally XML automatically using AI in just a few simple steps."}
-
           </p>
-
         </div>
-
-        {/* Process Grid */}
 
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {processSteps.map((step, index) => {
@@ -127,56 +111,42 @@ export default function ProcessSection({ isHindi }: Props) {
             return (
               <div
                 key={step.no}
-                className="group relative rounded-3xl border border-slate-700 bg-slate-900/70 backdrop-blur transition-all duration-300 hover:-translate-y-2 hover:border-teal-500/50 hover:shadow-[0_0_35px_rgba(20,184,166,0.18)]"
+                className="group relative rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-teal-400 hover:shadow-lg"
               >
-                {/* Step Number */}
-
-                <div className="absolute left-6 top-6 text-5xl font-black text-white/10">
+                <div className="absolute left-6 top-6 z-10 text-5xl font-black text-slate-200">
                   {step.no}
                 </div>
 
-                {/* Image */}
-
-                <div className="relative overflow-hidden rounded-t-3xl bg-slate-950">
+                <div className="relative overflow-hidden rounded-t-3xl bg-slate-50">
                   <Image
-    			src={step.image}
-    			alt={step.titleEn}
-   			width={700}
-    			height={420}
-   			className="w-full h-[260px] object-contain bg-slate-950 p-2 transition duration-500 group-hover:scale-[1.02]"
-		  />
-
+                    src={step.image}
+                    alt={step.titleEn}
+                    width={700}
+                    height={420}
+                    className="w-full h-[260px] object-contain bg-slate-50 p-2 transition duration-500 group-hover:scale-[1.02]"
+                  />
                   <div
-                    className={`absolute inset-0 bg-gradient-to-t ${step.color} opacity-20`}
+                    className={`absolute inset-0 bg-gradient-to-t ${step.color} opacity-30`}
                   />
                 </div>
 
-                {/* Content */}
-
                 <div className="p-7">
-
-                  <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-teal-500/10 text-teal-400">
+                  <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
                     <Icon size={24} />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-white">
+                  <h3 className="text-2xl font-bold text-slate-900">
                     {isHindi ? step.titleHi : step.titleEn}
                   </h3>
 
-                  <p className="mt-3 leading-7 text-slate-400">
+                  <p className="mt-3 leading-7 text-slate-700">
                     {isHindi ? step.descHi : step.descEn}
                   </p>
-
                 </div>
-
-                {/* Arrow */}
 
                 {index !== processSteps.length - 1 && (
                   <div className="absolute -bottom-5 left-1/2 hidden -translate-x-1/2 xl:block">
-                    <ArrowDown
-                      size={26}
-                      className="text-teal-500/60"
-                    />
+                    <ArrowDown size={26} className="text-teal-600" />
                   </div>
                 )}
               </div>
