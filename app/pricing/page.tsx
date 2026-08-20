@@ -19,7 +19,7 @@ export default function PricingPage() {
     standard: {
       id: "standard",
       name: "LekhaFlow Standard",
-      price: 9,999,// Aapki original price ke hisaab se adjust kar sakte hain
+      price: 9999, // ✅ Comma hata diya, ab ye 9999 number hai
       originalPrice: 15000,
       limit: "10,000 Invoices/Year",
       razorpayKey: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -31,7 +31,7 @@ export default function PricingPage() {
         "Email Support",
       ],
     },
-    gold: { // ✅ Yahan 'standard' ki jagah 'gold' kiya hai
+    gold: { 
       id: "gold",
       name: "LekhaFlow Gold",
       price: 14999,
