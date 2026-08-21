@@ -1,5 +1,6 @@
 "use client";
-import PartnerForm from "@/components/PartnerForm";
+import dynamic from 'next/dynamic';
+const PartnerForm = dynamic(() => import('@/components/PartnerForm'), { ssr: false });
 import ProblemSection from "@/components/ProblemSection";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
