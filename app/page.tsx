@@ -163,6 +163,11 @@ export default function LekhaFlowLanding() {
               {isHindi ? "पार्टनर" : "Partner"}
             </Link>
             
+            {/* ★ NEW: Admin Link yahan add kiya hai */}
+            <Link href="/admin" className="hover:text-teal-600 transition-colors font-black">
+              {isHindi ? "एडमिन" : "Admin"}
+            </Link>
+            
             <button
               onClick={() => setIsHindi(!isHindi)}
               className="text-teal-600 border border-teal-500/40 px-3 py-1 rounded hover:bg-teal-50"
