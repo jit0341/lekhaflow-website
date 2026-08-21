@@ -15,7 +15,7 @@ export default function PartnerForm({ isHindi }: { isHindi: boolean }) {
   const [submitted, setSubmitted] = useState(false);
 
   // 🔥 Google Apps Script ka Web App URL yahan daalein
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkgLWnKF4s5VnhkVHbQ9AzB_X5BRFLy9WJNsrdGB4Oj-yQjGy5j4o2Ti97142TvFpAOA/exec
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkgLWnKF4s5VnhkVHbQ9AzB_X5BRFLy9WJNsrdGB4Oj-yQjGy5j4o2Ti97142TvFpAOA/exe";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
