@@ -127,7 +127,8 @@ export default function LekhaFlowLanding() {
       {/* ============================================================ */}
       <nav className="fixed top-0 w-full z-[100] bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm">
         <div className={containerClass + " flex justify-between items-center h-20"}>
-          <Link href="/" className="flex items-center gap-2.5">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
             <img
               src="/logo.png"
               alt="LekhaFlow"
@@ -135,51 +136,53 @@ export default function LekhaFlowLanding() {
               height={36}
               className="h-9 w-9 rounded-lg object-contain"
             />
-            <span className="text-xl font-black text-slate-900 tracking-tighter uppercase">
+            <span className="text-xl font-black text-slate-900 tracking-tighter uppercase whitespace-nowrap">
               LEKHA<span className="text-teal-600">FLOW</span>
             </span>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-10 text-[11px] font-bold uppercase tracking-widest text-slate-600">
-            <Link href="#how-it-works" className="hover:text-slate-900 transition-colors">
+          {/* Navigation Links - Spacing Fixed */}
+          <div className="hidden lg:flex items-center justify-end flex-1 gap-6 xl:gap-8 text-[10px] xl:text-[11px] font-bold uppercase tracking-widest text-slate-600 ml-6">
+            <Link href="#how-it-works" className="hover:text-slate-900 transition-colors whitespace-nowrap">
               {isHindi ? "काम कैसे करता है" : "How It Works"}
             </Link>
-            <Link href="#features" className="hover:text-slate-900 transition-colors">
+            <Link href="#features" className="hover:text-slate-900 transition-colors whitespace-nowrap">
               {isHindi ? "फीचर्स" : "Features"}
             </Link>
-            <Link href="#pricing" className="hover:text-slate-900 transition-colors">
+            <Link href="#pricing" className="hover:text-slate-900 transition-colors whitespace-nowrap">
               {isHindi ? "मूल्य निर्धारण" : "Pricing"}
             </Link>
-            <Link href="/blog" className="text-amber-600 hover:text-amber-500 font-black">
+            <Link href="/blog" className="text-amber-600 hover:text-amber-500 font-black whitespace-nowrap">
               {isHindi ? "ब्लॉग" : "Insights"}
             </Link>
-            <Link href="/downloads" className="hover:text-slate-900 transition-colors">
+            <Link href="/downloads" className="hover:text-slate-900 transition-colors whitespace-nowrap">
               {isHindi ? "डाउनलोड" : "Download Center"}
             </Link>
-            <Link href="/faq" className="hover:text-slate-900 transition-colors">
+            <Link href="/faq" className="hover:text-slate-900 transition-colors whitespace-nowrap">
               {isHindi ? "सहायता" : "FAQ"}
             </Link>
-            <Link href="#partner" className="hover:text-slate-900 transition-colors">
+            <Link href="#partner" className="hover:text-slate-900 transition-colors whitespace-nowrap">
               {isHindi ? "पार्टनर" : "Partner"}
             </Link>
-            
-            {/* ★ NEW: Admin Link yahan add kiya hai */}
-            <Link href="/admin" className="hover:text-teal-600 transition-colors font-black">
+            <Link href="/admin" className="hover:text-teal-600 transition-colors font-black whitespace-nowrap">
               {isHindi ? "एडमिन" : "Admin"}
             </Link>
             
-            <button
-              onClick={() => setIsHindi(!isHindi)}
-              className="text-teal-600 border border-teal-500/40 px-3 py-1 rounded hover:bg-teal-50"
-            >
-              {isHindi ? "ENGLISH" : "हिंदी"}
-            </button>
-            <Link
-              href="/downloads"
-              className="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-xl shadow-lg font-black transition-all"
-            >
-              {isHindi ? "ट्रायल लें" : "Get Trial"}
-            </Link>
+            {/* Language & CTA Buttons - Pinned to the right */}
+            <div className="flex items-center gap-4 ml-auto pl-4 border-l border-slate-200">
+              <button
+                onClick={() => setIsHindi(!isHindi)}
+                className="text-teal-600 border border-teal-500/40 px-3 py-1 rounded hover:bg-teal-50 whitespace-nowrap"
+              >
+                {isHindi ? "ENGLISH" : "हिंदी"}
+              </button>
+              <Link
+                href="/downloads"
+                className="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-xl shadow-lg font-black transition-all whitespace-nowrap"
+              >
+                {isHindi ? "ट्रायल लें" : "Get Trial"}
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
