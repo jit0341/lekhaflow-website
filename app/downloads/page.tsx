@@ -59,26 +59,6 @@ export default function DownloadsPage() {
               <Download size={18} /> Download Trial
             </a>
           </div>
-
-          {/* 3. Gold Version */}
-          <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[3rem] shadow-2xl">
-            <div className="flex items-center gap-3 mb-4">
-              <Sparkles className="text-amber-500" size={24} />
-              <h2 className="text-2xl font-black text-white uppercase tracking-tighter">LekhaFlow Gold</h2>
-            </div>
-            <div className="bg-amber-500/10 border border-amber-500/30 rounded-full px-4 py-1 inline-block mb-4">
-              <span className="text-amber-400 text-[10px] font-black uppercase tracking-widest">Full Version</span>
-            </div>
-            <ul className="space-y-3 mb-8">
-              <li className="flex items-center gap-3 text-slate-300 text-sm"><CheckCircle2 size={16} className="text-teal-500" /> Unlimited Invoices/Year</li>
-              <li className="flex items-center gap-3 text-slate-300 text-sm"><CheckCircle2 size={16} className="text-teal-500" /> GSTR-2B Reconciliation</li>
-              <li className="flex items-center gap-3 text-slate-300 text-sm"><CheckCircle2 size={16} className="text-teal-500" /> Direct WhatsApp Support</li>
-            </ul>
-            <a href={downloadLinks.gold} download className="flex items-center justify-center gap-3 w-full py-5 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:shadow-lg hover:shadow-amber-500/20 transition-all">
-              <Download size={18} /> Download Gold
-            </a>
-          </div>
-
         </div>
       </div>
     </div>
