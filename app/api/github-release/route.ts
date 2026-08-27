@@ -1,19 +1,49 @@
 // app/api/github-release/route.ts
+
 import { NextResponse } from "next/server";
 
 const GITHUB_RELEASES_URL =
   "https://api.github.com/repos/jit0341/lekhaflow-website/releases/latest";
 
-function findAsset(
-  assets: any[],
-  pattern: RegExp
-) {
-  return assets.find((asset) => pattern.test(asset?.name || ""));
+type GitHubAsset = {
+  name?: string;
+  browser_download_url?: string;
+  size?: number;
+  content_type?: string;
+  state?: string;
+};
+
+function findExeAsset(
+  assets: GitHubAsset[],
+  patterns: RegExp[]
+): GitHubAsset | undefined {
+  return assets.find((asset) => {
+    const name = asset?.name || "";
+
+    if (!/\.exe$/i.test(name)) {
+      return false;
+    }
+
+    if (asset.state && asset.state !== "uploaded") {
+      return false;
+    }
+
+    return patterns.some((pattern) => pattern.test(name));
+  });
+}
+
+function assetInfo(asset?: GitHubAsset) {
+  return {
+    url: asset?.browser_download_url || "",
+    name: asset?.name || "",
+    size: asset?.size || 0,
+  };
 }
 
 export async function GET() {
   try {
     const response = await fetch(GITHUB_RELEASES_URL, {
+      method: "GET",
       headers: {
         Accept: "application/vnd.github+json",
         "User-Agent": "LekhaFlow-Website",
@@ -37,64 +67,73 @@ export async function GET() {
     }
 
     const data = await response.json();
-    const assets = Array.isArray(data.assets) ? data.assets : [];
 
-    // Production naming convention:
-    // LekhaFlow_Standard_Setup_<version>.exe
-    // LekhaFlow_Standard_Trial_<version>.exe
-    // LekhaFlow_Gold_Setup_<version>.exe
-    // LekhaFlow_Gold_Trial_<version>.exe
-    const standard = findAsset(
-      assets,
-      /^LekhaFlow_Standard_Setup_[^/]+\.exe$/i
-    );
+    const assets: GitHubAsset[] = Array.isArray(data.assets)
+      ? data.assets
+      : [];
 
-    const standardTrial = findAsset(
-      assets,
-      /^LekhaFlow_Standard_Trial_[^/]+\.exe$/i
-    );
+    /*
+     * Production naming support
+     *
+     * Current Standard:
+     *   LekhaFlow_Standard_Suite_Setup_15.1.0.exe
+     *
+     * Future-compatible names:
+     *   LekhaFlow_Standard_Setup_15.1.0.exe
+     *   LekhaFlow_Standard_Trial_15.1.0.exe
+     *   LekhaFlow_Gold_Setup_15.1.0.exe
+     *   LekhaFlow_Gold_Trial_15.1.0.exe
+     */
 
-    const gold = findAsset(
-      assets,
-      /^LekhaFlow_Gold_Setup_[^/]+\.exe$/i
-    );
+    const standard = findExeAsset(assets, [
+      /^LekhaFlow_Standard_Suite_Setup_[^/]+\.exe$/i,
+      /^LekhaFlow_Standard_Setup_[^/]+\.exe$/i,
+    ]);
 
-    const goldTrial = findAsset(
-      assets,
-      /^LekhaFlow_Gold_Trial_[^/]+\.exe$/i
-    );
+    const standardTrial = findExeAsset(assets, [
+      /^LekhaFlow_Standard_Trial_[^/]+\.exe$/i,
+      /^LekhaFlow_Standard_Suite_Trial_[^/]+\.exe$/i,
+    ]);
+
+    const gold = findExeAsset(assets, [
+      /^LekhaFlow_Gold_Setup_[^/]+\.exe$/i,
+      /^LekhaFlow_Gold_Suite_Setup_[^/]+\.exe$/i,
+    ]);
+
+    const goldTrial = findExeAsset(assets, [
+      /^LekhaFlow_Gold_Trial_[^/]+\.exe$/i,
+      /^LekhaFlow_Gold_Suite_Trial_[^/]+\.exe$/i,
+    ]);
+
+    /*
+     * Diagnostic information.
+     * This makes future release naming problems immediately visible
+     * without affecting the website UI.
+     */
 
     return NextResponse.json(
       {
         success: true,
+
         latestVersion: data.tag_name || "",
         publishedAt: data.published_at || data.created_at || "",
         releaseName: data.name || "",
         releaseUrl: data.html_url || "",
 
-        standard: {
-          url: standard?.browser_download_url || "",
-          name: standard?.name || "",
-          size: standard?.size || 0,
-        },
+        standard: assetInfo(standard),
+        standardTrial: assetInfo(standardTrial),
+        gold: assetInfo(gold),
+        goldTrial: assetInfo(goldTrial),
 
-        standardTrial: {
-          url: standardTrial?.browser_download_url || "",
-          name: standardTrial?.name || "",
-          size: standardTrial?.size || 0,
-        },
+        assetCount: assets.length,
 
-        gold: {
-          url: gold?.browser_download_url || "",
-          name: gold?.name || "",
-          size: gold?.size || 0,
-        },
-
-        goldTrial: {
-          url: goldTrial?.browser_download_url || "",
-          name: goldTrial?.name || "",
-          size: goldTrial?.size || 0,
-        },
+        assets: assets
+          .filter((asset) => /\.exe$/i.test(asset?.name || ""))
+          .map((asset) => ({
+            name: asset.name || "",
+            size: asset.size || 0,
+            url: asset.browser_download_url || "",
+          })),
       },
       {
         headers: {
