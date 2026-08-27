@@ -44,16 +44,16 @@ export default function LekhaFlowLanding() {
   useEffect(() => {
     async function loadDownloads() {
       try {
-        const response = await fetch("/api/github_release");
+        const response = await fetch("/api/github-release", { cache: "no-store" });
         const data = await response.json();
         if (data.success) {
           setDownloadLinks({
             standard: data.standard?.url || "",
-            demo: data.demo?.url || "",
+            demo: data.standardTrial?.url || "",
             gold: data.gold?.url || ""
           });
-          setLatestVersion(data.gold?.version || data.standard?.version || "v15.0");
-          setPublishedAt(data.gold?.publishedAt || "");
+          setLatestVersion(data.latestVersion || ""); 
+          setPublishedAt(data.publishedAt || "");
         }
       } catch (err) { console.error(err); }
     }

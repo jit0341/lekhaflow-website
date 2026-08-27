@@ -1,80 +1,121 @@
 // app/api/github-release/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+const GITHUB_RELEASES_URL =
+  "https://api.github.com/repos/jit0341/lekhaflow-website/releases/latest";
+
+function findAsset(
+  assets: any[],
+  pattern: RegExp
+) {
+  return assets.find((asset) => pattern.test(asset?.name || ""));
+}
+
+export async function GET() {
   try {
-    // GitHub से latest release fetch करें
-    const response = await fetch(
-      'https://api.github.com/repos/jit0341/lekhaflow-website/releases/latest',
-      {
-        headers: {
-          'Accept': 'application/vnd.github.v3+json',
-        },
-      }
-    );
+    const response = await fetch(GITHUB_RELEASES_URL, {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "LekhaFlow-Website",
+      },
+      cache: "no-store",
+    });
 
     if (!response.ok) {
-      // Fallback: Static links
-      return getStaticLinks();
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Unable to fetch latest GitHub release.",
+        },
+        {
+          status: 502,
+          headers: {
+            "Cache-Control": "no-store, max-age=0",
+          },
+        }
+      );
     }
 
     const data = await response.json();
+    const assets = Array.isArray(data.assets) ? data.assets : [];
 
-    if (!data.tag_name) {
-      return getStaticLinks();
-    }
-
-    // Find assets
-    const goldAsset = data.assets?.find((a: any) => 
-      a.name?.includes('setup') && !a.name?.includes('trial')
+    // Production naming convention:
+    // LekhaFlow_Standard_Setup_<version>.exe
+    // LekhaFlow_Standard_Trial_<version>.exe
+    // LekhaFlow_Gold_Setup_<version>.exe
+    // LekhaFlow_Gold_Trial_<version>.exe
+    const standard = findAsset(
+      assets,
+      /^LekhaFlow_Standard_Setup_[^/]+\.exe$/i
     );
 
-    const goldTrialAsset = data.assets?.find((a: any) => 
-      a.name?.includes('trial')
+    const standardTrial = findAsset(
+      assets,
+      /^LekhaFlow_Standard_Trial_[^/]+\.exe$/i
     );
 
-    return NextResponse.json({
-      success: true,
-      latestVersion: data.tag_name,
-      publishedAt: data.published_at,
-      gold: {
-        url: goldAsset?.browser_download_url || '',
-        name: goldAsset?.name || '',
+    const gold = findAsset(
+      assets,
+      /^LekhaFlow_Gold_Setup_[^/]+\.exe$/i
+    );
+
+    const goldTrial = findAsset(
+      assets,
+      /^LekhaFlow_Gold_Trial_[^/]+\.exe$/i
+    );
+
+    return NextResponse.json(
+      {
+        success: true,
+        latestVersion: data.tag_name || "",
+        publishedAt: data.published_at || data.created_at || "",
+        releaseName: data.name || "",
+        releaseUrl: data.html_url || "",
+
+        standard: {
+          url: standard?.browser_download_url || "",
+          name: standard?.name || "",
+          size: standard?.size || 0,
+        },
+
+        standardTrial: {
+          url: standardTrial?.browser_download_url || "",
+          name: standardTrial?.name || "",
+          size: standardTrial?.size || 0,
+        },
+
+        gold: {
+          url: gold?.browser_download_url || "",
+          name: gold?.name || "",
+          size: gold?.size || 0,
+        },
+
+        goldTrial: {
+          url: goldTrial?.browser_download_url || "",
+          name: goldTrial?.name || "",
+          size: goldTrial?.size || 0,
+        },
       },
-      goldTrial: {
-        url: goldTrialAsset?.browser_download_url || '',
-        name: goldTrialAsset?.name || '',
-      },
-      standard: {
-        url: '',
-        name: '',
-      },
-    });
+      {
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+        },
+      }
+    );
   } catch (error) {
-    console.error('Error:', error);
-    return getStaticLinks();
-  }
-}
+    console.error("GitHub release API error:", error);
 
-// ✅ Fallback function with your existing links
-function getStaticLinks() {
-  return NextResponse.json({
-    success: true,
-    latestVersion: "v2.0",
-    publishedAt: new Date().toISOString(),
-    gold: {
-      url: "https://github.com/jit0341/lekhaflow-website/releases/download/v2.0/Lekhaflow_setup.exe",
-      name: "LekhaFlow Gold Full v2.0",
-      size: "157 MB",
-    },
-    goldTrial: {
-      url: "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/Trial_setup.exe",
-      name: "LekhaFlow Gold Trial v1.0",
-      size: "157 MB",
-    },
-    standard: {
-      url: "",
-      name: "",
-    },
-  });
+    return NextResponse.json(
+      {
+        success: false,
+        error: "GitHub release lookup failed.",
+      },
+      {
+        status: 502,
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+        },
+      }
+    );
+  }
 }

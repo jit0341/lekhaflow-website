@@ -1,12 +1,52 @@
 "use client";
 import { Download, CheckCircle2, Sparkles, Clock, Shield } from "lucide-react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function DownloadsPage() {
-  const downloadLinks = {
-    gold: "https://github.com/jit0341/lekhaflow-website/releases/download/v2.0/Lekhaflow_gold_setup.exe",
-    standard_full: "https://github.com/jit0341/lekhaflow-website/releases/download/V1FULL/Lekhaflow_standard_setup.exe",
-    standard_trial: "https://github.com/jit0341/lekhaflow-website/releases/download/v1.0/standard_trial_setup.exe",
+  const [downloadLinks, setDownloadLinks] = useState({
+    gold: "",
+    standard_full: "",
+    standard_trial: "",
+  });
+  const [latestVersion, setLatestVersion] = useState("");
+  const [publishedAt, setPublishedAt] = useState("");
+  const [loadingDownloads, setLoadingDownloads] = useState(true);
+
+  useEffect(() => {
+    async function loadDownloads() {
+      try {
+        const response = await fetch("/api/github-release", {
+          cache: "no-store",
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          setDownloadLinks({
+            standard_full: data.standard?.url || "",
+            standard_trial: data.standardTrial?.url || "",
+            gold: data.gold?.url || "",
+          });
+          setLatestVersion(data.latestVersion || "");
+          setPublishedAt(data.publishedAt || "");
+        }
+      } catch (err) {
+        console.error("Failed to load latest release:", err);
+      } finally {
+        setLoadingDownloads(false);
+      }
+    }
+
+    loadDownloads();
+  }, []);
+
+  const formatDate = (date: string) => {
+    if (!date) return "";
+    return new Date(date).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
   };
 
   return (
@@ -17,6 +57,12 @@ export default function DownloadsPage() {
             Download Center
           </h1>
           <p className="text-slate-500 text-sm mt-4">Choose your LekhaFlow version</p>
+          {latestVersion && (
+            <p className="text-slate-400 text-[10px] mt-2 font-bold uppercase tracking-widest">
+              Latest Stable Build: {latestVersion}
+              {publishedAt ? ` | Released: ${formatDate(publishedAt)}` : ""}
+            </p>
+          )}
         </div>
 
         {/* 3 Cards Grid */}
@@ -36,8 +82,17 @@ export default function DownloadsPage() {
               <li className="flex items-center gap-3 text-slate-300 text-sm"><CheckCircle2 size={16} className="text-teal-500" /> Bank Statement → Tally</li>
               <li className="flex items-center gap-3 text-slate-300 text-sm"><CheckCircle2 size={16} className="text-teal-500" /> Email Support</li>
             </ul>
-            <a href={downloadLinks.standard_full} download className="flex items-center justify-center gap-3 w-full py-5 bg-blue-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-blue-500 transition-all">
-              <Download size={18} /> Download Full
+            <a
+              href={downloadLinks.standard_full || undefined}
+              download
+              aria-disabled={!downloadLinks.standard_full}
+              className={`flex items-center justify-center gap-3 w-full py-5 text-white font-black rounded-2xl uppercase text-xs tracking-widest transition-all ${
+                downloadLinks.standard_full
+                  ? "bg-blue-600 hover:bg-blue-500"
+                  : "bg-slate-700 opacity-60 pointer-events-none"
+              }`}
+            >
+              <Download size={18} /> {loadingDownloads ? "Loading..." : "Download Full"}
             </a>
           </div>
 
@@ -55,8 +110,17 @@ export default function DownloadsPage() {
               <li className="flex items-center gap-3 text-slate-300 text-sm"><CheckCircle2 size={16} className="text-teal-500" /> No Credit Card Required</li>
               <li className="flex items-center gap-3 text-slate-300 text-sm"><CheckCircle2 size={16} className="text-teal-500" /> 7 Days Full Access</li>
             </ul>
-            <a href={downloadLinks.standard_trial} download className="flex items-center justify-center gap-3 w-full py-5 bg-teal-600 text-white font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-teal-500 transition-all">
-              <Download size={18} /> Download Trial
+            <a
+              href={downloadLinks.standard_trial || undefined}
+              download
+              aria-disabled={!downloadLinks.standard_trial}
+              className={`flex items-center justify-center gap-3 w-full py-5 text-white font-black rounded-2xl uppercase text-xs tracking-widest transition-all ${
+                downloadLinks.standard_trial
+                  ? "bg-teal-600 hover:bg-teal-500"
+                  : "bg-slate-700 opacity-60 pointer-events-none"
+              }`}
+            >
+              <Download size={18} /> {loadingDownloads ? "Loading..." : "Download Trial"}
             </a>
           </div>
         </div>
