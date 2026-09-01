@@ -1,0 +1,1897 @@
+
+FullName                                                        
+--------                                                        
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                    
+C:\Lekhaflow\lekhaflow-pro\app\favicon.ico                      
+C:\Lekhaflow\lekhaflow-pro\app\globals.css                      
+C:\Lekhaflow\lekhaflow-pro\app\layout.tsx                       
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                         
+C:\Lekhaflow\lekhaflow-pro\app\admin\page.tsx                   
+C:\Lekhaflow\lekhaflow-pro\app\api\create-payment-link\route.ts 
+C:\Lekhaflow\lekhaflow-pro\app\api\create_order\route.ts        
+C:\Lekhaflow\lekhaflow-pro\app\api\generate_license\route.ts    
+C:\Lekhaflow\lekhaflow-pro\app\api\github-release\route.ts      
+C:\Lekhaflow\lekhaflow-pro\app\api\save_lead\route.ts           
+C:\Lekhaflow\lekhaflow-pro\app\api\send_license\route.ts        
+C:\Lekhaflow\lekhaflow-pro\app\api\verify_payment\route.ts      
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts    
+C:\Lekhaflow\lekhaflow-pro\app\bank-statement\page.tsx          
+C:\Lekhaflow\lekhaflow-pro\app\blog\page.tsx                    
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\New Text Document.txt
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx             
+C:\Lekhaflow\lekhaflow-pro\app\compare\page.tsx                 
+C:\Lekhaflow\lekhaflow-pro\app\components\New Text Document.txt 
+C:\Lekhaflow\lekhaflow-pro\app\downloads\page.tsx               
+C:\Lekhaflow\lekhaflow-pro\app\faq\FAQClient.tsx                
+C:\Lekhaflow\lekhaflow-pro\app\faq\page.tsx                     
+C:\Lekhaflow\lekhaflow-pro\app\gallery\page.tsx                 
+C:\Lekhaflow\lekhaflow-pro\app\how-it-works\page.tsx            
+C:\Lekhaflow\lekhaflow-pro\app\payment\page.tsx                 
+C:\Lekhaflow\lekhaflow-pro\app\payment\status\page.tsx          
+C:\Lekhaflow\lekhaflow-pro\app\pricing\page.tsx                 
+C:\Lekhaflow\lekhaflow-pro\app\privacy\page.tsx.tsx             
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                
+C:\Lekhaflow\lekhaflow-pro\app\reconciliation\page.tsx          
+C:\Lekhaflow\lekhaflow-pro\app\refund\page.tsx                  
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx             
+C:\Lekhaflow\lekhaflow-pro\app\tally-sync\page.tsx              
+C:\Lekhaflow\lekhaflow-pro\app\updates\page.tsx                 
+
+
+
+
+FullName                                                              
+--------                                                              
+C:\Lekhaflow\lekhaflow-pro\components\AdminQRGenerator.tsx            
+C:\Lekhaflow\lekhaflow-pro\components\BenefitsSection.tsx             
+C:\Lekhaflow\lekhaflow-pro\components\BlogPreview.tsx                 
+C:\Lekhaflow\lekhaflow-pro\components\CompatibilitySection.tsx        
+C:\Lekhaflow\lekhaflow-pro\components\contact.tsx                     
+C:\Lekhaflow\lekhaflow-pro\components\DownloadDemo.tsx                
+C:\Lekhaflow\lekhaflow-pro\components\FAQ.tsx                         
+C:\Lekhaflow\lekhaflow-pro\components\Footer.tsx                      
+C:\Lekhaflow\lekhaflow-pro\components\Founder.tsx                     
+C:\Lekhaflow\lekhaflow-pro\components\Hero.tsx                        
+C:\Lekhaflow\lekhaflow-pro\components\Navbar.tsx                      
+C:\Lekhaflow\lekhaflow-pro\components\ParticlesBackground.tsx         
+C:\Lekhaflow\lekhaflow-pro\components\PartnerForm.tsx                 
+C:\Lekhaflow\lekhaflow-pro\components\PaymentModal.tsx                
+C:\Lekhaflow\lekhaflow-pro\components\Pricing.tsx                     
+C:\Lekhaflow\lekhaflow-pro\components\ProblemSection.tsx              
+C:\Lekhaflow\lekhaflow-pro\components\ProcessSection.tsx              
+C:\Lekhaflow\lekhaflow-pro\components\RoiCalculator.tsx               
+C:\Lekhaflow\lekhaflow-pro\components\SectionTitle.tsx                
+C:\Lekhaflow\lekhaflow-pro\components\SolutionSection.tsx             
+C:\Lekhaflow\lekhaflow-pro\components\TrustSection.tsx                
+C:\Lekhaflow\lekhaflow-pro\components\WhatsAppButton.tsx              
+C:\Lekhaflow\lekhaflow-pro\components\WhoUsesSection.tsx              
+C:\Lekhaflow\lekhaflow-pro\components\home\HeroSection.tsx            
+C:\Lekhaflow\lekhaflow-pro\components\home\SalesSplitSection.tsx      
+C:\Lekhaflow\lekhaflow-pro\components\home\WhyLekhaFlowSection.tsx    
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx               
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx
+
+
+
+
+Path                                                                   LineNumber Line                                               
+----                                                                   ---------- ----                                               
+C:\Lekhaflow\lekhaflow-pro\.env.production                                      1 # Disable Founder Skip Payment in Production       
+C:\Lekhaflow\lekhaflow-pro\.gitignore                                          20 # production                                       
+C:\Lekhaflow\lekhaflow-pro\license_generator2.py                               56         print("\n--- Select Product Tier ---")     
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   22               Products <ChevronDown size={14} />   
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   55 features: [                                        
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   56 isHindi ? "â‚¹10,000, â‚¹30,000 à¤¯à¤¾ â‚¹50,000   
+                                                                                  à¤¸à¥‡ à¤•à¤® à¤¸à¥‡à¤²à¥à¤¸                      
+                                                                                  à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Sales Split Below        
+                                                                                  â‚¹10,000, â‚¹30,000 or â‚¹50,000",                
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   58 { i: Zap, t: isHindi ? "à¤¯à¥‚à¤¨à¤¿à¤•            
+                                                                                  à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Sales    
+                                                                                  Split Advantage", d: isHindi ? "à¤¸à¥‡à¤²à¥à¤¸    
+                                                                                  à¤Ÿà¥‹à¤Ÿà¤² à¤•à¥‹ à¤•à¤ˆ à¤µà¤¾à¤‰à¤šà¤°         
+                                                                                  à¤®à¥‡à¤‚ à¤‘à¤Ÿà¥‹à¤®à¥ˆà¤Ÿà¤¿à¤•à¤²à¥€           
+                                                                                  à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ à¤•à¤°à¥‡à¤‚à¥¤" :           
+                                                                                  "Automatically split a sales total into multiple   
+                                                                                  vouchers.", c: "text-amber-500" }                  
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   62 <Link href="#features"                             
+                                                                                  className="hover:text-slate-900 transition-colors  
+                                                                                  whitespace-nowrap">                                
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   63 {isHindi ? "à¤«à¥€à¤šà¤°à¥à¤¸" : "Features"}      
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   74 {/* HERO SECTION â€” Balanced Font Sizes + All     
+                                                                                  Features */}                                       
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   75 <Split size={14} className="text-amber-500" />     
+                                                                                  {isHindi ? "à¤¯à¥‚à¤¨à¤¿à¤• à¤¸à¥‡à¤²à¥à¤¸        
+                                                                                  à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Unique Sales Split"}     
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   80 {/* SALES SPLIT FEATURE â€” UNIQUE USP */}         
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   81 <section id="features" className="py-24            
+                                                                                  bg-slate-50 border-y border-amber-500/20">         
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   84 {isHindi ? "à¤¯à¥‚à¤¨à¤¿à¤• à¤¸à¥‡à¤²à¥à¤¸        
+                                                                                  à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Unique Sales Split"}     
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   85 : "GST reconciliation, invoice processing, sales   
+                                                                                  split â€” all in one tool."}                       
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   87 ? "à¤¯à¤¹à¥€ workflow Purchase Invoices, Sales     
+                                                                                  Invoices, Bank Statements à¤”à¤° Sales Split       
+                                                                                  à¤•à¥‡ à¤²à¤¿à¤ à¤¬à¤¨à¤¾à¤¯à¤¾ à¤—à¤¯à¤¾         
+                                                                                  à¤¹à¥ˆà¥¤"                                         
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   88 : "The same workflow extends across Purchase       
+                                                                                  Invoices, Sales Invoices, Bank Statements and      
+                                                                                  Sales Split."}                                     
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   89 {isHindi ? "ðŸ”¥ à¤¸à¥‡à¤²à¥à¤¸                   
+                                                                                  à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ: â‚¹75,000 à¤•à¤¾            
+                                                                                  à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ â†’ 2 à¤µà¤¾à¤‰à¤šà¤° (â‚¹40K + 
+                                                                                  â‚¹35K) à¤‘à¤Ÿà¥‹à¤®à¥‡à¤Ÿà¤¿à¤•" : "ðŸ”¥ Sales    
+                                                                                  Split: â‚¹75,000 Invoice â†’ 2 Vouchers (â‚¹40K +  
+                                                                                  â‚¹35K) Automatic"}                                
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   91 ? "Vouchrit AI-ledger à¤ªà¤° à¤«à¥‹à¤•à¤¸          
+                                                                                  à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆ, Vyapar TaxOne practice        
+                                                                                  management à¤ªà¤° â€” LekhaFlow desktop workflow + 
+                                                                                  privacy + sales split à¤ªà¤°"                      
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   92 : "Vouchrit focuses on AI-ledger prediction,       
+                                                                                  Vyapar TaxOne on practice management â€” LekhaFlow 
+                                                                                  owns desktop workflow + privacy + sales split"}    
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   93 <tr className="border-b border-slate-200/50"><td   
+                                                                                  className="py-4">Sales Split Below â‚¹50K</td><td  
+                                                                                  className="text-center text-amber-500              
+                                                                                  font-black">âœ“ Auto</td><td                       
+                                                                                  className="text-center text-pink-500">âœ—</td><td  
+                                                                                  className="text-center text-pink-500">âœ—</td></tr>
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   94 ? "ðŸ”¥ Vouchrit AI-ledger à¤ªà¤°, Vyapar TaxOne   
+                                                                                  practice management à¤ªà¤° â€” LekhaFlow desktop   
+                                                                                  workflow + privacy + unique sales split à¤ªà¤°"    
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                   95 : "ðŸ”¥ Vouchrit owns AI-ledger prediction, Vyapar 
+                                                                                  TaxOne owns practice management â€” LekhaFlow owns 
+                                                                                  desktop workflow + privacy + unique sales split"}  
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                  100 : "LekhaFlow is desktop-first, privacy-focused,    
+                                                                                  and offers unique sales split â€” which neither    
+                                                                                  competitor provides."                              
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                  104 {Object.entries(productData).filter(([key]) => key 
+                                                                                  === 'standard').map(([key, p]) => (                
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                  105 {p.features.map((feature, i) => (                  
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                  109 { name: "Priya Gupta", firm: "Gupta Tax            
+                                                                                  Consultants, Bilaspur", quote: isHindi ?           
+                                                                                  "à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ             
+                                                                                  à¤«à¥€à¤šà¤° à¤¬à¤¹à¥à¤¤                          
+                                                                                  à¤¶à¤•à¥à¤¤à¤¿à¤¶à¤¾à¤²à¥€ à¤¹à¥ˆà¥¤              
+                                                                                  à¤®à¥ˆà¤¨à¥à¤¯à¥à¤…à¤²                           
+                                                                                  à¤•à¥ˆà¤²à¤•à¥à¤²à¥‡à¤¶à¤¨ à¤–à¤¤à¥à¤®à¥¤" :     
+                                                                                  "The Sales Split feature is powerful. No more      
+                                                                                  manual calculations for GST compliance." },        
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                  127 bank-statement                                     
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                  134 features                                           
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                  144 sales-split                                        
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                  161   { slug: "gstr-2b-reconciliation-tally", title:   
+                                                                                  "GSTR-2B Reconciliation in Tally: A Complete       
+                                                                                  Workflow", desc: "How to match your purchase       
+                                                                                  register with GSTR-2B data and identify mismatches 
+                                                                                  automatically.", icon: Database },                 
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                                  165   { slug: "bank-statement-auto-entry-tally",       
+                                                                                  title: "Automated Bank Statement Entry into Tally: 
+                                                                                  Setup Guide", desc: "How to configure automatic    
+                                                                                  bank statement imports and reconciliation in       
+                                                                                  Tally.", icon: Landmark },                         
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                          70   const productData = {                            
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                          79     features: [                                    
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                          84       isHindi ? "â‚¹10,000, â‚¹30,000 à¤¯à¤¾       
+                                                                                  â‚¹50,000 à¤¸à¥‡ à¤•à¤® à¤¸à¥‡à¤²à¥à¤¸            
+                                                                                  à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Sales Split Below        
+                                                                                  â‚¹10,000, â‚¹30,000 or â‚¹50,000",                
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         102         : "Automate Purchase & Sales Invoices,     
+                                                                                  Bank Statements and Accounting Documents â€” then  
+                                                                                  review the results and send them to Tally.",       
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         105         : "âœ… Client data stays on your system.   
+                                                                                  âœ… Automatically split sales totals into multiple 
+                                                                                  vouchers. âœ… No cloud storage."                   
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         111         { i: Zap, t: isHindi ? "à¤¯à¥‚à¤¨à¤¿à¤•    
+                                                                                  à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Sales    
+                                                                                  Split Advantage", d: isHindi ? "à¤¸à¥‡à¤²à¥à¤¸    
+                                                                                  à¤Ÿà¥‹à¤Ÿà¤² à¤•à¥‹ à¤•à¤ˆ à¤µà¤¾à¤‰à¤šà¤°         
+                                                                                  à¤®à¥‡à¤‚ à¤‘à¤Ÿà¥‹à¤®à¥ˆà¤Ÿà¤¿à¤•à¤²à¥€           
+                                                                                  à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ à¤•à¤°à¥‡à¤‚à¥¤" :           
+                                                                                  "Automatically split a sales total into multiple   
+                                                                                  vouchers.", c: "text-amber-500" }                  
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         150             <Link href="#features"                 
+                                                                                  className="hover:text-slate-900 transition-colors  
+                                                                                  whitespace-nowrap">                                
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         151               {isHindi ? "à¤«à¥€à¤šà¤°à¥à¤¸" :    
+                                                                                  "Features"}                                        
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         191       {/* HERO SECTION â€” Balanced Font Sizes +   
+                                                                                  All Features */}                                   
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         217               : "Automate Purchase & Sales         
+                                                                                  Invoices, Bank Statements and Accounting Documents 
+                                                                                  â€” then review the results and send them to       
+                                                                                  Tally."}                                           
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         228               {isHindi ? "à¤¸à¥‡à¤²à¥à¤¸          
+                                                                                  à¤Ÿà¥‹à¤Ÿà¤² à¤•à¥‹ à¤•à¤ˆ à¤µà¤¾à¤‰à¤šà¤°         
+                                                                                  à¤®à¥‡à¤‚ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Split sales    
+                                                                                  totals into multiple vouchers"}                    
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         245               <Split size={14}                     
+                                                                                  className="text-amber-500" /> {isHindi ?           
+                                                                                  "à¤¯à¥‚à¤¨à¤¿à¤• à¤¸à¥‡à¤²à¥à¤¸                   
+                                                                                  à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Unique Sales Split"}     
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         322       {/* SALES SPLIT FEATURE â€” UNIQUE USP */}   
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         324       <section id="features" className="py-24      
+                                                                                  bg-slate-50 border-y border-amber-500/20">         
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         333               {isHindi ? "à¤¸à¥‡à¤²à¥à¤¸          
+                                                                                  à¤Ÿà¥‹à¤Ÿà¤² â†’ à¤•à¤ˆ à¤µà¤¾à¤‰à¤šà¤°" : "Sales  
+                                                                                  Total â†’ Multiple Vouchers"}                      
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         338                 : "Automatically split a single    
+                                                                                  sales invoice into vouchers below â‚¹10,000,       
+                                                                                  â‚¹30,000 or â‚¹50,000"}                           
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         499                     {isHindi ? "à¤¯à¥‚à¤¨à¤¿à¤•    
+                                                                                  à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Unique   
+                                                                                  Sales Split"}                                      
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         504                       : "Automatically split one   
+                                                                                  sales invoice into multiple vouchers. Nobody else  
+                                                                                  offers this."}                                     
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         668                   : "GST reconciliation, invoice   
+                                                                                  processing, sales split â€” all in one tool."}     
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         761                 ? "à¤¯à¤¹à¥€ workflow Purchase     
+                                                                                  Invoices, Sales Invoices, Bank Statements à¤”à¤°   
+                                                                                  Sales Split à¤•à¥‡ à¤²à¤¿à¤ à¤¬à¤¨à¤¾à¤¯à¤¾       
+                                                                                  à¤—à¤¯à¤¾ à¤¹à¥ˆà¥¤"                               
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         762                 : "The same workflow extends       
+                                                                                  across Purchase Invoices, Sales Invoices, Bank     
+                                                                                  Statements and Sales Split."}                      
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         767                 {isHindi ? "ðŸ”¥ à¤¸à¥‡à¤²à¥à¤¸   
+                                                                                  à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ: â‚¹75,000 à¤•à¤¾            
+                                                                                  à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ â†’ 2 à¤µà¤¾à¤‰à¤šà¤° (â‚¹40K + 
+                                                                                  â‚¹35K) à¤‘à¤Ÿà¥‹à¤®à¥‡à¤Ÿà¤¿à¤•" : "ðŸ”¥ Sales    
+                                                                                  Split: â‚¹75,000 Invoice â†’ 2 Vouchers (â‚¹40K +  
+                                                                                  â‚¹35K) Automatic"}                                
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         846           ? "Vouchrit AI-ledger à¤ªà¤°             
+                                                                                  à¤«à¥‹à¤•à¤¸ à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆ, Vyapar TaxOne    
+                                                                                  practice management à¤ªà¤° â€” LekhaFlow desktop   
+                                                                                  workflow + privacy + sales split à¤ªà¤°"           
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         847           : "Vouchrit focuses on AI-ledger         
+                                                                                  prediction, Vyapar TaxOne on practice management   
+                                                                                  â€” LekhaFlow owns desktop workflow + privacy +    
+                                                                                  sales split"}                                      
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         863           <tr className="border-b                  
+                                                                                  border-slate-200/50"><td className="py-4">Sales    
+                                                                                  Split Below â‚¹50K</td><td className="text-center  
+                                                                                  text-amber-500 font-black">âœ“ Auto</td><td        
+                                                                                  className="text-center text-pink-500">âœ—</td><td  
+                                                                                  className="text-center text-pink-500">âœ—</td></tr>
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         872           ? "ðŸ”¥ Vouchrit AI-ledger à¤ªà¤°,       
+                                                                                  Vyapar TaxOne practice management à¤ªà¤° â€”       
+                                                                                  LekhaFlow desktop workflow + privacy + unique      
+                                                                                  sales split à¤ªà¤°"                                
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         873           : "ðŸ”¥ Vouchrit owns AI-ledger          
+                                                                                  prediction, Vyapar TaxOne owns practice management 
+                                                                                  â€” LekhaFlow owns desktop workflow + privacy +    
+                                                                                  unique sales split"}                               
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         892               {isHindi ? "GSTR-2B                  
+                                                                                  à¤°à¤¿à¤•à¤‚à¤¸à¤¿à¤²à¤¿à¤à¤¶à¤¨" : "GSTR-2B      
+                                                                                  Reconciliation"}                                   
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         897                 : "Auto-match purchase invoices    
+                                                                                  with GSTR-2B. Identify mismatches easily. Coming   
+                                                                                  in the next update."}                              
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         901                 {isHindi ? "âœ… à¤ªà¤°à¥à¤šà¥‡à¤œ 
+                                                                                  à¤‡à¤¨à¤µà¥‰à¤‡à¤¸" : "âœ… Purchase Invoices"}     
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         992                 q: isHindi ? "GSTR-2B              
+                                                                                  à¤°à¤¿à¤•à¤‚à¤¸à¤¿à¤²à¤¿à¤à¤¶à¤¨ à¤•à¤¬           
+                                                                                  à¤†à¤à¤—à¤¾?" : "When will GSTR-2B reconciliation 
+                                                                                  come?",                                            
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                         995                   : "GSTR-2B reconciliation is     
+                                                                                  coming in the next update. We're working on it."   
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                        1007                   : "LekhaFlow is desktop-first,   
+                                                                                  privacy-focused, and offers unique sales split â€” 
+                                                                                  which neither competitor provides."                
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                        1073                                                    
+                                                                                  {Object.entries(productData).filter(([key]) => key 
+                                                                                  === 'standard').map(([key, p]) => (                
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                        1087                     {p.features.map((feature, i)   
+                                                                                  => (                                               
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt                        1137               { name: "Priya Gupta", firm: "Gupta  
+                                                                                  Tax Consultants, Bilaspur", quote: isHindi ?       
+                                                                                  "à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ             
+                                                                                  à¤«à¥€à¤šà¤° à¤¬à¤¹à¥à¤¤                          
+                                                                                  à¤¶à¤•à¥à¤¤à¤¿à¤¶à¤¾à¤²à¥€ à¤¹à¥ˆà¥¤              
+                                                                                  à¤®à¥ˆà¤¨à¥à¤¯à¥à¤…à¤²                           
+                                                                                  à¤•à¥ˆà¤²à¤•à¥à¤²à¥‡à¤¶à¤¨ à¤–à¤¤à¥à¤®à¥¤" :     
+                                                                                  "The Sales Split feature is powerful. No more      
+                                                                                  manual calculations for GST compliance." },        
+C:\Lekhaflow\lekhaflow-pro\README.md                                           27 - [Next.js Documentation](https://nextjs.org/docs) 
+                                                                                  - learn about Next.js features and API.            
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                    3 # 100% Correct synced code string targeting        
+                                                                                  production layout                                  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                   26       videoBtn: "🎬 Watch Product Video",          
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                   28       secDesc: "Select any product tab component   
+                                                                                  to analyze specific execution logic algorithms",   
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                   34       gridTitle: "Full Product Deployment Grid",   
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                   92   const productData = {                            
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  101       features: [                                  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  102         "Random splitting of sales invoice amounts 
+                                                                                  strictly below ₹50,000 threshold",                 
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  118       features: [                                  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  120         "Automated sales split processing routines 
+                                                                                  configured strictly below standard ₹50,000         
+                                                                                  protocols",                                        
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  135       features: [                                  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  136         "Direct automatic entry handler for Sales  
+                                                                                  and Purchase vouchers into Tally Prime runtime     
+                                                                                  environment",                                      
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  152       features: [                                  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  169       features: [                                  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  173         "Sales transaction amount processing logic 
+                                                                                  configured safely underneath standard ₹50,000      
+                                                                                  security tags",                                    
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  186       features: [                                  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  203       features: [                                  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  221   const launchQuotationLetterhead = (product: any) 
+                                                                                  => {                                               
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  223       refNo:                                       
+                                                                                  `NS/2026/QUOT/${product.id.toUpperCase()}_0523`,   
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  225       name: product.title,                         
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  226       limit: product.limit,                        
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  227       price: product.price,                        
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  228       scope: product.tagline,                      
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  229       benefits: product.features                   
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  456             {currentContent.activeText}:           
+                                                                                  {productData[activeTab].title}                     
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  461           {Object.values(productData).map((item)   
+                                                                                  => (                                               
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  479               <h3 className="text-lg font-black    
+                                                                                  text-slate-950                                     
+                                                                                  tracking-wide">{productData[activeTab].title}</h3> 
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  480               <p className="text-blue-600          
+                                                                                  font-black                                         
+                                                                                  text-[11px]">{productData[activeTab].tagline}</p>  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  484               <div className="text-2xl font-black  
+                                                                                  text-slate-950 tracking-tight">{productData[activeT
+                                                                                  ab].price}</div>                                   
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  485               <span className="text-black          
+                                                                                  text-[10px] font-mono font-black block             
+                                                                                  mt-0.5">{productData[activeTab].limit}</span>      
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  498                                                    
+                                                                                  {productData[activeTab].features.map((feature, i)  
+                                                                                  => {                                               
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  513             <button onClick={() =>                 
+                                                                                  launchQuotationLetterhead(productData[activeTab])} 
+                                                                                  className="px-5 py-2.5 rounded-xl bg-white         
+                                                                                  border-2 border-slate-400 hover:bg-slate-50        
+                                                                                  text-slate-950 font-black text-[11px] shadow-sm    
+                                                                                  transition-all">                                   
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  516             <button onClick={() => executeRazorpay(
+                                                                                  productData[activeTab].razorpayUrl)}               
+                                                                                  className="px-5 py-2.5 rounded-xl bg-blue-600      
+                                                                                  text-white font-black hover:bg-blue-700 shadow-md  
+                                                                                  shadow-blue-600/10 text-[11px] transition-all">    
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  530           {Object.values(productData).map((p) => ( 
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  551                   {p.features.slice(0, 3).map((f,  
+                                                                                  idx) => (                                          
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                                  627 # Write out the fresh production payload explicitly
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                         4 import SalesSplitSection from                      
+                                                                                  "@/components/home/SalesSplitSection";             
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                        98   const productData = {                            
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       107     features: [                                    
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       112       isHindi ? "₹10,000, ₹30,000 या ₹50,000 से कम 
+                                                                                  सेल्स स्प्लिट" : "Sales Split Below ₹10,000,       
+                                                                                  ₹30,000 or ₹50,000",                               
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       130         : "Automate Purchase & Sales Invoices,     
+                                                                                  Bank Statements and Accounting Documents — then    
+                                                                                  review the results and send them to Tally.",       
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       133         : "✅ Client data stays on your system. ✅   
+                                                                                  Automatically split sales totals into multiple     
+                                                                                  vouchers. ✅ No cloud storage."                     
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       139         { i: Zap, t: isHindi ? "यूनिक सेल्स        
+                                                                                  स्प्लिट" : "Sales Split Advantage", d: isHindi ?   
+                                                                                  "सेल्स टोटल को कई वाउचर में ऑटोमैटिकली स्प्लिट     
+                                                                                  करें।" : "Automatically split a sales total into   
+                                                                                  multiple vouchers.", c: "text-amber-500" }         
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       158       {/* HERO SECTION — Balanced Font Sizes + All 
+                                                                                  Features */}                                       
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       170       {/* SALES SPLIT FEATURE — UNIQUE USP */}     
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       172       <SalesSplitSection                           
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       357                   : "GST reconciliation, invoice   
+                                                                                  processing, sales split — all in one tool."}       
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       450                 ? "यही workflow Purchase Invoices, 
+                                                                                  Sales Invoices, Bank Statements और Sales Split के  
+                                                                                  लिए बनाया गया है।"                                 
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       451                 : "The same workflow extends       
+                                                                                  across Purchase Invoices, Sales Invoices, Bank     
+                                                                                  Statements and Sales Split."}                      
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       456                 {isHindi ? "🔥 सेल्स स्प्लिट:      
+                                                                                  ₹75,000 का इनवॉइस → 2 वाउचर (₹40K + ₹35K)          
+                                                                                  ऑटोमेटिक" : "🔥 Sales Split: ₹75,000 Invoice → 2   
+                                                                                  Vouchers (₹40K + ₹35K) Automatic"}                 
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       535           ? "Vouchrit AI-ledger पर फोकस करता है,   
+                                                                                  Vyapar TaxOne practice management पर — LekhaFlow   
+                                                                                  desktop workflow + privacy + sales split पर"       
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       536           : "Vouchrit focuses on AI-ledger         
+                                                                                  prediction, Vyapar TaxOne on practice management — 
+                                                                                  LekhaFlow owns desktop workflow + privacy + sales  
+                                                                                  split"}                                            
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       552           <tr className="border-b                  
+                                                                                  border-slate-200/50"><td className="py-4">Sales    
+                                                                                  Split Below ₹50K</td><td className="text-center    
+                                                                                  text-amber-500 font-black">✓ Auto</td><td          
+                                                                                  className="text-center text-pink-500">✗</td><td    
+                                                                                  className="text-center text-pink-500">✗</td></tr>  
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       561           ? "🔥 Vouchrit AI-ledger पर, Vyapar      
+                                                                                  TaxOne practice management पर — LekhaFlow desktop  
+                                                                                  workflow + privacy + unique sales split पर"        
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       562           : "🔥 Vouchrit owns AI-ledger            
+                                                                                  prediction, Vyapar TaxOne owns practice management 
+                                                                                  — LekhaFlow owns desktop workflow + privacy +      
+                                                                                  unique sales split"}                               
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       581               {isHindi ? "GSTR-2B रिकंसिलिएशन" :   
+                                                                                  "GSTR-2B Reconciliation"}                          
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       586                 : "Auto-match purchase invoices    
+                                                                                  with GSTR-2B. Identify mismatches easily. Coming   
+                                                                                  in the next update."}                              
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       590                 {isHindi ? "✅ पर्चेज इनवॉइस" : "✅  
+                                                                                  Purchase Invoices"}                                
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       681                 q: isHindi ? "GSTR-2B रिकंसिलिएशन  
+                                                                                  कब आएगा?" : "When will GSTR-2B reconciliation      
+                                                                                  come?",                                            
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       684                   : "GSTR-2B reconciliation is     
+                                                                                  coming in the next update. We're working on it."   
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       696                   : "LekhaFlow is desktop-first,   
+                                                                                  privacy-focused, and offers unique sales split —   
+                                                                                  which neither competitor provides."                
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       762                                                    
+                                                                                  {Object.entries(productData).filter(([key]) => key 
+                                                                                  === 'standard').map(([key, p]) => (                
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       776                     {p.features.map((feature, i)   
+                                                                                  => (                                               
+C:\Lekhaflow\lekhaflow-pro\app\page.tsx                                       826               { name: "Priya Gupta", firm: "Gupta  
+                                                                                  Tax Consultants, Bilaspur", quote: isHindi ?       
+                                                                                  "सेल्स स्प्लिट फीचर बहुत शक्तिशाली है। मैन्युअल    
+                                                                                  कैलकुलेशन खत्म।" : "The Sales Split feature is     
+                                                                                  powerful. No more manual calculations for GST      
+                                                                                  compliance." },                                    
+C:\Lekhaflow\lekhaflow-pro\app\api\github-release\route.ts                     76      * Production naming support                   
+C:\Lekhaflow\lekhaflow-pro\app\api\send_license\route.ts                       37               <h2>Thank you for your purchase,     
+                                                                                  ${name || "Customer"}!</h2>                        
+C:\Lekhaflow\lekhaflow-pro\app\api\send_license\route.ts                       85             messaging_product: "whatsapp",         
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts                  136           <h2>Product Invoice</h2>                 
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts                  143               <th>Product</th>                     
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts                  144               <th>Core Features</th>               
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts                  149               <td>Tally Auto Entry (Sales Split,   
+                                                                                  Purchase, Bank Statements)</td>                    
+C:\Lekhaflow\lekhaflow-pro\app\bank-statement\page.tsx                          2 import ProductMarketingPage from                   
+                                                                                  "@/components/product/ProductMarketingPage";       
+C:\Lekhaflow\lekhaflow-pro\app\bank-statement\page.tsx                         11   return <ProductMarketingPage product="bank" />;  
+C:\Lekhaflow\lekhaflow-pro\app\blog\page.tsx                                   16   { slug: "gstr-2b-reconciliation-tally", title:   
+                                                                                  "GSTR-2B Reconciliation in Tally: A Complete       
+                                                                                  Workflow", desc: "How to match your purchase       
+                                                                                  register with GSTR-2B data and identify mismatches 
+                                                                                  automatically.", icon: Database },                 
+C:\Lekhaflow\lekhaflow-pro\app\blog\page.tsx                                   20   { slug: "bank-statement-auto-entry-tally",       
+                                                                                  title: "Automated Bank Statement Entry into Tally: 
+                                                                                  Setup Guide", desc: "How to configure automatic    
+                                                                                  bank statement imports and reconciliation in       
+                                                                                  Tally.", icon: Landmark },                         
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                            25         <p className="mb-4">Traditionally,         
+                                                                                  accountants follow these steps: open each PDF      
+                                                                                  invoice, read party name, GST number, item         
+                                                                                  details, tax amounts, then manually create         
+                                                                                  purchase/sales vouchers in Tally. For a single     
+                                                                                  invoice with 5 items, this takes 3-5 minutes.</p>  
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                            43         <p className="mb-4">Create ledgers under   
+                                                                                  Duties & Taxes: CGST @ 9%, SGST @ 9%, and IGST @   
+                                                                                  18%. For interstate purchases, use IGST. For       
+                                                                                  intrastate, split equally between CGST and         
+                                                                                  SGST.</p>                                          
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                            77         <p className="mb-4">Each voucher in Tally  
+                                                                                  XML contains: VoucherType (Purchase/Sales),        
+                                                                                  VoucherDate, PartyName, LedgerEntries (with tax    
+                                                                                  splits), and InventoryEntries (item details). The  
+                                                                                  XML must strictly follow Tally's schema.</p>       
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                            84   "gstr-2b-reconciliation-tally": {                
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                            85     title: "GSTR-2B Reconciliation in Tally: A     
+                                                                                  Complete Workflow",                                
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                            86     description: "How to match your purchase       
+                                                                                  register with GSTR-2B data and identify mismatches 
+                                                                                  automatically.",                                   
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                            92         <p className="mb-4">GSTR-2B reconciliation 
+                                                                                  is mandatory for claiming accurate input tax       
+                                                                                  credit. Mismatches between your Tally purchase     
+                                                                                  register and GST portal data can lead to denied    
+                                                                                  ITC and penalties.</p>                             
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                            93         <h3 className="text-white font-black       
+                                                                                  uppercase tracking-widest text-sm mt-8 mb-4">The   
+                                                                                  Reconciliation Challenge</h3>                      
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                            95         <h3 className="text-white font-black       
+                                                                                  uppercase tracking-widest text-sm mt-8             
+                                                                                  mb-4">Automated Reconciliation</h3>                
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                            97         <p>This reduces reconciliation time from   
+                                                                                  days to minutes, ensuring you never miss input     
+                                                                                  credit due to data entry errors.</p>               
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                           113         <p className="mb-4">Phase 1: Automate bank 
+                                                                                  statement entry (saves 30% time). Phase 2:         
+                                                                                  Automate purchase invoice entry (saves 40% time).  
+                                                                                  Phase 3: Add reconciliation automation (saves 20%  
+                                                                                  time).</p>                                         
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                           147         <p className="mb-4">LekhaFlow's Sales      
+                                                                                  Split feature automatically divides large invoices 
+                                                                                  into mathematically correct vouchers. A ₹75,000    
+                                                                                  invoice becomes two vouchers: ₹40,000 and ₹35,000. 
+                                                                                  Tax is proportionally split, maintaining exact     
+                                                                                  decimal precision.</p>                             
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                           152   "bank-statement-auto-entry-tally": {             
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                           154     description: "How to configure automatic bank  
+                                                                                  statement imports and reconciliation in Tally.",   
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                           160         <p className="mb-4">Bank reconciliation is 
+                                                                                  the most repetitive task in accounting. Every      
+                                                                                  month, accountants manually type hundreds of       
+                                                                                  transactions from PDF statements into Tally        
+                                                                                  payment and receipt vouchers.</p>                  
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                           198         <p className="mb-4">Before filing:         
+                                                                                  reconcile GSTR-2B with purchase register, verify   
+                                                                                  all e-invoices are uploaded, check for missing     
+                                                                                  credit notes, and validate POS for interstate B2C  
+                                                                                  supplies.</p>                                      
+C:\Lekhaflow\lekhaflow-pro\app\blog\[slug]\page.tsx                           199         <p>LekhaFlow's reconciliation module flags 
+                                                                                  mismatches before you file, preventing notices and 
+                                                                                  ensuring 100% compliant returns.</p>               
+C:\Lekhaflow\lekhaflow-pro\app\compare\page.tsx                                15   ["Sales splitting", "Manual", "Smart split       
+                                                                                  workflow"],                                        
+C:\Lekhaflow\lekhaflow-pro\app\downloads\page.tsx                             109               <li className="flex items-center     
+                                                                                  gap-3 text-slate-300 text-sm"><CheckCircle2        
+                                                                                  size={16} className="text-teal-500" /> All         
+                                                                                  Standard Features</li>                             
+C:\Lekhaflow\lekhaflow-pro\app\faq\FAQClient.tsx                               17     a: "Standard includes Bank Statement → Tally,  
+                                                                                  PDF/Image Invoice to Tally, Excel export, and Auto 
+                                                                                  Ledger creation for up to 10,000 invoices/year.    
+                                                                                  Gold adds unlimited invoices, GSTR-2B              
+                                                                                  Reconciliation, Sales Split below ₹50,000,         
+                                                                                  Multi-Company support, and direct WhatsApp support 
+                                                                                  from the founder."                                 
+C:\Lekhaflow\lekhaflow-pro\app\faq\FAQClient.tsx                               32     q: "What is Sales Split and why do I need it?",
+C:\Lekhaflow\lekhaflow-pro\app\faq\FAQClient.tsx                               33     a: "Sales Split automatically divides large    
+                                                                                  invoices (e.g., ₹75,000) into multiple smaller     
+                                                                                  vouchers (e.g., ₹40,000 + ₹35,000) below the       
+                                                                                  ₹50,000 threshold. This helps with GST compliance  
+                                                                                  and cash transaction reporting without manual      
+                                                                                  calculation."                                      
+C:\Lekhaflow\lekhaflow-pro\app\faq\FAQClient.tsx                               41     a: "You can upload PDF invoices, scanned image 
+                                                                                  files (JPG, PNG), and Excel sheets. Our AI engine  
+                                                                                  reads all major Indian invoice formats including   
+                                                                                  GST invoices, purchase orders, and delivery        
+                                                                                  challans."                                         
+C:\Lekhaflow\lekhaflow-pro\app\gallery\page.tsx                                52               Lekha<span                           
+                                                                                  className="text-amber-500">Flow</span> <span       
+                                                                                  className="text-xs text-slate-500 font-normal">|   
+                                                                                  Production Lab</span>                              
+C:\Lekhaflow\lekhaflow-pro\app\gallery\page.tsx                                56             Real Software Terminal Interface & GUI 
+                                                                                  Production Screenshots                             
+C:\Lekhaflow\lekhaflow-pro\app\how-it-works\page.tsx                           22     text: "Choose purchase invoices, sales files   
+                                                                                  or bank statements.",                              
+C:\Lekhaflow\lekhaflow-pro\app\pricing\page.tsx                                26       features: [                                  
+C:\Lekhaflow\lekhaflow-pro\app\pricing\page.tsx                                41       features: [                                  
+C:\Lekhaflow\lekhaflow-pro\app\pricing\page.tsx                                43         "GSTR-2B Reconciliation",                  
+C:\Lekhaflow\lekhaflow-pro\app\pricing\page.tsx                                44         "Sales Split Below ₹50,000",               
+C:\Lekhaflow\lekhaflow-pro\app\pricing\page.tsx                               157                   {plan.features.map((feature, i)  
+                                                                                  => (                                               
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                                4   ["01", "Select Purchase Invoice", "Choose        
+                                                                                  purchase invoices or accounting documents."],      
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                                5   ["02", "Start AI Engine", "Let LekhaFlow read    
+                                                                                  and process the purchase document."],              
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                               15   "Purchase ledger",                               
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                               23 export default function PurchasePage() {           
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                               34               PURCHASE AUTOMATION                  
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                               38               Turn Purchase Invoices               
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                               46               Scan purchase invoices with AI,      
+                                                                                  review the complete accounting                     
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                               79                 text: "Read purchase invoices and  
+                                                                                  turn document data into accounting data.",         
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              121                 THE PURCHASE WORKFLOW              
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              129                 LekhaFlow is designed to take the  
+                                                                                  purchase document beyond                           
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              146                   "Purchase invoice",              
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              182       {/* REAL PRODUCT INTERFACE */}               
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              201               The purchase workflow is designed    
+                                                                                  around a reviewable accounting                     
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              216                   Purchase AI Control Center       
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              232                                                    
+                                                                                  src="/images/products/purchase-ai.png"             
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              233                   alt="LekhaFlow Purchase AI       
+                                                                                  Control Center"                                    
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              244             Real LekhaFlow product interface — the 
+                                                                                  screenshot will be used                            
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              245             here to show the actual Purchase       
+                                                                                  workflow to prospective clients.                   
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              259               HOW PURCHASE AUTOMATION WORKS        
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              263               From purchase invoice to final       
+                                                                                  accounting result.                                 
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              267               LekhaFlow processes the purchase     
+                                                                                  document, creates the accounting                   
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              321                 Before the final sync, the         
+                                                                                  generated purchase accounting result               
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              370                 The processed purchase accounting  
+                                                                                  data can also be opened in                         
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              389                 purchase result can be sent to the 
+                                                                                  selected Tally company.                            
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              409             Stop entering purchase invoices        
+                                                                                  manually.                                          
+C:\Lekhaflow\lekhaflow-pro\app\purchase\page.tsx                              413             Process a real purchase invoice,       
+                                                                                  review the generated accounting                    
+C:\Lekhaflow\lekhaflow-pro\app\reconciliation\page.tsx                          2 import ProductMarketingPage from                   
+                                                                                  "@/components/product/ProductMarketingPage";       
+C:\Lekhaflow\lekhaflow-pro\app\reconciliation\page.tsx                          5   title: "GST Reconciliation | LekhaFlow",         
+C:\Lekhaflow\lekhaflow-pro\app\reconciliation\page.tsx                          7     "Explore the LekhaFlow reconciliation workflow 
+                                                                                  for GST and accounting data.",                     
+C:\Lekhaflow\lekhaflow-pro\app\reconciliation\page.tsx                         10 export default function ReconciliationPage() {     
+C:\Lekhaflow\lekhaflow-pro\app\reconciliation\page.tsx                         11   return <ProductMarketingPage                     
+                                                                                  product="reconciliation" />;                       
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                             3 export default function SalesSplitPage() {         
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                            13               SALES SPLIT AUTOMATION               
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                            17               One Sales Invoice.                   
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                            25               Process a sales invoice with         
+                                                                                  LekhaFlow, choose your voucher                     
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                            58                 text: "Large sales totals become   
+                                                                                  separate vouchers",                                
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                            92               You decide how the sales amount      
+                                                                                  should be split.                                   
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                            96               LekhaFlow does not treat Sales Split 
+                                                                                  as ordinary invoice                                
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                            97               conversion. You select the voucher   
+                                                                                  limit and the processed sales                      
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           114                 Sales are split into separate      
+                                                                                  vouchers below the selected                        
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           156               HOW SALES SPLIT WORKS                
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           165               processes the sales data, applies    
+                                                                                  your selected threshold,                           
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           175               ["01", "Select File", "Choose the    
+                                                                                  sales invoice or files."],                         
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           176               ["02", "Start AI Engine", "Process   
+                                                                                  the sales documents."],                            
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           205       {/* PRODUCT INTERFACE */}                    
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           222               Select a voucher limit, process the  
+                                                                                  sales file and review the                          
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           235                   Sales AI & Smart Split Hub       
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           253                     Sales Invoice                  
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           288                   ["2025-04-30", "Cash", "Sales",  
+                                                                                  "1", "₹9,150.26"],                                 
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           289                   ["2025-04-24", "Cash", "Sales",  
+                                                                                  "2", "₹9,750.75"],                                 
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           290                   ["2025-04-13", "Cash", "Sales",  
+                                                                                  "3", "₹9,260.04"],                                 
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           291                   ["2025-04-24", "Cash", "Sales",  
+                                                                                  "4", "₹9,234.71"],                                 
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           292                   ["2025-04-17", "Cash", "Sales",  
+                                                                                  "5", "₹9,236.83"],                                 
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           314                   Direct Sync Sales to Tally       
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           324             LekhaFlow Sales interface screenshot.  
+                                                                                  Replace the visual above                           
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           325             with the actual product screenshot in  
+                                                                                  the next asset step.                               
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           348                 Every generated sales voucher can  
+                                                                                  be reviewed inside the                             
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           399                 The processed sales result can     
+                                                                                  also be opened in Excel,                           
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           417                 workflow sends the sales result to 
+                                                                                  the currently selected                             
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           437             Stop manually splitting sales vouchers.
+C:\Lekhaflow\lekhaflow-pro\app\sales-split\page.tsx                           441             Process a real sales file, choose your 
+                                                                                  threshold, review the                              
+C:\Lekhaflow\lekhaflow-pro\app\tally-sync\page.tsx                              2 import ProductMarketingPage from                   
+                                                                                  "@/components/product/ProductMarketingPage";       
+C:\Lekhaflow\lekhaflow-pro\app\tally-sync\page.tsx                             11   return <ProductMarketingPage product="tally" />; 
+C:\Lekhaflow\lekhaflow-pro\app\updates\page.tsx                                42           Keep your LekhaFlow Gold up to date with 
+                                                                                  the latest features                                
+C:\Lekhaflow\lekhaflow-pro\app\updates\page.tsx                                53                 New features and improvements are  
+                                                                                  ready for you!                                     
+C:\Lekhaflow\lekhaflow-pro\components\Navbar.tsx                               16               Products <ChevronDown size={14} />   
+C:\Lekhaflow\lekhaflow-pro\components\PaymentModal.tsx                         27   // Production में                                
+                                                                                  NEXT_PUBLIC_ENABLE_FOUNDER_MODE = false होना चाहिए 
+C:\Lekhaflow\lekhaflow-pro\components\home\HeroSection.tsx                     51                   : "Automate Purchase & Sales     
+                                                                                  Invoices, Bank Statements and Accounting Documents 
+                                                                                  — then review the results and send them to Tally."}
+C:\Lekhaflow\lekhaflow-pro\components\home\HeroSection.tsx                     62                   {isHindi ? "सेल्स टोटल को कई     
+                                                                                  वाउचर में स्प्लिट" : "Split sales totals into      
+                                                                                  multiple vouchers"}                                
+C:\Lekhaflow\lekhaflow-pro\components\home\HeroSection.tsx                     79                   <Split size={14}                 
+                                                                                  className="text-amber-500" /> {isHindi ? "यूनिक    
+                                                                                  सेल्स स्प्लिट" : "Unique Sales Split"}             
+C:\Lekhaflow\lekhaflow-pro\components\home\SalesSplitSection.tsx               10 interface SalesSplitSectionProps {                 
+C:\Lekhaflow\lekhaflow-pro\components\home\SalesSplitSection.tsx               15 export default function SalesSplitSection({        
+C:\Lekhaflow\lekhaflow-pro\components\home\SalesSplitSection.tsx               18 }: SalesSplitSectionProps) {                       
+C:\Lekhaflow\lekhaflow-pro\components\home\SalesSplitSection.tsx               20           <section id="features" className="py-24  
+                                                                                  bg-slate-50 border-y border-amber-500/20">         
+C:\Lekhaflow\lekhaflow-pro\components\home\SalesSplitSection.tsx               29                   {isHindi ? "सेल्स टोटल → कई      
+                                                                                  वाउचर" : "Sales Total → Multiple Vouchers"}        
+C:\Lekhaflow\lekhaflow-pro\components\home\SalesSplitSection.tsx               34                     : "Automatically split a       
+                                                                                  single sales invoice into vouchers below ₹10,000,  
+                                                                                  ₹30,000 or ₹50,000"}                               
+C:\Lekhaflow\lekhaflow-pro\components\home\WhyLekhaFlowSection.tsx             65                         {isHindi ? "यूनिक सेल्स    
+                                                                                  स्प्लिट" : "Unique Sales Split"}                   
+C:\Lekhaflow\lekhaflow-pro\components\home\WhyLekhaFlowSection.tsx             70                           : "Automatically split   
+                                                                                  one sales invoice into multiple vouchers. Nobody   
+                                                                                  else offers this."}                                
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        13 const products = [                                 
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        14   { name: "Purchase", href: "/purchase" },         
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        15   { name: "Sales Split", href: "/sales-split" },   
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        16   { name: "Bank Statement", href:                  
+                                                                                  "/bank-statement" },                               
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        17   { name: "Reconciliation", href:                  
+                                                                                  "/reconciliation" },                               
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        18   { name: "Tally Sync", href: "/tally-sync" },     
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        31   const [productsOpen, setProductsOpen] =          
+                                                                                  useState(false);                                   
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        61     setProductsOpen(false);                        
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        84               {isHindi ? "प्रोडक्ट्स" : "Products"}
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        89               {products.map((product) => (         
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        91                   key={product.href}               
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        92                   href={product.href}              
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                        95                   {product.name}                   
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                       150               onClick={() =>                       
+                                                                                  setProductsOpen(!productsOpen)}                    
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                       153               <span>{isHindi ? "प्रोडक्ट्स" :      
+                                                                                  "Products"}</span>                                 
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                       156                 className={productsOpen ?          
+                                                                                  "rotate-180" : ""}                                 
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                       160             {productsOpen && (                     
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                       162                 {products.map((product) => (       
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                       164                     key={product.href}             
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                       165                     href={product.href}            
+C:\Lekhaflow\lekhaflow-pro\components\layout\Navbar.tsx                       169                     {product.name}                 
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         23 function ProductScreenshot({ src, alt, title }:    
+                                                                                  ScreenshotProps) {                                 
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         36             Product interface screenshot will      
+                                                                                  appear here.                                       
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         56   purchase: {                                      
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         57     eyebrow: "PURCHASE AUTOMATION",                
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         58     title: "Turn Purchase Invoices Into            
+                                                                                  Tally-Ready Vouchers",                             
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         60       "Scan purchase invoices with AI, review the  
+                                                                                  complete accounting result inside LekhaFlow, open  
+                                                                                  the result in Excel, and sync the voucher directly 
+                                                                                  to Tally.",                                        
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         61     screenshot:                                    
+                                                                                  "/images/product/purchase-control-center.png",     
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         62     screenshotTitle: "Purchase AI Control Center", 
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         75       "Direct Purchase sync to Tally",             
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         79   sales: {                                         
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         80     eyebrow: "SALES SPLIT AUTOMATION",             
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         81     title: "Split Sales Into Tally-Ready Vouchers",
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         83       "Process sales invoices, apply your voucher  
+                                                                                  limits, review the generated vouchers, open the    
+                                                                                  result in Excel and send the final entries         
+                                                                                  directly to Tally.",                               
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         84     screenshot:                                    
+                                                                                  "/images/product/sales-control-center.png",        
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         85     screenshotTitle: "Sales AI & Smart Split Hub", 
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         87       "Select sales files",                        
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         94       "Smart sales voucher splitting",             
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         95       "Multiple vouchers generated from sales      
+                                                                                  totals",                                           
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx         98       "Direct Sales sync to Tally",                
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        107     screenshot:                                    
+                                                                                  "/images/products/bank-intelligence.png",          
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        125   reconciliation: {                                
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        126     eyebrow: "GST RECONCILIATION",                 
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        127     title: "Reconciliation Built Into Your         
+                                                                                  Accounting Workflow",                              
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        129       "A dedicated reconciliation workspace for    
+                                                                                  comparing accounting data and GST records,         
+                                                                                  designed to fit naturally into the same LekhaFlow  
+                                                                                  workflow.",                                        
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        130     screenshot: "/images/product/gstr-2b.png",     
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        131     screenshotTitle: "GSTR-2B Reconciliation",     
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        133       "Import reconciliation data",                
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        140       "Dedicated reconciliation workspace",        
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        153     screenshot: "/images/product/tally-sync.png",  
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        160       "Send Purchase, Sales or Bank results",      
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        167       "Purchase, Sales and Bank workflows connect  
+                                                                                  to Tally",                                         
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        172 type ProductKey = keyof typeof content;            
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        174 export default function ProductMarketingPage({     
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        175   product,                                         
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        177   product: ProductKey;                             
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        180   const data = content[product];                   
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        252       {/* PRODUCT SCREENSHOT */}                   
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        258                 Real product interface             
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        271           <ProductScreenshot                       
+C:\Lekhaflow\lekhaflow-pro\components\product\ProductMarketingPage.tsx        356                 Purchase, Sales and Bank workflows 
+                                                                                  can expose the processed                           
+C:\Lekhaflow\lekhaflow-pro\public\sitemap.xml                                   9     <loc>https://lekhaflow.in#features</loc>       
+
+
+
+
+FullName                                      Length LastWriteTime      
+--------                                      ------ -------------      
+C:\Lekhaflow\lekhaflow-pro\app\admin\page.tsx    451 21-08-2026 06:32:16
+
+
+
+
+Path                                                         LineNumber Line                                                         
+----                                                         ---------- ----                                                         
+C:\Lekhaflow\lekhaflow-pro\.env.local                                 9 # RAZORPAY ADMIN QR CODE GENERATION                          
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                         71 <Link href="/admin" className="hover:text-teal-600           
+                                                                        transition-colors font-black whitespace-nowrap">             
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                        125 admin                                                        
+C:\Lekhaflow\lekhaflow-pro\navbar-review.txt                        152 FILE: app\admin\page.tsx                                     
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt               168             <Link href="/admin"                              
+                                                                        className="hover:text-teal-600 transition-colors font-black  
+                                                                        whitespace-nowrap">                                          
+C:\Lekhaflow\lekhaflow-pro\page-source-for-review.txt               169               {isHindi ? "à¤à¤¡à¤®à¤¿à¤¨" : "Admin"}        
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                         15   const [showAuthModal, setShowAuthModal] =                  
+                                                                        useState<boolean>(false);                                    
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                         16   const [authMode, setAuthMode] = useState<"signin" |        
+                                                                        "signup">("signin");                                         
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        307                 <div className="underline border-t           
+                                                                        border-slate-400 pt-1">Authorized Signatory</div>            
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        317       {showAuthModal && (                                    
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        322                 {authMode === "signin" ? "Sign In to         
+                                                                        Dashboard" : "Create Professional Account"}                  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        326             <form onSubmit={(e) => { e.preventDefault();     
+                                                                        setIsLoggedIn(true); setShowAuthModal(false); }}             
+                                                                        className="space-y-3 font-medium">                           
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        327               {authMode === "signup" && (                    
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        336                 {authMode === "signin" ? "Authenticate       
+                                                                        Credentials" : "Register and Open Systems"}                  
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        340               {authMode === "signin" ? (                     
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        341                 <p>New to LekhaFlow? <span onClick={() =>    
+                                                                        setAuthMode("signup")} className="text-blue-600 underline    
+                                                                        cursor-pointer">Create Account here</span></p>               
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        343                 <p>Already registered? <span onClick={() =>  
+                                                                        setAuthMode("signin")} className="text-blue-600 underline    
+                                                                        cursor-pointer">Sign In here</span></p>                      
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        346             <button onClick={() => setShowAuthModal(false)}  
+                                                                        className="w-full py-1.5 bg-slate-100 hover:bg-slate-200     
+                                                                        text-slate-800 font-bold rounded-lg transition               
+                                                                        text-[10px]">Cancel</button>                                 
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        358             <form onSubmit={(e) => { e.preventDefault();     
+                                                                        setShowTrialModal(false); alert("Telemetry authorization     
+                                                                        complete. Redirecting your node to secure download           
+                                                                        portal..."); window.open("https://rzp.io/rzp/SkJTqlgi",      
+                                                                        "_blank"); }} className="space-y-3 font-medium">             
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        363                 Authorize Profile & Go to Download Portal    
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        402             <button onClick={() => { setAuthMode("signin");  
+                                                                        setShowAuthModal(true); }} className="px-3 py-2 font-black   
+                                                                        rounded-lg bg-slate-50 border border-slate-300               
+                                                                        hover:bg-slate-100 text-slate-950 transition text-[10px]">   
+C:\Lekhaflow\lekhaflow-pro\app\build_page.py                        403               🔑 Client Login                                
+C:\Lekhaflow\lekhaflow-pro\app\admin\page.tsx                         2 import AdminQRGenerator from "@/components/AdminQRGenerator";
+C:\Lekhaflow\lekhaflow-pro\app\admin\page.tsx                         4 export default function AdminPage() {                        
+C:\Lekhaflow\lekhaflow-pro\app\admin\page.tsx                         9           Admin Panel - QR Generator                         
+C:\Lekhaflow\lekhaflow-pro\app\admin\page.tsx                        11         <AdminQRGenerator />                                 
+C:\Lekhaflow\lekhaflow-pro\app\api\generate_license\route.ts         64     // ✅ 6. Notify Admin (You)                               
+C:\Lekhaflow\lekhaflow-pro\app\api\generate_license\route.ts         65     await notifyAdmin(name, plan, email, mobile);            
+C:\Lekhaflow\lekhaflow-pro\app\api\generate_license\route.ts        112     auth: {                                                  
+C:\Lekhaflow\lekhaflow-pro\app\api\generate_license\route.ts        156 // ✅ Admin Notifier                                          
+C:\Lekhaflow\lekhaflow-pro\app\api\generate_license\route.ts        157 async function notifyAdmin(name: string, plan: string,       
+                                                                        email: string, mobile: string) {                             
+C:\Lekhaflow\lekhaflow-pro\app\api\send_license\route.ts             18           auth: {                                            
+C:\Lekhaflow\lekhaflow-pro\app\api\send_license\route.ts             81             Authorization: `Bearer ${WHATSAPP_API_KEY}`,     
+C:\Lekhaflow\lekhaflow-pro\app\api\verify_payment\route.ts           43     const auth =                                             
+                                                                        Buffer.from(`${RAZORPAY_KEY_SECRET}:`).toString("base64");   
+C:\Lekhaflow\lekhaflow-pro\app\api\verify_payment\route.ts           49           Authorization: `Basic ${auth}`,                    
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts         90       // 6. Notify Admin (You)                               
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts         91       await sendAdminNotification(customerData);             
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts        157             <li>Hardware: Software locked to authorized      
+                                                                        Machine ID</li>                                              
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts        163           <p><strong>Authorized Signatory,</strong></p>      
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts        215 async function sendAdminNotification(customerData: any) {    
+C:\Lekhaflow\lekhaflow-pro\app\api\webhook\razorpay\route.ts        217   console.log(`[ADMIN NOTIFICATION] New payment received:`,  
+                                                                        customerData);                                               
+C:\Lekhaflow\lekhaflow-pro\app\blog\page.tsx                         26 export default function BlogIndexPage() {                    
+C:\Lekhaflow\lekhaflow-pro\app\refund\page.tsx                       51               <li className="flex items-start gap-3"><span   
+                                                                        className="text-pink-500 mt-1">•</span>License was           
+                                                                        transferred to a different machine without authorization</li>
+C:\Lekhaflow\lekhaflow-pro\components\AdminQRGenerator.tsx            5 export default function AdminQRGenerator() {                 
+C:\Lekhaflow\lekhaflow-pro\public\logo.png                           10 4MIIHowoBAKCCB5wwggeYBgkrBgEFBQcwAQEEggeJMIIHhTCBx6IWBBRaUbfg
+                                                                        bYcRgM1QctyBv6wRo3ci8hgPMjAyNjA4MTQxNzEyMDZaMHcwdTBNMAkGBSsOA
+                                                                        wIaBQAEFKaiKtDHHrDRcGoPd8VzyaMr13FoBBT8Kkp1OoD6mWOT8HNX7L6TsH
+                                                                        3DewIUJytjyMwdTS2bhFFybPScXjJRrt6AABgPMjAyNjA4MTQxNzEyMDZaoBE
+                                                                        YDzIwMjYwODIxMTcxMjA1WqEjMCEwHwYJKwYBBQUHMAECBBIEEL0JZwO7d6sE
+                                                                        kDIuOhMAtT8wDQYJKoZIhvcNAQELBQADggGBAGC0uPzVu9nrQpu/fJHoy0+k2
+                                                                        mxdhm+lYpowgZhS1e8/inAVlxnzzTkNbr3VlA35ePsDT0TIhlq/bzI2auA3lz
+                                                                        YzEIIeanAi5fW1hkMuoGS7o/Yf2R1wn9/hGCuvPSua3LzqlC46qHj1deP+167
+                                                                        Dltu2m2dRcdG530YBJwoVW2L+ylL53qchEqZyDaIRD5VnGJPx+kJAbT1XI9WZ
+                                                                        /9G12hRRJEsgtd12DzDyTuur1nppfWrmR84ozmZnRAbT4b/xcZzjVmd0UMMQZ
+                                                                        SiMA9YQYjoj8p4sWio/NE6nHTl5gVcg6smc64A8AjIJ/wJ6uqPqQddr36tu9r
+                                                                        i/Ro55Y2bI+B1DteNLwSnDW8LWfZR0tAgNcxtYcdee7WMewwKTlMwZeMwctXe
+                                                                        2y4z9KHEoY23LYDa3yTyiY9GqYWouQQhSJEzkMNEbd3xVAHOTf9Pi4G/E1MO7
+                                                                        1O46tbq1Iu25zlHbm4x7ema7yAeKmSSirbeao+iropsZx3KQTMthY/UJsxIrQ
+                                                                        6CCBSMwggUfMIIFGzCCAwOgAwIBAgIQQSbSw0ZVz7OGk4EaH80e/zANBgkqhk
+                                                                        iG9w0BAQsFADBPMSYwJAYDVQQDDB1TU0wuY29tIEMyUEEgUlNBIFJvb3QgQ0E
+                                                                        gMjAyNTEYMBYGA1UECgwPU1NMIENvcnBvcmF0aW9uMQswCQYDVQQGEwJVUzAe
+                                                                        Fw0yNjA0MTYxNDE2MjNaFw0yNzA0MTYxNDE2MjJaMEoxCzAJBgNVBAYTAlVTM
+                                                                        REwDwYDVQQKDAhTU0wgQ29ycDEoMCYGA1UEAwwfU1NMLmNvbS1DMlBBLVJvb3
+                                                                        QtMjAyNS1SU0EgLSBpMTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggG
+                                                                        BAKvg+fAsk3H3q275ScaQ2XIIBNF73xDak7DcJzV8idiiEgaHGDQewiqqcFQQ
+                                                                        ZD9e3bHMZu42ZV4Uuk7oweLcICYfyuiQ2wlRxKp01dLRfU5X9Jvkphs0RU+TO
+                                                                        mdLdYIqtuFI4yGrcZyt07iVKd3tteAGqsS2i6fTbQsOy/15UMbicWXnf+obdc
+                                                                        47g2eZ81eOUcjjj2OIk1Gqp6T2afpuDnmT12tDV4voiV/X3stesoTDphZDiem
+                                                                        tkai7y8xrfRRbtSwOhl7oj+jSeYROV2i/Bm71wyeY13p2zjgZd/p4E55nytR6
+                                                                        wp//rr+1MANZIUgCOQsGS87or5J9wTjJCY9VA5A1kyRwr51CcDWareBWiHW1t
+                                                                        Z48GF6mEwIZnu5qI0H3+zAtYEFQG3qZOPBPowD8ondwnbd619Fw9pdpMcZA7S
+                                                                        ruE+6TJ75JcFYJd9IK2tE5DC1qrsx25+SPIgtH08+ZoYB/CUGtqE6UvO2HUrH
+                                                                        SOUQcSkvzfLr/PrjeWs7LE59ikwIDAQABo3gwdjAfBgNVHSMEGDAWgBT8Kkp1
+                                                                        OoD6mWOT8HNX7L6TsH3DezAPBgkrBgEFBQcwAQUEAgUAMBMGA1UdJQQMMAoGC
+                                                                        CsGAQUFBwMJMB0GA1UdDgQWBBRaUbfgbYcRgM1QctyBv6wRo3ci8jAOBgNVHQ
+                                                                        8BAf8EBAMCB4AwDQYJKoZIhvcNAQELBQADggIBAJxtITXxvGW7fRNiXdjSgsj
+                                                                        hAnLTdBewxGe8jzGuJ7F3El/lYOwEt9EXZ69RzNctOPxdSrAGxydt/pQ4sxof
+                                                                        bGl5Vdqh8AYK7sIO4fADQnzP74hNsR/zWbgoBi7bi88B5C0xhaVJmfNLK6VEl
+                                                                        D7B8i8UQdb0pdN9MBi1mFb5YC56h1KrVthgAI1kX2brtfalCFWl0Gf4mF8DeR
+                                                                        Zwb0IQOZam7Bn1FPkv5lzO56K2S+A6yx1bP0Ts5HAAQ58IwvPCTl13qY8+Eyu
+                                                                        IztblBBDxhnT4RJuYiBWzP1E2xWGujl74aG6PaZp1D9lRZsxSULdAFeFeJ/zB
+                                                                        2In+fVOOFYWV9WObTP4oxV+l3RLEK5HLKAWUuP//YO1mJYvUIrQoCxf6DIEhu
+                                                                        vHLvOinSLfMAyU7a3Q/LuuvK8WawPgw/IEZTelEHJkeIY+wQFvtHQou50J1pn
+                                                                        nXaYKzdX2DWvNOxsBDOkSEnV147VKRCeegmgKXJQzDW8yxu1MNgfJ0zA5haAF
+                                                                        fbPM/ZUfNBPLkyErU+nzbm9n8OnGDKYmRO0IoV57Dxqku/CQDS4f+U4P7BKKK
+                                                                        zM1b9WUfmA56d+QE2qk/3bG1mosP0T9+SKYgFevvVErjHsDsTS2phZme+25UK
+                                                                        gat0GTLMboUH/JTU4jnO/cf8iTUNF4nzWmPR9xzhMJRvKD9Qj1y   �jumb  
+                                                                         @jumdcbor  �  � 8�qc2pa.hash.data    c2sh�5̇��c����e��
+                                                                           {cbor�jexclusions��estart!flengthq�dnamenjumbf          
+                                                                        manifestcalgfsha256dhashX ��T�h� "�Z���0]�)�#�VA�h�����Vcpad
+                                                                        H          jumb   'jumdc2cl  �  � 8�qc2pa.claim.v2   �c
+                                                                        bor�jinstanceIDx,xmp:iid:8c157df5-7a51-44a1-8ec1-0da430708617
+                                                                        tclaim_generator_info�dnamexOpenAI Media Service            
+                                                                        APIdicon�curlx$self#jumbf=c2pa.assertions/c2pa.icondhashX �a�
+                                                                         Er�����E���E���J�����[=�worg.contentauth.c2pa_rsf0.79.2ksp
+                                                                        ecVersione2.2.0isignaturexMself#jumbf=/c2pa/urn:c2pa:48da765f
+                                                                        -728a-472d-b01e-62647b456266/c2pa.signaturercreated_assertion
+                                                                        s��curlx$self#jumbf=c2pa.assertions/c2pa.icondhashX �a� Er���
+                                                                        ��E���E���J�����[=��curlx*self#jumbf=c2pa.assertions/c2pa.a
+                                                                        ctions.v2dhashX U>�~#�8�³��                                 
+C:\Lekhaflow\lekhaflow-pro\public\robots.txt                          3 Disallow: /admin/                                            
+
+
+
+"use client";
+import dynamic from 'next/dynamic';
+import WhyLekhaFlowSection from "@/components/home/WhyLekhaFlowSection";
+import SalesSplitSection from "@/components/home/SalesSplitSection";
+import HeroSection from "@/components/home/HeroSection";
+const PartnerForm = dynamic(() => import('@/components/PartnerForm'), { ssr: false });
+import ProblemSection from "@/components/ProblemSection";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { 
+  Zap, ShieldCheck, Target, Headphones,
+  Download, X, Cpu, Database, CheckCircle2, Laptop,
+  ArrowRight, FileText, Landmark, Send, MessageCircleQuestion,
+  RefreshCcw, Shield, Users, Sparkles, Clock, Lock, FileSearch,
+  Split, Building2, BadgeCheck, Eye
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import PaymentModal from "@/components/PaymentModal";
+
+export default function LekhaFlowLanding() {
+  const [isHindi, setIsHindi] = useState<boolean>(false);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("lekhaflow-language");
+
+    if (saved === "hi") {
+      setIsHindi(true);
+    }
+
+    const handleLanguageChange = (event: Event) => {
+      const customEvent = event as CustomEvent<boolean>;
+      setIsHindi(customEvent.detail === true);
+    };
+
+    window.addEventListener(
+      "lekhaflow-language-change",
+      handleLanguageChange
+    );
+
+    return () => {
+      window.removeEventListener(
+        "lekhaflow-language-change",
+        handleLanguageChange
+      );
+    };
+  }, []);
+  const [showIntakeModal, setShowIntakeModal] = useState<boolean>(false);
+  const [intakeTarget, setIntakeTarget] = useState<"demo" | "quotation">("demo");
+  const [clientForm, setClientForm] = useState({ clientName: "", companyName: "", mobileNumber: "", clientEmail: "" });
+  const [invoices, setInvoices] = useState(500);
+  const [staffCost, setStaffCost] = useState(15000);
+  const [downloadLinks, setDownloadLinks] = useState({ standard: "", demo: "", gold: "" });
+  const [latestVersion, setLatestVersion] = useState("");
+  const [publishedAt, setPublishedAt] = useState("");
+
+  // Payment modal state
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<{key: string; name: string; price: string; url: string} | null>(null);
+
+  // âœ… FIX: openPayment function
+  const openPayment = (key: string, plan: any) => {
+    setSelectedPlan({
+      key: key,
+      name: plan.title,
+      price: plan.offerPrice,
+      url: plan.razorpayUrl
+    });
+    setPaymentModalOpen(true);
+  };
+
+  useEffect(() => {
+    async function loadDownloads() {
+      try {
+        const response = await fetch("/api/github-release", { cache: "no-store" });
+        const data = await response.json();
+        if (data.success) {
+          setDownloadLinks({
+            standard: data.standard?.url || "",
+            demo: data.standardTrial?.url || "",
+            gold: data.gold?.url || ""
+          });
+          setLatestVersion(data.latestVersion || ""); 
+          setPublishedAt(data.publishedAt || "");
+        }
+      } catch (err) { console.error(err); }
+    }
+    loadDownloads();
+  }, []);
+
+  const formatDate = (date: string) => {
+    if (!date) return "";
+    return new Date(date).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+  };
+
+  const containerClass = "max-w-7xl mx-auto px-6 lg:px-8";
+
+  const productData = {
+  standard: {
+    title: "LekhaFlow Standard",
+    originalPrice: "15,000",
+    offerPrice: "9,999",
+    limit: "10,000 Invoices/Year",
+    razorpayUrl: "https://pages.razorpay.com/lekhaflow-standard",
+    downloadUrl: "/downloads",
+    tagline: isHindi ? "MSME à¤•à¥‡ à¤²à¤¿à¤ à¤†à¤µà¤¶à¥à¤¯à¤• AI à¤‘à¤Ÿà¥‹à¤®à¥‡à¤¶à¤¨" : "Essential AI Automation for MSMEs",
+    features: [
+      isHindi ? "à¤¬à¥ˆà¤‚à¤• à¤¸à¥à¤Ÿà¥‡à¤Ÿà¤®à¥‡à¤‚à¤Ÿ â†’ à¤Ÿà¥ˆà¤²à¥€ (à¤…à¤¸à¥€à¤®à¤¿à¤¤)" : "Bank Statement â†’ Tally (Unlimited)",
+      isHindi ? "PDF / à¤‡à¤®à¥‡à¤œ à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ â†’ à¤Ÿà¥ˆà¤²à¥€" : "PDF / Image Invoice â†’ Tally",
+      isHindi ? "à¤à¤•à¥à¤¸à¥‡à¤² à¤Ÿà¥à¤°à¥‚ à¤•à¥‰à¤ªà¥€ à¤à¤•à¥à¤¸à¤ªà¥‹à¤°à¥à¤Ÿ" : "Excel True Copy Export",
+      isHindi ? "à¤‘à¤Ÿà¥‹ à¤²à¥‡à¤œà¤° à¤”à¤° à¤¸à¥à¤Ÿà¥‰à¤• à¤¨à¤¿à¤°à¥à¤®à¤¾à¤£" : "Auto Ledger & Stock Creation",
+      isHindi ? "â‚¹10,000, â‚¹30,000 à¤¯à¤¾ â‚¹50,000 à¤¸à¥‡ à¤•à¤® à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Sales Split Below â‚¹10,000, â‚¹30,000 or â‚¹50,000",
+      isHindi ? "à¤ˆà¤®à¥‡à¤² à¤¸à¤ªà¥‹à¤°à¥à¤Ÿ" : "Email Support"
+    ],
+    color: "border-teal-500",
+    accent: "text-teal-600"
+  }
+};
+
+  const t = {
+    hero: {
+      badge: isHindi ? "AI à¤…à¤•à¤¾à¤‰à¤‚à¤Ÿà¤¿à¤‚à¤— à¤‘à¤Ÿà¥‹à¤®à¥‡à¤¶à¤¨ â†’ à¤Ÿà¥ˆà¤²à¥€" : "AI-POWERED ACCOUNTING AUTOMATION â†’ TALLY",
+      title: isHindi ? (
+        <>à¤Ÿà¥ˆà¤²à¥€ à¤•à¥‡ à¤²à¤¿à¤ <span className="text-teal-500 italic">AI-à¤ªà¤¾à¤µà¤°à¥à¤¡ à¤…à¤•à¤¾à¤‰à¤‚à¤Ÿà¤¿à¤‚à¤— à¤‘à¤Ÿà¥‹à¤®à¥‡à¤¶à¤¨</span></>
+      ) : (
+        <>AI-Powered Accounting Automation <span className="text-teal-500 italic">for Tally</span></>
+      ),
+      desc: isHindi 
+        ? "à¤ªà¤°à¥à¤šà¥‡à¤œ à¤”à¤° à¤¸à¥‡à¤²à¥à¤¸ à¤‡à¤¨à¤µà¥‰à¤‡à¤¸, à¤¬à¥ˆà¤‚à¤• à¤¸à¥à¤Ÿà¥‡à¤Ÿà¤®à¥‡à¤‚à¤Ÿ à¤”à¤° à¤…à¤•à¤¾à¤‰à¤‚à¤Ÿà¤¿à¤‚à¤— à¤¡à¥‰à¤•à¥à¤¯à¥‚à¤®à¥‡à¤‚à¤Ÿ à¤•à¥‹ AI à¤¸à¥‡ à¤ªà¥à¤°à¥‹à¤¸à¥‡à¤¸ à¤•à¤°à¥‡à¤‚, à¤°à¤¿à¤œà¤²à¥à¤Ÿ à¤•à¥‹ à¤°à¤¿à¤µà¥à¤¯à¥‚ à¤•à¤°à¥‡à¤‚ à¤”à¤° Tally à¤®à¥‡à¤‚ à¤­à¥‡à¤œà¥‡à¤‚à¥¤" 
+        : "Automate Purchase & Sales Invoices, Bank Statements and Accounting Documents â€” then review the results and send them to Tally.",
+      sub: isHindi
+        ? "âœ… à¤•à¥à¤²à¤¾à¤‡à¤‚à¤Ÿ à¤¡à¥‡à¤Ÿà¤¾ à¤†à¤ªà¤•à¥‡ à¤¸à¤¿à¤¸à¥à¤Ÿà¤® à¤ªà¤° à¤°à¤¹à¤¤à¤¾ à¤¹à¥ˆà¥¤ âœ… à¤¸à¥‡à¤²à¥à¤¸ à¤Ÿà¥‹à¤Ÿà¤² à¤•à¥‹ à¤‘à¤Ÿà¥‹à¤®à¥ˆà¤Ÿà¤¿à¤•à¤²à¥€ à¤•à¤ˆ à¤µà¤¾à¤‰à¤šà¤° à¤®à¥‡à¤‚ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ à¤•à¤°à¥‡à¤‚à¥¤ âœ… à¤•à¥‹à¤ˆ à¤•à¥à¤²à¤¾à¤‰à¤¡ à¤¸à¥à¤Ÿà¥‹à¤°à¥‡à¤œ à¤¨à¤¹à¥€à¤‚à¥¤"
+        : "âœ… Client data stays on your system. âœ… Automatically split sales totals into multiple vouchers. âœ… No cloud storage."
+    },
+    trust: [
+        { i: Cpu, t: isHindi ? "AI à¤…à¤•à¤¾à¤‰à¤‚à¤Ÿà¤¿à¤‚à¤— à¤‘à¤Ÿà¥‹à¤®à¥‡à¤¶à¤¨" : "AI-Powered Automation", d: isHindi ? "à¤‡à¤¨à¤µà¥‰à¤‡à¤¸, à¤¬à¥ˆà¤‚à¤• à¤¸à¥à¤Ÿà¥‡à¤Ÿà¤®à¥‡à¤‚à¤Ÿ à¤”à¤° PDF à¤¸à¥‡ à¤…à¤•à¤¾à¤‰à¤‚à¤Ÿà¤¿à¤‚à¤— à¤¡à¥‡à¤Ÿà¤¾ à¤¤à¥ˆà¤¯à¤¾à¤° à¤•à¤°à¥‡à¤‚à¥¤" : "Process invoices, bank statements and accounting documents with AI.", c: "text-purple-500" },
+        { i: ShieldCheck, t: isHindi ? "à¤•à¥à¤²à¤¾à¤‡à¤‚à¤Ÿ à¤¡à¥‡à¤Ÿà¤¾ à¤•à¤‚à¤Ÿà¥à¤°à¥‹à¤²" : "Client-Side Data Control", d: isHindi ? "à¤—à¥‹à¤ªà¤¨à¥€à¤¯ à¤•à¥à¤²à¤¾à¤‡à¤‚à¤Ÿ à¤¡à¥‡à¤Ÿà¤¾ à¤ªà¤° à¤†à¤ªà¤•à¤¾ à¤¨à¤¿à¤¯à¤‚à¤¤à¥à¤°à¤£à¥¤" : "Designed around client-side processing and data control.", c: "text-teal-500" },
+        { i: Target, t: isHindi ? "à¤°à¤¿à¤µà¥à¤¯à¥‚ à¤¸à¥‡ à¤Ÿà¥ˆà¤²à¥€ à¤¤à¤•" : "Review Before Tally", d: isHindi ? "AI à¤¤à¥ˆà¤¯à¤¾à¤° à¤•à¤°à¥‡, à¤†à¤ª à¤°à¤¿à¤µà¥à¤¯à¥‚ à¤•à¤°à¥‡à¤‚, à¤«à¤¿à¤° Tally à¤®à¥‡à¤‚ à¤­à¥‡à¤œà¥‡à¤‚à¥¤" : "AI prepares. You review. Then send the final entries to Tally.", c: "text-blue-500" },
+        { i: Zap, t: isHindi ? "à¤¯à¥‚à¤¨à¤¿à¤• à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Sales Split Advantage", d: isHindi ? "à¤¸à¥‡à¤²à¥à¤¸ à¤Ÿà¥‹à¤Ÿà¤² à¤•à¥‹ à¤•à¤ˆ à¤µà¤¾à¤‰à¤šà¤° à¤®à¥‡à¤‚ à¤‘à¤Ÿà¥‹à¤®à¥ˆà¤Ÿà¤¿à¤•à¤²à¥€ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ à¤•à¤°à¥‡à¤‚à¥¤" : "Automatically split a sales total into multiple vouchers.", c: "text-amber-500" }
+    ]
+  };
+
+  const handleIntakeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowIntakeModal(false);
+    window.location.href = "/downloads";
+  };
+
+  const timeSavedValue = invoices * 3;
+  const annualSavingsValue = Math.round((timeSavedValue / 60) * (staffCost / 160)) * 12;
+
+  return (
+    <>
+      {/* ============================================================ */}
+      {/* NAVIGATION */}
+      {/* ============================================================ */}
+      {/* ============================================================ */}
+      {/* HERO SECTION â€” Balanced Font Sizes + All Features */}
+      {/* ============================================================ */}
+      <HeroSection
+        isHindi={isHindi}
+        containerClass={containerClass}
+        setIntakeTarget={setIntakeTarget}
+        setShowIntakeModal={setShowIntakeModal}
+      />
+      <PartnerForm isHindi={isHindi} />
+      <ProblemSection isHindi={isHindi} />
+
+      {/* ============================================================ */}
+      {/* SALES SPLIT FEATURE â€” UNIQUE USP */}
+      {/* ============================================================ */}
+      <SalesSplitSection
+        isHindi={isHindi}
+        containerClass={containerClass}
+      />
+
+          {/* ============================================================ */}
+          {/* SwiftAssignâ„¢ AI Ledger Assignment */}
+          {/* ============================================================ */}
+          <section className="py-24 bg-slate-50 border-y border-slate-200">
+            <div className={containerClass}>
+              <div className="text-center mb-16">
+                <div className="inline-block mb-4 px-5 py-2 bg-purple-100 border border-purple-300 rounded-full">
+                  <p className="text-purple-700 text-[10px] font-black uppercase tracking-[0.4em]">
+                    âš¡ AI-POWERED AUTOMATION
+                  </p>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
+                  SwiftAssignâ„¢ <span className="text-purple-600">AI Ledger Assignment</span>
+                </h2>
+                <p className="text-slate-900 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
+                  Smart bulk ledger assignment with AI-powered grouping
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div className="bg-white border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
+                  <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                    <Users className="text-purple-500" size={28} />
+                  </div>
+                  <h3 className="text-slate-900 font-black uppercase text-sm mb-3">AI Grouping</h3>
+                  <p className="text-slate-900 text-xs leading-relaxed">
+                    Similar transactions are automatically grouped together â€” UPI, NEFT, IMPS, ATM all get detected
+                  </p>
+                </div>
+
+                <div className="bg-white border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
+                  <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                    <Zap className="text-purple-500" size={28} />
+                  </div>
+                  <h3 className="text-slate-900 font-black uppercase text-sm mb-3">Bulk Assignment</h3>
+                  <p className="text-slate-900 text-xs leading-relaxed">
+                    Assign ledgers to all transactions in one click â€” with 100% accuracy
+                  </p>
+                </div>
+
+                <div className="bg-white border border-purple-500/20 p-8 rounded-[2.5rem] hover:border-purple-500/50 transition-all text-center">
+                  <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                    <Target className="text-purple-500" size={28} />
+                  </div>
+                  <h3 className="text-slate-900 font-black uppercase text-sm mb-3">Smart Detection</h3>
+                  <p className="text-slate-900 text-xs leading-relaxed">
+                    Detects and suggests repeated party names (e.g. "Pradeep", "Ramanujanagar") automatically
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+      {/* ============================================================ */}
+      {/* WHY LEKHAFLOW â€” Enhanced Trust Section */}
+      {/* ============================================================ */}
+      <WhyLekhaFlowSection
+        isHindi={isHindi}
+        containerClass={containerClass}
+      />
+
+      {/* ============================================================ */}
+      {/* PRIVACY SECTION â€” Stronger + More Prominent */}
+      {/* ============================================================ */}
+      <section className="py-20 bg-slate-50 border-y-2 border-teal-500/20">
+        <div className={containerClass}>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-5 py-2 bg-teal-100 border border-teal-300 rounded-full mb-6">
+              <Lock className="text-teal-500" size={16} />
+              <span className="text-teal-700 text-[10px] font-black uppercase tracking-[0.3em]">
+                {isHindi ? "ðŸ”’ à¤ªà¥à¤°à¤¾à¤‡à¤µà¥‡à¤¸à¥€-à¤«à¤°à¥à¤¸à¥à¤Ÿ à¤¡à¤¿à¤œà¤¼à¤¾à¤‡à¤¨" : "ðŸ”’ PRIVACY-FIRST DESIGN"}
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-6">
+              {isHindi ? " à¤•à¥à¤²à¤¾à¤‡à¤‚à¤Ÿ à¤•à¤¾ à¤¡à¥‡à¤Ÿà¤¾, à¤•à¥à¤²à¤¾à¤‡à¤‚à¤Ÿ à¤•à¤¾ à¤¨à¤¿à¤¯à¤‚à¤¤à¥à¤°à¤£" : " Client's Data. Client's own control."}
+            </h2>
+            <p className="text-slate-900 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-8">
+              {isHindi
+                ? "LekhaFlow à¤‰à¤¨ à¤ªà¥à¤°à¥‹à¤«à¥‡à¤¶à¤¨à¤²à¥à¤¸ à¤•à¥‡ à¤²à¤¿à¤ à¤¬à¤¨à¤¾à¤¯à¤¾ à¤—à¤¯à¤¾ à¤¹à¥ˆ à¤œà¥‹ à¤¸à¤‚à¤µà¥‡à¤¦à¤¨à¤¶à¥€à¤² à¤…à¤•à¤¾à¤‰à¤‚à¤Ÿà¤¿à¤‚à¤— à¤¡à¥‡à¤Ÿà¤¾ à¤¸à¤‚à¤­à¤¾à¤²à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤ à¤¹à¤®à¤¾à¤°à¤¾ workflow client-side processing à¤”à¤° data control à¤•à¥‹ à¤§à¥à¤¯à¤¾à¤¨ à¤®à¥‡à¤‚ à¤°à¤–à¤•à¤° à¤¬à¤¨à¤¾à¤¯à¤¾ à¤—à¤¯à¤¾ à¤¹à¥ˆà¥¤"
+                : "LekhaFlow is built for professionals who handle confidential accounting data. The workflow is designed around client-side processing and keeping control of sensitive accounting information with the client environment."}
+            </p>
+            
+            {/* Privacy Bullet Points */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto text-left">
+              <div className="bg-white/50 border border-slate-200 p-6 rounded-2xl flex items-start gap-4">
+                <Shield className="text-teal-500 flex-shrink-0 mt-1" size={20} />
+                <div>
+                  <p className="text-slate-900 font-black text-xs uppercase tracking-widest">
+                    {isHindi ? "à¤•à¥‹à¤ˆ à¤•à¥à¤²à¤¾à¤‰à¤¡ à¤¸à¥à¤Ÿà¥‹à¤°à¥‡à¤œ à¤¨à¤¹à¥€à¤‚" : "No Cloud Storage"}
+                  </p>
+                  <p className="text-slate-900 text-[10px] leading-relaxed">
+                    {isHindi ? "à¤¡à¥‡à¤Ÿà¤¾ à¤•à¤­à¥€ à¤¹à¤®à¤¾à¤°à¥‡ à¤¸à¤°à¥à¤µà¤° à¤ªà¤° à¤¨à¤¹à¥€à¤‚ à¤œà¤¾à¤¤à¤¾" : "Data never leaves your system"}
+                  </p>
+                </div>
+              </div>
+              <div className="bg-white/50 border border-slate-200 p-6 rounded-2xl flex items-start gap-4">
+                <Eye className="text-teal-500 flex-shrink-0 mt-1" size={20} />
+                <div>
+                  <p className="text-slate-900 font-black text-xs uppercase tracking-widest">
+                    {isHindi ? "à¤ªà¥‚à¤°à¤¾ à¤¨à¤¿à¤¯à¤‚à¤¤à¥à¤°à¤£" : "Full Control"}
+                  </p>
+                  <p className="text-slate-900 text-[10px] leading-relaxed">
+                    {isHindi ? "à¤†à¤ª à¤¤à¤¯ à¤•à¤°à¥‡à¤‚ à¤•à¤¿ à¤•à¥Œà¤¨ à¤¦à¥‡à¤–à¥‡" : "You decide who accesses what"}
+                  </p>
+                </div>
+              </div>
+              <div className="bg-white/50 border border-slate-200 p-6 rounded-2xl flex items-start gap-4">
+                <BadgeCheck className="text-teal-500 flex-shrink-0 mt-1" size={20} />
+                <div>
+                  <p className="text-slate-900 font-black text-xs uppercase tracking-widest">
+                    {isHindi ? "CAs à¤•à¥‡ à¤²à¤¿à¤ à¤¬à¤¨à¤¾à¤¯à¤¾ à¤—à¤¯à¤¾" : "Built for CAs"}
+                  </p>
+                  <p className="text-slate-900 text-[10px] leading-relaxed">
+                    {isHindi ? "à¤—à¥‹à¤ªà¤¨à¥€à¤¯à¤¤à¤¾ à¤ªà¥‡à¤¶à¥‡à¤µà¤° à¤œà¤¼à¤¿à¤®à¥à¤®à¥‡à¤¦à¤¾à¤°à¥€ à¤¹à¥ˆ" : "Privacy is a professional responsibility"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* USE CASES SECTION â€” Who Is It For */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200">
+        <div className={containerClass}>
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4 px-5 py-2 bg-teal-100 border border-teal-300 rounded-full">
+              <p className="text-teal-700 text-[10px] font-black uppercase tracking-[0.4em]">
+                {isHindi ? "ðŸŽ¯ à¤•à¤¿à¤¸à¤•à¥‡ à¤²à¤¿à¤ à¤¹à¥ˆ" : "ðŸŽ¯ WHO IS IT FOR"}
+              </p>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
+              {isHindi ? "à¤²à¥‡à¤–à¤¾à¤«à¥à¤²à¥‹ à¤•à¤¿à¤¸à¤•à¥‡ à¤²à¤¿à¤ à¤¹à¥ˆ" : "Who Is LekhaFlow For?"}
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Tally Users */}
+            <div className="bg-white border border-slate-200 p-8 rounded-[2.5rem] hover:border-teal-500/30 transition-all text-center">
+              <div className="w-16 h-16 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6">
+                <Users className="text-blue-500" size={28} />
+              </div>
+              <h3 className="text-slate-900 font-black uppercase text-sm mb-3">
+                {isHindi ? "à¤Ÿà¥ˆà¤²à¥€ à¤¯à¥‚à¤œà¤¼à¤°à¥à¤¸" : "Tally Users"}
+              </h3>
+              <p className="text-slate-900 text-xs leading-relaxed">
+                {isHindi 
+                  ? "à¤°à¥‹à¤œà¤¼à¤¾à¤¨à¤¾ à¤•à¥‡ à¤µà¤¾à¤‰à¤šà¤° à¤à¤‚à¤Ÿà¥à¤°à¥€ à¤•à¥‹ à¤¤à¥‡à¤œà¤¼ à¤•à¤°à¥‡à¤‚à¥¤ à¤¬à¥ˆà¤‚à¤• à¤¸à¥à¤Ÿà¥‡à¤Ÿà¤®à¥‡à¤‚à¤Ÿ, à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ à¤¸à¤¬ à¤à¤• à¤œà¤—à¤¹à¥¤"
+                  : "Speed up daily voucher entry. Bank statements, invoices, all in one place."}
+              </p>
+            </div>
+
+            {/* CA Firms */}
+            <div className="bg-white border border-slate-200 p-8 rounded-[2.5rem] hover:border-teal-500/30 transition-all text-center">
+              <div className="w-16 h-16 mx-auto bg-teal-500/10 rounded-2xl flex items-center justify-center mb-6">
+                <Building2 className="text-teal-500" size={28} />
+              </div>
+              <h3 className="text-slate-900 font-black uppercase text-sm mb-3">
+                {isHindi ? "CA à¤«à¤°à¥à¤®à¥à¤¸" : "CA Firms"}
+              </h3>
+              <p className="text-slate-900 text-xs leading-relaxed">
+                {isHindi 
+                  ? "à¤•à¥à¤²à¤¾à¤‡à¤‚à¤Ÿ à¤¡à¥‡à¤Ÿà¤¾ à¤•à¥€ à¤—à¥‹à¤ªà¤¨à¥€à¤¯à¤¤à¤¾ à¤¬à¤¨à¤¾à¤ à¤°à¤–à¥‡à¤‚à¥¤ à¤‘à¤Ÿà¥‹à¤®à¥‡à¤¶à¤¨ à¤•à¥‡ à¤¸à¤¾à¤¥ à¤•à¤‚à¤Ÿà¥à¤°à¥‹à¤² à¤­à¥€à¥¤"
+                  : "Maintain client data confidentiality. Automation with control."}
+              </p>
+            </div>
+
+            {/* Tax Consultants */}
+            <div className="bg-white border border-slate-200 p-8 rounded-[2.5rem] hover:border-teal-500/30 transition-all text-center">
+              <div className="w-16 h-16 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6">
+                <FileText className="text-amber-500" size={28} />
+              </div>
+              <h3 className="text-slate-900 font-black uppercase text-sm mb-3">
+                {isHindi ? "à¤Ÿà¥ˆà¤•à¥à¤¸ à¤•à¤‚à¤¸à¤²à¥à¤Ÿà¥‡à¤‚à¤Ÿà¥à¤¸" : "Tax Consultants"}
+              </h3>
+              <p className="text-slate-900 text-xs leading-relaxed">
+                {isHindi 
+                  ? "GST à¤°à¤¿à¤•à¤‚à¤¸à¤¿à¤²à¤¿à¤à¤¶à¤¨, à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ à¤ªà¥à¤°à¥‹à¤¸à¥‡à¤¸à¤¿à¤‚à¤—, à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ â€” à¤¸à¤¬ à¤à¤• à¤Ÿà¥‚à¤² à¤®à¥‡à¤‚à¥¤"
+                  : "GST reconciliation, invoice processing, sales split â€” all in one tool."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* TRUST BADGES â€” Service Providers */}
+      {/* ============================================================ */}
+      <section className="py-12 bg-white border-y border-slate-200">
+        <div className={containerClass}>
+          <p className="text-slate-900 text-[10px] font-black uppercase tracking-[0.5em] text-center mb-8">
+            {isHindi ? "à¤‡à¤¨ à¤ªà¥à¤²à¥‡à¤Ÿà¤«à¥‰à¤°à¥à¤®à¥à¤¸ à¤•à¥‡ à¤¸à¤¾à¤¥ à¤•à¤¾à¤® à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆ" : "WORKS WITH"}
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700">
+            <span className="text-slate-900 font-black text-sm uppercase tracking-widest">Tally</span>
+            <span className="text-slate-900 font-black text-sm uppercase tracking-widest">GST</span>
+            <span className="text-slate-900 font-black text-sm uppercase tracking-widest">MSME</span>
+            <span className="text-slate-900 font-black text-sm uppercase tracking-widest">Windows 10/11</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* SOCIAL PROOF â€” Recent Activity */}
+      {/* ============================================================ */}
+      <section className="py-12 bg-white border-y border-slate-200">
+        <div className={containerClass}>
+          <p className="text-slate-900 text-[10px] font-black uppercase tracking-[0.5em] text-center mb-6">
+            {isHindi ? "à¤¹à¤¾à¤² à¤¹à¥€ à¤®à¥‡à¤‚ à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤¿à¤¯à¤¾" : "RECENTLY DOWNLOADED"}
+          </p>
+          <div className="flex flex-wrap justify-center gap-6 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              CA Firm, Delhi â€” 15 mins ago
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              Tax Consultant, Mumbai â€” 1 hour ago
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              Tally User, Raipur â€” 3 hours ago
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* HOW IT WORKS */}
+      {/* ============================================================ */}
+      <section id="how-it-works" className="py-28 bg-slate-50 border-y border-slate-200">
+        <div className={containerClass}>
+          <div className="text-center mb-20">
+            <div className="inline-block mb-6 px-5 py-2 bg-teal-50 border border-teal-200 rounded-full">
+              <p className="text-teal-700 text-[10px] font-black uppercase tracking-[0.4em]">
+                {isHindi ? "4 à¤¸à¤°à¤² à¤šà¤°à¤£" : "4 SIMPLE STEPS"}
+              </p>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
+              {isHindi ? "à¤²à¥‡à¤–à¤¾à¤«à¥à¤²à¥‹ à¤•à¥ˆà¤¸à¥‡ à¤•à¤¾à¤® à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆ" : "How LekhaFlow Works"}
+            </h2>
+            <p className="text-slate-900 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
+              {isHindi 
+                ? "à¤‡à¤¨à¤µà¥‰à¤‡à¤¸, à¤¬à¥ˆà¤‚à¤• à¤¸à¥à¤Ÿà¥‡à¤Ÿà¤®à¥‡à¤‚à¤Ÿ à¤”à¤° à¤…à¤•à¤¾à¤‰à¤‚à¤Ÿà¤¿à¤‚à¤— à¤¡à¥‰à¤•à¥à¤¯à¥‚à¤®à¥‡à¤‚à¤Ÿ à¤¸à¥‡ AI à¤‘à¤Ÿà¥‹à¤®à¥‡à¤¶à¤¨ â€” à¤°à¤¿à¤µà¥à¤¯à¥‚ à¤•à¤°à¥‡à¤‚ à¤”à¤° Tally à¤®à¥‡à¤‚ à¤­à¥‡à¤œà¥‡à¤‚à¥¤" 
+                : "From invoices and bank statements to accounting entries â€” AI processes the work, you review it, then send it to Tally."}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {[
+              { num: "01", icon: FileText, title: isHindi ? "PDF à¤…à¤ªà¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚" : "Upload Bank Statement", desc: isHindi ? "à¤…à¤ªà¤¨à¤¾ à¤¬à¥ˆà¤‚à¤• à¤¸à¥à¤Ÿà¥‡à¤Ÿà¤®à¥‡à¤‚à¤Ÿ PDF à¤šà¥à¤¨à¥‡à¤‚à¥¤ à¤¸à¥‰à¤«à¥à¤Ÿà¤µà¥‡à¤¯à¤° à¤¸à¥à¤µà¤šà¤¾à¤²à¤¿à¤¤ à¤°à¥‚à¤ª à¤¸à¥‡ à¤¬à¥ˆà¤‚à¤• à¤•à¤¾ à¤ªà¤¤à¤¾ à¤²à¤—à¤¾ à¤²à¥‡à¤—à¤¾à¥¤" : "Select your bank statement PDF. The software auto-detects the bank format." },
+              { num: "02", icon: Cpu, title: isHindi ? "AI à¤ªà¤¢à¤¼à¤¤à¤¾ à¤¹à¥ˆ" : "AI Reads & Categorizes", desc: isHindi ? "AI à¤ªà¥à¤°à¤¤à¥à¤¯à¥‡à¤• à¤²à¥‡à¤¨-à¤¦à¥‡à¤¨ à¤•à¥‹ à¤ªà¤¢à¤¼à¤¤à¤¾ à¤¹à¥ˆ, à¤¨à¥ˆà¤°à¥‡à¤¶à¤¨ à¤•à¥‹ à¤¸à¤®à¤à¤¤à¤¾ à¤¹à¥ˆ, à¤”à¤° à¤¡à¥‡à¤¬à¤¿à¤Ÿ/à¤•à¥à¤°à¥‡à¤¡à¤¿à¤Ÿ à¤•à¥‹ à¤µà¤°à¥à¤—à¥€à¤•à¥ƒà¤¤ à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆà¥¤" : "AI reads every transaction, understands narration, and classifies Dr/Cr automatically." },
+              { num: "03", icon: Landmark, title: isHindi ? "à¤—à¥à¤°à¤¿à¤¡ à¤®à¥‡à¤‚ à¤¸à¤®à¥€à¤•à¥à¤·à¤¾ à¤•à¤°à¥‡à¤‚" : "Review in Smart Grid", desc: isHindi ? "à¤¸à¤­à¥€ à¤²à¥‡à¤¨-à¤¦à¥‡à¤¨ à¤à¤• à¤¸à¤¾à¤« à¤—à¥à¤°à¤¿à¤¡ à¤®à¥‡à¤‚ à¤¦à¤¿à¤–à¤¾à¤ˆ à¤¦à¥‡à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤ à¤“à¤ªà¤¨à¤¿à¤‚à¤—/à¤•à¥à¤²à¥‹à¤œà¤¿à¤‚à¤— à¤¬à¥ˆà¤²à¥‡à¤‚à¤¸ à¤‘à¤Ÿà¥‹-à¤µà¥ˆà¤²à¤¿à¤¡à¥‡à¤Ÿà¥‡à¤¡à¥¤" : "All transactions appear in a clean grid. Opening/closing balance auto-validated." },
+              { num: "04", icon: Send, title: isHindi ? "à¤µà¤¨-à¤•à¥à¤²à¤¿à¤• à¤Ÿà¥ˆà¤²à¥€" : "One-Click to Tally", desc: isHindi ? "'Send to Tally' à¤¦à¤¬à¤¾à¤à¤‚à¥¤ à¤¸à¤­à¥€ à¤µà¤¾à¤‰à¤šà¤° à¤¸à¥€à¤§à¥‡ à¤†à¤ªà¤•à¥‡ à¤Ÿà¥ˆà¤²à¥€ à¤®à¥‡à¤‚ à¤¬à¤¨ à¤œà¤¾à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤" : "Hit 'Send to Tally'. All vouchers are created directly in your Tally â€” no XML import needed." },
+            ].map((step, i) => (
+              <div key={i} className="group bg-white border border-slate-200 p-10 rounded-[2.5rem] hover:bg-white hover:border-teal-500/30 transition-all text-center relative">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-50 border border-slate-200 px-4 py-1 rounded-full">
+                  <span className="text-teal-500 font-black text-xs tracking-widest">{step.num}</span>
+                </div>
+                <div className="w-16 h-16 mx-auto bg-teal-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-teal-500/20 transition-colors mt-4">
+                  <step.icon className="text-teal-500" size={28} />
+                </div>
+                <h3 className="text-slate-900 font-black uppercase text-sm mb-4 tracking-widest">{step.title}</h3>
+                <p className="text-slate-900 font-medium text-xs leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <p className="text-slate-900 text-[10px] font-bold uppercase tracking-widest mb-6">
+              {isHindi 
+                ? "à¤¯à¤¹à¥€ workflow Purchase Invoices, Sales Invoices, Bank Statements à¤”à¤° Sales Split à¤•à¥‡ à¤²à¤¿à¤ à¤¬à¤¨à¤¾à¤¯à¤¾ à¤—à¤¯à¤¾ à¤¹à¥ˆà¥¤" 
+                : "The same workflow extends across Purchase Invoices, Sales Invoices, Bank Statements and Sales Split."}
+            </p>
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-white border border-amber-500/30 rounded-2xl">
+              <Sparkles size={16} className="text-amber-500" />
+              <span className="text-slate-900 text-xs font-bold uppercase tracking-widest">
+                {isHindi ? "ðŸ”¥ à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ: â‚¹75,000 à¤•à¤¾ à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ â†’ 2 à¤µà¤¾à¤‰à¤šà¤° (â‚¹40K + â‚¹35K) à¤‘à¤Ÿà¥‹à¤®à¥‡à¤Ÿà¤¿à¤•" : "ðŸ”¥ Sales Split: â‚¹75,000 Invoice â†’ 2 Vouchers (â‚¹40K + â‚¹35K) Automatic"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* DEMO FLOW SECTION */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-white">
+        <div className={containerClass}>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
+              {isHindi ? "à¤«à¥à¤°à¥€ à¤¡à¥‡à¤®à¥‹ à¤•à¥ˆà¤¸à¥‡ à¤•à¤¾à¤® à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆ" : "How the Free Demo Works"}
+            </h2>
+            <p className="text-slate-900 font-bold uppercase tracking-widest text-xs">
+              {isHindi ? "à¤•à¥‹à¤ˆ à¤ªà¥‡à¤®à¥‡à¤‚à¤Ÿ à¤¨à¤¹à¥€à¤‚à¥¤ à¤•à¥‹à¤ˆ à¤•à¥à¤°à¥‡à¤¡à¤¿à¤Ÿ à¤•à¤¾à¤°à¥à¤¡ à¤¨à¤¹à¥€à¤‚à¥¤" : "No payment. No credit card required."}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {[
+              { num: "01", title: isHindi ? "à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚" : "Download", desc: isHindi ? "7-à¤¦à¤¿à¤¨ à¤•à¤¾ à¤Ÿà¥à¤°à¤¾à¤¯à¤² à¤¸à¥‡à¤Ÿà¤…à¤ª à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚à¥¤" : "Download the 7-day trial setup file (Windows 10/11)." },
+              { num: "02", title: isHindi ? "à¤‡à¤‚à¤¸à¥à¤Ÿà¥‰à¤² à¤•à¤°à¥‡à¤‚" : "Install", desc: isHindi ? "à¤¸à¥‰à¤«à¥à¤Ÿà¤µà¥‡à¤¯à¤° à¤‡à¤‚à¤¸à¥à¤Ÿà¥‰à¤² à¤•à¤°à¥‡à¤‚à¥¤ à¤®à¤¶à¥€à¤¨ à¤†à¤ˆà¤¡à¥€ à¤•à¥‰à¤ªà¥€ à¤•à¤°à¥‡à¤‚à¥¤" : "Install the software. Copy the Machine Hardware ID displayed." },
+              { num: "03", title: isHindi ? "à¤¹à¤®à¤¸à¥‡ à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚" : "Contact Us", desc: isHindi ? "à¤µà¥à¤¹à¤¾à¤Ÿà¥à¤¸à¤à¤ª à¤ªà¤° à¤†à¤ˆà¤¡à¥€ à¤­à¥‡à¤œà¥‡à¤‚à¥¤ à¤¹à¤® 2 à¤˜à¤‚à¤Ÿà¥‡ à¤®à¥‡à¤‚ à¤²à¤¾à¤‡à¤¸à¥‡à¤‚à¤¸ à¤­à¥‡à¤œ à¤¦à¥‡à¤‚à¤—à¥‡à¥¤" : "Send the ID on WhatsApp. We send your trial license within 2 hours." },
+              { num: "04", title: isHindi ? "à¤Ÿà¥ˆà¤²à¥€ à¤®à¥‡à¤‚ à¤¦à¥‡à¤–à¥‡à¤‚" : "See It in Tally", desc: isHindi ? "à¤…à¤ªà¤¨à¥‡ à¤¬à¥ˆà¤‚à¤• à¤¸à¥à¤Ÿà¥‡à¤Ÿà¤®à¥‡à¤‚à¤Ÿ à¤”à¤° à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ à¤•à¥‹ à¤Ÿà¥ˆà¤²à¥€ à¤®à¥‡à¤‚ à¤¦à¥‡à¤–à¥‡à¤‚à¥¤" : "Watch your bank statements and invoices flow into Tally automatically." },
+            ].map((step, i) => (
+              <div key={i} className="bg-white border border-slate-200 p-8 rounded-[2rem] text-center hover:border-teal-500/30 transition-all">
+                <div className="text-4xl font-black text-teal-500/20 mb-4">{step.num}</div>
+                <h3 className="text-slate-900 font-black uppercase text-sm mb-3 tracking-widest">{step.title}</h3>
+                <p className="text-slate-900 font-medium text-xs leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-slate-900 text-[10px] font-bold uppercase tracking-widest">
+              {isHindi 
+                ? "à¤¸à¤‚à¤¦à¥‡à¤¹ à¤¹à¥ˆ? à¤µà¥à¤¹à¤¾à¤Ÿà¥à¤¸à¤à¤ª à¤ªà¤° 'à¤¡à¥‡à¤®à¥‹' à¤²à¤¿à¤–à¥‡à¤‚ à¤”à¤° à¤¹à¤® à¤†à¤ªà¤•à¥‹ à¤¸à¥à¤•à¥à¤°à¥€à¤¨ à¤¶à¥‡à¤¯à¤° à¤ªà¤° à¤¦à¤¿à¤–à¤¾à¤à¤‚à¤—à¥‡à¥¤" 
+                : "Not sure? WhatsApp 'DEMO' and we'll show you live via screen share."}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* CORE BENEFITS */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200">
+        <div className={containerClass}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {t.trust.map((item, i) => (
+              <div key={i} className="group bg-white/30 border border-slate-200 p-10 rounded-[3rem] hover:bg-white hover:border-teal-500/30 transition-all">
+                 <item.i className={`${item.c} mb-8 group-hover:scale-110 transition-transform`} size={32} />
+                 <h3 className="text-slate-900 font-black uppercase text-sm mb-4 tracking-widest">{item.t}</h3>
+                 <p className="text-slate-900 font-medium text-xs leading-relaxed">{item.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+{/* ============================================================ */}
+{/* COMPETITOR COMPARISON â€” Stronger Differentiation */}
+{/* ============================================================ */}
+<section className="py-24 bg-slate-50 border-y-2 border-slate-200">
+  <div className={containerClass}>
+    <div className="text-center mb-12">
+      <div className="inline-block mb-4 px-5 py-2 bg-teal-100 border border-teal-300 rounded-full">
+        <p className="text-teal-700 text-[10px] font-black uppercase tracking-[0.4em]">
+          {isHindi ? "ðŸ“Š à¤²à¥‡à¤–à¤¾à¤«à¥à¤²à¥‹ à¤¬à¤¨à¤¾à¤® à¤•à¤‚à¤ªà¤Ÿà¥€à¤Ÿà¤°à¥à¤¸" : "ðŸ“Š LEKHAFLOW VS COMPETITORS"}
+        </p>
+      </div>
+      <h2 className="text-3xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
+        {isHindi ? "à¤²à¥‡à¤–à¤¾à¤«à¥à¤²à¥‹ à¤•à¥à¤¯à¥‹à¤‚ à¤…à¤²à¤— à¤¹à¥ˆ" : "Built Differently for Tally Professionals"}
+      </h2>
+      <p className="text-slate-900 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
+        {isHindi 
+          ? "Vouchrit AI-ledger à¤ªà¤° à¤«à¥‹à¤•à¤¸ à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆ, Vyapar TaxOne practice management à¤ªà¤° â€” LekhaFlow desktop workflow + privacy + sales split à¤ªà¤°"
+          : "Vouchrit focuses on AI-ledger prediction, Vyapar TaxOne on practice management â€” LekhaFlow owns desktop workflow + privacy + sales split"}
+      </p>
+    </div>
+    <div className="max-w-4xl mx-auto overflow-x-auto">
+      <table className="w-full text-left bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+          <thead>
+            <tr className="border-b border-slate-200 bg-slate-50">
+              <th className="py-4 text-slate-900 text-[10px] font-black uppercase tracking-widest px-4">Feature</th>
+              <th className="py-4 text-teal-600 text-[10px] font-black uppercase tracking-widest text-center">LekhaFlow</th>
+              <th className="py-4 text-slate-600 text-[10px] font-black uppercase tracking-widest text-center">Vyapar TaxOne</th>
+              <th className="py-4 text-slate-600 text-[10px] font-black uppercase tracking-widest text-center">Vouchrit</th>
+            </tr>
+          </thead>
+          <tbody className="text-xs font-bold text-slate-800"> {/* ðŸ‘ˆ Text ko dark kiya */}
+          <tr className="border-b border-slate-200/50"><td className="py-4">Bank Statement â†’ Tally</td><td className="text-center text-teal-500">âœ“ Unlimited</td><td className="text-center">âœ“</td><td className="text-center text-pink-500">âœ—</td></tr>
+          <tr className="border-b border-slate-200/50"><td className="py-4">PDF Invoice â†’ Tally</td><td className="text-center text-teal-500">âœ“</td><td className="text-center">âœ“</td><td className="text-center text-pink-500">âœ—</td></tr>
+          <tr className="border-b border-slate-200/50"><td className="py-4">Sales Split Below â‚¹50K</td><td className="text-center text-amber-500 font-black">âœ“ Auto</td><td className="text-center text-pink-500">âœ—</td><td className="text-center text-pink-500">âœ—</td></tr>
+          <tr className="border-b border-slate-200/50"><td className="py-4">Client Data Privacy</td><td className="text-center text-teal-500 font-black">âœ“ 100% Local</td><td className="text-center">Cloud</td><td className="text-center">Cloud</td></tr>
+          <tr><td className="py-4">Yearly Price</td><td className="text-center text-teal-500 font-black">â‚¹7,999</td><td className="text-center">â‚¹10,000+</td><td className="text-center">â‚¹12,000+</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div className="text-center mt-8">
+      <p className="text-slate-900 text-[10px] font-bold uppercase tracking-widest">
+        {isHindi 
+          ? "ðŸ”¥ Vouchrit AI-ledger à¤ªà¤°, Vyapar TaxOne practice management à¤ªà¤° â€” LekhaFlow desktop workflow + privacy + unique sales split à¤ªà¤°" 
+          : "ðŸ”¥ Vouchrit owns AI-ledger prediction, Vyapar TaxOne owns practice management â€” LekhaFlow owns desktop workflow + privacy + unique sales split"}
+      </p>
+    </div>
+  </div>
+</section>
+
+      {/* ============================================================ */}
+      {/* GSTR-2B COMING SOON BANNER */}
+      {/* ============================================================ */}
+      <section className="py-16 bg-blue-50 border-y border-blue-500/20">
+        <div className={containerClass}>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-5 py-2 bg-blue-100 border border-blue-300 rounded-full mb-4">
+              <Sparkles className="text-blue-400" size={16} />
+              <span className="text-blue-700 text-[10px] font-black uppercase tracking-[0.3em]">
+                {isHindi ? "ðŸ”œ à¤…à¤ªà¤¡à¥‡à¤Ÿ à¤† à¤°à¤¹à¤¾ à¤¹à¥ˆ" : "ðŸ”œ COMING SOON"}
+              </span>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-black text-slate-900 uppercase italic tracking-tighter">
+              {isHindi ? "GSTR-2B à¤°à¤¿à¤•à¤‚à¤¸à¤¿à¤²à¤¿à¤à¤¶à¤¨" : "GSTR-2B Reconciliation"}
+            </h3>
+            <p className="text-slate-900 text-sm max-w-2xl mx-auto mt-3">
+              {isHindi 
+                ? "à¤ªà¤°à¥à¤šà¥‡à¤œ à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ à¤•à¥‹ GSTR-2B à¤¸à¥‡ à¤‘à¤Ÿà¥‹-à¤®à¥ˆà¤š à¤•à¤°à¥‡à¤‚à¥¤ à¤®à¤¿à¤¸à¤®à¥ˆà¤š à¤•à¥‹ à¤†à¤¸à¤¾à¤¨à¥€ à¤¸à¥‡ à¤ªà¤¹à¤šà¤¾à¤¨à¥‡à¤‚à¥¤ à¤…à¤—à¤²à¥‡ à¤…à¤ªà¤¡à¥‡à¤Ÿ à¤®à¥‡à¤‚ à¤† à¤°à¤¹à¤¾ à¤¹à¥ˆà¥¤"
+                : "Auto-match purchase invoices with GSTR-2B. Identify mismatches easily. Coming in the next update."}
+            </p>
+            <div className="mt-4 flex justify-center gap-4">
+              <span className="text-slate-900 text-[10px] font-bold uppercase tracking-widest border border-slate-200 px-4 py-2 rounded-full">
+                {isHindi ? "âœ… à¤ªà¤°à¥à¤šà¥‡à¤œ à¤‡à¤¨à¤µà¥‰à¤‡à¤¸" : "âœ… Purchase Invoices"}
+              </span>
+              <span className="text-slate-900 text-[10px] font-bold uppercase tracking-widest border border-slate-200 px-4 py-2 rounded-full">
+                {isHindi ? "âœ… GSTR-2B à¤®à¥ˆà¤šà¤¿à¤‚à¤—" : "âœ… GSTR-2B Matching"}
+              </span>
+              <span className="text-slate-900 text-[10px] font-bold uppercase tracking-widest border border-slate-200 px-4 py-2 rounded-full">
+                {isHindi ? "âœ… à¤®à¤¿à¤¸à¤®à¥ˆà¤š à¤¡à¤¿à¤Ÿà¥‡à¤•à¥à¤¶à¤¨" : "âœ… Mismatch Detection"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* ROI CALCULATOR */}
+      {/* ============================================================ */}
+      <section className="py-28">
+        <div className={containerClass}>
+          <div className="bg-white border border-slate-200 rounded-[4rem] p-10 lg:p-20 shadow-2xl grid lg:grid-cols-2 gap-20 items-center">
+              <div className="space-y-10">
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase italic leading-none">
+                  {isHindi ? "à¤‘à¤Ÿà¥‹à¤®à¥‡à¤¶à¤¨ à¤•à¤¾ à¤µà¤¿à¤¤à¥à¤¤à¥€à¤¯ à¤ªà¥à¤°à¤­à¤¾à¤µ" : "The Financial Impact of"} <span className="text-teal-500">{isHindi ? "à¤‘à¤Ÿà¥‹à¤®à¥‡à¤¶à¤¨" : "Automation"}</span>
+                </h2>
+                <div className="space-y-10">
+                  <div className="space-y-4">
+                    <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block">
+                      {isHindi ? "à¤”à¤¸à¤¤ à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ / à¤®à¤¹à¥€à¤¨à¤¾" : "Average Invoices / Month"}: {invoices}
+                    </label>
+                    <input type="range" min="100" max="5000" step="100" value={invoices} onChange={(e) => setInvoices(parseInt(e.target.value))} className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-teal-500" />
+                  </div>
+                  <div className="space-y-4">
+                    <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block">
+                      {isHindi ? "à¤µà¤°à¥à¤¤à¤®à¤¾à¤¨ à¤¸à¥à¤Ÿà¤¾à¤« à¤µà¥‡à¤¤à¤¨" : "Current Staff Salary"}: â‚¹{staffCost}
+                    </label>
+                    <input type="range" min="8000" max="50000" step="1000" value={staffCost} onChange={(e) => setStaffCost(parseInt(e.target.value))} className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-teal-500" />
+                  </div>
+                </div>
+              </div>
+              <div className="grid gap-6">
+                <div className="bg-slate-50 p-12 rounded-[2.5rem] border border-slate-200 text-center">
+                   <p className="text-slate-900 text-[10px] font-black uppercase tracking-[0.3em] mb-3">
+                     {isHindi ? "à¤…à¤ªà¤¨à¤¾ à¤¸à¤®à¤¯ à¤µà¤¾à¤ªà¤¸ à¤²à¥‡à¤‚" : "Reclaim Your Time"}
+                   </p>
+                   <p className="text-6xl font-black text-teal-500 tracking-tighter">{Math.round(timeSavedValue / 60)} <span className="text-2xl text-slate-900">Hrs/Mo</span></p>
+                </div>
+                <div className="bg-teal-500 p-12 rounded-[2.5rem] text-black shadow-xl text-center">
+                   <p className="text-teal-900 text-[10px] font-black uppercase tracking-[0.3em] mb-3">
+                     {isHindi ? "à¤µà¤¾à¤°à¥à¤·à¤¿à¤• à¤¬à¤šà¤¤" : "Annual Operational Savings"}
+                   </p>
+                   <p className="text-6xl font-black tracking-tighter">â‚¹{annualSavingsValue.toLocaleString()}</p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* FAQ SECTION â€” Dedicated */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200">
+        <div className={containerClass}>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
+              {isHindi ? "à¤…à¤•à¥à¤¸à¤° à¤ªà¥‚à¤›à¥‡ à¤œà¤¾à¤¨à¥‡ à¤µà¤¾à¤²à¥‡ à¤¸à¤µà¤¾à¤²" : "Frequently Asked Questions"}
+            </h2>
+            <p className="text-slate-900 font-bold uppercase tracking-widest text-xs">
+              {isHindi ? "à¤œà¤µà¤¾à¤¬ à¤œà¥‹ à¤†à¤ªà¤•à¥‹ à¤šà¤¾à¤¹à¤¿à¤" : "Answers you need"}
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-4">
+            {[
+              {
+                q: isHindi ? "à¤•à¥à¤¯à¤¾ LekhaFlow à¤•à¥à¤²à¤¾à¤‰à¤¡-à¤†à¤§à¤¾à¤°à¤¿à¤¤ à¤¹à¥ˆ?" : "Is LekhaFlow cloud-based?",
+                a: isHindi 
+                  ? "à¤¨à¤¹à¥€à¤‚à¥¤ LekhaFlow à¤à¤• à¤¡à¥‡à¤¸à¥à¤•à¤Ÿà¥‰à¤ª à¤¸à¥‰à¤«à¥à¤Ÿà¤µà¥‡à¤¯à¤° à¤¹à¥ˆà¥¤ à¤†à¤ªà¤•à¤¾ à¤¡à¥‡à¤Ÿà¤¾ à¤†à¤ªà¤•à¥‡ à¤•à¤‚à¤ªà¥à¤¯à¥‚à¤Ÿà¤° à¤ªà¤° à¤¹à¥€ à¤°à¤¹à¤¤à¤¾ à¤¹à¥ˆà¥¤ à¤¹à¤®à¤¾à¤°à¥‡ à¤¸à¤°à¥à¤µà¤° à¤ªà¤° à¤•à¥‹à¤ˆ à¤¡à¥‡à¤Ÿà¤¾ à¤¨à¤¹à¥€à¤‚ à¤œà¤¾à¤¤à¤¾à¥¤"
+                  : "No. LekhaFlow is desktop software. Your data stays on your computer. No data goes to our servers."
+              },
+              {
+                q: isHindi ? "à¤•à¥à¤¯à¤¾ à¤¯à¤¹ à¤‘à¤«à¤²à¤¾à¤‡à¤¨ à¤•à¤¾à¤® à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆ?" : "Does it work offline?",
+                a: isHindi 
+                  ? "à¤¹à¤¾à¤à¥¤ à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¥‡ à¤¬à¤¾à¤¦ à¤‡à¤‚à¤Ÿà¤°à¤¨à¥‡à¤Ÿ à¤•à¥€ à¤œà¤°à¥‚à¤°à¤¤ à¤¨à¤¹à¥€à¤‚ à¤¹à¥ˆà¥¤ à¤†à¤ª à¤‘à¤«à¤²à¤¾à¤‡à¤¨ à¤•à¤¾à¤® à¤•à¤° à¤¸à¤•à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤"
+                  : "Yes. No internet required after download. You can work offline."
+              },
+              {
+                q: isHindi ? "à¤•à¥Œà¤¨ à¤¸à¥€ Tally versions à¤¸à¤ªà¥‹à¤°à¥à¤Ÿ à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆ?" : "Which Tally versions are supported?",
+                a: isHindi 
+                  ? "Tally Prime, Tally ERP 9, à¤”à¤° à¤¸à¤­à¥€ à¤¹à¤¾à¤²à¤¿à¤¯à¤¾ à¤µà¤°à¥à¤œà¤¨ à¤¸à¤ªà¥‹à¤°à¥à¤Ÿ à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆà¥¤"
+                  : "Supports Tally Prime, Tally ERP 9, and all recent versions."
+              },
+              {
+                q: isHindi ? "GSTR-2B à¤°à¤¿à¤•à¤‚à¤¸à¤¿à¤²à¤¿à¤à¤¶à¤¨ à¤•à¤¬ à¤†à¤à¤—à¤¾?" : "When will GSTR-2B reconciliation come?",
+                a: isHindi 
+                  ? "GSTR-2B à¤°à¤¿à¤•à¤‚à¤¸à¤¿à¤²à¤¿à¤à¤¶à¤¨ à¤…à¤—à¤²à¥‡ à¤…à¤ªà¤¡à¥‡à¤Ÿ à¤®à¥‡à¤‚ à¤† à¤°à¤¹à¤¾ à¤¹à¥ˆà¥¤ à¤¹à¤® à¤‡à¤¸ à¤ªà¤° à¤•à¤¾à¤® à¤•à¤° à¤°à¤¹à¥‡ à¤¹à¥ˆà¤‚à¥¤"
+                  : "GSTR-2B reconciliation is coming in the next update. We're working on it."
+              },
+              {
+                q: isHindi ? "à¤•à¥à¤¯à¤¾ à¤®à¥ˆà¤‚ à¤–à¤°à¥€à¤¦à¤¨à¥‡ à¤¸à¥‡ à¤ªà¤¹à¤²à¥‡ à¤Ÿà¥à¤°à¤¾à¤¯à¤² à¤•à¤° à¤¸à¤•à¤¤à¤¾ à¤¹à¥‚à¤?" : "Can I try before buying?",
+                a: isHindi 
+                  ? "à¤¹à¤¾à¤à¥¤ 7-à¤¦à¤¿à¤¨ à¤•à¤¾ à¤«à¥à¤°à¥€ à¤Ÿà¥à¤°à¤¾à¤¯à¤² à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚ à¤”à¤° à¤…à¤ªà¤¨à¥‡ à¤¡à¥‡à¤Ÿà¤¾ à¤•à¥‡ à¤¸à¤¾à¤¥ à¤Ÿà¥‡à¤¸à¥à¤Ÿ à¤•à¤°à¥‡à¤‚à¥¤"
+                  : "Yes. Download the 7-day free trial and test it with your own data."
+              },
+              {
+                q: isHindi ? "LekhaFlow Vouchrit à¤¯à¤¾ TaxOne à¤¸à¥‡ à¤•à¥ˆà¤¸à¥‡ à¤…à¤²à¤— à¤¹à¥ˆ?" : "How is LekhaFlow different from Vouchrit or TaxOne?",
+                a: isHindi 
+                  ? "LekhaFlow à¤¡à¥‡à¤¸à¥à¤•à¤Ÿà¥‰à¤ª-à¤«à¤°à¥à¤¸à¥à¤Ÿ, à¤ªà¥à¤°à¤¾à¤‡à¤µà¥‡à¤¸à¥€-à¤«à¥‹à¤•à¤¸à¥à¤¡ à¤¹à¥ˆ, à¤”à¤° à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ à¤«à¥€à¤šà¤° à¤¦à¥‡à¤¤à¤¾ à¤¹à¥ˆ â€” à¤œà¥‹ à¤¦à¥‹à¤¨à¥‹à¤‚ à¤•à¤‚à¤ªà¤Ÿà¥€à¤Ÿà¤°à¥à¤¸ à¤®à¥‡à¤‚ à¤¨à¤¹à¥€à¤‚ à¤¹à¥ˆà¥¤"
+                  : "LekhaFlow is desktop-first, privacy-focused, and offers unique sales split â€” which neither competitor provides."
+              },
+            ].map((faq, i) => (
+              <details key={i} className="group bg-white border border-slate-200 rounded-2xl transition-all hover:border-teal-500/30">
+                <summary className="flex justify-between items-center p-6 cursor-pointer">
+                  <span className="text-slate-900 font-black text-sm uppercase tracking-widest">{faq.q}</span>
+                  <span className="text-teal-500 group-open:rotate-180 transition-transform">â–¼</span>
+                </summary>
+                <div className="px-6 pb-6 text-slate-900 text-sm leading-relaxed border-t border-slate-200 pt-4">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* FOUNDER VISION */}
+      {/* ============================================================ */}
+      <section className="py-20">
+        <div className={containerClass + " max-w-4xl"}>
+          <div className="bg-white border border-slate-200 rounded-[3rem] p-10 flex flex-col md:flex-row items-center gap-10">
+              <div className="w-28 h-28 flex-shrink-0 rounded-full border-2 border-teal-500/20 overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="/jitendra.bharti.jpg" alt="Founder" className="w-full h-full object-cover" />
+              </div>
+              <div className="text-center md:text-left">
+                 <h3 className="text-slate-900 font-black uppercase tracking-widest text-lg mb-3">
+                   {isHindi ? "à¤¸à¤Ÿà¥€à¤•à¤¤à¤¾ à¤•à¥‡ à¤ªà¥à¤°à¤¤à¤¿ à¤ªà¥à¤°à¤¤à¤¿à¤¬à¤¦à¥à¤§à¤¤à¤¾" : "Commitment to Accuracy"}
+                 </h3>
+                 <p className="text-slate-900 italic text-sm leading-relaxed mb-4">
+                   {isHindi 
+                     ? "à¤­à¤¾à¤°à¤¤à¥€à¤¯ à¤²à¥‡à¤–à¤¾ à¤¸à¤®à¥à¤¦à¤¾à¤¯ à¤•à¥‹ à¤•à¥à¤²à¤°à¥à¤•à¤¿à¤¯à¤² à¤¬à¥‹à¤ à¤•à¤® à¤•à¤°à¤•à¥‡ à¤¸à¤¶à¤•à¥à¤¤ à¤¬à¤¨à¤¾à¤¨à¤¾ à¤¹à¤®à¤¾à¤°à¤¾ à¤®à¤¿à¤¶à¤¨ à¤¹à¥ˆà¥¤ à¤¹à¤® à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ à¤•à¥€ à¤ªà¥à¤°à¥‹à¤¸à¥‡à¤¸à¤¿à¤‚à¤— à¤²à¤¾à¤—à¤¤ à¤”à¤° 100% à¤¡à¥‡à¤Ÿà¤¾ à¤…à¤–à¤‚à¤¡à¤¤à¤¾ à¤•à¥‹ à¤²à¤•à¥à¤·à¤¿à¤¤ à¤•à¤° à¤°à¤¹à¥‡ à¤¹à¥ˆà¤‚à¥¤" 
+                     : "Our mission is to empower the Indian accounting community by reducing the clerical burden. We are targeting a processing cost with 100% data integrity."}
+                 </p>
+                 <p className="text-teal-500 font-bold text-[10px] uppercase tracking-[0.2em]">
+                   {isHindi ? "à¤œà¤¿à¤¤à¥‡à¤‚à¤¦à¥à¤° à¤­à¤¾à¤°à¤¤à¥€ â€” à¤¸à¤‚à¤¸à¥à¤¥à¤¾à¤ªà¤•, à¤²à¥‡à¤–à¤¾à¤«à¥à¤²à¥‹" : "Jitendra Bharti â€” Founder, LekhaFlow"}
+                 </p>
+              </div>
+          </div>
+        </div>
+      </section>
+
+           {/* ============================================================ */}
+      {/* PRICING SECTION */}
+      {/* ============================================================ */}
+      <section id="pricing" className="py-32 bg-slate-50 border-t border-slate-200">
+        <div className={containerClass}>
+          <div className="text-center mb-20">
+            <div className="inline-block mb-4 px-4 py-1.5 bg-amber-100 border border-amber-300 rounded-full">
+              <p className="text-amber-700 text-[10px] font-black uppercase tracking-[0.3em]">
+                {isHindi ? "à¤¸à¥à¤µà¤¤à¤‚à¤¤à¥à¤°à¤¤à¤¾ à¤¦à¤¿à¤µà¤¸ à¤²à¥‰à¤¨à¥à¤š à¤‘à¤«à¤°" : "Independence Day Launch Offer"}
+              </p>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
+              {isHindi ? "à¤ªà¥à¤°à¥‹à¤«à¥‡à¤¶à¤¨à¤² à¤²à¤¾à¤‡à¤¸à¥‡à¤‚à¤¸" : "Professional Licenses"}
+            </h2>
+            <p className="text-slate-900 font-bold uppercase tracking-widest text-xs mb-2">
+              {isHindi ? "à¤ªà¤¹à¤²à¥‡ 50 à¤—à¥à¤°à¤¾à¤¹à¤•à¥‹à¤‚ à¤•à¥‡ à¤²à¤¿à¤ à¤µà¤¿à¤¶à¥‡à¤· à¤®à¥‚à¤²à¥à¤¯" : "Special pricing for first 50 clients only"}
+            </p>
+            <p className="text-amber-500 text-[10px] font-black uppercase tracking-widest">
+              {isHindi ? "31 à¤…à¤—à¤¸à¥à¤¤ 2026 à¤¤à¤• à¤µà¥ˆà¤§" : "Valid till 31st August 2026"}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-10 max-w-3xl mx-auto">
+            {Object.entries(productData).filter(([key]) => key === 'standard').map(([key, p]) => (
+              <div key={key} className={`bg-white border-2 ${p.color} p-10 rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col justify-between group max-w-lg mx-auto w-full`}>
+                <div className="absolute top-0 right-0 bg-amber-500 text-black px-6 py-1 text-[9px] font-black uppercase tracking-widest">
+                  {isHindi ? "à¤¸à¤¬à¤¸à¥‡ à¤²à¥‹à¤•à¤ªà¥à¤°à¤¿à¤¯" : "Most Popular"}
+                </div>
+                <div className="space-y-6">
+                  <h3 className="text-slate-900 font-black text-xs uppercase tracking-[0.3em]">{p.title}</h3>
+                  <div className="py-8 border-y border-slate-200">
+                    <p className={`text-slate-900 font-black text-2xl tracking-tighter mb-1 line-through`}>â‚¹{p.originalPrice}</p>
+                    <p className={`${p.accent} font-black text-6xl tracking-tighter mb-2`}>â‚¹{p.offerPrice}</p>
+                    <p className="text-[10px] text-slate-900 font-bold uppercase tracking-widest">{p.limit}</p>
+                  </div>
+                  <p className="text-[11px] font-bold text-slate-900 italic leading-snug">{p.tagline}</p>
+                  <ul className="space-y-4 py-4">
+                    {p.features.map((feature, i) => (
+                        <li key={i} className="flex items-center gap-3 text-[11px] font-bold text-slate-900">
+                            <CheckCircle2 size={14} className="text-teal-500" /> {feature}
+                        </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="pt-6 space-y-4">
+                  <button
+                    onClick={() => openPayment(key, p)}
+                    className={`block w-full py-5 bg-teal-600 text-white hover:bg-teal-500 rounded-2xl font-black uppercase text-xs text-center tracking-widest transition-all`}
+                  >
+                    {isHindi ? "à¤–à¤°à¥€à¤¦à¥‡à¤‚" : "Buy Now"} â€” â‚¹{p.offerPrice}
+                  </button>
+                  <Link href="/downloads" className="block w-full py-5 bg-slate-100 text-slate-900 rounded-2xl font-black uppercase text-[10px] text-center tracking-widest border border-slate-200 hover:border-slate-600 transition-all">
+                    {isHindi ? "à¤¸à¥‡à¤Ÿà¤…à¤ª à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚" : "Download Setup"}
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12 max-w-2xl mx-auto">
+            <p className="text-slate-900 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
+              {isHindi 
+                ? "à¤ªà¤¹à¤²à¥‡ 50 à¤—à¥à¤°à¤¾à¤¹à¤•à¥‹à¤‚ à¤•à¥‹ lifetime à¤¯à¤¹à¥€ à¤®à¥‚à¤²à¥à¤¯ à¤®à¤¿à¤²à¥‡à¤—à¤¾à¥¤ 1 à¤¸à¤¿à¤¤à¤‚à¤¬à¤° à¤¸à¥‡ â‚¹11999 à¤¹à¥‹ à¤œà¤¾à¤à¤—à¤¾à¥¤" 
+                : "First 50 clients lock this price for life. From 1st Sept, price becomes â‚¹11,999."}
+            </p>
+          </div>
+
+          <p className="text-center mt-6 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
+            ðŸ”’ {isHindi ? "7-à¤¦à¤¿à¤¨ à¤•à¤¾ à¤°à¤¿à¤«à¤‚à¤¡ à¤—à¤¾à¤°à¤‚à¤Ÿà¥€ â€” à¤…à¤—à¤° à¤ªà¤¸à¤‚à¤¦ à¤¨à¤¹à¥€à¤‚ à¤†à¤¯à¤¾ à¤¤à¥‹ à¤ªà¥ˆà¤¸à¥‡ à¤µà¤¾à¤ªà¤¸" : "7-Day Money-Back Guarantee â€” Not satisfied? Full refund"}
+          </p>
+
+          <p className="text-center mt-8 text-slate-900 text-[10px] font-bold uppercase tracking-widest">Latest Stable Build: {latestVersion} | Released: {formatDate(publishedAt)}</p>
+        </div>
+      </section>
+      {/* ============================================================ */}
+      {/* TESTIMONIALS */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className={containerClass}>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
+              {isHindi ? "à¤²à¥‡à¤–à¤¾à¤•à¤¾à¤° à¤•à¥à¤¯à¤¾ à¤•à¤¹à¤¤à¥‡ à¤¹à¥ˆà¤‚" : "What Accountants Say"}
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              { name: "CA Rahul Sharma", firm: "Sharma & Associates, Raipur", quote: isHindi ? "à¤¬à¥ˆà¤‚à¤• à¤¸à¥à¤Ÿà¥‡à¤Ÿà¤®à¥‡à¤‚à¤Ÿ à¤•à¥‹ à¤Ÿà¥ˆà¤²à¥€ à¤®à¥‡à¤‚ à¤¡à¤¾à¤²à¤¨à¥‡ à¤®à¥‡à¤‚ 3 à¤˜à¤‚à¤Ÿà¥‡ à¤¬à¤šà¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤" : "Bank statement entry that used to take 3 hours now finishes in 10 minutes." },
+              { name: "Priya Gupta", firm: "Gupta Tax Consultants, Bilaspur", quote: isHindi ? "à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ à¤«à¥€à¤šà¤° à¤¬à¤¹à¥à¤¤ à¤¶à¤•à¥à¤¤à¤¿à¤¶à¤¾à¤²à¥€ à¤¹à¥ˆà¥¤ à¤®à¥ˆà¤¨à¥à¤¯à¥à¤…à¤² à¤•à¥ˆà¤²à¤•à¥à¤²à¥‡à¤¶à¤¨ à¤–à¤¤à¥à¤®à¥¤" : "The Sales Split feature is powerful. No more manual calculations for GST compliance." },
+              { name: "Rajesh Agrawal", firm: "Agrawal & Co., Ambikapur", quote: isHindi ? "7-à¤¦à¤¿à¤¨ à¤•à¥‡ à¤Ÿà¥à¤°à¤¾à¤¯à¤² à¤®à¥‡à¤‚ 500 à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ à¤ªà¥à¤°à¥‹à¤¸à¥‡à¤¸ à¤•à¤¿à¤à¥¤ 99% à¤¸à¤Ÿà¥€à¤•à¥¤" : "Processed 500 invoices during the 7-day trial. 99% accuracy on first try." },
+            ].map((t, i) => (
+              <div key={i} className="bg-white border border-slate-200 p-8 rounded-[2.5rem]">
+                <p className="text-slate-900 text-sm italic leading-relaxed mb-6">"{t.quote}"</p>
+                <p className="text-slate-900 font-black text-xs uppercase tracking-widest">{t.name}</p>
+                <p className="text-teal-500 text-[10px] font-bold uppercase tracking-widest">{t.firm}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* FOOTER */}
+      {/* ============================================================ */}
+      <footer className="py-20 border-t border-slate-200 bg-white text-center">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-wrap justify-center gap-8 mb-10">
+            <Link href="/privacy" className="text-slate-700 text-[10px] font-bold uppercase tracking-widest hover:text-teal-600 transition-colors flex items-center gap-2">
+              <Shield size={14} /> Privacy Policy
+            </Link>
+            <Link href="/refund" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+              <RefreshCcw size={14} /> Refund Policy
+            </Link>
+            <Link href="/faq" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+              <MessageCircleQuestion size={14} /> FAQ
+            </Link>
+            <Link href="/blog" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+              <ArrowRight size={14} /> Blog
+            </Link>
+          </div>
+              <div className="flex justify-center gap-8 mb-10 opacity-40 grayscale hover:opacity-100 transition-all duration-700">
+                <Laptop size={24} /> <Database size={24} /> <Cpu size={24} /> <ShieldCheck size={24} />
+              </div>
+              <p className="text-slate-600 text-[10px] font-black tracking-[0.5em] uppercase italic">
+                {isHindi ? "à¤²à¥‡à¤–à¤¾à¤«à¥à¤²à¥‹ AI | à¤­à¤¾à¤°à¤¤à¥€à¤¯ à¤²à¥‡à¤–à¤¾à¤‚à¤•à¤¨ à¤•à¤¾ à¤­à¤µà¤¿à¤·à¥à¤¯" : "LekhaFlow AI | Engineering the Future of Indian Accounting ðŸ‡®ðŸ‡³"}
+              </p>
+            </div>
+          </footer>
+
+      {/* ============================================================ */}
+      {/* INTAKE MODAL */}
+      {/* ============================================================ */}
+      <AnimatePresence>
+        {showIntakeModal && (
+          <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="fixed inset-0 z-[150] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4">
+            <motion.div initial={{scale:0.9, y:20}} animate={{scale:1, y:0}} className="bg-white border-2 border-teal-500 p-10 rounded-[3.5rem] max-w-md w-full relative shadow-2xl">
+              <button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-400 hover:text-slate-900"><X size={28}/></button>
+              <form onSubmit={handleIntakeSubmit} className="space-y-6">
+                <div className="text-center mb-10">
+                  <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">Access Portal</h3>
+                  <p className="text-slate-900 text-[10px] font-bold uppercase tracking-widest mt-2">Get started with LekhaFlow Professional</p>
+                </div>
+                <input required placeholder="YOUR FULL NAME" className="w-full bg-slate-50 border border-slate-200 p-5 rounded-2xl text-slate-900 font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientName: e.target.value})}/>
+                <input required placeholder="COMPANY NAME" className="w-full bg-slate-50 border border-slate-200 p-5 rounded-2xl text-slate-900 font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, companyName: e.target.value})}/>
+                <input required placeholder="WHATSAPP NUMBER" className="w-full bg-slate-50 border border-slate-200 p-5 rounded-2xl text-slate-900 font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, mobileNumber: e.target.value})}/>
+                <input required type="email" placeholder="EMAIL ADDRESS" className="w-full bg-slate-50 border border-slate-200 p-5 rounded-2xl text-slate-900 font-black text-xs outline-none focus:border-teal-500 transition-all uppercase tracking-widest" onChange={(e) => setClientForm({...clientForm, clientEmail: e.target.value})}/>
+                <button type="submit" className="w-full py-6 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-[10px] tracking-[0.2em] shadow-xl">CONTINUE TO DOWNLOAD CENTER</button>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ============================================================ */}
+      {/* PAYMENT MODAL */}
+      {/* ============================================================ */}
+      {selectedPlan && (
+        <PaymentModal
+          isOpen={paymentModalOpen}
+          onClose={() => setPaymentModalOpen(false)}
+          plan={selectedPlan.key as "standard" | "gold"}
+          planName={selectedPlan.name}
+          price={selectedPlan.price}
+          razorpayUrl={selectedPlan.url}
+        />
+      )}
+
+      {/* ============================================================ */}
+      {/* STICKY TRIAL BAR */}
+      {/* ============================================================ */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[90] hidden md:flex items-center gap-4 bg-white/95 backdrop-blur-xl border border-slate-200 px-6 py-3 rounded-full shadow-2xl">
+        <span className="text-slate-900 font-black text-xs uppercase tracking-widest">Ready to automate your Tally?</span>
+        <a 
+          href="/downloads"
+          className="bg-teal-600 hover:bg-teal-500 text-white px-5 py-2 rounded-full font-black text-[10px] uppercase tracking-widest transition-all"
+        >
+          Download Free Trial
+        </a>
+      </div>
+      <WhatsAppButton />
+    </>
+  );
+}
+
+
+{
+  "name": "lekhaflow-pro",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.17.0",
+    "next": "16.2.6",
+    "nodemailer": "^9.0.3",
+    "qrcode": "^1.5.4",
+    "razorpay": "^2.9.8",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-tsparticles": "^2.12.2",
+    "tailwind-merge": "^3.6.0",
+    "tsparticles-slim": "^2.12.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/nodemailer": "^8.0.1",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+

@@ -59,7 +59,7 @@ export default function Contact({ isHindi }: ContactProps) {
     }
   };
 
-  const current = isHindi ? t.hi : t.en;
+  const current = false ? t.hi : t.en;
 
   const validateEmail = (inputEmail: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

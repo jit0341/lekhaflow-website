@@ -1,0 +1,195 @@
+﻿============================================================
+LEKHAFlow NAVIGATION REVIEW
+============================================================
+
+CURRENT NAVBAR
+------------------------------------------------------------
+import Link from 'next/link';
+import { ChevronDown } from 'lucide-react';
+
+export default function Navbar() {
+  return (
+    <nav className="fixed top-0 w-full z-[100] bg-slate-950/80 border-b border-slate-800 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <Link href="/" className="text-2xl font-black text-white italic">
+          LEKHA<span className="text-teal-500">FLOW</span>
+        </Link>
+        
+        <div className="hidden md:flex items-center gap-10 text-xs font-bold uppercase tracking-widest text-slate-400">
+          <Link href="/pricing" className="hover:text-white">Pricing</Link>
+          <div className="group relative">
+            <button className="flex items-center gap-1 hover:text-white">
+              Products <ChevronDown size={14} />
+            </button>
+            <div className="absolute top-full left-0 hidden group-hover:block bg-slate-900 border border-slate-800 p-4 w-48 rounded-xl shadow-2xl">
+              <Link href="/downloads" className="block p-2 hover:bg-slate-800 rounded">Gold Version</Link>
+              <Link href="/downloads" className="block p-2 hover:bg-slate-800 rounded">Standard</Link>
+            </div>
+          </div>
+          <Link href="/blog" className="hover:text-white">Insights</Link>
+          <Link href="/contact" className="hover:text-white">Support</Link>
+          <Link href="/downloads" className="bg-teal-600 text-white px-6 py-3 rounded-full hover:bg-teal-500 transition-all">
+            Download Trial
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+============================================================
+CURRENT HOME NAVIGATION
+------------------------------------------------------------
+Download, X, Cpu, Database, CheckCircle2, Laptop,
+const [downloadLinks, setDownloadLinks] = useState({ standard: "", demo: "", gold: "" });
+async function loadDownloads() {
+setDownloadLinks({
+standard: data.standard?.url || "",
+demo: data.standardTrial?.url || "",
+gold: data.gold?.url || ""
+loadDownloads();
+standard: {
+title: "LekhaFlow Standard",
+razorpayUrl: "https://pages.razorpay.com/lekhaflow-standard",
+downloadUrl: "/downloads",
+features: [
+isHindi ? "â‚¹10,000, â‚¹30,000 à¤¯à¤¾ â‚¹50,000 à¤¸à¥‡ à¤•à¤® à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Sales Split Below â‚¹10,000, â‚¹30,000 or â‚¹50,000",
+isHindi ? "à¤ˆà¤®à¥‡à¤² à¤¸à¤ªà¥‹à¤°à¥à¤Ÿ" : "Email Support"
+{ i: Zap, t: isHindi ? "à¤¯à¥‚à¤¨à¤¿à¤• à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Sales Split Advantage", d: isHindi ? "à¤¸à¥‡à¤²à¥à¤¸ à¤Ÿà¥‹à¤Ÿà¤² à¤•à¥‹ à¤•à¤ˆ à¤µà¤¾à¤‰à¤šà¤° à¤®à¥‡à¤‚ à¤‘à¤Ÿà¥‹à¤®à¥ˆà¤Ÿà¤¿à¤•à¤²à¥€ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ à¤•à¤°à¥‡à¤‚à¥¤" : "Automatically split a sales total into multiple vouchers.", c: "text-amber-500" }
+window.location.href = "/downloads";
+<Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
+<Link href="#how-it-works" className="hover:text-slate-900 transition-colors whitespace-nowrap">
+<Link href="#features" className="hover:text-slate-900 transition-colors whitespace-nowrap">
+{isHindi ? "à¤«à¥€à¤šà¤°à¥à¤¸" : "Features"}
+<Link href="#pricing" className="hover:text-slate-900 transition-colors whitespace-nowrap">
+{isHindi ? "à¤®à¥‚à¤²à¥à¤¯ à¤¨à¤¿à¤°à¥à¤§à¤¾à¤°à¤£" : "Pricing"}
+<Link href="/blog" className="text-amber-600 hover:text-amber-500 font-black whitespace-nowrap">
+<Link href="/downloads" className="hover:text-slate-900 transition-colors whitespace-nowrap">
+{isHindi ? "à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡" : "Download Center"}
+<Link href="/faq" className="hover:text-slate-900 transition-colors whitespace-nowrap">
+<Link href="#partner" className="hover:text-slate-900 transition-colors whitespace-nowrap">
+<Link href="/admin" className="hover:text-teal-600 transition-colors font-black whitespace-nowrap">
+onClick={() => setIsHindi(!isHindi)}
+href="/downloads"
+{/* HERO SECTION â€” Balanced Font Sizes + All Features */}
+<Split size={14} className="text-amber-500" /> {isHindi ? "à¤¯à¥‚à¤¨à¤¿à¤• à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Unique Sales Split"}
+href="/downloads"
+<Download size={16} /> {isHindi ? "à¤«à¥à¤°à¥€ à¤Ÿà¥à¤°à¤¾à¤¯à¤² à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚" : "Download Free Trial"}
+onClick={() => { setIntakeTarget("demo"); setShowIntakeModal(true); }}
+onClick={() => window.open("https://wa.me/918770808695", "_blank")}
+{/* SALES SPLIT FEATURE â€” UNIQUE USP */}
+<section id="features" className="py-24 bg-slate-50 border-y border-amber-500/20">
+{/* SwiftAssignâ„¢ AI Ledger Assignment */}
+SwiftAssignâ„¢ <span className="text-purple-600">AI Ledger Assignment</span>
+{isHindi ? "à¤¯à¥‚à¤¨à¤¿à¤• à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ" : "Unique Sales Split"}
+: "GST reconciliation, invoice processing, sales split â€” all in one tool."}
+{isHindi ? "à¤¹à¤¾à¤² à¤¹à¥€ à¤®à¥‡à¤‚ à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤¿à¤¯à¤¾" : "RECENTLY DOWNLOADED"}
+? "à¤¯à¤¹à¥€ workflow Purchase Invoices, Sales Invoices, Bank Statements à¤”à¤° Sales Split à¤•à¥‡ à¤²à¤¿à¤ à¤¬à¤¨à¤¾à¤¯à¤¾ à¤—à¤¯à¤¾ à¤¹à¥ˆà¥¤"
+: "The same workflow extends across Purchase Invoices, Sales Invoices, Bank Statements and Sales Split."}
+{isHindi ? "ðŸ”¥ à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ: â‚¹75,000 à¤•à¤¾ à¤‡à¤¨à¤µà¥‰à¤‡à¤¸ â†’ 2 à¤µà¤¾à¤‰à¤šà¤° (â‚¹40K + â‚¹35K) à¤‘à¤Ÿà¥‹à¤®à¥‡à¤Ÿà¤¿à¤•" : "ðŸ”¥ Sales Split: â‚¹75,000 Invoice â†’ 2 Vouchers (â‚¹40K + â‚¹35K) Automatic"}
+{ num: "01", title: isHindi ? "à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚" : "Download", desc: isHindi ? "7-à¤¦à¤¿à¤¨ à¤•à¤¾ à¤Ÿà¥à¤°à¤¾à¤¯à¤² à¤¸à¥‡à¤Ÿà¤…à¤ª à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚à¥¤" : "Download the 7-day trial setup file (Windows 10/11)." },
+? "Vouchrit AI-ledger à¤ªà¤° à¤«à¥‹à¤•à¤¸ à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆ, Vyapar TaxOne practice management à¤ªà¤° â€” LekhaFlow desktop workflow + privacy + sales split à¤ªà¤°"
+: "Vouchrit focuses on AI-ledger prediction, Vyapar TaxOne on practice management â€” LekhaFlow owns desktop workflow + privacy + sales split"}
+<tr className="border-b border-slate-200/50"><td className="py-4">Sales Split Below â‚¹50K</td><td className="text-center text-amber-500 font-black">âœ“ Auto</td><td className="text-center text-pink-500">âœ—</td><td className="text-center text-pink-500">âœ—</td></tr>
+? "ðŸ”¥ Vouchrit AI-ledger à¤ªà¤°, Vyapar TaxOne practice management à¤ªà¤° â€” LekhaFlow desktop workflow + privacy + unique sales split à¤ªà¤°"
+: "ðŸ”¥ Vouchrit owns AI-ledger prediction, Vyapar TaxOne owns practice management â€” LekhaFlow owns desktop workflow + privacy + unique sales split"}
+: "Yes. No internet required after download. You can work offline."
+q: isHindi ? "à¤•à¥Œà¤¨ à¤¸à¥€ Tally versions à¤¸à¤ªà¥‹à¤°à¥à¤Ÿ à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆ?" : "Which Tally versions are supported?",
+: "Supports Tally Prime, Tally ERP 9, and all recent versions."
+: "Yes. Download the 7-day free trial and test it with your own data."
+: "LekhaFlow is desktop-first, privacy-focused, and offers unique sales split â€” which neither competitor provides."
+{/* PRICING SECTION */}
+<section id="pricing" className="py-32 bg-slate-50 border-t border-slate-200">
+{isHindi ? "à¤ªà¤¹à¤²à¥‡ 50 à¤—à¥à¤°à¤¾à¤¹à¤•à¥‹à¤‚ à¤•à¥‡ à¤²à¤¿à¤ à¤µà¤¿à¤¶à¥‡à¤· à¤®à¥‚à¤²à¥à¤¯" : "Special pricing for first 50 clients only"}
+{Object.entries(productData).filter(([key]) => key === 'standard').map(([key, p]) => (
+{p.features.map((feature, i) => (
+onClick={() => openPayment(key, p)}
+<Link href="/downloads" className="block w-full py-5 bg-slate-100 text-slate-900 rounded-2xl font-black uppercase text-[10px] text-center tracking-widest border border-slate-200 hover:border-slate-600 transition-all">
+{isHindi ? "à¤¸à¥‡à¤Ÿà¤…à¤ª à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚" : "Download Setup"}
+{ name: "Priya Gupta", firm: "Gupta Tax Consultants, Bilaspur", quote: isHindi ? "à¤¸à¥‡à¤²à¥à¤¸ à¤¸à¥à¤ªà¥à¤²à¤¿à¤Ÿ à¤«à¥€à¤šà¤° à¤¬à¤¹à¥à¤¤ à¤¶à¤•à¥à¤¤à¤¿à¤¶à¤¾à¤²à¥€ à¤¹à¥ˆà¥¤ à¤®à¥ˆà¤¨à¥à¤¯à¥à¤…à¤² à¤•à¥ˆà¤²à¤•à¥à¤²à¥‡à¤¶à¤¨ à¤–à¤¤à¥à¤®à¥¤" : "The Sales Split feature is powerful. No more manual calculations for GST compliance." },
+<Link href="/privacy" className="text-slate-700 text-[10px] font-bold uppercase tracking-widest hover:text-teal-600 transition-colors flex items-center gap-2">
+<Link href="/refund" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+<Link href="/faq" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+<Link href="/blog" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+<ArrowRight size={14} /> Blog
+<button onClick={() => setShowIntakeModal(false)} className="absolute top-8 right-8 text-slate-400 hover:text-slate-900"><X size={28}/></button>
+<button type="submit" className="w-full py-6 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-black rounded-2xl uppercase text-[10px] tracking-[0.2em] shadow-xl">CONTINUE TO DOWNLOAD CENTER</button>
+plan={selectedPlan.key as "standard" | "gold"}
+href="/downloads"
+Download Free Trial
+
+============================================================
+CURRENT ROUTES
+------------------------------------------------------------
+about
+admin
+api
+bank-statement
+blog
+compare
+components
+contact
+downloads
+faq
+features
+gallery
+gold
+how-it-works
+invoice-to-tally
+partner
+payment
+pricing
+privacy
+refund
+sales-split
+standard
+swiftassign
+updates
+
+============================================================
+EXISTING PAGE TITLES
+------------------------------------------------------------
+FILE: app\admin\page.tsx
+FILE: app\blog\[slug]\page.tsx
+FILE: app\blog\page.tsx
+  export const metadata: Metadata = {
+  title: "Accounting Insights & Tally Guides | LekhaFlow Blog",
+  { slug: "gst-invoices-to-tally-manual-vs-automation", title: "How to Convert GST Invoices into Tally – Manual vs Automation", desc: "Compare manual data entry with AI automation. Discover which method saves more time for MSMEs.", icon: Zap },
+  { slug: "record-gst-entries-tally-guide", title: "Complete Guide to Recording CGST, SGST & IGST in Tally", desc: "A step-by-step tutorial on mastering GST bifurcation and ledger setup in Tally Prime.", icon: ShieldCheck },
+  { slug: "ai-invoice-extraction-accuracy", title: "Why AI Invoice Extraction Beats OCR Every Time", desc: "Understand the difference between template-based OCR and modern AI parsing for accounting.", icon: Cpu },
+  { slug: "tally-xml-generator-pdf-excel", title: "How to Generate Tally XML from PDF and Excel Invoices", desc: "Technical guide on converting unstructured invoice data into structured Tally import files.", icon: FileText },
+  { slug: "gstr-2b-reconciliation-tally", title: "GSTR-2B Reconciliation in Tally: A Complete Workflow", desc: "How to match your purchase register with GSTR-2B data and identify mismatches automatically.", icon: Database },
+  { slug: "reduce-data-entry-costs-ca-firm", title: "How CA Firms Can Reduce Data Entry Costs by 80%", desc: "Practical strategies for chartered accountants to automate clerical work and improve margins.", icon: TrendingUp },
+  { slug: "tally-prime-vs-erp9-migration", title: "Tally Prime vs Tally ERP 9: Should You Migrate?", desc: "Feature comparison and migration guide for businesses still on Tally ERP 9.", icon: Layout },
+  { slug: "invoice-splitting-gst-threshold", title: "Invoice Splitting Below ₹50,000: GST Compliance Guide", desc: "Understanding the legal and technical aspects of splitting invoices for GST compliance.", icon: BookOpen },
+  { slug: "bank-statement-auto-entry-tally", title: "Automated Bank Statement Entry into Tally: Setup Guide", desc: "How to configure automatic bank statement imports and reconciliation in Tally.", icon: Landmark },
+  { slug: "multi-company-tally-automation", title: "Managing Multiple Companies in Tally with Automation", desc: "Best practices for CA firms handling books for multiple clients using automated tools.", icon: Layout },
+  { slug: "gst-return-filing-tips-july-2026", title: "GST Return Filing Tips for July 2026: Avoid Common Errors", desc: "Latest updates and practical tips for accurate GSTR-1 and GSTR-3B filing this month.", icon: Receipt },
+  { slug: "choose-invoice-automation-software", title: "How to Choose the Right Invoice Automation Software in India", desc: "Evaluation criteria for MSMEs and CA firms selecting an invoice-to-Tally solution.", icon: Calculator },
+FILE: app\downloads\page.tsx
+FILE: app\faq\page.tsx
+  export const metadata: Metadata = {
+  title: "FAQ | LekhaFlow",
+FILE: app\gallery\page.tsx
+  title: "LekhaFlow Gold Suite Dashboard",
+  title: "Deterministic Split Logic Configurator",
+  title: "Tally Prime Live Injection Channel",
+  title: "Bank Statement Auto-Entry Matrix",
+FILE: app\page.tsx
+  title: "LekhaFlow Standard",
+  title: isHindi ? (
+  { num: "01", icon: FileText, title: isHindi ? "PDF अपलोड करें" : "Upload Bank Statement", desc: isHindi ? "अपना बैंक स्टेटमेंट PDF चुनें। सॉफ्टवेयर स्वचालित रूप से बैंक का पता लगा लेगा।" : "Select your bank statement PDF. The software auto-detects the bank format." },
+  { num: "02", icon: Cpu, title: isHindi ? "AI पढ़ता है" : "AI Reads & Categorizes", desc: isHindi ? "AI प्रत्येक लेन-देन को पढ़ता है, नैरेशन को समझता है, और डेबिट/क्रेडिट को वर्गीकृत करता है।" : "AI reads every transaction, understands narration, and classifies Dr/Cr automatically." },
+  { num: "03", icon: Landmark, title: isHindi ? "ग्रिड में समीक्षा करें" : "Review in Smart Grid", desc: isHindi ? "सभी लेन-देन एक साफ ग्रिड में दिखाई देते हैं। ओपनिंग/क्लोजिंग बैलेंस ऑटो-वैलिडेटेड।" : "All transactions appear in a clean grid. Opening/closing balance auto-validated." },
+  { num: "04", icon: Send, title: isHindi ? "वन-क्लिक टैली" : "One-Click to Tally", desc: isHindi ? "'Send to Tally' दबाएं। सभी वाउचर सीधे आपके टैली में बन जाते हैं।" : "Hit 'Send to Tally'. All vouchers are created directly in your Tally — no XML import needed." },
+  { num: "01", title: isHindi ? "डाउनलोड करें" : "Download", desc: isHindi ? "7-दिन का ट्रायल सेटअप डाउनलोड करें।" : "Download the 7-day trial setup file (Windows 10/11)." },
+  { num: "02", title: isHindi ? "इंस्टॉल करें" : "Install", desc: isHindi ? "सॉफ्टवेयर इंस्टॉल करें। मशीन आईडी कॉपी करें।" : "Install the software. Copy the Machine Hardware ID displayed." },
+  { num: "03", title: isHindi ? "हमसे संपर्क करें" : "Contact Us", desc: isHindi ? "व्हाट्सएप पर आईडी भेजें। हम 2 घंटे में लाइसेंस भेज देंगे।" : "Send the ID on WhatsApp. We send your trial license within 2 hours." },
+  { num: "04", title: isHindi ? "टैली में देखें" : "See It in Tally", desc: isHindi ? "अपने बैंक स्टेटमेंट और इनवॉइस को टैली में देखें।" : "Watch your bank statements and invoices flow into Tally automatically." },
+FILE: app\payment\page.tsx
+FILE: app\payment\status\page.tsx
+FILE: app\pricing\page.tsx
+FILE: app\refund\page.tsx
+  export const metadata: Metadata = {
+  title: "Refund Policy | LekhaFlow",
+FILE: app\updates\page.tsx

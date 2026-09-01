@@ -20,7 +20,32 @@ import TimedLeadPopup from '@/components/TimedLeadPopup';
 import PaymentModal from "@/components/PaymentModal";
 
 export default function LekhaFlowLanding() {
-const isHindi = false;
+const [isHindi, setIsHindi] = useState<boolean>(false);
+
+useEffect(() => {
+const saved = window.localStorage.getItem("lekhaflow-language");
+
+if (saved === "hi") {
+setIsHindi(true);
+}
+
+const handleLanguageChange = (event: Event) => {
+const customEvent = event as CustomEvent<boolean>;
+setIsHindi(customEvent.detail === true);
+};
+
+window.addEventListener(
+"lekhaflow-language-change",
+handleLanguageChange
+);
+
+return () => {
+window.removeEventListener(
+"lekhaflow-language-change",
+handleLanguageChange
+);
+};
+}, []);
 const [showIntakeModal, setShowIntakeModal] = useState<boolean>(false);
 const [intakeTarget, setIntakeTarget] = useState<"demo" | "quotation">("demo");
 const [clientForm, setClientForm] = useState({ clientName: "", companyName: "", mobileNumber: "", clientEmail: "" });
@@ -79,14 +104,14 @@ offerPrice: "9,999",
 limit: "10,000 Invoices/Year",
 razorpayUrl: "https://pages.razorpay.com/lekhaflow-standard",
 downloadUrl: "/downloads",
-tagline: false ? "MSME AI " : "Essential AI Automation for MSMEs",
+tagline: isHindi ? "MSME AI " : "Essential AI Automation for MSMEs",
 features: [
-false ? " -> ()" : "Bank Statement -> Tally (Unlimited)",
-false ? "PDF / -> " : "PDF / Image Invoice -> Tally",
-false ? " " : "Excel True Copy Export",
-false ? " " : "Auto Ledger & Stock Creation",
-false ? "10,000, 30,000 50,000 " : "Sales Split Below 10,000, 30,000 or 50,000",
-false ? " " : "Email Support"
+isHindi ? " -> ()" : "Bank Statement -> Tally (Unlimited)",
+isHindi ? "PDF / -> " : "PDF / Image Invoice -> Tally",
+isHindi ? " " : "Excel True Copy Export",
+isHindi ? " " : "Auto Ledger & Stock Creation",
+isHindi ? "10,000, 30,000 50,000 " : "Sales Split Below 10,000, 30,000 or 50,000",
+isHindi ? " " : "Email Support"
 ],
 color: "border-teal-500",
 accent: "text-teal-600"
@@ -95,8 +120,8 @@ accent: "text-teal-600"
 
 const t = {
 hero: {
-badge: false ? "AI -> " : "AI-POWERED ACCOUNTING AUTOMATION -> TALLY",
-title: false ? (
+badge: isHindi ? "AI -> " : "AI-POWERED ACCOUNTING AUTOMATION -> TALLY",
+title: isHindi ? (
 <> <span className="text-teal-500 italic">AI- </span></>
 ) : (
 <>AI-Powered Accounting Automation <span className="text-teal-500 italic">for Tally</span></>
@@ -109,10 +134,10 @@ sub: isHindi
 : " Client data stays on your system. Automatically split sales totals into multiple vouchers. No cloud storage."
 },
 trust: [
-{ i: Cpu, t: false ? "AI " : "AI-Powered Automation", d: false ? ", PDF " : "Process invoices, bank statements and accounting documents with AI.", c: "text-purple-500" },
-{ i: ShieldCheck, t: false ? " " : "Client-Side Data Control", d: false ? " " : "Designed around client-side processing and data control.", c: "text-teal-500" },
-{ i: Target, t: false ? " " : "Review Before Tally", d: false ? "AI , , Tally " : "AI prepares. You review. Then send the final entries to Tally.", c: "text-blue-500" },
-{ i: Zap, t: false ? " " : "Sales Split Advantage", d: false ? " " : "Automatically split a sales total into multiple vouchers.", c: "text-amber-500" }
+{ i: Cpu, t: isHindi ? "AI " : "AI-Powered Automation", d: isHindi ? ", PDF " : "Process invoices, bank statements and accounting documents with AI.", c: "text-purple-500" },
+{ i: ShieldCheck, t: isHindi ? " " : "Client-Side Data Control", d: isHindi ? " " : "Designed around client-side processing and data control.", c: "text-teal-500" },
+{ i: Target, t: isHindi ? " " : "Review Before Tally", d: isHindi ? "AI , , Tally " : "AI prepares. You review. Then send the final entries to Tally.", c: "text-blue-500" },
+{ i: Zap, t: isHindi ? " " : "Sales Split Advantage", d: isHindi ? " " : "Automatically split a sales total into multiple vouchers.", c: "text-amber-500" }
 ]
 };
 
@@ -134,19 +159,19 @@ return (
 {/* HERO SECTION - Balanced Font Sizes + All Features */}
 {/* ============================================================ */}
 <HeroSection
-isHindi={false}
+isHindi={isHindi}
 containerClass={containerClass}
 setIntakeTarget={setIntakeTarget}
 setShowIntakeModal={setShowIntakeModal}
 />
-<PartnerForm isHindi={false} />
-<ProblemSection isHindi={false} />
+<PartnerForm isHindi={isHindi} />
+<ProblemSection isHindi={isHindi} />
 
 {/* ============================================================ */}
 {/* SALES SPLIT FEATURE - UNIQUE USP */}
 {/* ============================================================ */}
 <SalesSplitSection
-isHindi={false}
+isHindi={isHindi}
 containerClass={containerClass}
 />
 
@@ -207,7 +232,7 @@ Detects and suggests repeated party names (e.g. "Pradeep", "Ramanujanagar") auto
 {/* WHY LEKHAFLOW - Enhanced Trust Section */}
 {/* ============================================================ */}
 <WhyLekhaFlowSection
-isHindi={false}
+isHindi={isHindi}
 containerClass={containerClass}
 />
 
@@ -220,11 +245,11 @@ containerClass={containerClass}
 <div className="inline-flex items-center gap-2 px-5 py-2 bg-teal-100 border border-teal-300 rounded-full mb-6">
 <Lock className="text-teal-500" size={16} />
 <span className="text-teal-700 text-[10px] font-black uppercase tracking-[0.3em]">
-{false ? " - " : " PRIVACY-FIRST DESIGN"}
+{isHindi ? " - " : " PRIVACY-FIRST DESIGN"}
 </span>
 </div>
 <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-6">
-{false ? " , " : " Client's Data. Client's own control."}
+{isHindi ? " , " : " Client's Data. Client's own control."}
 </h2>
 <p className="text-slate-900 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-8">
 {isHindi
@@ -238,10 +263,10 @@ containerClass={containerClass}
 <Shield className="text-teal-500 flex-shrink-0 mt-1" size={20} />
 <div>
 <p className="text-slate-900 font-black text-xs uppercase tracking-widest">
-{false ? " " : "No Cloud Storage"}
+{isHindi ? " " : "No Cloud Storage"}
 </p>
 <p className="text-slate-900 text-[10px] leading-relaxed">
-{false ? " " : "Data never leaves your system"}
+{isHindi ? " " : "Data never leaves your system"}
 </p>
 </div>
 </div>
@@ -249,10 +274,10 @@ containerClass={containerClass}
 <Eye className="text-teal-500 flex-shrink-0 mt-1" size={20} />
 <div>
 <p className="text-slate-900 font-black text-xs uppercase tracking-widest">
-{false ? " " : "Full Control"}
+{isHindi ? " " : "Full Control"}
 </p>
 <p className="text-slate-900 text-[10px] leading-relaxed">
-{false ? " " : "You decide who accesses what"}
+{isHindi ? " " : "You decide who accesses what"}
 </p>
 </div>
 </div>
@@ -260,10 +285,10 @@ containerClass={containerClass}
 <BadgeCheck className="text-teal-500 flex-shrink-0 mt-1" size={20} />
 <div>
 <p className="text-slate-900 font-black text-xs uppercase tracking-widest">
-{false ? "CAs " : "Built for CAs"}
+{isHindi ? "CAs " : "Built for CAs"}
 </p>
 <p className="text-slate-900 text-[10px] leading-relaxed">
-{false ? " " : "Privacy is a professional responsibility"}
+{isHindi ? " " : "Privacy is a professional responsibility"}
 </p>
 </div>
 </div>
@@ -280,11 +305,11 @@ containerClass={containerClass}
 <div className="text-center mb-16">
 <div className="inline-block mb-4 px-5 py-2 bg-teal-100 border border-teal-300 rounded-full">
 <p className="text-teal-700 text-[10px] font-black uppercase tracking-[0.4em]">
-{false ? " " : " WHO IS IT FOR"}
+{isHindi ? " " : " WHO IS IT FOR"}
 </p>
 </div>
 <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
-{false ? " " : "Who Is LekhaFlow For?"}
+{isHindi ? " " : "Who Is LekhaFlow For?"}
 </h2>
 </div>
 
@@ -295,7 +320,7 @@ containerClass={containerClass}
 <Users className="text-blue-500" size={28} />
 </div>
 <h3 className="text-slate-900 font-black uppercase text-sm mb-3">
-{false ? " " : "Tally Users"}
+{isHindi ? " " : "Tally Users"}
 </h3>
 <p className="text-slate-900 text-xs leading-relaxed">
 {isHindi
@@ -310,7 +335,7 @@ containerClass={containerClass}
 <Building2 className="text-teal-500" size={28} />
 </div>
 <h3 className="text-slate-900 font-black uppercase text-sm mb-3">
-{false ? "CA " : "CA Firms"}
+{isHindi ? "CA " : "CA Firms"}
 </h3>
 <p className="text-slate-900 text-xs leading-relaxed">
 {isHindi
@@ -325,7 +350,7 @@ containerClass={containerClass}
 <FileText className="text-amber-500" size={28} />
 </div>
 <h3 className="text-slate-900 font-black uppercase text-sm mb-3">
-{false ? " " : "Tax Consultants"}
+{isHindi ? " " : "Tax Consultants"}
 </h3>
 <p className="text-slate-900 text-xs leading-relaxed">
 {isHindi
@@ -343,7 +368,7 @@ containerClass={containerClass}
 <section className="py-12 bg-white border-y border-slate-200">
 <div className={containerClass}>
 <p className="text-slate-900 text-[10px] font-black uppercase tracking-[0.5em] text-center mb-8">
-{false ? " " : "WORKS WITH"}
+{isHindi ? " " : "WORKS WITH"}
 </p>
 <div className="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700">
 <span className="text-slate-900 font-black text-sm uppercase tracking-widest">Tally</span>
@@ -360,7 +385,7 @@ containerClass={containerClass}
 <section className="py-12 bg-white border-y border-slate-200">
 <div className={containerClass}>
 <p className="text-slate-900 text-[10px] font-black uppercase tracking-[0.5em] text-center mb-6">
-{false ? " " : "RECENTLY DOWNLOADED"}
+{isHindi ? " " : "RECENTLY DOWNLOADED"}
 </p>
 <div className="flex flex-wrap justify-center gap-6 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
 <span className="flex items-center gap-2">
@@ -387,11 +412,11 @@ Tally User, Raipur - 3 hours ago
 <div className="text-center mb-20">
 <div className="inline-block mb-6 px-5 py-2 bg-teal-50 border border-teal-200 rounded-full">
 <p className="text-teal-700 text-[10px] font-black uppercase tracking-[0.4em]">
-{false ? "4 " : "4 SIMPLE STEPS"}
+{isHindi ? "4 " : "4 SIMPLE STEPS"}
 </p>
 </div>
 <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
-{false ? " " : "How LekhaFlow Works"}
+{isHindi ? " " : "How LekhaFlow Works"}
 </h2>
 <p className="text-slate-900 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
 {isHindi
@@ -402,10 +427,10 @@ Tally User, Raipur - 3 hours ago
 
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
 {[
-{ num: "01", icon: FileText, title: false ? "PDF " : "Upload Bank Statement", desc: false ? " PDF " : "Select your bank statement PDF. The software auto-detects the bank format." },
-{ num: "02", icon: Cpu, title: false ? "AI " : "AI Reads & Categorizes", desc: false ? "AI - , , / " : "AI reads every transaction, understands narration, and classifies Dr/Cr automatically." },
-{ num: "03", icon: Landmark, title: false ? " " : "Review in Smart Grid", desc: false ? " - / -" : "All transactions appear in a clean grid. Opening/closing balance auto-validated." },
-{ num: "04", icon: Send, title: false ? "- " : "One-Click to Tally", desc: false ? "'Send to Tally' " : "Hit 'Send to Tally'. All vouchers are created directly in your Tally - no XML import needed." },
+{ num: "01", icon: FileText, title: isHindi ? "PDF " : "Upload Bank Statement", desc: isHindi ? " PDF " : "Select your bank statement PDF. The software auto-detects the bank format." },
+{ num: "02", icon: Cpu, title: isHindi ? "AI " : "AI Reads & Categorizes", desc: isHindi ? "AI - , , / " : "AI reads every transaction, understands narration, and classifies Dr/Cr automatically." },
+{ num: "03", icon: Landmark, title: isHindi ? " " : "Review in Smart Grid", desc: isHindi ? " - / -" : "All transactions appear in a clean grid. Opening/closing balance auto-validated." },
+{ num: "04", icon: Send, title: isHindi ? "- " : "One-Click to Tally", desc: isHindi ? "'Send to Tally' " : "Hit 'Send to Tally'. All vouchers are created directly in your Tally - no XML import needed." },
 ].map((step, i) => (
 <div key={i} className="group bg-white border border-slate-200 p-10 rounded-[2.5rem] hover:bg-white hover:border-teal-500/30 transition-all text-center relative">
 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-50 border border-slate-200 px-4 py-1 rounded-full">
@@ -429,7 +454,7 @@ Tally User, Raipur - 3 hours ago
 <div className="inline-flex items-center gap-3 px-6 py-3 bg-white border border-amber-500/30 rounded-2xl">
 <Sparkles size={16} className="text-amber-500" />
 <span className="text-slate-900 text-xs font-bold uppercase tracking-widest">
-{false ? " : 75,000 -> 2 (40K + 35K) " : " Sales Split: 75,000 Invoice -> 2 Vouchers (40K + 35K) Automatic"}
+{isHindi ? " : 75,000 -> 2 (40K + 35K) " : " Sales Split: 75,000 Invoice -> 2 Vouchers (40K + 35K) Automatic"}
 </span>
 </div>
 </div>
@@ -443,19 +468,19 @@ Tally User, Raipur - 3 hours ago
 <div className={containerClass}>
 <div className="text-center mb-16">
 <h2 className="text-3xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
-{false ? " " : "How the Free Demo Works"}
+{isHindi ? " " : "How the Free Demo Works"}
 </h2>
 <p className="text-slate-900 font-bold uppercase tracking-widest text-xs">
-{false ? " " : "No payment. No credit card required."}
+{isHindi ? " " : "No payment. No credit card required."}
 </p>
 </div>
 
 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
 {[
-{ num: "01", title: false ? " " : "Download", desc: false ? "7- " : "Download the 7-day trial setup file (Windows 10/11)." },
-{ num: "02", title: false ? " " : "Install", desc: false ? " " : "Install the software. Copy the Machine Hardware ID displayed." },
-{ num: "03", title: false ? " " : "Contact Us", desc: false ? " 2 " : "Send the ID on WhatsApp. We send your trial license within 2 hours." },
-{ num: "04", title: false ? " " : "See It in Tally", desc: false ? " " : "Watch your bank statements and invoices flow into Tally automatically." },
+{ num: "01", title: isHindi ? " " : "Download", desc: isHindi ? "7- " : "Download the 7-day trial setup file (Windows 10/11)." },
+{ num: "02", title: isHindi ? " " : "Install", desc: isHindi ? " " : "Install the software. Copy the Machine Hardware ID displayed." },
+{ num: "03", title: isHindi ? " " : "Contact Us", desc: isHindi ? " 2 " : "Send the ID on WhatsApp. We send your trial license within 2 hours." },
+{ num: "04", title: isHindi ? " " : "See It in Tally", desc: isHindi ? " " : "Watch your bank statements and invoices flow into Tally automatically." },
 ].map((step, i) => (
 <div key={i} className="bg-white border border-slate-200 p-8 rounded-[2rem] text-center hover:border-teal-500/30 transition-all">
 <div className="text-4xl font-black text-teal-500/20 mb-4">{step.num}</div>
@@ -503,11 +528,11 @@ Tally User, Raipur - 3 hours ago
 <div className="inline-flex items-center gap-2 px-5 py-2 bg-blue-100 border border-blue-300 rounded-full mb-4">
 <Sparkles className="text-blue-400" size={16} />
 <span className="text-blue-700 text-[10px] font-black uppercase tracking-[0.3em]">
-{false ? " " : " COMING SOON"}
+{isHindi ? " " : " COMING SOON"}
 </span>
 </div>
 <h3 className="text-2xl md:text-3xl font-black text-slate-900 uppercase italic tracking-tighter">
-{false ? "GSTR-2B " : "GSTR-2B Reconciliation"}
+{isHindi ? "GSTR-2B " : "GSTR-2B Reconciliation"}
 </h3>
 <p className="text-slate-900 text-sm max-w-2xl mx-auto mt-3">
 {isHindi
@@ -516,13 +541,13 @@ Tally User, Raipur - 3 hours ago
 </p>
 <div className="mt-4 flex justify-center gap-4">
 <span className="text-slate-900 text-[10px] font-bold uppercase tracking-widest border border-slate-200 px-4 py-2 rounded-full">
-{false ? " " : " Purchase Invoices"}
+{isHindi ? " " : " Purchase Invoices"}
 </span>
 <span className="text-slate-900 text-[10px] font-bold uppercase tracking-widest border border-slate-200 px-4 py-2 rounded-full">
-{false ? " GSTR-2B " : " GSTR-2B Matching"}
+{isHindi ? " GSTR-2B " : " GSTR-2B Matching"}
 </span>
 <span className="text-slate-900 text-[10px] font-bold uppercase tracking-widest border border-slate-200 px-4 py-2 rounded-full">
-{false ? " " : " Mismatch Detection"}
+{isHindi ? " " : " Mismatch Detection"}
 </span>
 </div>
 </div>
@@ -537,18 +562,18 @@ Tally User, Raipur - 3 hours ago
 <div className="bg-white border border-slate-200 rounded-[4rem] p-10 lg:p-20 shadow-2xl grid lg:grid-cols-2 gap-20 items-center">
 <div className="space-y-10">
 <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase italic leading-none">
-{false ? " " : "The Financial Impact of"} <span className="text-teal-500">{false ? "" : "Automation"}</span>
+{isHindi ? " " : "The Financial Impact of"} <span className="text-teal-500">{isHindi ? "" : "Automation"}</span>
 </h2>
 <div className="space-y-10">
 <div className="space-y-4">
 <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block">
-{false ? " / " : "Average Invoices / Month"}: {invoices}
+{isHindi ? " / " : "Average Invoices / Month"}: {invoices}
 </label>
 <input type="range" min="100" max="5000" step="100" value={invoices} onChange={(e) => setInvoices(parseInt(e.target.value))} className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-teal-500" />
 </div>
 <div className="space-y-4">
 <label className="text-[10px] font-black text-teal-400 uppercase tracking-widest block">
-{false ? " " : "Current Staff Salary"}: {staffCost}
+{isHindi ? " " : "Current Staff Salary"}: {staffCost}
 </label>
 <input type="range" min="8000" max="50000" step="1000" value={staffCost} onChange={(e) => setStaffCost(parseInt(e.target.value))} className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-teal-500" />
 </div>
@@ -557,13 +582,13 @@ Tally User, Raipur - 3 hours ago
 <div className="grid gap-6">
 <div className="bg-slate-50 p-12 rounded-[2.5rem] border border-slate-200 text-center">
 <p className="text-slate-900 text-[10px] font-black uppercase tracking-[0.3em] mb-3">
-{false ? " " : "Reclaim Your Time"}
+{isHindi ? " " : "Reclaim Your Time"}
 </p>
 <p className="text-6xl font-black text-teal-500 tracking-tighter">{Math.round(timeSavedValue / 60)} <span className="text-2xl text-slate-900">Hrs/Mo</span></p>
 </div>
 <div className="bg-teal-500 p-12 rounded-[2.5rem] text-black shadow-xl text-center">
 <p className="text-teal-900 text-[10px] font-black uppercase tracking-[0.3em] mb-3">
-{false ? " " : "Annual Operational Savings"}
+{isHindi ? " " : "Annual Operational Savings"}
 </p>
 <p className="text-6xl font-black tracking-tighter">{annualSavingsValue.toLocaleString()}</p>
 </div>
@@ -579,41 +604,41 @@ Tally User, Raipur - 3 hours ago
 <div className={containerClass}>
 <div className="text-center mb-16">
 <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
-{false ? " " : "Frequently Asked Questions"}
+{isHindi ? " " : "Frequently Asked Questions"}
 </h2>
 <p className="text-slate-900 font-bold uppercase tracking-widest text-xs">
-{false ? " " : "Answers you need"}
+{isHindi ? " " : "Answers you need"}
 </p>
 </div>
 
 <div className="max-w-3xl mx-auto space-y-4">
 {[
 {
-q: false ? " LekhaFlow - ?" : "Is LekhaFlow cloud-based?",
+q: isHindi ? " LekhaFlow - ?" : "Is LekhaFlow cloud-based?",
 a: isHindi
 ? " LekhaFlow "
 : "No. LekhaFlow is desktop software. Your data stays on your computer. No data goes to our servers."
 },
 {
-q: false ? " ?" : "Does it work offline?",
+q: isHindi ? " ?" : "Does it work offline?",
 a: isHindi
 ? " "
 : "Yes. No internet required after download. You can work offline."
 },
 {
-q: false ? " Tally versions ?" : "Which Tally versions are supported?",
+q: isHindi ? " Tally versions ?" : "Which Tally versions are supported?",
 a: isHindi
 ? "Tally Prime, Tally ERP 9, "
 : "Supports Tally Prime, Tally ERP 9, and all recent versions."
 },
 {
-q: false ? "GSTR-2B ?" : "When will GSTR-2B reconciliation come?",
+q: isHindi ? "GSTR-2B ?" : "When will GSTR-2B reconciliation come?",
 a: isHindi
 ? "GSTR-2B "
 : "GSTR-2B reconciliation is coming in the next update. We're working on it."
 },
 {
-q: false ? " ?" : "Can I try before buying?",
+q: isHindi ? " ?" : "Can I try before buying?",
 a: isHindi
 ? " 7- "
 : "Yes. Download the 7-day free trial and test it with your own data."
@@ -644,7 +669,7 @@ a: isHindi
 </div>
 <div className="text-center md:text-left">
 <h3 className="text-slate-900 font-black uppercase tracking-widest text-lg mb-3">
-{false ? " " : "Commitment to Accuracy"}
+{isHindi ? " " : "Commitment to Accuracy"}
 </h3>
 <p className="text-slate-900 italic text-sm leading-relaxed mb-4">
 {isHindi
@@ -652,7 +677,7 @@ a: isHindi
 : "Our mission is to empower the Indian accounting community by reducing the clerical burden. We are targeting a processing cost with 100% data integrity."}
 </p>
 <p className="text-teal-500 font-bold text-[10px] uppercase tracking-[0.2em]">
-{false ? " - , " : "Jitendra Bharti - Founder, LekhaFlow"}
+{isHindi ? " - , " : "Jitendra Bharti - Founder, LekhaFlow"}
 </p>
 </div>
 </div>
@@ -667,17 +692,17 @@ a: isHindi
 <div className="text-center mb-20">
 <div className="inline-block mb-4 px-4 py-1.5 bg-amber-100 border border-amber-300 rounded-full">
 <p className="text-amber-700 text-[10px] font-black uppercase tracking-[0.3em]">
-{false ? " " : "Independence Day Launch Offer"}
+{isHindi ? " " : "Independence Day Launch Offer"}
 </p>
 </div>
 <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
-{false ? " " : "Professional Licenses"}
+{isHindi ? " " : "Professional Licenses"}
 </h2>
 <p className="text-slate-900 font-bold uppercase tracking-widest text-xs mb-2">
-{false ? " 50 " : "Special pricing for first 50 clients only"}
+{isHindi ? " 50 " : "Special pricing for first 50 clients only"}
 </p>
 <p className="text-amber-500 text-[10px] font-black uppercase tracking-widest">
-{false ? "31 2026 " : "Valid till 31st August 2026"}
+{isHindi ? "31 2026 " : "Valid till 31st August 2026"}
 </p>
 </div>
 
@@ -685,7 +710,7 @@ a: isHindi
 {Object.entries(productData).filter(([key]) => key === 'standard').map(([key, p]) => (
 <div key={key} className={`bg-white border-2 ${p.color} p-10 rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col justify-between group max-w-lg mx-auto w-full`}>
 <div className="absolute top-0 right-0 bg-amber-500 text-black px-6 py-1 text-[9px] font-black uppercase tracking-widest">
-{false ? " " : "Most Popular"}
+{isHindi ? " " : "Most Popular"}
 </div>
 <div className="space-y-6">
 <h3 className="text-slate-900 font-black text-xs uppercase tracking-[0.3em]">{p.title}</h3>
@@ -708,10 +733,10 @@ a: isHindi
 onClick={() => openPayment(key, p)}
 className={`block w-full py-5 bg-teal-600 text-white hover:bg-teal-500 rounded-2xl font-black uppercase text-xs text-center tracking-widest transition-all`}
 >
-{false ? "" : "Buy Now"} - {p.offerPrice}
+{isHindi ? "" : "Buy Now"} - {p.offerPrice}
 </button>
 <Link href="/downloads" className="block w-full py-5 bg-slate-100 text-slate-900 rounded-2xl font-black uppercase text-[10px] text-center tracking-widest border border-slate-200 hover:border-slate-600 transition-all">
-{false ? " " : "Download Setup"}
+{isHindi ? " " : "Download Setup"}
 </Link>
 </div>
 </div>
@@ -727,7 +752,7 @@ className={`block w-full py-5 bg-teal-600 text-white hover:bg-teal-500 rounded-2
 </div>
 
 <p className="text-center mt-6 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
-{false ? "7- - " : "7-Day Money-Back Guarantee - Not satisfied? Full refund"}
+{isHindi ? "7- - " : "7-Day Money-Back Guarantee - Not satisfied? Full refund"}
 </p>
 
 <p className="text-center mt-8 text-slate-900 text-[10px] font-bold uppercase tracking-widest">Latest Stable Build: {latestVersion} | Released: {formatDate(publishedAt)}</p>
@@ -740,14 +765,14 @@ className={`block w-full py-5 bg-teal-600 text-white hover:bg-teal-500 rounded-2
 <div className={containerClass}>
 <div className="text-center mb-16">
 <h2 className="text-3xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
-{false ? " " : "What Accountants Say"}
+{isHindi ? " " : "What Accountants Say"}
 </h2>
 </div>
 <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
 {[
-{ name: "CA Rahul Sharma", firm: "Sharma & Associates, Raipur", quote: false ? " 3 " : "Bank statement entry that used to take 3 hours now finishes in 10 minutes." },
-{ name: "Priya Gupta", firm: "Gupta Tax Consultants, Bilaspur", quote: false ? " " : "The Sales Split feature is powerful. No more manual calculations for GST compliance." },
-{ name: "Rajesh Agrawal", firm: "Agrawal & Co., Ambikapur", quote: false ? "7- 500 99% " : "Processed 500 invoices during the 7-day trial. 99% accuracy on first try." },
+{ name: "CA Rahul Sharma", firm: "Sharma & Associates, Raipur", quote: isHindi ? " 3 " : "Bank statement entry that used to take 3 hours now finishes in 10 minutes." },
+{ name: "Priya Gupta", firm: "Gupta Tax Consultants, Bilaspur", quote: isHindi ? " " : "The Sales Split feature is powerful. No more manual calculations for GST compliance." },
+{ name: "Rajesh Agrawal", firm: "Agrawal & Co., Ambikapur", quote: isHindi ? "7- 500 99% " : "Processed 500 invoices during the 7-day trial. 99% accuracy on first try." },
 ].map((t, i) => (
 <div key={i} className="bg-white border border-slate-200 p-8 rounded-[2.5rem]">
 <p className="text-slate-900 text-sm italic leading-relaxed mb-6">"{t.quote}"</p>
@@ -782,7 +807,7 @@ className={`block w-full py-5 bg-teal-600 text-white hover:bg-teal-500 rounded-2
 <Laptop size={24} /> <Database size={24} /> <Cpu size={24} /> <ShieldCheck size={24} />
 </div>
 <p className="text-slate-600 text-[10px] font-black tracking-[0.5em] uppercase italic">
-{false ? " AI | " : "LekhaFlow AI | Engineering the Future of Indian Accounting "}
+{isHindi ? " AI | " : "LekhaFlow AI | Engineering the Future of Indian Accounting "}
 </p>
 </div>
 </footer>

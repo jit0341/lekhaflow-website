@@ -20,7 +20,32 @@ import TimedLeadPopup from '@/components/TimedLeadPopup';
 import PaymentModal from "@/components/PaymentModal";
 
 export default function LekhaFlowLanding() {
-const isHindi = false;
+const [isHindi, setIsHindi] = useState<boolean>(false);
+
+useEffect(() => {
+const saved = window.localStorage.getItem("lekhaflow-language");
+
+if (saved === "hi") {
+setIsHindi(false);
+}
+
+const handleLanguageChange = (event: Event) => {
+const customEvent = event as CustomEvent<boolean>;
+setIsHindi(false);
+};
+
+window.addEventListener(
+"lekhaflow-language-change",
+handleLanguageChange
+);
+
+return () => {
+window.removeEventListener(
+"lekhaflow-language-change",
+handleLanguageChange
+);
+};
+}, []);
 const [showIntakeModal, setShowIntakeModal] = useState<boolean>(false);
 const [intakeTarget, setIntakeTarget] = useState<"demo" | "quotation">("demo");
 const [clientForm, setClientForm] = useState({ clientName: "", companyName: "", mobileNumber: "", clientEmail: "" });
@@ -134,19 +159,19 @@ return (
 {/* HERO SECTION - Balanced Font Sizes + All Features */}
 {/* ============================================================ */}
 <HeroSection
-isHindi={false}
+isHindi={isHindi}
 containerClass={containerClass}
 setIntakeTarget={setIntakeTarget}
 setShowIntakeModal={setShowIntakeModal}
 />
-<PartnerForm isHindi={false} />
-<ProblemSection isHindi={false} />
+<PartnerForm isHindi={isHindi} />
+<ProblemSection isHindi={isHindi} />
 
 {/* ============================================================ */}
 {/* SALES SPLIT FEATURE - UNIQUE USP */}
 {/* ============================================================ */}
 <SalesSplitSection
-isHindi={false}
+isHindi={isHindi}
 containerClass={containerClass}
 />
 
@@ -207,7 +232,7 @@ Detects and suggests repeated party names (e.g. "Pradeep", "Ramanujanagar") auto
 {/* WHY LEKHAFLOW - Enhanced Trust Section */}
 {/* ============================================================ */}
 <WhyLekhaFlowSection
-isHindi={false}
+isHindi={isHindi}
 containerClass={containerClass}
 />
 
