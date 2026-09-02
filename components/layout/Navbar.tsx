@@ -25,6 +25,7 @@ const mainLinks = [
 { name: "Admin", href: "/admin" },
 { name: "Insights", href: "/blog" },
 { name: "Support", href: "/support" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -41,8 +42,13 @@ return (
 <Link
 href="/"
 onClick={closeMobile}
-className="flex items-center gap-1.5 shrink-0"
+className="flex items-center gap-2 shrink-0"
 >
+<img
+src="/logo.png"
+alt="LekhaFlow"
+className="h-9 w-9 object-contain"
+/>
 <span className="text-2xl font-black tracking-tight text-slate-950">
 LEKHA
 </span>

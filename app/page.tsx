@@ -774,7 +774,12 @@ className={`block w-full py-5 bg-teal-600 text-white hover:bg-teal-500 rounded-2
 <Link href="/faq" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
 <MessageCircleQuestion size={14} /> FAQ
 </Link>
-<Link href="/blog" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+            <Link href="/contact" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+              Contact
+            </Link>
+            <a href="https://www.linkedin.com/in/jitendra-bharti-5024b9116" target="_blank" rel="noopener noreferrer" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
+              LinkedIn
+            </a><Link href="/blog" className="text-slate-900 text-[10px] font-bold uppercase tracking-widest hover:text-teal-500 transition-colors flex items-center gap-2">
 <ArrowRight size={14} /> Blog
 </Link>
 </div>
