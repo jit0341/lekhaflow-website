@@ -12,7 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
-const linkedinUrl = "https://www.linkedin.com/in/jitendra-bharti-5024b9116";
+const linkedinUrl = "https://www.linkedin.com/company/144811463/";
 const whatsappUrl = "https://wa.me/918770808695";
 const emailAddress = "Nexoriva.systems@gmail.com";
 
@@ -361,3 +361,4 @@ function Field({
     </div>
   );
 }
+
