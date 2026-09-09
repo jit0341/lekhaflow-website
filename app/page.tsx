@@ -224,7 +224,7 @@ containerClass={containerClass}
 </span>
 </div>
 <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-6">
-{false ? " , " : " Client's Data. Client's own control."}
+{false ? " , " : " Your Data. Your control."}
 </h2>
 <p className="text-slate-900 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-8">
 {isHindi
