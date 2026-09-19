@@ -35,6 +35,25 @@ export default function SalesSplitPage() {
         </div>
       </section>
 
+      <section className="bg-white py-14 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-teal-700">REAL PRODUCT INTERFACE</p>
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">See Sales Split inside LekhaFlow.</h2>
+            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+              This is the actual Sales AI &amp; Smart Split Hub used in the LekhaFlow desktop workflow.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-10 max-w-6xl overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-2 shadow-[0_30px_80px_-35px_rgba(15,23,42,0.35)] sm:p-3">
+            <img
+              src="/images/products/sales-split-interface.png"
+              alt="LekhaFlow Sales AI & Smart Split Hub real product interface"
+              className="block h-auto w-full rounded-[1.35rem] border border-slate-200"
+            />
+          </div>
+        </div>
+      </section>
       <section className="bg-slate-50 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
