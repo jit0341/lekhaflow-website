@@ -29,7 +29,7 @@ export default function SalesSplitSection({ isHindi, containerClass }: SalesSpli
           <div className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-sm">
             <div className="flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-100"><Calculator size={20} className="text-amber-600" /></div>
-              <div><p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500">Sales Total</p><p className="text-2xl font-black text-slate-950">₹{total.toLocaleString("en-IN")}</p></div>
+              <div><p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Sales Total</p><p className="text-2xl font-black text-slate-950">₹{total.toLocaleString("en-IN")}</p></div>
             </div>
 
             <label className="mt-8 block text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Invoice Amount</label>
@@ -41,23 +41,23 @@ export default function SalesSplitSection({ isHindi, containerClass }: SalesSpli
                 <button key={value} type="button" onClick={() => setThreshold(value)} className={`rounded-xl border px-3 py-3 text-xs font-black transition ${threshold === value ? "border-amber-500 bg-amber-500 text-slate-950" : "border-slate-200 bg-white text-slate-600 hover:border-amber-300"}`}>₹{value.toLocaleString("en-IN")}</button>
               ))}
             </div>
-            <p className="mt-3 text-[10px] leading-5 text-slate-500">The threshold is the maximum amount allowed in one generated voucher.</p>
+            <p className="mt-3 text-[10px] leading-5 text-slate-400">The threshold is the maximum amount allowed in one generated voucher.</p>
           </div>
 
-          <div className="rounded-[2rem] bg-white border border-slate-200 p-7 text-slate-950 shadow-sm">
-            <div className="flex items-end justify-between gap-4 border-b border-slate-200 pb-5">
-              <div><p className="text-[9px] font-black uppercase tracking-[0.2em] text-amber-600">Generated Result</p><p className="mt-2 text-3xl font-black">{vouchers.length} vouchers</p></div>
-              <BadgeCheck size={25} className="text-teal-600" />
+          <div className="rounded-[2rem] bg-slate-950 p-7 text-white shadow-xl">
+            <div className="flex items-end justify-between gap-4 border-b border-white/10 pb-5">
+              <div><p className="text-[9px] font-black uppercase tracking-[0.2em] text-amber-400">Generated Result</p><p className="mt-2 text-3xl font-black">{vouchers.length} vouchers</p></div>
+              <BadgeCheck size={25} className="text-teal-400" />
             </div>
             <div className="mt-6 grid gap-2 sm:grid-cols-2">
               {vouchers.map((amount, index) => (
-                <div key={index} className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Voucher {index + 1}</span>
+                <div key={index} className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Voucher {index + 1}</span>
                   <span className="text-sm font-black">₹{amount.toLocaleString("en-IN")}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-6 flex items-center gap-2 text-xs font-bold text-slate-600"><ArrowRight size={14} className="text-amber-600" /> Total remains ₹{total.toLocaleString("en-IN")}</div>
+            <div className="mt-6 flex items-center gap-2 text-xs font-bold text-slate-300"><ArrowRight size={14} className="text-amber-400" /> Total remains ₹{total.toLocaleString("en-IN")}</div>
           </div>
         </div>
 
