@@ -33,16 +33,16 @@ export default async function AdminLoginPage({
   const hasError = params.error === "1";
 
   return (
-    <main className="min-h-screen bg-slate-950 px-5 py-16 text-white">
+    <main className="min-h-screen bg-white px-5 py-16 text-slate-950">
       <div className="mx-auto flex min-h-[70vh] max-w-md items-center justify-center">
-        <section className="w-full rounded-3xl border border-slate-700 bg-slate-900 p-8 shadow-2xl">
-          <p className="text-xs font-black uppercase tracking-[0.25em] text-teal-400">
+        <section className="w-full rounded-3xl border border-slate-300 bg-white p-8 shadow-2xl">
+          <p className="text-xs font-black uppercase tracking-[0.25em] text-teal-700">
             LekhaFlow Private Area
           </p>
 
           <h1 className="mt-3 text-3xl font-black">Admin Login</h1>
 
-          <p className="mt-3 text-sm leading-6 text-slate-300">
+          <p className="mt-3 text-sm leading-6 text-slate-600">
             Private access for the LekhaFlow QR payment generator.
           </p>
 
@@ -54,7 +54,7 @@ export default async function AdminLoginPage({
 
           <form action={loginAdmin} className="mt-7 space-y-5">
             <label className="block">
-              <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-300">
+              <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-600">
                 Password
               </span>
 
@@ -63,7 +63,7 @@ export default async function AdminLoginPage({
                 type="password"
                 required
                 autoComplete="current-password"
-                className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full rounded-xl border border-slate-300 bg-slate-800 px-4 py-3 text-slate-950 outline-none focus:ring-2 focus:ring-teal-500"
                 placeholder="Enter admin password"
               />
             </label>

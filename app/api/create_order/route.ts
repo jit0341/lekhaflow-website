@@ -1,13 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID || "",
-  key_secret: process.env.RAZORPAY_KEY_SECRET || "",
-});
-
 export async function POST(req: NextRequest) {
   try {
+    const keyId = process.env.RAZORPAY_KEY_ID;
+    const keySecret = process.env.RAZORPAY_KEY_SECRET;
+
+    if (!keyId || !keySecret) {
+      return NextResponse.json(
+        { success: false, error: "Payment service is not configured." },
+        { status: 503 }
+      );
+    }
+
+    const razorpay = new Razorpay({
+      key_id: keyId,
+      key_secret: keySecret,
+    });
+
     const body = await req.json();
     const { plan, amount } = body;
 
@@ -18,16 +28,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const options = {
-      amount: amount * 100, // Convert to paise
+    const order = await razorpay.orders.create({
+      amount: amount * 100,
       currency: "INR",
       receipt: `receipt_${Date.now()}`,
-      notes: {
-        plan: plan,
-      },
-    };
-
-    const order = await razorpay.orders.create(options);
+      notes: { plan },
+    });
 
     return NextResponse.json({
       success: true,

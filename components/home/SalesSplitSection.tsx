@@ -1,95 +1,70 @@
 "use client";
 
-import {
-  Split,
-  Clock,
-  BadgeCheck,
-  Sparkles,
-} from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowRight, BadgeCheck, Calculator, Split } from "lucide-react";
 
-interface SalesSplitSectionProps {
-  isHindi: boolean;
-  containerClass: string;
-}
+interface SalesSplitSectionProps { isHindi: boolean; containerClass: string; }
 
-export default function SalesSplitSection({
-  isHindi,
-  containerClass,
-}: SalesSplitSectionProps) {
+export default function SalesSplitSection({ isHindi, containerClass }: SalesSplitSectionProps) {
+  const [total, setTotal] = useState(75000);
+  const [threshold, setThreshold] = useState(50000);
+  const vouchers = useMemo(() => {
+    const count = Math.max(1, Math.ceil(total / threshold));
+    return Array.from({ length: count }, (_, i) => i < count - 1 ? threshold : total - threshold * (count - 1));
+  }, [total, threshold]);
+
   return (
-          <section id="features" className="py-24 bg-slate-50 border-y border-amber-500/20">
-            <div className={containerClass}>
-              <div className="text-center mb-16">
-                <div className="inline-block mb-4 px-5 py-2 bg-amber-100 border border-amber-300 rounded-full">
-                  <p className="text-amber-700 text-[10px] font-black uppercase tracking-[0.4em]">
-                    ⚡ {isHindi ? "यूनिक फीचर — कोई और नहीं देता" : "UNIQUE FEATURE — NOBODY ELSE OFFERS"}
-                  </p>
-                </div>
-                <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-4">
-                  {isHindi ? "सेल्स टोटल → कई वाउचर" : "Sales Total → Multiple Vouchers"}
-                </h2>
-                <p className="text-slate-900 font-bold uppercase tracking-widest text-xs max-w-xl mx-auto">
-                  {isHindi 
-                    ? "एक सेल्स इनवॉइस को ₹10,000, ₹30,000 या ₹50,000 से कम वाउचर में ऑटोमैटिकली स्प्लिट करें"
-                    : "Automatically split a single sales invoice into vouchers below ₹10,000, ₹30,000 or ₹50,000"}
-                </p>
-              </div>
-    
-              <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <div className="bg-white border border-amber-500/20 p-8 rounded-[2.5rem] hover:border-amber-500/50 transition-all text-center">
-                  <div className="w-16 h-16 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6">
-                    <Split className="text-amber-500" size={28} />
-                  </div>
-                  <h3 className="text-slate-900 font-black uppercase text-sm mb-3">
-                    {isHindi ? "ऑटोमैटिक स्प्लिट" : "Automatic Split"}
-                  </h3>
-                  <p className="text-slate-900 text-xs leading-relaxed">
-                    {isHindi 
-                      ? "₹75,000 का इनवॉइस → ₹40,000 + ₹35,000 — बिना मैन्युअल कैलकुलेशन के"
-                      : "₹75,000 Invoice → ₹40,000 + ₹35,000 — no manual calculation needed"}
-                  </p>
-                </div>
-    
-                <div className="bg-white border border-amber-500/20 p-8 rounded-[2.5rem] hover:border-amber-500/50 transition-all text-center">
-                  <div className="w-16 h-16 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6">
-                    <Clock className="text-amber-500" size={28} />
-                  </div>
-                  <h3 className="text-slate-900 font-black uppercase text-sm mb-3">
-                    {isHindi ? "घंटों की बचत" : "Save Hours"}
-                  </h3>
-                  <p className="text-slate-900 text-xs leading-relaxed">
-                    {isHindi 
-                      ? "CAs और accountants के लिए सबसे बड़ी टाइम-सेवर — क्लाइंट के GST कंप्लायंस के लिए"
-                      : "The biggest time-saver for CAs and accountants — perfect for client GST compliance"}
-                  </p>
-                </div>
-    
-                <div className="bg-white border border-amber-500/20 p-8 rounded-[2.5rem] hover:border-amber-500/50 transition-all text-center">
-                  <div className="w-16 h-16 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6">
-                    <BadgeCheck className="text-amber-500" size={28} />
-                  </div>
-                  <h3 className="text-slate-900 font-black uppercase text-sm mb-3">
-                    {isHindi ? "100% सटीक" : "100% Accurate"}
-                  </h3>
-                  <p className="text-slate-900 text-xs leading-relaxed">
-                    {isHindi 
-                      ? "हर स्प्लिट एकदम सही — मैन्युअल एरर का कोई चांस नहीं"
-                      : "Every split is perfectly calculated — zero chance of manual errors"}
-                  </p>
-                </div>
-              </div>
-    
-              <div className="text-center mt-12">
-                <div className="inline-flex items-center gap-3 px-6 py-3 bg-white border border-amber-500/30 rounded-2xl">
-                  <Sparkles size={16} className="text-amber-500" />
-                  <span className="text-slate-900 text-xs font-bold uppercase tracking-widest">
-                    {isHindi 
-                      ? "🔥 यह फीचर Vouchrit या Vyapar TaxOne में नहीं है — केवल LekhaFlow में"
-                      : "🔥 This feature is NOT in Vouchrit or Vyapar TaxOne — only LekhaFlow"}
-                  </span>
-                </div>
-              </div>
+    <section id="sales-split" className="border-y border-amber-200 bg-gradient-to-b from-amber-50/70 to-white py-24">
+      <div className={containerClass}>
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white px-4 py-2">
+            <Split size={14} className="text-amber-600" />
+            <span className="text-[10px] font-black uppercase tracking-[0.25em] text-amber-700">{isHindi ? "Sales Split" : "A practical control for sales vouchers"}</span>
+          </div>
+          <h2 className="text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">Sales Total <span className="text-amber-500">→</span> Multiple Vouchers</h2>
+          <p className="mt-5 text-base leading-7 text-slate-600">Choose the maximum voucher amount. LekhaFlow calculates the voucher count and the final remainder automatically.</p>
+        </div>
+
+        <div className="mx-auto mt-12 grid max-w-5xl gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-100"><Calculator size={20} className="text-amber-600" /></div>
+              <div><p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500">Sales Total</p><p className="text-2xl font-black text-slate-950">₹{total.toLocaleString("en-IN")}</p></div>
             </div>
-          </section>
+
+            <label className="mt-8 block text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Invoice Amount</label>
+            <input aria-label="Sales total" type="range" min="10000" max="250000" step="5000" value={total} onChange={e => setTotal(Number(e.target.value))} className="mt-4 w-full accent-amber-500" />
+
+            <label className="mt-8 block text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Maximum Voucher Amount</label>
+            <div className="mt-3 grid grid-cols-3 gap-2">
+              {[10000, 30000, 50000].map(value => (
+                <button key={value} type="button" onClick={() => setThreshold(value)} className={`rounded-xl border px-3 py-3 text-xs font-black transition ${threshold === value ? "border-amber-500 bg-amber-500 text-slate-950" : "border-slate-200 bg-white text-slate-600 hover:border-amber-300"}`}>₹{value.toLocaleString("en-IN")}</button>
+              ))}
+            </div>
+            <p className="mt-3 text-[10px] leading-5 text-slate-500">The threshold is the maximum amount allowed in one generated voucher.</p>
+          </div>
+
+          <div className="rounded-[2rem] bg-white border border-slate-200 p-7 text-slate-950 shadow-sm">
+            <div className="flex items-end justify-between gap-4 border-b border-slate-200 pb-5">
+              <div><p className="text-[9px] font-black uppercase tracking-[0.2em] text-amber-600">Generated Result</p><p className="mt-2 text-3xl font-black">{vouchers.length} vouchers</p></div>
+              <BadgeCheck size={25} className="text-teal-600" />
+            </div>
+            <div className="mt-6 grid gap-2 sm:grid-cols-2">
+              {vouchers.map((amount, index) => (
+                <div key={index} className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Voucher {index + 1}</span>
+                  <span className="text-sm font-black">₹{amount.toLocaleString("en-IN")}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 flex items-center gap-2 text-xs font-bold text-slate-600"><ArrowRight size={14} className="text-amber-600" /> Total remains ₹{total.toLocaleString("en-IN")}</div>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-8 max-w-5xl rounded-2xl border border-amber-200 bg-white px-5 py-4 text-center text-xs font-semibold text-slate-600">
+          Example: ₹75,000 with a ₹50,000 maximum voucher amount produces <strong className="text-slate-950">₹50,000 + ₹25,000</strong>. With ₹30,000 it produces ₹30,000 + ₹30,000 + ₹15,000; with ₹10,000 it produces ₹10,000 × 7 + ₹5,000.
+        </div>
+      </div>
+    </section>
   );
 }

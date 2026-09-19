@@ -153,7 +153,7 @@ containerClass={containerClass}
 {/* ============================================================ */}
 {/* SwiftAssign AI Ledger Assignment */}
 {/* ============================================================ */}
-<section className="py-24 bg-slate-50 border-y border-slate-200">
+<section id="swiftassign" className="py-24 bg-slate-50 border-y border-slate-200">
 <div className={containerClass}>
 <div className="text-center mb-16">
 <div className="inline-block mb-4 px-5 py-2 bg-purple-100 border border-purple-300 rounded-full">
@@ -186,7 +186,7 @@ Similar transactions are automatically grouped together - UPI, NEFT, IMPS, ATM a
 </div>
 <h3 className="text-slate-900 font-black uppercase text-sm mb-3">Bulk Assignment</h3>
 <p className="text-slate-900 text-xs leading-relaxed">
-Assign ledgers to all transactions in one click - with 100% accuracy
+Assign suggested ledgers in bulk, then review the result before posting.
 </p>
 </div>
 
@@ -354,36 +354,12 @@ containerClass={containerClass}
 </div>
 </section>
 
-{/* ============================================================ */}
-{/* SOCIAL PROOF - Recent Activity */}
-{/* ============================================================ */}
-<section className="py-12 bg-white border-y border-slate-200">
-<div className={containerClass}>
-<p className="text-slate-900 text-[10px] font-black uppercase tracking-[0.5em] text-center mb-6">
-{false ? " " : "RECENTLY DOWNLOADED"}
-</p>
-<div className="flex flex-wrap justify-center gap-6 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
-<span className="flex items-center gap-2">
-<span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-CA Firm, Delhi - 15 mins ago
-</span>
-<span className="flex items-center gap-2">
-<span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-Tax Consultant, Mumbai - 1 hour ago
-</span>
-<span className="flex items-center gap-2">
-<span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-Tally User, Raipur - 3 hours ago
-</span>
-</div>
-</div>
-</section>
 
 {/* ============================================================ */}
 {/* HOW IT WORKS */}
 {/* ============================================================ */}
-<section id="how-it-works" className="py-28 bg-slate-50 border-y border-slate-200">
-<div className={containerClass}>
+<section id="review" className="py-28 bg-slate-50 border-y border-slate-200">
+<div id="how-it-works" className={containerClass}>
 <div className="text-center mb-20">
 <div className="inline-block mb-6 px-5 py-2 bg-teal-50 border border-teal-200 rounded-full">
 <p className="text-teal-700 text-[10px] font-black uppercase tracking-[0.4em]">
@@ -405,7 +381,7 @@ Tally User, Raipur - 3 hours ago
 { num: "01", icon: FileText, title: false ? "PDF " : "Upload Bank Statement", desc: false ? " PDF " : "Select your bank statement PDF. The software auto-detects the bank format." },
 { num: "02", icon: Cpu, title: false ? "AI " : "AI Reads & Categorizes", desc: false ? "AI - , , / " : "AI reads every transaction, understands narration, and classifies Dr/Cr automatically." },
 { num: "03", icon: Landmark, title: false ? " " : "Review in Smart Grid", desc: false ? " - / -" : "All transactions appear in a clean grid. Opening/closing balance auto-validated." },
-{ num: "04", icon: Send, title: false ? "- " : "One-Click to Tally", desc: false ? "'Send to Tally' " : "Hit 'Send to Tally'. All vouchers are created directly in your Tally - no XML import needed." },
+{ num: "04", icon: Send, title: false ? "- " : "Send the Final Result to Tally", desc: false ? "" : "Review the processed result, then send the final accounting entries through the Tally workflow." },
 ].map((step, i) => (
 <div key={i} className="group bg-white border border-slate-200 p-10 rounded-[2.5rem] hover:bg-white hover:border-teal-500/30 transition-all text-center relative">
 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-50 border border-slate-200 px-4 py-1 rounded-full">
@@ -429,7 +405,7 @@ Tally User, Raipur - 3 hours ago
 <div className="inline-flex items-center gap-3 px-6 py-3 bg-white border border-amber-500/30 rounded-2xl">
 <Sparkles size={16} className="text-amber-500" />
 <span className="text-slate-900 text-xs font-bold uppercase tracking-widest">
-{false ? " : 75,000 -> 2 (40K + 35K) " : " Sales Split: 75,000 Invoice -> 2 Vouchers (40K + 35K) Automatic"}
+{false ? " : 75,000 -> 2 (40K + 35K) " : " Sales Split example: ₹75,000 → ₹50,000 + ₹25,000 at a ₹50,000 maximum voucher amount"}
 </span>
 </div>
 </div>
@@ -532,7 +508,7 @@ Tally User, Raipur - 3 hours ago
 {/* ============================================================ */}
 {/* ROI CALCULATOR */}
 {/* ============================================================ */}
-<section className="py-28">
+<section id="calculator" className="py-28">
 <div className={containerClass}>
 <div className="bg-white border border-slate-200 rounded-[4rem] p-10 lg:p-20 shadow-2xl grid lg:grid-cols-2 gap-20 items-center">
 <div className="space-y-10">
@@ -649,7 +625,7 @@ a: isHindi
 <p className="text-slate-900 italic text-sm leading-relaxed mb-4">
 {isHindi
 ? " 100% "
-: "Our mission is to empower the Indian accounting community by reducing the clerical burden. We are targeting a processing cost with 100% data integrity."}
+: "Our mission is to reduce repetitive clerical work for the Indian accounting community while keeping the accounting result visible and reviewable."}
 </p>
 <p className="text-teal-500 font-bold text-[10px] uppercase tracking-[0.2em]">
 {false ? " - , " : "Jitendra Bharti - Founder, LekhaFlow"}

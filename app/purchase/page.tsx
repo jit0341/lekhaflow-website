@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const workflow = [
   ["01", "Select Purchase Invoice", "Choose purchase invoices or accounting documents."],
-  ["02", "Start AI Engine", "Let LekhaFlow read and process the purchase document."],
+  ["02", "Process the purchase document", "Let LekhaFlow read and structure the purchase document."],
   ["03", "Build Accounting Result", "Generate the accounting result from the processed invoice."],
   ["04", "Review Before Tally", "Inspect the generated result before anything is synced."],
   ["05", "Export or Sync", "Open the result in Excel or send it directly to Tally."],
@@ -52,7 +52,7 @@ export default function PurchasePage() {
 
               <Link
                 href="/downloads"
-                className="rounded-xl bg-teal-600 px-7 py-4 text-sm font-black uppercase tracking-wide text-white shadow-lg shadow-teal-600/20 transition hover:bg-teal-700"
+                className="rounded-xl bg-teal-600 px-7 py-4 text-sm font-black uppercase tracking-wide text-slate-950 shadow-lg shadow-teal-600/20 transition hover:bg-teal-700"
               >
                 Start Free Trial →
               </Link>
@@ -134,7 +134,7 @@ export default function PurchasePage() {
 
             </div>
 
-            <div className="rounded-3xl bg-[#020617] p-8 text-white shadow-xl">
+            <div className="rounded-3xl bg-slate-50 p-8 text-slate-950 shadow-sm">
 
               <p className="text-sm font-black uppercase tracking-widest text-teal-400">
                 FROM DOCUMENT TO ACCOUNTING
@@ -180,7 +180,7 @@ export default function PurchasePage() {
 
 
       {/* REAL PRODUCT INTERFACE */}
-      <section className="bg-[#020617] text-white">
+      <section className="bg-white text-slate-950">
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
 
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
@@ -197,7 +197,7 @@ export default function PurchasePage() {
 
             </div>
 
-            <p className="max-w-md text-base leading-7 text-slate-300">
+            <p className="max-w-md text-base leading-7 text-slate-600">
               The purchase workflow is designed around a reviewable accounting
               result — not a blind document conversion.
             </p>
@@ -206,9 +206,9 @@ export default function PurchasePage() {
 
 
           {/* REAL SCREENSHOT SLOT */}
-          <div className="mt-14 overflow-hidden rounded-3xl border border-white/10 bg-[#0f172a] shadow-2xl">
+          <div className="mt-14 overflow-hidden rounded-3xl border border-slate-200 bg-[#0f172a] shadow-2xl">
 
-            <div className="border-b border-white/10 px-6 py-4">
+            <div className="border-b border-slate-200 px-6 py-4">
 
               <div className="flex flex-wrap items-center justify-between gap-3">
 
@@ -226,7 +226,7 @@ export default function PurchasePage() {
 
             <div className="bg-[#0f172a] p-4 sm:p-6">
 
-              <div className="flex min-h-[360px] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#020617]">
+              <div className="flex min-h-[360px] items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white">
 
                 <img
                   src="/images/products/purchase-ai.png"
@@ -240,7 +240,7 @@ export default function PurchasePage() {
 
           </div>
 
-          <p className="mt-5 text-sm text-slate-400">
+          <p className="mt-5 text-sm text-slate-600">
             Real LekhaFlow product interface — the screenshot will be used
             here to show the actual Purchase workflow to prospective clients.
           </p>
@@ -280,7 +280,7 @@ export default function PurchasePage() {
                 className="rounded-2xl border border-slate-200 bg-slate-50 p-6"
               >
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#020617] text-sm font-black text-white">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-sm font-black text-slate-950">
                   {number}
                 </div>
 
@@ -350,13 +350,31 @@ export default function PurchasePage() {
       </section>
 
 
+      {/* UOM / DOZEN */}
+      <section id="uom" className="bg-slate-50">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.3em] text-teal-600">ITEM QUANTITY & UOM</p>
+              <h2 className="mt-4 text-4xl font-black tracking-[-0.03em] sm:text-5xl">Keep the source quantity meaningful.</h2>
+              <p className="mt-5 text-lg leading-8 text-slate-600">Purchase processing keeps quantity, unit and rate visible in the accounting workflow so the review result remains understandable before Tally.</p>
+            </div>
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+              <div className="grid grid-cols-3 border-b border-slate-200 pb-3 text-[10px] font-black uppercase tracking-widest text-slate-600"><span>Item</span><span>Qty / UOM</span><span>Rate</span></div>
+              <div className="grid grid-cols-3 gap-2 py-5 text-sm font-black text-slate-900"><span>Sample item</span><span>2 Dozen</span><span>₹1,250</span></div>
+              <p className="text-xs leading-5 text-slate-500">The review keeps quantity, per/UOM and rate visible instead of unnecessarily converting the displayed unit into pieces.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* EXCEL + TALLY */}
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
 
           <div className="grid gap-6 md:grid-cols-2">
 
-            <div className="rounded-3xl bg-blue-600 p-8 text-white lg:p-10">
+            <div className="rounded-3xl bg-blue-600 p-8 text-slate-950 lg:p-10">
 
               <p className="text-sm font-black uppercase tracking-widest text-blue-100">
                 EXPORT
@@ -374,7 +392,7 @@ export default function PurchasePage() {
             </div>
 
 
-            <div className="rounded-3xl bg-emerald-600 p-8 text-white lg:p-10">
+            <div className="rounded-3xl bg-emerald-600 p-8 text-slate-950 lg:p-10">
 
               <p className="text-sm font-black uppercase tracking-widest text-emerald-100">
                 TALLY SYNC
@@ -418,7 +436,7 @@ export default function PurchasePage() {
 
             <Link
               href="/downloads"
-              className="rounded-xl bg-teal-600 px-8 py-4 text-sm font-black uppercase tracking-wide text-white shadow-lg shadow-teal-600/20 transition hover:bg-teal-700"
+              className="rounded-xl bg-teal-600 px-8 py-4 text-sm font-black uppercase tracking-wide text-slate-950 shadow-lg shadow-teal-600/20 transition hover:bg-teal-700"
             >
               Start Free Trial →
             </Link>

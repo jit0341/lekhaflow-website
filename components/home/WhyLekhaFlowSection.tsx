@@ -44,12 +44,12 @@ export default function WhyLekhaFlowSection({
                     </div>
                     <div>
                       <h3 className="text-slate-900 font-black uppercase text-sm mb-2 tracking-widest">
-                        {false ? "100% क्लाइंट डेटा प्राइवेसी" : "100% Client Data Privacy"}
+                        {false ? "100% क्लाइंट डेटा प्राइवेसी" : "Client-Side Data Control"}
                       </h3>
                       <p className="text-slate-900 text-xs leading-relaxed">
                         {isHindi 
                           ? "आपका डेटा आपके सिस्टम पर रहता है। कोई क्लाउड स्टोरेज नहीं। CAs के लिए बिल्कुल सुरक्षित।"
-                          : "Your data stays on your system. No cloud storage. Completely safe for CAs."}
+                          : "Designed to keep accounting data under your control, with no cloud storage workflow."}
                       </p>
                     </div>
                   </div>
@@ -62,12 +62,12 @@ export default function WhyLekhaFlowSection({
                     </div>
                     <div>
                       <h3 className="text-slate-900 font-black uppercase text-sm mb-2 tracking-widest">
-                        {false ? "यूनिक सेल्स स्प्लिट" : "Unique Sales Split"}
+                        {false ? "यूनिक सेल्स स्प्लिट" : "Threshold-Based Sales Split"}
                       </h3>
                       <p className="text-slate-900 text-xs leading-relaxed">
                         {isHindi 
                           ? "एक सेल्स इनवॉइस को कई वाउचर में ऑटोमैटिकली स्प्लिट करें। कोई और नहीं देता।"
-                          : "Automatically split one sales invoice into multiple vouchers. Nobody else offers this."}
+                          : "Split a sales total into multiple vouchers using a defined maximum voucher amount."}
                       </p>
                     </div>
                   </div>
@@ -98,12 +98,12 @@ export default function WhyLekhaFlowSection({
                     </div>
                     <div>
                       <h3 className="text-slate-900 font-black uppercase text-sm mb-2 tracking-widest">
-                        {false ? "80x तेज़" : "80x Faster"}
+                        {false ? "80x तेज़" : "Faster Workflow"}
                       </h3>
                       <p className="text-slate-900 text-xs leading-relaxed">
                         {isHindi 
                           ? "मैन्युअल एंट्री की तुलना में 80 गुना तेज़। घंटों का काम मिनटों में।"
-                          : "80 times faster than manual entry. Hours of work in minutes."}
+                          : "Reduce repetitive entry work by moving document processing, review and posting into one workflow."}
                       </p>
                     </div>
                   </div>

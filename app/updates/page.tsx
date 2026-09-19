@@ -33,23 +33,23 @@ export default function UpdatesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020617] py-20">
+    <div className="min-h-screen bg-white py-20">
       <div className="max-w-5xl mx-auto px-6">
-        <h1 className="text-5xl font-black text-white uppercase italic tracking-tighter text-center mb-4">
+        <h1 className="text-5xl font-black text-slate-950 uppercase italic tracking-tighter text-center mb-4">
           Software Updates
         </h1>
-        <p className="text-slate-400 text-center mb-12">
+        <p className="text-slate-600 text-center mb-12">
           Keep your LekhaFlow Gold up to date with the latest features
         </p>
 
         {/* ✅ Update Now Button */}
-        <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-3xl mb-12">
+        <div className="bg-white border-2 border-amber-500 p-8 rounded-3xl mb-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-              <h2 className="text-2xl font-black text-white">
+              <h2 className="text-2xl font-black text-slate-950">
                 Update Available: {latestVersion}
               </h2>
-              <p className="text-slate-400 text-sm">
+              <p className="text-slate-600 text-sm">
                 New features and improvements are ready for you!
               </p>
             </div>
@@ -66,14 +66,14 @@ export default function UpdatesPage() {
 
         {/* ✅ Changelog */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-black text-white uppercase tracking-tighter">
+          <h2 className="text-2xl font-black text-slate-950 uppercase tracking-tighter">
             What's New
           </h2>
           {changelog.map((feature: string, index: number) => (
-            <div key={index} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+            <div key={index} className="bg-white border border-slate-200 p-6 rounded-2xl">
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="text-teal-500 flex-shrink-0 mt-1" size={20} />
-                <span className="text-slate-300">{feature}</span>
+                <span className="text-slate-600">{feature}</span>
               </div>
             </div>
           ))}

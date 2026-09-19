@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Download,
-  Cpu,
-  CheckCircle2,
-  ShieldCheck,
-  Split,
-  Target,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, Cpu, Download, ShieldCheck, Split } from "lucide-react";
 
 interface HeroSectionProps {
   setIntakeTarget: (target: "demo" | "quotation") => void;
@@ -17,140 +9,64 @@ interface HeroSectionProps {
   containerClass: string;
 }
 
-export default function HeroSection({
-  isHindi,
-  containerClass,
-  setIntakeTarget,
-  setShowIntakeModal,
-}: HeroSectionProps) {
+export default function HeroSection({ isHindi, containerClass, setIntakeTarget, setShowIntakeModal }: HeroSectionProps) {
   return (
-          <section className="pt-36 pb-24 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.08)_0,transparent_70%)] pointer-events-none" />
-            <div className={containerClass + " text-center relative z-10"}>
-    
-              {/* Badge — Small */}
-              <div className="inline-block mb-6 px-4 py-1.5 bg-teal-50 border border-teal-200 rounded-full">
-                  <p className="text-teal-700 text-[10px] font-black uppercase tracking-[0.3em]">
-                  {isHindi ? "AI अकाउंटिंग ऑटोमेशन → टैली" : "AI-POWERED ACCOUNTING AUTOMATION → TALLY"}
-                </p>
-              </div>
-    
-              {/* Headline — Balanced */}
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.1] uppercase tracking-tighter mb-4 max-w-4xl mx-auto">
-                {isHindi ? (
-                  <>AI-पावर्ड <span className="text-teal-500 italic">डेस्कटॉप सॉफ्टवेयर</span> टैली वर्कफ्लो के लिए</>
-                ) : (
-                  <>AI-Powered <span className="text-teal-500 italic">Desktop Software</span> for Tally Workflows</>
-                )}
-              </h1>
-    
-              {/* Description — Medium */}
-              <p className="text-slate-900 text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed mb-4">
-                {isHindi 
-                  ? "पर्चेज और सेल्स इनवॉइस, बैंक स्टेटमेंट और अकाउंटिंग डॉक्यूमेंट को AI से प्रोसेस करें, रिजल्ट को रिव्यू करें और Tally में भेजें।" 
-                  : "Automate Purchase & Sales Invoices, Bank Statements and Accounting Documents — then review the results and send them to Tally."}
-              </p>
-    
-              {/* Sub-message with Bullets — Normal Font */}
-              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
-               <span className="text-slate-900 text-xs md:text-sm font-medium flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-teal-500 flex-shrink-0" />
-                  {isHindi ? "क्लाइंट डेटा आपके सिस्टम पर" : "Client data stays on your system"}
-                </span>
-                <span className="text-slate-900 text-xs md:text-sm font-medium flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-amber-500 flex-shrink-0" />
-                  {isHindi ? "सेल्स टोटल को कई वाउचर में स्प्लिट" : "Split sales totals into multiple vouchers"}
-                </span>
-                <span className="text-slate-900 text-xs md:text-sm font-medium flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-teal-500 flex-shrink-0" />
-                  {isHindi ? "कोई क्लाउड स्टोरेज नहीं" : "No cloud storage"}
-                </span>
-              </div>
-    
-              {/* Tags — Small */}
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <span className="flex items-center gap-1.5 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
-                  <Cpu size={14} className="text-teal-500" /> {isHindi ? "AI Powered" : "AI Powered"}
-                </span>
-                <span className="flex items-center gap-1.5 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
-                  <ShieldCheck size={14} className="text-teal-500" /> {isHindi ? "क्लाइंट डेटा कंट्रोल" : "Client-Side Data Control"}
-                </span>
-                <span className="flex items-center gap-1.5 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
-                  <Split size={14} className="text-amber-500" /> {isHindi ? "यूनिक सेल्स स्प्लिट" : "Unique Sales Split"}
-                </span>
-              </div>
-    
-              {/* CTA Buttons — Normal Size */}
-              <div className="flex flex-wrap justify-center gap-4 mb-14">
-                <a 
-                  href="/downloads" 
-                  className="group flex items-center gap-2 px-6 py-3 bg-teal-600 text-white font-bold rounded-xl uppercase text-xs tracking-widest shadow-lg shadow-teal-600/20 hover:bg-teal-500 hover:-translate-y-0.5 transition-all"
-                >
-                  <Download size={16} /> {isHindi ? "फ्री ट्रायल डाउनलोड करें" : "Download Free Trial"}
-                </a>
-                
-                <button 
-                  onClick={() => { setIntakeTarget("demo"); setShowIntakeModal(true); }}
-                  className="px-6 py-3 bg-slate-900 text-white font-bold rounded-xl uppercase text-xs tracking-widest hover:bg-slate-800 transition-all"
-                >
-                  {isHindi ? "लाइसेंस लें" : "Get License"}
-                </button>
-                
-                <button 
-                  onClick={() => window.open("https://wa.me/918770808695", "_blank")}
-                  className="px-6 py-3 bg-green-50 text-green-700 font-bold rounded-xl uppercase text-xs tracking-widest border border-green-200 hover:bg-green-100 transition-all"
-                >
-                  💬 {isHindi ? "व्हाट्सएप पर पूछें" : "Ask on WhatsApp"}
-                </button>
-              </div>
-    
-              {/* Main Image */}
-              <div className="max-w-5xl mx-auto bg-white border border-slate-200 rounded-3xl p-2 shadow-2xl">
-                <img 
-                  src="/bank-intelligence.png" 
-                  alt="LekhaFlow Bank Intelligence Dashboard" 
-                  className="w-full h-full object-cover" 
-                />
-              </div>
-    
-              {/* Demo Video — Optional (comment out if video not ready) */}
-              <div className="mt-8 max-w-4xl mx-auto">
-                <div className="relative bg-white rounded-2xl border border-slate-200 overflow-hidden">
-                  <video 
-                    src="/demo.mp4" 
-                    autoPlay 
-                    muted 
-                    loop 
-                    playsInline
-                    className="w-full"
-                    poster="/demo-poster.png"
-                  />
-                  <div className="absolute bottom-4 right-4 bg-black/80 px-3 py-1 rounded-full text-[10px] text-white font-bold tracking-widest">
-                    ▶ 60 sec demo
-                  </div>
-                </div>
-              </div>
-    
-              {/* Stats — Small */}
-              <div className="mt-16 flex flex-wrap justify-center gap-8 border-t border-slate-200 pt-8">
-                {[
-                  { l: isHindi ? "सटीकता" : "Accuracy", v: "100%", i: Target },
-                  { l: isHindi ? "गति" : "Efficiency", v: "80x Faster", i: Zap },
-                  { l: isHindi ? "डेटा प्राइवेसी" : "Data Privacy", v: "100% Local", i: ShieldCheck }
-                ].map((m, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <m.i className="text-teal-500" size={18} />
-                    <div className="text-left">
-                      <p className="text-slate-900 font-black text-base leading-none">{m.v}</p>
-                      <p className="text-slate-900 text-[9px] font-bold uppercase tracking-widest mt-0.5">{m.l}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-white pb-20 pt-36">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[620px] bg-[radial-gradient(circle_at_50%_15%,rgba(20,184,166,0.11),transparent_62%)]" />
+      <div className={containerClass + " relative z-10"}>
+        <div className="mx-auto max-w-5xl text-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-4 py-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-teal-500" />
+            <span className="text-[10px] font-black uppercase tracking-[0.24em] text-teal-700">{isHindi ? "टैली के आसपास स्मार्ट अकाउंटिंग वर्कफ़्लो" : "SMART ACCOUNTING AUTOMATION FOR TALLY"}</span>
+          </div>
+
+          <h1 className="mx-auto max-w-4xl text-4xl font-black leading-[1.02] tracking-[-0.04em] text-slate-950 sm:text-5xl lg:text-7xl">
+            {isHindi ? <>टैली वही। <span className="italic text-teal-600">दोहराया जाने वाला काम</span> ऑटोमेटेड।</> : <>Tally stays. <span className="italic text-teal-600">Manual accounting work</span> gets automated.</>}
+          </h1>
+
+          <p className="mx-auto mt-7 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+            {isHindi ? "Purchase invoices, Sales Split और Bank Statements को process करें, result को review करें और final entries Tally तक पहुँचाएँ।" : "Process Purchase Invoices, Sales Split and Bank Statements, review the result, then send the final accounting work to Tally."}
+          </p>
+
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs font-bold text-slate-600">
+            <span className="inline-flex items-center gap-2"><CheckCircle2 size={15} className="text-teal-600" /> Client-side data control</span>
+            <span className="inline-flex items-center gap-2"><CheckCircle2 size={15} className="text-teal-600" /> Review before Tally</span>
+            <span className="inline-flex items-center gap-2"><CheckCircle2 size={15} className="text-amber-500" /> Threshold-based Sales Split</span>
+          </div>
+
+          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href="/downloads" className="inline-flex items-center justify-center gap-2 rounded-xl bg-teal-600 px-7 py-4 text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-teal-600/20 transition hover:-translate-y-0.5 hover:bg-teal-700">
+              <Download size={16} /> Download Free Trial
+            </a>
+            <a href="#sales-split" className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-7 py-4 text-xs font-black uppercase tracking-wider text-slate-900 transition hover:border-teal-400 hover:text-teal-700">
+              See Sales Split <ArrowRight size={16} />
+            </a>
+            <button onClick={() => { setIntakeTarget("demo"); setShowIntakeModal(true); }} className="inline-flex items-center justify-center rounded-xl bg-slate-950 px-7 py-4 text-xs font-black uppercase tracking-wider text-white transition hover:bg-slate-800">Get a Demo</button>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-14 max-w-6xl">
+          <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-2 shadow-[0_30px_80px_-35px_rgba(15,23,42,0.45)]">
+            <img src="/bank-intelligence.png" alt="LekhaFlow Bank Intelligence Dashboard" className="h-auto w-full rounded-[1.5rem] object-cover" />
+          </div>
+          <p className="mt-4 text-center text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">Bank Statement Intelligence · Real product interface</p>
+        </div>
+
+        <div className="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-4">
+          {[
+            ["01", "Purchase", "Invoice processing"],
+            ["02", "Sales Split", "Voucher control"],
+            ["03", "Bank", "Statement intelligence"],
+            ["04", "Tally", "Final sync"],
+          ].map(([n, title, desc]) => (
+            <div key={n} className="rounded-2xl border border-slate-200 bg-white/80 p-4 text-left">
+              <span className="text-[9px] font-black tracking-[0.2em] text-teal-600">{n}</span>
+              <p className="mt-2 text-sm font-black text-slate-900">{title}</p>
+              <p className="mt-1 text-[10px] font-medium text-slate-500">{desc}</p>
             </div>
-          </section>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
-
-
-

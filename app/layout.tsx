@@ -1,17 +1,7 @@
-﻿import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import GlobalFooter from "@/components/layout/GlobalFooter";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://lekhaflow.in"),
@@ -20,11 +10,11 @@ export const metadata: Metadata = {
     template: "%s | LekhaFlow",
   },
   description:
-    "India's fastest AI accounting automation. Convert PDF, Image, and Excel invoices to Tally XML with 100% accuracy. Save 80% time on GST data entry.",
+    "Desktop accounting workflow automation for Tally users. Process Purchase Invoices, Sales Split and Bank Statements, review the result and send final entries to Tally.",
   keywords: [
     "Invoice to Tally Software",
     "GST Automation India",
-    "Tally Prime XML Generator",
+    "Tally Accounting Automation",
     "AI Data Entry for Accountants",
     "Chhattisgarh GST Software",
   ],
@@ -34,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LekhaFlow | Stop Manual Data Entry in Tally",
     description:
-      "Convert 3 hours of data entry into 3 minutes. AI-powered precision for Tally Prime 5.0.",
+      "Process accounting documents around Tally with a review-first workflow.",
     url: "https://lekhaflow.in",
     siteName: "LekhaFlow",
     images: [
@@ -52,12 +42,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LekhaFlow AI | Invoice to Tally Automation",
     description:
-      "Automate your Tally entries using AI. 100% accurate, 0% manual effort.",
+      "Process accounting documents around Tally with review and control.",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#020617",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -68,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full scroll-smooth">
       <head>
-        <meta name="color-scheme" content="dark" />
+        <meta name="color-scheme" content="light" />
 
         <script
           type="application/ld+json"
@@ -84,21 +74,17 @@ export default function RootLayout({
                 price: "15000",
                 priceCurrency: "INR",
               },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.9",
-                ratingCount: "120",
-              },
             }),
           }}
         />
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-full bg-[#020617] text-slate-200 antialiased`}
+        className="min-h-full bg-white text-slate-950 antialiased"
       >
         <Navbar />
         {children}
+        <GlobalFooter />
       </body>
     </html>
   );

@@ -75,20 +75,20 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-950">
       {/* HERO */}
-      <section className="relative overflow-hidden bg-slate-950 pt-32 pb-20">
+      <section className="relative overflow-hidden bg-white pt-32 pb-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(20,184,166,0.18),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(37,99,235,0.18),transparent_35%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-400/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-teal-300">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-50 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-teal-700">
               <Sparkles size={14} />
               LekhaFlow Support & Enquiries
             </div>
 
-            <h1 className="text-4xl font-black tracking-tight text-white sm:text-6xl">
-              Contact <span className="text-teal-400">LekhaFlow</span>
+            <h1 className="text-4xl font-black tracking-tight text-slate-950 sm:text-6xl">
+              Contact <span className="text-teal-700">LekhaFlow</span>
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
               Have a question, need a demo, or want to see how LekhaFlow can fit
               your accounting workflow? Tell us what you need and we will help
               you choose the right next step.
@@ -250,7 +250,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-teal-600 to-blue-600 px-6 py-4 text-sm font-black uppercase tracking-[0.12em] text-white shadow-lg transition hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-teal-600 to-blue-600 px-6 py-4 text-sm font-black uppercase tracking-[0.12em] text-slate-950 shadow-lg transition hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {submitting ? "Sending..." : "Send Enquiry"}
                 {!submitting && <ArrowRight size={17} />}
@@ -260,12 +260,12 @@ export default function ContactPage() {
 
           {/* DIRECT CONTACT */}
           <div className="space-y-6">
-            <div className="rounded-[2rem] bg-slate-950 p-8 text-white shadow-xl">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-teal-300">
+            <div className="rounded-[2rem] bg-white p-8 text-slate-950 shadow-xl">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-teal-700">
                 Direct Contact
               </p>
               <h2 className="mt-3 text-3xl font-black">Prefer to talk directly?</h2>
-              <p className="mt-4 text-sm leading-7 text-slate-300">
+              <p className="mt-4 text-sm leading-7 text-slate-600">
                 Choose the channel that is most convenient for you. We can discuss
                 your workflow, demo requirements, trial setup, or support query.
               </p>
@@ -275,17 +275,17 @@ export default function ContactPage() {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 font-bold transition hover:bg-white/10"
+                  className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 font-bold transition hover:bg-white/10"
                 >
-                  <MessageCircle size={20} className="text-teal-300" />
+                  <MessageCircle size={20} className="text-teal-700" />
                   +91 87708 08695
                 </a>
 
                 <a
                   href={`mailto:${emailAddress}`}
-                  className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 font-bold transition hover:bg-white/10"
+                  className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 font-bold transition hover:bg-white/10"
                 >
-                  <Mail size={20} className="text-blue-300" />
+                  <Mail size={20} className="text-blue-700" />
                   {emailAddress}
                 </a>
 
@@ -293,9 +293,9 @@ export default function ContactPage() {
                   href={linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 font-bold transition hover:bg-white/10"
+                  className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 font-bold transition hover:bg-white/10"
                 >
-                  <span className="flex h-5 w-5 items-center justify-center rounded bg-sky-500 text-[11px] font-black text-white">in</span>
+                  <span className="flex h-5 w-5 items-center justify-center rounded bg-sky-500 text-[11px] font-black text-slate-950">in</span>
                   Connect on LinkedIn
                 </a>
               </div>

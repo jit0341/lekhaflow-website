@@ -41,7 +41,7 @@ export default function PricingPage() {
       features: [
         "Everything in Standard",
         "GSTR-2B Reconciliation",
-        "Sales Split Below ₹50,000",
+        "Sales Split",
         "Multi-Company Support",
         "Direct WhatsApp Support from Founder",
       ],
@@ -74,7 +74,7 @@ export default function PricingPage() {
           amount: data.amount,
           currency: "INR",
           name: "LekhaFlow",
-          description: `${plan.name} - Lifetime License`,
+          description: `${plan.name} - Annual License`,
           order_id: data.orderId,
           prefill: {
             name: "",
@@ -108,18 +108,18 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="bg-[#020617] min-h-screen text-slate-200 font-sans py-24 px-4">
+    <div className="bg-white min-h-screen text-slate-200 font-sans py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <Link href="/" className="inline-flex items-center gap-2 text-teal-500 font-bold text-xs uppercase mb-12 hover:gap-4 transition-all">
           <ArrowLeft size={16} /> Back to Home
         </Link>
 
         <div className="text-center mb-20">
-          <h1 className="text-5xl md:text-7xl font-black text-white italic uppercase tracking-tighter mb-6">
+          <h1 className="text-5xl md:text-7xl font-black text-slate-950 italic uppercase tracking-tighter mb-6">
             Choose Your <span className="text-teal-500">Plan</span>
           </h1>
-          <p className="text-slate-400 font-bold uppercase tracking-widest text-sm">
-            Special pricing for first 50 clients only • Valid till 31st August 2026
+          <p className="text-slate-600 font-bold uppercase tracking-widest text-sm">
+            Special pricing for first 50 clients only •
           </p>
         </div>
 
@@ -127,7 +127,7 @@ export default function PricingPage() {
           {Object.entries(plans).map(([key, plan]) => (
             <div
               key={key}
-              className={`bg-slate-900 border-2 ${
+              className={`bg-white border-2 ${
                 key === "standard" ? "border-amber-500" : "border-blue-500"
               } p-10 rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col`}
             >
@@ -138,10 +138,10 @@ export default function PricingPage() {
               )}
 
               <div className="flex-1">
-                <h3 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-4">
+                <h3 className="text-slate-950 font-black text-xs uppercase tracking-[0.3em] mb-4">
                   {plan.name}
                 </h3>
-                <div className="py-8 border-y border-slate-800">
+                <div className="py-8 border-y border-slate-200">
                   <p className="text-slate-500 font-black text-2xl tracking-tighter mb-1 line-through">
                     ₹{plan.originalPrice.toLocaleString()}
                   </p>
@@ -155,7 +155,7 @@ export default function PricingPage() {
 
                 <ul className="space-y-4 py-6">
                   {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-3 text-[11px] font-bold text-slate-300">
+                    <li key={i} className="flex items-center gap-3 text-[11px] font-bold text-slate-600">
                       <CheckCircle2 size={14} className="text-teal-500" />
                       {feature}
                     </li>
@@ -167,7 +167,7 @@ export default function PricingPage() {
                 onClick={() => handlePayment(key as "standard" | "gold")}
                 disabled={loading && selectedPlan === key}
                 className={`w-full py-5 ${
-                  key === "standard" ? "bg-amber-500 text-black hover:bg-amber-400" : "bg-teal-600 text-white hover:bg-teal-500"
+                  key === "standard" ? "bg-amber-500 text-black hover:bg-amber-400" : "bg-teal-600 text-slate-950 hover:bg-teal-500"
                 } rounded-2xl font-black uppercase text-xs text-center tracking-widest transition-all disabled:opacity-50`}
               >
                 {loading && selectedPlan === key ? "Processing..." : `Buy Now — ₹${plan.price.toLocaleString()}`}

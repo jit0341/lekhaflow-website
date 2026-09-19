@@ -8,7 +8,7 @@ import {
   FileText,
   ArrowDown,
 } from "lucide-react";
-<div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
+<div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
 type ProblemSectionProps = {
   isHindi: boolean;
 };
@@ -20,7 +20,7 @@ export default function ProblemSection({
 
 <section
 id="problem"
-className="bg-[#07131f] py-2"
+className="bg-slate-50 py-2"
 >
 
 <div className="max-w-7xl mx-auto px-6">
@@ -29,7 +29,7 @@ className="bg-[#07131f] py-2"
 
 <div className="text-center max-w-3xl mx-auto">
 
-<span className="inline-flex rounded-full border border-red-500/30 bg-red-500/10 px-5 py-2 text-xs uppercase tracking-[0.2em] text-red-400 font-bold">
+<span className="inline-flex rounded-full border border-red-500/30 bg-red-500/10 px-5 py-2 text-xs uppercase tracking-[0.2em] text-red-600 font-bold">
 
 {isHindi
 ? "क्या अभी भी Manual Entry कर रहे हैं?"
@@ -38,7 +38,7 @@ className="bg-[#07131f] py-2"
 
 </span>
 
-<h2 className="mt-8 text-4xl lg:text-5xl font-black text-white leading-tight">
+<h2 className="mt-8 text-4xl lg:text-5xl font-black text-slate-950 leading-tight">
 
 {isHindi
 ? "रोज़ 3–4 घंटे Invoice Entry में बर्बाद हो रहे हैं?"
@@ -64,9 +64,9 @@ className="bg-[#07131f] py-2"
 
 {/* LEFT */}
 
-<div className="rounded-3xl border border-slate-700 bg-slate-900/60 p-10">
+<div className="rounded-3xl border border-slate-200 bg-white p-10">
 
-<h3 className="text-2xl font-black text-red-400 mb-8">
+<h3 className="text-2xl font-black text-red-600 mb-8">
 
 {isHindi
 ? "Manual Process"
@@ -80,9 +80,9 @@ className="bg-[#07131f] py-2"
 
               <div className="flex items-center gap-4">
 
-                <FileSpreadsheet className="text-red-400" size={26} />
+                <FileSpreadsheet className="text-red-600" size={26} />
 
-                <span className="text-lg text-slate-200">
+                <span className="text-lg text-slate-700">
 
                   {isHindi
                     ? "Invoice PDF डाउनलोड करें"
@@ -96,9 +96,9 @@ className="bg-[#07131f] py-2"
 
               <div className="flex items-center gap-4">
 
-                <Calculator className="text-red-400" size={26} />
+                <Calculator className="text-red-600" size={26} />
 
-                <span className="text-lg text-slate-200">
+                <span className="text-lg text-slate-700">
 
                   {isHindi
                     ? "Tally खोलें और Voucher चुनें"
@@ -112,9 +112,9 @@ className="bg-[#07131f] py-2"
 
               <div className="flex items-center gap-4">
 
-                <FileText className="text-red-400" size={26} />
+                <FileText className="text-red-600" size={26} />
 
-                <span className="text-lg text-slate-200">
+                <span className="text-lg text-slate-700">
 
                   {isHindi
                     ? "Invoice देखकर Manual Entry करें"
@@ -128,9 +128,9 @@ className="bg-[#07131f] py-2"
 
               <div className="flex items-center gap-4">
 
-                <AlertTriangle className="text-red-400" size={26} />
+                <AlertTriangle className="text-red-600" size={26} />
 
-                <span className="text-lg text-slate-200">
+                <span className="text-lg text-slate-700">
 
                   {isHindi
                     ? "GST एवं Calculation दोबारा Check करें"
@@ -144,32 +144,32 @@ className="bg-[#07131f] py-2"
 
               <div className="flex items-center gap-4">
 
-                <Clock3 className="text-red-400" size={26} />
+                <Clock3 className="text-red-600" size={26} />
 
-                <span className="text-lg text-slate-200">
+                <span className="text-lg text-slate-700">
 
                   {isHindi
                     ? "3–4 घंटे प्रतिदिन बर्बाद"
                     : "3–4 Hours Lost Every Day"}
 <div className="mt-10 grid grid-cols-3 gap-4">
 
-  <div className="rounded-xl bg-slate-900 border border-slate-800 p-5 text-center">
-      <p className="text-red-400 text-3xl font-black">3–4h</p>
-      <p className="text-slate-400 text-sm">
+  <div className="rounded-xl bg-white border border-slate-200 p-5 text-center">
+      <p className="text-red-600 text-3xl font-black">3–4h</p>
+      <p className="text-slate-600 text-sm">
         Manual Work
       </p>
   </div>
 
-  <div className="rounded-xl bg-slate-900 border border-slate-800 p-5 text-center">
-      <p className="text-red-400 text-3xl font-black">100+</p>
-      <p className="text-slate-400 text-sm">
+  <div className="rounded-xl bg-white border border-slate-200 p-5 text-center">
+      <p className="text-red-600 text-3xl font-black">100+</p>
+      <p className="text-slate-600 text-sm">
         Manual Clicks
       </p>
   </div>
 
-  <div className="rounded-xl bg-slate-900 border border-slate-800 p-5 text-center">
-      <p className="text-red-400 text-3xl font-black">High</p>
-      <p className="text-slate-400 text-sm">
+  <div className="rounded-xl bg-white border border-slate-200 p-5 text-center">
+      <p className="text-red-600 text-3xl font-black">High</p>
+      <p className="text-slate-600 text-sm">
         Error Risk
       </p>
   </div>
@@ -188,7 +188,7 @@ className="bg-[#07131f] py-2"
 
           <div className="rounded-3xl border border-teal-500/20 bg-gradient-to-br from-teal-500/10 to-slate-900 p-10">
 
-            <h3 className="mb-8 text-2xl font-black text-teal-400">
+            <h3 className="mb-8 text-2xl font-black text-teal-600">
 
               {isHindi
                 ? "LekhaFlow Workflow"
@@ -198,9 +198,9 @@ className="bg-[#07131f] py-2"
 
             <div className="space-y-5">
 
-              <div className="rounded-2xl bg-slate-900/70 p-5 border border-slate-700">
+              <div className="rounded-2xl bg-slate-50 p-5 border border-slate-200">
 
-                <p className="font-bold text-white">
+                <p className="font-bold text-slate-950">
 
                   📂 {isHindi
                     ? "Invoice Folder चुनें"
@@ -210,11 +210,11 @@ className="bg-[#07131f] py-2"
 
               </div>
 
-              <ArrowDown className="text-teal-400 ml-2" />
+              <ArrowDown className="text-teal-600 ml-2" />
 
-              <div className="rounded-2xl bg-slate-900/70 p-5 border border-slate-700">
+              <div className="rounded-2xl bg-slate-50 p-5 border border-slate-200">
 
-                <p className="font-bold text-white">
+                <p className="font-bold text-slate-950">
 
                   🤖 {isHindi
                     ? "AI Invoice पढ़ता है"
@@ -224,11 +224,11 @@ className="bg-[#07131f] py-2"
 
               </div>
 
-              <ArrowDown className="text-teal-400 ml-2" />
+              <ArrowDown className="text-teal-600 ml-2" />
 
-              <div className="rounded-2xl bg-slate-900/70 p-5 border border-slate-700">
+              <div className="rounded-2xl bg-slate-50 p-5 border border-slate-200">
 
-                <p className="font-bold text-white">
+                <p className="font-bold text-slate-950">
 
                   ⚙️ {isHindi
                     ? "XML Automatically Generate"
@@ -238,7 +238,7 @@ className="bg-[#07131f] py-2"
 
               </div>
 
-              <ArrowDown className="text-teal-400 ml-2" />
+              <ArrowDown className="text-teal-600 ml-2" />
 
               <div className="rounded-2xl bg-teal-500 text-slate-950 p-6">
 
@@ -266,13 +266,13 @@ className="bg-[#07131f] py-2"
 
             <div className="grid grid-cols-3 gap-5 mt-10">
 
-              <div className="rounded-2xl bg-slate-900/60 p-5 text-center">
+              <div className="rounded-2xl bg-white p-5 text-center">
 
-                <h4 className="text-3xl font-black text-teal-400">
+                <h4 className="text-3xl font-black text-teal-600">
                   90%
                 </h4>
 
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-slate-600">
 
                   {isHindi
                     ? "Time Saved"
@@ -282,13 +282,13 @@ className="bg-[#07131f] py-2"
 
               </div>
 
-              <div className="rounded-2xl bg-slate-900/60 p-5 text-center">
+              <div className="rounded-2xl bg-white p-5 text-center">
 
-                <h4 className="text-3xl font-black text-teal-400">
+                <h4 className="text-3xl font-black text-teal-600">
                   99.9%
                 </h4>
 
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-slate-600">
 
                   {isHindi
                     ? "Accuracy"
@@ -298,13 +298,13 @@ className="bg-[#07131f] py-2"
 
               </div>
 
-              <div className="rounded-2xl bg-slate-900/60 p-5 text-center">
+              <div className="rounded-2xl bg-white p-5 text-center">
 
-                <h4 className="text-3xl font-black text-teal-400">
+                <h4 className="text-3xl font-black text-teal-600">
                   AI
                 </h4>
 
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-slate-600">
 
                   {isHindi
                     ? "Automation"
