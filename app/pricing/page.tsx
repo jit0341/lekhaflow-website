@@ -54,7 +54,7 @@ export default function PricingPage() {
     setLoading(true);
 
     // Create order
-    fetch("/api/create-order", {
+    fetch("/api/create_order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
