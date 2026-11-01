@@ -47,7 +47,7 @@ const modules = [
     eyebrow: "SALES CONTROL",
     description:
       "Set the maximum voucher amount and let LekhaFlow calculate the required vouchers and final remainder.",
-    bullets: ["â‚¹10,000 / â‚¹30,000 / â‚¹50,000 thresholds", "Automatic voucher calculation", "Total preserved"],
+    bullets: ["₹10,000 / ₹30,000 / ₹50,000 thresholds", "Automatic voucher calculation", "Total preserved"],
     href: "/sales-split",
     image: "/images/products/sales-split-interface.png",
   },
@@ -65,12 +65,12 @@ const modules = [
 ];
 
 const capabilities = [
-  { icon: ClipboardCheck, title: "Review before Tally", text: "See the prepared accounting result before the final Tally step â€” review, correct and approve what needs attention." },
+  { icon: ClipboardCheck, title: "Review before Tally", text: "See the prepared accounting result before the final Tally step — review, correct and approve what needs attention." },
   { icon: LockKeyhole, title: "Client-side control", text: "Work from a Windows desktop workflow designed to keep the review process in your working environment." },
   { icon: FileSpreadsheet, title: "Excel when you need it", text: "Create an Excel copy when you need a separate review, sharing or reconciliation file." },
   { icon: Zap, title: "Less repetitive entry", text: "Reduce repeated typing and manual preparation so your team can spend more time reviewing the accounting result." },
-  { icon: FileText, title: "Multiple source formats", text: "Use the supported source formats for each workflow â€” including PDFs, images and Excel where applicable." },
-  { icon: Laptop, title: "Built for Windows", text: "A Windows desktop application designed to work around your existing Tally setup â€” not replace it." },
+  { icon: FileText, title: "Multiple source formats", text: "Use the supported source formats for each workflow — including PDFs, images and Excel where applicable." },
+  { icon: Laptop, title: "Built for Windows", text: "A Windows desktop application designed to work around your existing Tally setup — not replace it." },
 ];
 
 const faqs = [
@@ -124,7 +124,7 @@ export default function LekhaFlowLanding() {
               Keep Tally. <span className="text-teal-600">Automate the work around it.</span>
             </h1>
             <p className="mx-auto mt-7 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-              LekhaFlow helps Tally users turn repetitive purchase, sales and bank-entry work into a structured desktop workflow â€” process, review and then send the approved result to Tally.
+              LekhaFlow helps Tally users turn repetitive purchase, sales and bank-entry work into a structured desktop workflow — process, review and then send the approved result to Tally.
             </p>
 
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -322,7 +322,7 @@ export default function LekhaFlowLanding() {
             <div className="lg:sticky lg:top-28">
               <SectionLabel>How it works</SectionLabel>
               <h2 className="mt-5 text-3xl font-black tracking-[-0.03em] text-slate-950 sm:text-4xl">Process. Review. Approve. Tally.</h2>
-              <p className="mt-5 text-base leading-7 text-slate-600">LekhaFlow creates a clear working layer between your source documents and the final accounting result â€” process, review, approve and complete the Tally step.</p>
+              <p className="mt-5 text-base leading-7 text-slate-600">LekhaFlow creates a clear working layer between your source documents and the final accounting result — process, review, approve and complete the Tally step.</p>
               <Link href="/how-it-works" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-teal-600">See the full workflow <ArrowRight size={15} /></Link>
             </div>
             <div className="space-y-4">
@@ -345,7 +345,7 @@ export default function LekhaFlowLanding() {
             <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-teal-100"><Sparkles size={13} /> Start with your own workflow</div>
-                <h2 className="mt-5 max-w-2xl text-3xl font-black tracking-[-0.03em] sm:text-4xl">Start with the work that takes time â€” and see how LekhaFlow fits around your existing Tally workflow.</h2>
+                <h2 className="mt-5 max-w-2xl text-3xl font-black tracking-[-0.03em] sm:text-4xl">Start with the work that takes time — and see how LekhaFlow fits around your existing Tally workflow.</h2>
                 <p className="mt-4 max-w-2xl text-sm leading-6 text-teal-50/90">Download the Windows trial, test the workflow with your own accounting files and review the prepared result before choosing a license.</p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">

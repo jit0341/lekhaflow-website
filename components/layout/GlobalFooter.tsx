@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export default function GlobalFooter() {
   return (
@@ -24,8 +24,7 @@ export default function GlobalFooter() {
               <Link className="block hover:text-teal-700" href="/">Home</Link>
               <Link className="block hover:text-teal-700" href="/pricing">Pricing</Link>
               <Link className="block hover:text-teal-700" href="/downloads">Downloads</Link>
-              <Link className="block hover:text-teal-700" href="/support">Support</Link>
-              <Link className="block hover:text-teal-700" href="/contact">Contact</Link>
+<Link className="block hover:text-teal-700" href="/contact">Contact & Support</Link>
               <Link className="block hover:text-teal-700" href="/privacy">Privacy</Link>
               <Link className="block hover:text-teal-700" href="/refund">Refund Policy</Link>
             </div>
@@ -39,3 +38,4 @@ export default function GlobalFooter() {
     </footer>
   );
 }
+

@@ -29,7 +29,7 @@ const capabilities = [
   { name: "SwiftAssign", href: "/bank-statement#swiftassign" },
   { name: "Excel Export", href: "/how-it-works#export" },
   { name: "UOM / Dozen Handling", href: "/purchase#uom" },
-  { name: "Built-in Calculator Â· Ctrl+N", href: "/production#calculator" },
+  { name: "Built-in Calculator · Ctrl+N", href: "/production#calculator" },
 ];
 
 const mainLinks = [
@@ -39,8 +39,7 @@ const mainLinks = [
   { name: "Partners", href: "/partner" },
   { name: "Downloads", href: "/downloads" },
   { name: "Insights", href: "/blog" },
-  { name: "Support", href: "/support" },
-  { name: "Contact", href: "/contact" },
+  { name: "Contact & Support", href: "/contact" },
   { name: "Admin", href: "/admin-login" },
 ];
 
@@ -52,13 +51,13 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-[100] border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6">
-        <Link href="/" onClick={closeMobile} className="flex shrink-0 items-center gap-2">
+        <Link href="/" onClick={closeMobile} className="flex min-w-[205px] shrink-0 items-center gap-2">
           <img src="/logo.png" alt="LekhaFlow" className="h-9 w-9 object-contain" />
           <span className="text-2xl font-black tracking-tight text-slate-950">LEKHA</span>
           <span className="text-2xl font-black tracking-tight text-teal-600">FLOW</span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="ml-auto hidden flex-1 items-center justify-end gap-4 pl-6 xl:flex 2xl:gap-5">
           <div className="relative" onMouseEnter={() => setProductOpen(true)} onMouseLeave={() => setProductOpen(false)}>
             <button type="button" onClick={() => setProductOpen(!productOpen)} aria-expanded={productOpen} aria-haspopup="true" className="flex items-center gap-1.5 text-sm font-bold text-slate-700 transition-colors hover:text-teal-600">
               Product <ChevronDown size={15} className={productOpen ? "rotate-180 transition-transform" : "transition-transform"} />
@@ -132,11 +131,11 @@ export default function Navbar() {
           <Link href="/downloads" className="group flex items-center gap-2 rounded-full bg-slate-950 px-5 py-2.5 text-xs font-black uppercase tracking-wide text-white transition hover:bg-teal-600"><Sparkles size={14} /> Free Trial</Link>
         </nav>
 
-        <button type="button" aria-label={mobileOpen ? "Close menu" : "Open menu"} onClick={() => setMobileOpen(!mobileOpen)} className="rounded-xl p-2 text-slate-900 hover:bg-slate-100 lg:hidden">{mobileOpen ? <X size={26} /> : <Menu size={26} />}</button>
+        <button type="button" aria-label={mobileOpen ? "Close menu" : "Open menu"} onClick={() => setMobileOpen(!mobileOpen)} className="rounded-xl p-2 text-slate-900 hover:bg-slate-100 xl:hidden">{mobileOpen ? <X size={26} /> : <Menu size={26} />}</button>
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-slate-200 bg-white lg:hidden">
+        <div className="border-t border-slate-200 bg-white xl:hidden">
           <nav className="mx-auto max-w-7xl px-5 py-5">
             <button type="button" onClick={() => setProductOpen(!productOpen)} className="flex w-full items-center justify-between border-b border-slate-100 py-4 text-left text-sm font-black text-slate-900">Product <ChevronDown size={18} className={productOpen ? "rotate-180 transition-transform" : "transition-transform"} /></button>
             {productOpen && (
@@ -147,7 +146,7 @@ export default function Navbar() {
                 {controlLinks.map((item) => <Link key={item.href} href={item.href} onClick={closeMobile} className="block rounded-lg px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-white hover:text-teal-600">{item.name}</Link>)}
                 <p className="px-3 pb-2 pt-3 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Built-in capabilities</p>
                 {capabilities.map((item) => <Link key={item.href} href={item.href} onClick={closeMobile} className="block rounded-lg px-3 py-2 text-xs font-semibold text-slate-500 hover:bg-white hover:text-teal-600">{item.name}</Link>)}
-                <Link href="/reconciliation" onClick={closeMobile} className="mt-2 block rounded-lg bg-blue-50 px-3 py-3 text-xs font-bold text-blue-700">GSTR-2B Reconciliation Â· Coming Soon</Link>
+                <Link href="/reconciliation" onClick={closeMobile} className="mt-2 block rounded-lg bg-blue-50 px-3 py-3 text-xs font-bold text-blue-700">GSTR-2B Reconciliation · Coming Soon</Link>
               </div>
             )}
             {mainLinks.map((link) => <Link key={link.href} href={link.href} onClick={closeMobile} className="block border-b border-slate-100 py-4 text-sm font-black text-slate-900 hover:text-teal-600">{link.name}</Link>)}
@@ -158,4 +157,5 @@ export default function Navbar() {
     </header>
   );
 }
+
 
