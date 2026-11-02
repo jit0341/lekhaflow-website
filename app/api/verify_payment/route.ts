@@ -4,16 +4,17 @@ import crypto from "crypto";
 const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || "";
 const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || "";
 const LICENSE_SECRET = process.env.LICENSE_SECRET || "";
+const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL || "";
+const STANDARD_AMOUNT_PAISE = 999900;
 const STANDARD_INVOICE_LIMIT = 10000;
 const LICENSE_VERSION = "3.0";
 
-function createCompatibleLicense(clientName: string, validDays: number) {
+function createCompatibleLicense(clientName: string) {
   const validTill = new Date();
-  validTill.setDate(validTill.getDate() + validDays);
+  validTill.setDate(validTill.getDate() + 365);
   const date = validTill.toISOString().slice(0, 10);
 
-  // This structure and signature input order must remain compatible with
-  // the desktop license_generator.py / main.py validation logic.
+  // Keep this structure and signature compatible with the desktop app.
   const license: Record<string, string | number> = {
     client_name: clientName,
     valid_till: date,
@@ -36,15 +37,29 @@ function createCompatibleLicense(clientName: string, validDays: number) {
   return { license, expiryDate: validTill.toISOString() };
 }
 
+async function callLicensingSheet(payload: Record<string, unknown>) {
+  const response = await fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+  });
+  const result = await response.json().catch(() => null);
+  if (!response.ok || !result?.success) {
+    throw new Error(result?.error || result?.message || "Licensing sheet could not save the payment.");
+  }
+  return result;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const paymentId = String(body.paymentId || "");
-    const orderId = String(body.orderId || "");
+    const paymentId = String(body.paymentId || "").trim();
+    const orderId = String(body.orderId || "").trim();
 
-    if (!RAZORPAY_KEY_ID || !RAZORPAY_KEY_SECRET || !LICENSE_SECRET) {
+    if (!RAZORPAY_KEY_ID || !RAZORPAY_KEY_SECRET || !LICENSE_SECRET || !GOOGLE_SCRIPT_URL) {
       return NextResponse.json(
-        { success: false, error: "Payment or license service is not configured." },
+        { success: false, error: "Payment, license, or licensing-sheet service is not configured." },
         { status: 503 }
       );
     }
@@ -57,100 +72,129 @@ export async function POST(req: NextRequest) {
     }
 
     const auth = Buffer.from(`${RAZORPAY_KEY_ID}:${RAZORPAY_KEY_SECRET}`).toString("base64");
-    const verifyResponse = await fetch(
-      `https://api.razorpay.com/v1/payments/${encodeURIComponent(paymentId)}`,
-      { headers: { Authorization: `Basic ${auth}` }, cache: "no-store" }
-    );
+    const headers = { Authorization: `Basic ${auth}` };
 
-    if (!verifyResponse.ok) {
+    const [paymentResponse, orderResponse] = await Promise.all([
+      fetch(`https://api.razorpay.com/v1/payments/${encodeURIComponent(paymentId)}`, {
+        headers, cache: "no-store",
+      }),
+      fetch(`https://api.razorpay.com/v1/orders/${encodeURIComponent(orderId)}`, {
+        headers, cache: "no-store",
+      }),
+    ]);
+
+    if (!paymentResponse.ok || !orderResponse.ok) {
       return NextResponse.json(
-        { success: false, error: "Payment could not be verified with Razorpay." },
+        { success: false, error: "Payment or order could not be verified with Razorpay." },
         { status: 400 }
       );
     }
 
-    const payment = await verifyResponse.json();
+    const [payment, order] = await Promise.all([
+      paymentResponse.json(),
+      orderResponse.json(),
+    ]);
+
     if (
       payment.status !== "captured" ||
       payment.order_id !== orderId ||
-      payment.amount !== 999900 ||
-      payment.currency !== "INR"
+      payment.amount !== STANDARD_AMOUNT_PAISE ||
+      payment.currency !== "INR" ||
+      order.id !== orderId ||
+      order.amount !== STANDARD_AMOUNT_PAISE ||
+      order.currency !== "INR"
     ) {
       return NextResponse.json(
-        { success: false, error: "Captured payment details do not match the Standard order." },
+        { success: false, error: "Captured payment details do not match the LekhaFlow Standard order." },
         { status: 400 }
       );
     }
 
-    const clientName = String(payment.notes?.customerName || payment.notes?.name || payment.email || "LekhaFlow Customer").trim();
-    const { license, expiryDate } = createCompatibleLicense(clientName, 365);
-    const licenseContent = JSON.stringify(license, null, 2);
+    const notes = order.notes || payment.notes || {};
+    const clientName = String(notes.customerName || notes.name || payment.email || "LekhaFlow Customer").trim();
+    const email = String(payment.email || notes.email || "").trim();
+    const mobile = String(payment.contact || notes.mobile || "").replace(/\D/g, "");
+    const company = String(notes.company || "").trim();
+
+    const { license, expiryDate } = createCompatibleLicense(clientName);
+    const generatedContent = JSON.stringify(license, null, 2);
     const safeClient = clientName.replace(/[^a-z0-9_-]/gi, "_").replace(/^\.+|\.+$/g, "") || "client";
     const filename = `license_${safeClient}.dat`;
 
-    // Save the issued license record if the configured Google Apps Script is available.
-    const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
-    if (googleScriptUrl) {
-      try {
-        const saveResponse = await fetch(googleScriptUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            action: "SAVE_LICENSE",
-            paymentId,
-            orderId,
-            licenseContent,
-            expiryDate,
-            timestamp: new Date().toISOString(),
-          }),
-        });
-        if (!saveResponse.ok) console.error("License record save failed:", saveResponse.status);
-      } catch (error) {
-        console.error("License record save failed:", error);
-      }
-    }
-
-    // Delivery is server-to-server and authenticated. The license is still
-    // returned to the verified customer for immediate download.
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.lekhaflow.in";
-    const deliveryResponse = await fetch(`${baseUrl}/api/send_license`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-license-delivery-secret": LICENSE_SECRET,
-      },
-      body: JSON.stringify({
-        email: payment.email || payment.notes?.email || "",
-        mobile: payment.contact || payment.notes?.mobile || "",
-        name: clientName,
-        plan: "PRO",
-        licenseContent,
-        filename,
-        expiryDate,
-      }),
+    // The Apps Script uses a script lock and payment ID to save one canonical
+    // license per captured Razorpay payment. Repeated browser visits reuse it.
+    const saved = await callLicensingSheet({
+      action: "SAVE_LICENSE",
+      paymentId,
+      orderId,
+      customerName: clientName,
+      company,
+      email,
+      mobile,
+      plan: "STANDARD",
+      amount: STANDARD_AMOUNT_PAISE / 100,
+      status: "PAID",
+      licenseContent: generatedContent,
+      expiryDate,
+      timestamp: new Date().toISOString(),
     });
 
-    const delivery = await deliveryResponse.json().catch(() => ({}));
-    if (!deliveryResponse.ok) {
-      console.error("License delivery endpoint returned:", deliveryResponse.status);
+    const licenseContent = String(saved.licenseContent || generatedContent);
+    const alreadyIssued = Boolean(saved.alreadyIssued);
+    let emailSent = Boolean(saved.emailSent);
+    let whatsappSent = Boolean(saved.whatsappSent);
+
+    // Do not send duplicate messages when the same payment status URL is
+    // refreshed. A first-time issue is delivered once; delivery state is
+    // recorded separately in the licensing sheet.
+    if (!alreadyIssued) {
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.lekhaflow.in";
+      const deliveryResponse = await fetch(`${baseUrl}/api/send_license`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-license-delivery-secret": LICENSE_SECRET,
+        },
+        body: JSON.stringify({
+          email,
+          mobile,
+          name: clientName,
+          plan: "PRO",
+          licenseContent,
+          filename,
+          expiryDate,
+        }),
+        cache: "no-store",
+      });
+
+      const delivery = await deliveryResponse.json().catch(() => ({}));
+      emailSent = Boolean(delivery.emailSent);
+      whatsappSent = Boolean(delivery.whatsappSent);
+
+      await callLicensingSheet({
+        action: "MARK_LICENSE_SENT",
+        paymentId,
+        emailSent,
+        whatsappSent,
+        deliveryStatus: emailSent || whatsappSent ? "SENT" : "PENDING",
+        remarks: Array.isArray(delivery.errors) ? delivery.errors.join(" ") : "",
+      });
     }
 
     return NextResponse.json({
       success: true,
       licenseContent,
-      filename,
+      filename: String(saved.filename || filename),
       plan: "PRO",
-      expiryDate,
-      delivery: {
-        emailSent: Boolean(delivery.emailSent),
-        whatsappSent: Boolean(delivery.whatsappSent),
-      },
+      expiryDate: String(saved.expiryDate || expiryDate),
+      alreadyIssued,
+      delivery: { emailSent, whatsappSent },
     });
   } catch (error) {
     console.error("Verify payment error:", error);
     return NextResponse.json(
-      { success: false, error: "Internal server error during payment verification." },
-      { status: 500 }
+      { success: false, error: "Payment was verified or license saved unsuccessfully. Please contact LekhaFlow support with your payment ID." },
+      { status: 503 }
     );
   }
 }
