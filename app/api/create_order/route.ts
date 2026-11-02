@@ -19,11 +19,17 @@ export async function POST(req: NextRequest) {
     });
 
     const body = await req.json();
-    const { plan, amount } = body;
+    const { plan } = body;
 
-    if (!plan || !amount) {
+    // Prices are controlled on the server; never trust a client-submitted amount.
+    const planPrices: Record<string, number> = {
+      standard: 9999,
+    };
+    const amount = planPrices[plan];
+
+    if (!amount) {
       return NextResponse.json(
-        { success: false, error: "Plan and amount required" },
+        { success: false, error: "Invalid or unavailable plan" },
         { status: 400 }
       );
     }
