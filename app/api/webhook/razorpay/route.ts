@@ -1,45 +1,63 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
-const WEBHOOK_SECRET = process.env.RAZORPAY_WEBHOOK_SECRET || "";
+// Payment verification and license delivery are handled by /api/verify_payment.
+// This webhook endpoint only validates Razorpay's event signature and safely
+// acknowledges events. It deliberately does not create licenses, run Python,
+// write to local disk, or send duplicate customer messages from a serverless
+// function.
+
+const RAZORPAY_WEBHOOK_SECRET = process.env.RAZORPAY_WEBHOOK_SECRET || "";
 
 export async function POST(req: NextRequest) {
   try {
     const rawBody = await req.text();
     const signature = req.headers.get("x-razorpay-signature") || "";
 
-    if (!WEBHOOK_SECRET || !signature) {
+    if (!RAZORPAY_WEBHOOK_SECRET) {
+      console.error("Razorpay webhook secret is not configured.");
       return NextResponse.json(
-        { success: false, error: "Webhook signature verification is not configured." },
+        { success: false, error: "Webhook is not configured." },
         { status: 503 }
       );
     }
 
+    if (!signature) {
+      return NextResponse.json(
+        { success: false, error: "Missing webhook signature." },
+        { status: 400 }
+      );
+    }
+
     const expected = crypto
-      .createHmac("sha256", WEBHOOK_SECRET)
+      .createHmac("sha256", RAZORPAY_WEBHOOK_SECRET)
       .update(rawBody)
-      .digest("hex");
-    const suppliedBuffer = Buffer.from(signature, "utf8");
-    const expectedBuffer = Buffer.from(expected, "utf8");
-
-    if (
-      suppliedBuffer.length !== expectedBuffer.length ||
-      !crypto.timingSafeEqual(suppliedBuffer, expectedBuffer)
-    ) {
-      return NextResponse.json({ success: false, error: "Invalid webhook signature." }, { status: 400 });
+      .digest();
+    let supplied: Buffer;
+    try {
+      supplied = Buffer.from(signature, "hex");
+    } catch {
+      return NextResponse.json({ success: false, error: "Invalid signature." }, { status: 400 });
     }
 
-    const event = JSON.parse(rawBody);
-    if (typeof event.event !== "string") {
-      return NextResponse.json({ success: false, error: "Invalid webhook event." }, { status: 400 });
+    if (supplied.length !== expected.length || !crypto.timingSafeEqual(supplied, expected)) {
+      return NextResponse.json(
+        { success: false, error: "Invalid signature." },
+        { status: 400 }
+      );
     }
 
-    // Payment verification and license issuance are handled by the dedicated
-    // verify_payment endpoint. Do not issue a second license from this webhook.
-    console.info("[RAZORPAY WEBHOOK]", event.event);
-    return NextResponse.json({ success: true });
+    const event = JSON.parse(rawBody) as { event?: string };
+    console.info("Verified Razorpay webhook event:", event.event || "unknown");
+
+    // No fulfilment here: the customer-facing payment verification endpoint
+    // performs the single license-generation and delivery workflow.
+    return NextResponse.json({ success: true, received: true });
   } catch (error) {
-    console.error("Razorpay webhook error:", error);
-    return NextResponse.json({ success: false, error: "Webhook processing failed." }, { status: 400 });
+    console.error("Razorpay webhook processing error:", error);
+    return NextResponse.json(
+      { success: false, error: "Webhook processing failed." },
+      { status: 400 }
+    );
   }
 }
