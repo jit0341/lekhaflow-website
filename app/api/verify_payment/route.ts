@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
       if (googleScriptUrl) {
         await fetch(googleScriptUrl, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "x-internal-api-secret": process.env.INTERNAL_API_SECRET || "" },
           body: JSON.stringify({
             action: "SAVE_LICENSE",
             paymentId,
