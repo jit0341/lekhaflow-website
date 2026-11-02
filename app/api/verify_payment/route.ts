@@ -68,6 +68,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Confirm this captured payment belongs to the submitted order and the server-approved Standard price.
+    if (
+      !orderId ||
+      payment.order_id !== orderId ||
+      payment.amount !== 999900 ||
+      payment.currency !== "INR"
+    ) {
+      return NextResponse.json(
+        { success: false, error: "Payment details do not match the order." },
+        { status: 400 }
+      );
+    }
+
     // Get machine ID from notes or generate one
     const machineId = payment.notes?.machineId || `PAID_${paymentId.substring(0, 8)}`;
     const planType = payment.notes?.plan || plan || "standard";
