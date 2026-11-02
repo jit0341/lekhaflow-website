@@ -15,6 +15,7 @@ export default function PricingPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<"standard" | null>(null);
+  const [razorpayReady, setRazorpayReady] = useState(false);
 
   const plans = {
     standard: {
@@ -23,7 +24,7 @@ export default function PricingPage() {
       price: 9999, // ✅ Comma hata diya, ab ye 9999 number hai
       originalPrice: 15000,
       limit: "10,000 Invoices/Year",
-      razorpayKey: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      
       features: [
         "Bank Statement → Tally (Unlimited)",
         "PDF / Image Invoice → Tally",
@@ -56,7 +57,7 @@ export default function PricingPage() {
 
         // Initialize Razorpay
         const options = {
-          key: plan.razorpayKey,
+          key: data.keyId,
           amount: data.amount,
           currency: "INR",
           name: "LekhaFlow",
@@ -95,7 +96,7 @@ export default function PricingPage() {
 
   return (
     <>
-    <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
+    <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" onLoad={() => setRazorpayReady(true)} />
     <div className="bg-white min-h-screen text-slate-200 font-sans py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <Link href="/" className="inline-flex items-center gap-2 text-teal-500 font-bold text-xs uppercase mb-12 hover:gap-4 transition-all">
@@ -153,7 +154,7 @@ export default function PricingPage() {
 
               <button
                 onClick={() => handlePayment("standard")}
-                disabled={loading && selectedPlan === key}
+                disabled={!razorpayReady || (loading && selectedPlan === key)}
                 className={`w-full py-5 ${
                   key === "standard" ? "bg-amber-500 text-black hover:bg-amber-400" : "bg-teal-600 text-slate-950 hover:bg-teal-500"
                 } rounded-2xl font-black uppercase text-xs text-center tracking-widest transition-all disabled:opacity-50`}
@@ -170,7 +171,7 @@ export default function PricingPage() {
               <p className="text-xs font-black uppercase tracking-[0.25em] text-teal-600 mb-3">Standalone bank statement parser</p>
               <h2 className="text-3xl font-black tracking-tight text-slate-950">LekhaFlow Bank</h2>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">For businesses and accounting teams that need bank statement parsing as a separate product. Bank Statement → structured data for the Tally workflow.</p>
-              <p className="mt-4 text-xs font-bold uppercase tracking-widest text-slate-500">One-time product price</p>
+              <p className="mt-4 text-xs font-bold uppercase tracking-widest text-slate-500">Product price</p>
               <p className="text-4xl font-black text-teal-600">₹4,999</p>
               <p className="mt-2 text-xs text-slate-500">LekhaFlow Standard continues to include its existing bank statement feature.</p>
             </div>
