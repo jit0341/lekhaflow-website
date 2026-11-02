@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
 const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || "";
-const LICENSE_SECRET = process.env.LICENSE_SECRET || "LekhaFlow_Secret_Key_2026";
+const LICENSE_SECRET = process.env.LICENSE_SECRET || "";
 
 function generateLicenseHash(machineId: string, plan: string, expiryDate: string): string {
   const data = `${machineId}:${plan}:${expiryDate}:${LICENSE_SECRET}`;
@@ -30,9 +30,13 @@ function generateLicenseFile(machineId: string, plan: string, expiryDays: number
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { paymentId, orderId, plan } = body;
+    const { paymentId, orderId } = body;
 
-    if (!paymentId) {
+    if (!RAZORPAY_KEY_SECRET || !LICENSE_SECRET) {
+      return NextResponse.json({ success: false, error: "Payment or license service is not configured." }, { status: 503 });
+    }
+
+    if (!paymentId || !orderId) {
       return NextResponse.json(
         { success: false, error: "Payment ID required" },
         { status: 400 }
@@ -83,8 +87,11 @@ export async function POST(req: NextRequest) {
 
     // Get machine ID from notes or generate one
     const machineId = payment.notes?.machineId || `PAID_${paymentId.substring(0, 8)}`;
-    const planType = payment.notes?.plan || plan || "standard";
-    const expiryDays = planType === "trial" ? 7 : 365;
+    const planType = payment.notes?.plan || "standard";
+    if (planType !== "standard") {
+      return NextResponse.json({ success: false, error: "This product is not available for online activation." }, { status: 400 });
+    }
+    const expiryDays = 365;
 
     // Generate license
     const licenseContent = generateLicenseFile(machineId, planType, expiryDays);
@@ -120,7 +127,7 @@ export async function POST(req: NextRequest) {
       const mobile = payment.contact || payment.notes?.mobile || "";
 
       if (email || mobile) {
-        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || "https://lekhaflow.in"}/api/send-license`, {
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || "https://lekhaflow.in"}/api/send_license`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
