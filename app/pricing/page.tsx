@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, X, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import Script from "next/script";
 
 declare global {
   interface Window {
@@ -93,6 +94,8 @@ export default function PricingPage() {
   };
 
   return (
+    <>
+    <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
     <div className="bg-white min-h-screen text-slate-200 font-sans py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <Link href="/" className="inline-flex items-center gap-2 text-teal-500 font-bold text-xs uppercase mb-12 hover:gap-4 transition-all">
@@ -176,5 +179,6 @@ export default function PricingPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
