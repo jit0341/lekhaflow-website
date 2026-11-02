@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
+const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || "";
 const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || "";
 const LICENSE_SECRET = process.env.LICENSE_SECRET || "";
 const STANDARD_INVOICE_LIMIT = 10000;
@@ -41,7 +42,7 @@ export async function POST(req: NextRequest) {
     const paymentId = String(body.paymentId || "");
     const orderId = String(body.orderId || "");
 
-    if (!RAZORPAY_KEY_SECRET || !LICENSE_SECRET) {
+    if (!RAZORPAY_KEY_ID || !RAZORPAY_KEY_SECRET || !LICENSE_SECRET) {
       return NextResponse.json(
         { success: false, error: "Payment or license service is not configured." },
         { status: 503 }
@@ -55,7 +56,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const auth = Buffer.from(`${process.env.RAZORPAY_KEY_ID || ""}:${RAZORPAY_KEY_SECRET}`).toString("base64");
+    const auth = Buffer.from(`${RAZORPAY_KEY_ID}:${RAZORPAY_KEY_SECRET}`).toString("base64");
     const verifyResponse = await fetch(
       `https://api.razorpay.com/v1/payments/${encodeURIComponent(paymentId)}`,
       { headers: { Authorization: `Basic ${auth}` }, cache: "no-store" }
