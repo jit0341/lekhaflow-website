@@ -13,7 +13,7 @@ declare global {
 export default function PricingPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<"standard" | "gold" | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<"standard" | null>(null);
 
   const plans = {
     standard: {
@@ -31,24 +31,9 @@ export default function PricingPage() {
         "Email Support",
       ],
     },
-    gold: { 
-      id: "gold",
-      name: "LekhaFlow Gold",
-      price: 14999,
-      originalPrice: 25000,
-      limit: "Unlimited Invoices/Year",
-      razorpayKey: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-      features: [
-        "Everything in Standard",
-        "GSTR-2B Reconciliation",
-        "Sales Split",
-        "Multi-Company Support",
-        "Direct WhatsApp Support from Founder",
-      ],
-    },
   };
 
-  const handlePayment = (planKey: "standard" | "gold") => {
+  const handlePayment = (planKey: "standard") => {
     const plan = plans[planKey];
     setSelectedPlan(planKey);
     setLoading(true);
@@ -164,7 +149,7 @@ export default function PricingPage() {
               </div>
 
               <button
-                onClick={() => handlePayment(key as "standard" | "gold")}
+                onClick={() => handlePayment("standard")}
                 disabled={loading && selectedPlan === key}
                 className={`w-full py-5 ${
                   key === "standard" ? "bg-amber-500 text-black hover:bg-amber-400" : "bg-teal-600 text-slate-950 hover:bg-teal-500"
@@ -176,10 +161,18 @@ export default function PricingPage() {
           ))}
         </div>
 
-        <div className="text-center mt-12 max-w-2xl mx-auto">
-          <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
-            First 50 clients lock this price for life. From 1st Sept, Gold becomes ₹14,999 and Standard ₹9,999.
-          </p>
+        <div className="mt-12 max-w-5xl mx-auto">
+          <div className="bg-white border-2 border-slate-300 p-8 md:p-10 rounded-[2.5rem] shadow-lg flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.25em] text-teal-600 mb-3">Standalone bank statement parser</p>
+              <h2 className="text-3xl font-black tracking-tight text-slate-950">LekhaFlow Bank</h2>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">For businesses and accounting teams that need bank statement parsing as a separate product. Bank Statement → structured data for the Tally workflow.</p>
+              <p className="mt-4 text-xs font-bold uppercase tracking-widest text-slate-500">One-time product price</p>
+              <p className="text-4xl font-black text-teal-600">₹4,999</p>
+              <p className="mt-2 text-xs text-slate-500">LekhaFlow Standard continues to include its existing bank statement feature.</p>
+            </div>
+            <a href="https://wa.me/8770808695?text=Hi%2C%20I%20am%20interested%20in%20LekhaFlow%20Bank%20at%20Rs%204999." className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-slate-950 px-8 py-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-teal-700">Enquire about LekhaFlow Bank</a>
+          </div>
         </div>
       </div>
     </div>
