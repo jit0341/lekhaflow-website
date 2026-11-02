@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
       success: true,
       orderId: order.id,
       amount: order.amount,
+      keyId,
     });
   } catch (error) {
     console.error("Create order error:", error);
