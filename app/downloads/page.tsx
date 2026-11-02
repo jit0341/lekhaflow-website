@@ -1,11 +1,9 @@
 "use client";
-import { Download, CheckCircle2, Sparkles, Clock, Shield } from "lucide-react";
+import { Download, CheckCircle2, Clock, Shield } from "lucide-react";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 export default function DownloadsPage() {
   const [downloadLinks, setDownloadLinks] = useState({
-    gold: "",
     standard_full: "",
     standard_trial: "",
   });
@@ -25,7 +23,6 @@ export default function DownloadsPage() {
           setDownloadLinks({
             standard_full: data.standard?.url || "",
             standard_trial: data.standardTrial?.url || "",
-            gold: data.gold?.url || "",
           });
           setLatestVersion(data.latestVersion || "");
           setPublishedAt(data.publishedAt || "");
@@ -66,7 +63,7 @@ export default function DownloadsPage() {
         </div>
 
         {/* 3 Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           
           {/* 1. Standard Full Version */}
           <div className="bg-white border-2 border-blue-500 p-8 rounded-[3rem] shadow-2xl">
