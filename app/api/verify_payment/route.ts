@@ -3,165 +3,152 @@ import crypto from "crypto";
 
 const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || "";
 const LICENSE_SECRET = process.env.LICENSE_SECRET || "";
+const STANDARD_INVOICE_LIMIT = 10000;
+const LICENSE_VERSION = "3.0";
 
-function generateLicenseHash(machineId: string, plan: string, expiryDate: string): string {
-  const data = `${machineId}:${plan}:${expiryDate}:${LICENSE_SECRET}`;
-  return crypto.createHash("sha256").update(data).digest("hex").substring(0, 16).toUpperCase();
-}
+function createCompatibleLicense(clientName: string, validDays: number) {
+  const validTill = new Date();
+  validTill.setDate(validTill.getDate() + validDays);
+  const date = validTill.toISOString().slice(0, 10);
 
-function generateLicenseFile(machineId: string, plan: string, expiryDays: number): string {
-  const expiryDate = new Date();
-  expiryDate.setDate(expiryDate.getDate() + expiryDays);
-  const expiryStr = expiryDate.toISOString().split("T")[0];
+  // This structure and signature input order must remain compatible with
+  // the desktop license_generator.py / main.py validation logic.
+  const license: Record<string, string | number> = {
+    client_name: clientName,
+    valid_till: date,
+    invoice_limit: STANDARD_INVOICE_LIMIT,
+    used: 0,
+    plan: "PRO",
+    machine_id: "",
+    version: LICENSE_VERSION,
+  };
 
-  const signature = generateLicenseHash(machineId, plan, expiryStr);
+  const raw =
+    String(license.client_name) +
+    String(license.valid_till) +
+    String(license.invoice_limit) +
+    String(license.used) +
+    String(license.machine_id) +
+    LICENSE_SECRET;
 
-  return [
-    "=== LEKHAFLOW LICENSE FILE ===",
-    `MACHINE_ID=${machineId}`,
-    `PLAN=${plan.toUpperCase()}`,
-    `EXPIRY=${expiryStr}`,
-    `ISSUED=${new Date().toISOString()}`,
-    `SIGNATURE=${signature}`,
-    "=== END LICENSE ==="
-  ].join("\n");
+  license.signature = crypto.createHash("sha256").update(raw).digest("hex");
+  return { license, expiryDate: validTill.toISOString() };
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { paymentId, orderId } = body;
+    const paymentId = String(body.paymentId || "");
+    const orderId = String(body.orderId || "");
 
     if (!RAZORPAY_KEY_SECRET || !LICENSE_SECRET) {
-      return NextResponse.json({ success: false, error: "Payment or license service is not configured." }, { status: 503 });
+      return NextResponse.json(
+        { success: false, error: "Payment or license service is not configured." },
+        { status: 503 }
+      );
     }
 
     if (!paymentId || !orderId) {
       return NextResponse.json(
-        { success: false, error: "Payment ID required" },
+        { success: false, error: "Payment ID and order ID are required." },
         { status: 400 }
       );
     }
 
-    // Verify payment with Razorpay
-    const auth = Buffer.from(`${RAZORPAY_KEY_SECRET}:`).toString("base64");
-    
+    const auth = Buffer.from(`${process.env.RAZORPAY_KEY_ID || ""}:${RAZORPAY_KEY_SECRET}`).toString("base64");
     const verifyResponse = await fetch(
-      `https://api.razorpay.com/v1/payments/${paymentId}`,
-      {
-        headers: {
-          Authorization: `Basic ${auth}`,
-        },
-      }
+      `https://api.razorpay.com/v1/payments/${encodeURIComponent(paymentId)}`,
+      { headers: { Authorization: `Basic ${auth}` }, cache: "no-store" }
     );
 
     if (!verifyResponse.ok) {
       return NextResponse.json(
-        { success: false, error: "Payment verification failed" },
+        { success: false, error: "Payment could not be verified with Razorpay." },
         { status: 400 }
       );
     }
 
     const payment = await verifyResponse.json();
-
-    // Check if payment is captured
-    if (payment.status !== "captured") {
-      return NextResponse.json(
-        { success: false, error: `Payment status: ${payment.status}` },
-        { status: 400 }
-      );
-    }
-
-    // Confirm this captured payment belongs to the submitted order and the server-approved Standard price.
     if (
-      !orderId ||
+      payment.status !== "captured" ||
       payment.order_id !== orderId ||
       payment.amount !== 999900 ||
       payment.currency !== "INR"
     ) {
       return NextResponse.json(
-        { success: false, error: "Payment details do not match the order." },
+        { success: false, error: "Captured payment details do not match the Standard order." },
         { status: 400 }
       );
     }
 
-    // Get machine ID from notes or generate one
-    const machineId = payment.notes?.machineId || `PAID_${paymentId.substring(0, 8)}`;
-    const planType = payment.notes?.plan || "standard";
-    if (planType !== "standard") {
-      return NextResponse.json({ success: false, error: "This product is not available for online activation." }, { status: 400 });
-    }
-    const expiryDays = 365;
+    const clientName = String(payment.notes?.customerName || payment.notes?.name || payment.email || "LekhaFlow Customer").trim();
+    const { license, expiryDate } = createCompatibleLicense(clientName, 365);
+    const licenseContent = JSON.stringify(license, null, 2);
+    const safeClient = clientName.replace(/[^a-z0-9_-]/gi, "_").replace(/^\.+|\.+$/g, "") || "client";
+    const filename = `license_${safeClient}.dat`;
 
-    // Generate license
-    const licenseContent = generateLicenseFile(machineId, planType, expiryDays);
-    const filename = `license_${machineId.substring(0, 8)}.dat`;
-    const expiryDate = new Date();
-    expiryDate.setDate(expiryDate.getDate() + expiryDays);
-
-    // Store in Google Sheet
-    try {
-      const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
-      if (googleScriptUrl) {
-        await fetch(googleScriptUrl, {
+    // Save the issued license record if the configured Google Apps Script is available.
+    const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
+    if (googleScriptUrl) {
+      try {
+        const saveResponse = await fetch(googleScriptUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             action: "SAVE_LICENSE",
             paymentId,
-            machineId,
-            plan: planType,
-            licenseContent: licenseContent.replace(/\n/g, " | "),
-            expiryDate: expiryDate.toISOString(),
+            orderId,
+            licenseContent,
+            expiryDate,
             timestamp: new Date().toISOString(),
           }),
         });
+        if (!saveResponse.ok) console.error("License record save failed:", saveResponse.status);
+      } catch (error) {
+        console.error("License record save failed:", error);
       }
-    } catch (err) {
-      console.error("Failed to save to Google Sheet:", err);
     }
 
-    // Send license via email and WhatsApp
-    try {
-      const email = payment.email || payment.notes?.email || "";
-      const mobile = payment.contact || payment.notes?.mobile || "";
+    // Delivery is server-to-server and authenticated. The license is still
+    // returned to the verified customer for immediate download.
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.lekhaflow.in";
+    const deliveryResponse = await fetch(`${baseUrl}/api/send_license`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-license-delivery-secret": LICENSE_SECRET,
+      },
+      body: JSON.stringify({
+        email: payment.email || payment.notes?.email || "",
+        mobile: payment.contact || payment.notes?.mobile || "",
+        name: clientName,
+        plan: "PRO",
+        licenseContent,
+        filename,
+        expiryDate,
+      }),
+    });
 
-      if (email || mobile) {
-        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || "https://lekhaflow.in"}/api/send_license`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-internal-api-secret": process.env.INTERNAL_API_SECRET || "",
-          },
-          body: JSON.stringify({
-            email,
-            mobile,
-            name: payment.notes?.customerName || payment.notes?.name || "",
-            plan: planType,
-            licenseContent,
-            filename,
-            expiryDate: expiryDate.toISOString(),
-          }),
-        });
-      }
-    } catch (err) {
-      console.error("Failed to send license notification:", err);
-      // Non-blocking - user can still download from page
+    const delivery = await deliveryResponse.json().catch(() => ({}));
+    if (!deliveryResponse.ok) {
+      console.error("License delivery endpoint returned:", deliveryResponse.status);
     }
 
     return NextResponse.json({
       success: true,
       licenseContent,
       filename,
-      machineId,
-      plan: planType,
-      expiryDate: expiryDate.toISOString(),
+      plan: "PRO",
+      expiryDate,
+      delivery: {
+        emailSent: Boolean(delivery.emailSent),
+        whatsappSent: Boolean(delivery.whatsappSent),
+      },
     });
-
   } catch (error) {
     console.error("Verify payment error:", error);
     return NextResponse.json(
-      { success: false, error: "Internal server error" },
+      { success: false, error: "Internal server error during payment verification." },
       { status: 500 }
     );
   }
