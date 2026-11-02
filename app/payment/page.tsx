@@ -26,7 +26,7 @@ function PaymentContent() {
 
     async function verifyPayment() {
       try {
-        const response = await fetch("/api/verify-payment", {
+        const response = await fetch("/api/verify_payment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
