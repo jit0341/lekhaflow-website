@@ -107,11 +107,11 @@ export default function PricingPage() {
             Choose Your <span className="text-teal-500">Plan</span>
           </h1>
           <p className="text-slate-600 font-bold uppercase tracking-widest text-sm">
-            Special pricing for first 50 clients only •
+            Introductory launch pricing •
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 gap-10 max-w-xl mx-auto">
           {Object.entries(plans).map(([key, plan]) => (
             <div
               key={key}
@@ -174,7 +174,7 @@ export default function PricingPage() {
               <p className="text-4xl font-black text-teal-600">₹4,999</p>
               <p className="mt-2 text-xs text-slate-500">LekhaFlow Standard continues to include its existing bank statement feature.</p>
             </div>
-            <a href="https://wa.me/8770808695?text=Hi%2C%20I%20am%20interested%20in%20LekhaFlow%20Bank%20at%20Rs%204999." className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-slate-950 px-8 py-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-teal-700">Enquire about LekhaFlow Bank</a>
+            <a href="https://wa.me/918770808695?text=Hi%2C%20I%20am%20interested%20in%20LekhaFlow%20Bank%20at%20Rs%204999." className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-slate-950 px-8 py-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-teal-700">Enquire about LekhaFlow Bank</a>
           </div>
         </div>
       </div>
