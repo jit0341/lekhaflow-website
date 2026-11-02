@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
       if (googleScriptUrl) {
         await fetch(googleScriptUrl, {
           method: "POST",
-          headers: { "Content-Type": "application/json", "x-internal-api-secret": process.env.INTERNAL_API_SECRET || "" },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             action: "SAVE_LICENSE",
             paymentId,
@@ -129,7 +129,10 @@ export async function POST(req: NextRequest) {
       if (email || mobile) {
         await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || "https://lekhaflow.in"}/api/send_license`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-internal-api-secret": process.env.INTERNAL_API_SECRET || "",
+          },
           body: JSON.stringify({
             email,
             mobile,
