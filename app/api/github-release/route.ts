@@ -88,11 +88,13 @@ export async function GET() {
     const standard = findExeAsset(assets, [
       /^LekhaFlow_Standard_Suite_Setup_[^/]+\.exe$/i,
       /^LekhaFlow_Standard_Setup_[^/]+\.exe$/i,
+      /^Lekhaflow_Standard_setup\.exe$/i,
     ]);
 
     const standardTrial = findExeAsset(assets, [
       /^LekhaFlow_Standard_Trial_[^/]+\.exe$/i,
       /^LekhaFlow_Standard_Suite_Trial_[^/]+\.exe$/i,
+      /^lekhaflow-standard-trial-setup\.exe$/i,
     ]);
 
     const gold = findExeAsset(assets, [
