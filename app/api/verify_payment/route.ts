@@ -143,48 +143,68 @@ export async function POST(req: NextRequest) {
     const alreadyIssued = Boolean(saved.alreadyIssued);
     const deliveryStatus = String(saved.deliveryStatus || "PENDING").toUpperCase();
 
-    // A license may already exist while delivery is still pending. In that
-    // case retry delivery using the SAME stored license; never create a new one.
-    // Once the sheet records SENT, a page refresh must not send another email.
-    const deliveryAlreadyComplete = deliveryStatus === "SENT";
+    // Claim delivery atomically in Apps Script before sending. This prevents
+    // two concurrent payment-status requests from sending duplicate emails.
+    // A CLAIMED lease expires after 10 minutes if a serverless request crashes.
+    const claim = await callLicensingSheet({
+      action: "CLAIM_LICENSE_DELIVERY",
+      paymentId,
+      leaseMinutes: 10,
+    });
+
     let emailSent: boolean | null = null;
     let whatsappSent: boolean | null = null;
     let deliveryErrors: string[] = [];
+    let finalDeliveryStatus = String(claim.deliveryStatus || deliveryStatus).toUpperCase();
 
-    if (!deliveryAlreadyComplete) {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.lekhaflow.in";
-      const deliveryResponse = await fetch(`${baseUrl}/api/send_license`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-license-delivery-secret": LICENSE_SECRET,
-        },
-        body: JSON.stringify({
-          email,
-          mobile,
-          name: clientName,
-          plan: "PRO",
-          licenseContent,
-          filename: String(saved.filename || filename),
-          expiryDate: String(saved.expiryDate || expiryDate),
-        }),
-        cache: "no-store",
-      });
+    if (claim.claimed === true) {
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.lekhaflow.in";
+        const deliveryResponse = await fetch(`${baseUrl}/api/send_license`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-license-delivery-secret": LICENSE_SECRET,
+          },
+          body: JSON.stringify({
+            email,
+            mobile,
+            name: clientName,
+            plan: "PRO",
+            licenseContent,
+            filename: String(saved.filename || filename),
+            expiryDate: String(saved.expiryDate || expiryDate),
+          }),
+          cache: "no-store",
+        });
 
-      const delivery = await deliveryResponse.json().catch(() => ({}));
-      emailSent = Boolean(delivery.emailSent);
-      whatsappSent = Boolean(delivery.whatsappSent);
-      deliveryErrors = Array.isArray(delivery.errors) ? delivery.errors : [];
+        const delivery = await deliveryResponse.json().catch(() => ({}));
+        emailSent = Boolean(delivery.emailSent);
+        whatsappSent = Boolean(delivery.whatsappSent);
+        deliveryErrors = Array.isArray(delivery.errors) ? delivery.errors : [];
+        finalDeliveryStatus = emailSent || whatsappSent ? "SENT" : "PENDING";
 
-      // Persist the result so later refreshes can avoid duplicate delivery.
-      await callLicensingSheet({
-        action: "MARK_LICENSE_SENT",
-        paymentId,
-        emailSent,
-        whatsappSent,
-        deliveryStatus: emailSent || whatsappSent ? "SENT" : "PENDING",
-        remarks: deliveryErrors.join(" "),
-      });
+        await callLicensingSheet({
+          action: "MARK_LICENSE_SENT",
+          paymentId,
+          emailSent,
+          whatsappSent,
+          deliveryStatus: finalDeliveryStatus,
+          remarks: deliveryErrors.join(" "),
+        });
+      } catch (deliveryError) {
+        // Release the claim for a later retry if the delivery request itself
+        // fails unexpectedly. No license is regenerated.
+        await callLicensingSheet({
+          action: "MARK_LICENSE_SENT",
+          paymentId,
+          emailSent: false,
+          whatsappSent: false,
+          deliveryStatus: "PENDING",
+          remarks: "Delivery request failed; retry is allowed.",
+        });
+        throw deliveryError;
+      }
     }
 
     return NextResponse.json({
@@ -195,7 +215,8 @@ export async function POST(req: NextRequest) {
       expiryDate: String(saved.expiryDate || expiryDate),
       alreadyIssued,
       delivery: {
-        status: deliveryAlreadyComplete ? "SENT" : (emailSent || whatsappSent ? "SENT" : "PENDING"),
+        status: finalDeliveryStatus,
+        claimed: claim.claimed === true,
         emailSent,
         whatsappSent,
         errors: deliveryErrors,
