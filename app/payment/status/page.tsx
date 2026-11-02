@@ -68,8 +68,20 @@ function PaymentStatusContent() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
+
+  if (status === "loading") {
+    return (
+      <main className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
+        <section className="text-center">
+          <Loader2 className="mx-auto h-12 w-12 animate-spin text-teal-400" />
+          <h1 className="mt-5 text-xl font-black text-white">Verifying Payment...</h1>
+          <p className="mt-2 text-sm text-slate-400">Please wait while Razorpay confirms your transaction.</p>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
