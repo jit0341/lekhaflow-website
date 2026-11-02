@@ -13,8 +13,16 @@ const faqs = [
     a: "All invoice and bank statement processing happens locally on your Windows machine. Your PDFs and images are never uploaded to our servers. Only anonymized metadata (like invoice count) may be sent for license validation."
   },
   {
-    q: "What is the difference between Standard and Gold plans?",
-    a: "Standard includes Bank Statement → Tally, PDF/Image Invoice → Tally, Excel export, and Auto Ledger & Stock Creation for up to 10,000 invoices/year. Gold adds unlimited invoices, GSTR-2B Reconciliation (Coming Soon), Sales Split, Multi-Company support, and direct WhatsApp support from the founder."
+    q: "What does LekhaFlow Standard include?",
+    a: "LekhaFlow Standard includes Bank Statement → Tally, PDF/Image Invoice → Tally, Excel export, and Auto Ledger & Stock Creation for up to 10,000 invoices per year. The bank statement workflow remains included in Standard."
+  },
+  {
+    q: "Is LekhaFlow Gold available?",
+    a: "No. LekhaFlow Gold is currently under development and is not available for purchase or download. We will share details when it is ready."
+  },
+  {
+    q: "Can I buy only the bank statement parser?",
+    a: "Yes. LekhaFlow Bank is planned as a separate bank statement parsing product at ₹4,999. Contact our team to enquire about availability. The same bank statement feature will continue to be included in LekhaFlow Standard."
   },
   {
     q: "How does the 7-day free trial work?",
