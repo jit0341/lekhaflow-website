@@ -141,13 +141,17 @@ export async function POST(req: NextRequest) {
 
     const licenseContent = String(saved.licenseContent || generatedContent);
     const alreadyIssued = Boolean(saved.alreadyIssued);
-    let emailSent = Boolean(saved.emailSent);
-    let whatsappSent = Boolean(saved.whatsappSent);
+    const deliveryStatus = String(saved.deliveryStatus || "PENDING").toUpperCase();
 
-    // Do not send duplicate messages when the same payment status URL is
-    // refreshed. A first-time issue is delivered once; delivery state is
-    // recorded separately in the licensing sheet.
-    if (!alreadyIssued) {
+    // A license may already exist while delivery is still pending. In that
+    // case retry delivery using the SAME stored license; never create a new one.
+    // Once the sheet records SENT, a page refresh must not send another email.
+    const deliveryAlreadyComplete = deliveryStatus === "SENT";
+    let emailSent: boolean | null = null;
+    let whatsappSent: boolean | null = null;
+    let deliveryErrors: string[] = [];
+
+    if (!deliveryAlreadyComplete) {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.lekhaflow.in";
       const deliveryResponse = await fetch(`${baseUrl}/api/send_license`, {
         method: "POST",
@@ -161,8 +165,8 @@ export async function POST(req: NextRequest) {
           name: clientName,
           plan: "PRO",
           licenseContent,
-          filename,
-          expiryDate,
+          filename: String(saved.filename || filename),
+          expiryDate: String(saved.expiryDate || expiryDate),
         }),
         cache: "no-store",
       });
@@ -170,14 +174,16 @@ export async function POST(req: NextRequest) {
       const delivery = await deliveryResponse.json().catch(() => ({}));
       emailSent = Boolean(delivery.emailSent);
       whatsappSent = Boolean(delivery.whatsappSent);
+      deliveryErrors = Array.isArray(delivery.errors) ? delivery.errors : [];
 
+      // Persist the result so later refreshes can avoid duplicate delivery.
       await callLicensingSheet({
         action: "MARK_LICENSE_SENT",
         paymentId,
         emailSent,
         whatsappSent,
         deliveryStatus: emailSent || whatsappSent ? "SENT" : "PENDING",
-        remarks: Array.isArray(delivery.errors) ? delivery.errors.join(" ") : "",
+        remarks: deliveryErrors.join(" "),
       });
     }
 
@@ -188,7 +194,12 @@ export async function POST(req: NextRequest) {
       plan: "PRO",
       expiryDate: String(saved.expiryDate || expiryDate),
       alreadyIssued,
-      delivery: { emailSent, whatsappSent },
+      delivery: {
+        status: deliveryAlreadyComplete ? "SENT" : (emailSent || whatsappSent ? "SENT" : "PENDING"),
+        emailSent,
+        whatsappSent,
+        errors: deliveryErrors,
+      },
     });
   } catch (error) {
     console.error("Verify payment error:", error);
