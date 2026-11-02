@@ -71,22 +71,37 @@ function PaymentStatusContent() {
     URL.revokeObjectURL(url);
   };
 
-  // Rest of your UI logic remains the same...
-  if (status === "loading") {
-    return (
-      <div className="min-h-screen bg-[#020617] flex items-center justify-center p-4">
-        <div className="text-center">
-          <Loader2 className="w-12 h-12 text-teal-500 animate-spin mx-auto mb-6" />
-          <h2 className="text-2xl font-black text-white uppercase tracking-tighter">
-            Verifying Payment...
-          </h2>
-          <p className="text-slate-500 mt-2">Please wait while we confirm your transaction</p>
-        </div>
-      </div>
-    );
-  }
-
-  // ... (बाकी UI वही रहेगा)
+  return (
+    <main className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
+      <section className="w-full max-w-xl rounded-3xl border border-slate-800 bg-slate-900 p-8 text-center shadow-2xl">
+        {status === "success" ? (
+          <>
+            <CheckCircle2 className="mx-auto h-16 w-16 text-teal-400" />
+            <h1 className="mt-5 text-2xl font-black text-white">Payment Successful</h1>
+            <p className="mt-3 text-sm leading-6 text-slate-300">Your LekhaFlow Standard payment has been verified.</p>
+            {licenseData?.expiryDate && (
+              <p className="mt-3 text-xs text-slate-400">License valid until {new Date(licenseData.expiryDate).toLocaleDateString("en-IN")}</p>
+            )}
+            <button
+              onClick={() => licenseData?.licenseContent && downloadLicense(licenseData.licenseContent, licenseData.filename)}
+              className="mt-7 inline-flex items-center justify-center gap-2 rounded-xl bg-teal-500 px-6 py-3 text-sm font-black text-slate-950 hover:bg-teal-400"
+            >
+              <Download size={17} /> Download License Again
+            </button>
+          </>
+        ) : (
+          <>
+            <XCircle className="mx-auto h-16 w-16 text-rose-400" />
+            <h1 className="mt-5 text-2xl font-black text-white">Payment Verification Failed</h1>
+            <p className="mt-3 text-sm leading-6 text-slate-300">{error || "We could not verify this payment."}</p>
+            <p className="mt-3 text-xs text-slate-400">If your account was debited, please contact LekhaFlow support with your payment ID.</p>
+            <Link href="/contact" className="mt-7 inline-flex rounded-xl bg-white px-6 py-3 text-sm font-black text-slate-950">Contact Support</Link>
+          </>
+        )}
+        <p className="mt-7 text-xs text-slate-500">Payment ID: {paymentId || "Not available"}</p>
+      </section>
+    </main>
+  );
 }
 
 // ✅ Main Page Component with Suspense Boundary
