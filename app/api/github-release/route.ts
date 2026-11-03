@@ -1,34 +1,32 @@
-// app/api/github-release/route.ts
-
 import { NextResponse } from "next/server";
 
 const GITHUB_RELEASES_URL =
-  "https://api.github.com/repos/jit0341/lekhaflow-website/releases/latest";
+  "https://api.github.com/repos/jit0341/lekhaflow-website/releases?per_page=30";
 
 type GitHubAsset = {
   name?: string;
   browser_download_url?: string;
   size?: number;
-  content_type?: string;
   state?: string;
 };
 
-function findExeAsset(
-  assets: GitHubAsset[],
-  patterns: RegExp[]
-): GitHubAsset | undefined {
+type GitHubRelease = {
+  tag_name?: string;
+  name?: string;
+  published_at?: string;
+  created_at?: string;
+  html_url?: string;
+  assets?: GitHubAsset[];
+};
+
+function findExeAsset(assets: GitHubAsset[], patterns: RegExp[]) {
   return assets.find((asset) => {
     const name = asset?.name || "";
-
-    if (!/\.exe$/i.test(name)) {
-      return false;
-    }
-
-    if (asset.state && asset.state !== "uploaded") {
-      return false;
-    }
-
-    return patterns.some((pattern) => pattern.test(name));
+    return (
+      /\.exe$/i.test(name) &&
+      (!asset.state || asset.state === "uploaded") &&
+      patterns.some((pattern) => pattern.test(name))
+    );
   });
 }
 
@@ -40,10 +38,20 @@ function assetInfo(asset?: GitHubAsset) {
   };
 }
 
+const standardPatterns = [
+  /^LekhaFlow_Standard_Suite_Setup_[^/]+\.exe$/i,
+  /^LekhaFlow_Standard_Setup_[^/]+\.exe$/i,
+  /^Lekhaflow_Standard_setup\.exe$/i,
+];
+const trialPatterns = [
+  /^LekhaFlow_Standard_Trial_[^/]+\.exe$/i,
+  /^LekhaFlow_Standard_Suite_Trial_[^/]+\.exe$/i,
+  /^lekhaflow-standard-trial-setup\.exe$/i,
+];
+
 export async function GET() {
   try {
     const response = await fetch(GITHUB_RELEASES_URL, {
-      method: "GET",
       headers: {
         Accept: "application/vnd.github+json",
         "User-Agent": "LekhaFlow-Website",
@@ -53,81 +61,50 @@ export async function GET() {
 
     if (!response.ok) {
       return NextResponse.json(
-        {
-          success: false,
-          error: "Unable to fetch latest GitHub release.",
-        },
-        {
-          status: 502,
-          headers: {
-            "Cache-Control": "no-store, max-age=0",
-          },
-        }
+        { success: false, error: "Unable to fetch GitHub releases." },
+        { status: 502, headers: { "Cache-Control": "no-store, max-age=0" } }
       );
     }
 
-    const data = await response.json();
+    const releases = (await response.json()) as GitHubRelease[];
+    if (!Array.isArray(releases)) {
+      return NextResponse.json(
+        { success: false, error: "Unexpected GitHub releases response." },
+        { status: 502 }
+      );
+    }
 
-    const assets: GitHubAsset[] = Array.isArray(data.assets)
-      ? data.assets
-      : [];
+    // Full and trial installers may be published in separate GitHub releases.
+    const standardRelease = releases.find((release) =>
+      findExeAsset(release.assets || [], standardPatterns)
+    );
+    const trialRelease = releases.find((release) =>
+      findExeAsset(release.assets || [], trialPatterns)
+    );
 
-    /*
-     * Production naming support
-     *
-     * Current Standard:
-     *   LekhaFlow_Standard_Suite_Setup_15.1.0.exe
-     *
-     * Future-compatible names:
-     *   LekhaFlow_Standard_Setup_15.1.0.exe
-     *   LekhaFlow_Standard_Trial_15.1.0.exe
-     *   LekhaFlow_Gold_Setup_15.1.0.exe
-     *   LekhaFlow_Gold_Trial_15.1.0.exe
-     */
-
-    const standard = findExeAsset(assets, [
-      /^LekhaFlow_Standard_Suite_Setup_[^/]+\.exe$/i,
-      /^LekhaFlow_Standard_Setup_[^/]+\.exe$/i,
-    ]);
-
-    const standardTrial = findExeAsset(assets, [
-      /^LekhaFlow_Standard_Trial_[^/]+\.exe$/i,
-      /^LekhaFlow_Standard_Suite_Trial_[^/]+\.exe$/i,
-    ]);
-
-    const gold = findExeAsset(assets, [
-      /^LekhaFlow_Gold_Setup_[^/]+\.exe$/i,
-      /^LekhaFlow_Gold_Suite_Setup_[^/]+\.exe$/i,
-    ]);
-
-    const goldTrial = findExeAsset(assets, [
-      /^LekhaFlow_Gold_Trial_[^/]+\.exe$/i,
-      /^LekhaFlow_Gold_Suite_Trial_[^/]+\.exe$/i,
-    ]);
-
-    /*
-     * Diagnostic information.
-     * This makes future release naming problems immediately visible
-     * without affecting the website UI.
-     */
+    const standardAsset = standardRelease
+      ? findExeAsset(standardRelease.assets || [], standardPatterns)
+      : undefined;
+    const trialAsset = trialRelease
+      ? findExeAsset(trialRelease.assets || [], trialPatterns)
+      : undefined;
 
     return NextResponse.json(
       {
         success: true,
-
-        latestVersion: data.tag_name || "",
-        publishedAt: data.published_at || data.created_at || "",
-        releaseName: data.name || "",
-        releaseUrl: data.html_url || "",
-
-        standard: assetInfo(standard),
-        standardTrial: assetInfo(standardTrial),
-        gold: assetInfo(gold),
-        goldTrial: assetInfo(goldTrial),
-
-        assetCount: assets.length,
-
-        assets: assets
+        latestVersion: standardRelease?.tag_name || "",
+        publishedAt: standardRelease?.published_at || standardRelease?.created_at || "",
+        releaseName: standardRelease?.name || "",
+        releaseUrl: standardRelease?.html_url || "",
+        standard: assetInfo(standardAsset),
+        standardTrial: assetInfo(trialAsset),
+        gold: assetInfo(undefined),
+        goldTrial: assetInfo(undefined),
+        releasesChecked: releases.length,
+        assets: [
+          ...(standardRelease?.assets || []),
+          ...(trialRelease?.assets || []),
+        ]
           .filter((asset) => /\.exe$/i.test(asset?.name || ""))
           .map((asset) => ({
             name: asset.name || "",
@@ -135,26 +112,13 @@ export async function GET() {
             url: asset.browser_download_url || "",
           })),
       },
-      {
-        headers: {
-          "Cache-Control": "no-store, max-age=0",
-        },
-      }
+      { headers: { "Cache-Control": "no-store, max-age=0" } }
     );
   } catch (error) {
     console.error("GitHub release API error:", error);
-
     return NextResponse.json(
-      {
-        success: false,
-        error: "GitHub release lookup failed.",
-      },
-      {
-        status: 502,
-        headers: {
-          "Cache-Control": "no-store, max-age=0",
-        },
-      }
+      { success: false, error: "GitHub release lookup failed." },
+      { status: 502, headers: { "Cache-Control": "no-store, max-age=0" } }
     );
   }
 }

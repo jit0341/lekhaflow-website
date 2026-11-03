@@ -26,7 +26,7 @@ function PaymentContent() {
 
     async function verifyPayment() {
       try {
-        const response = await fetch("/api/verify-payment", {
+        const response = await fetch("/api/verify_payment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -161,7 +161,7 @@ function PaymentContent() {
         </div>
 
         <p className="text-slate-600 text-[9px] font-bold uppercase tracking-widest mt-6">
-          A copy of your license has also been sent to your email and WhatsApp.
+          Your license file is available to download here. Email delivery depends on the configured email service.
         </p>
       </div>
     </div>

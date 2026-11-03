@@ -71,7 +71,7 @@ export default function RootLayout({
               applicationCategory: "AccountingSoftware",
               offers: {
                 "@type": "Offer",
-                price: "15000",
+                price: "9999",
                 priceCurrency: "INR",
               },
             }),

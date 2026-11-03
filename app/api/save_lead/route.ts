@@ -1,90 +1,76 @@
 import { NextRequest, NextResponse } from "next/server";
+import crypto from "crypto";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-
-    const {
-      name,
-      company,
-      email,
-      mobile,
-      machineId,
-      plan,
-      price,
-      source,
-      help,
-      message,
-    } = body;
-
+    const name = String(body.name || "").trim();
+    const company = String(body.company || "").trim();
+    const email = String(body.email || "").trim();
+    const mobile = String(body.mobile || "").trim();
+    const source = String(body.source || "website");
+    const help = String(body.help || "").trim();
+    const message = String(body.message || "").trim();
     const isContactLead = source === "contact_page";
 
-    // Contact enquiries need name and email.
-    // Payment/other leads keep the existing validation.
-    if (isContactLead) {
-      if (!name || !email) {
-        return NextResponse.json(
-          { success: false, error: "Name and email are required" },
-          { status: 400 }
-        );
-      }
-    } else {
-      if (!name || !email || !mobile || !plan) {
-        return NextResponse.json(
-          { success: false, error: "Missing required fields" },
-          { status: 400 }
-        );
-      }
+    if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json(
+        { success: false, error: "A valid name and email address are required." },
+        { status: 400 }
+      );
+    }
+    if (!isContactLead && (!mobile || !body.plan)) {
+      return NextResponse.json(
+        { success: false, error: "Mobile number and plan are required." },
+        { status: 400 }
+      );
     }
 
-    // Send to Google Apps Script
     const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
-
-    if (googleScriptUrl) {
-      await fetch(googleScriptUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "SAVE_PAYMENT",
-          paymentId: `LEAD_${Date.now()}`,
-          orderId: `LEAD_${Date.now()}`,
-          customerName: name,
-          company: company || "",
-          email,
-          mobile: mobile || "",
-          plan: isContactLead ? "CONTACT" : plan.toUpperCase(),
-          amount: price || "0",
-          status: "LEAD",
-          machineId: machineId || "",
-          source: source || "website",
-          help: help || "",
-          message: message || "",
-          timestamp: new Date().toISOString(),
-        }),
-      });
+    if (!googleScriptUrl) {
+      return NextResponse.json(
+        { success: false, error: "Enquiry service is temporarily unavailable. Please use WhatsApp or email." },
+        { status: 503 }
+      );
     }
 
-    console.log("[LEAD CAPTURED]", {
-      name,
-      company,
-      email,
-      mobile,
-      plan: isContactLead ? "CONTACT" : plan,
-      source,
-      help,
-      message,
-      timestamp: new Date().toISOString(),
+    const leadId = `LEAD_${crypto.randomUUID()}`;
+    const response = await fetch(googleScriptUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "SAVE_PAYMENT",
+        paymentId: leadId,
+        orderId: leadId,
+        customerName: name,
+        company,
+        email,
+        mobile,
+        plan: isContactLead ? "CONTACT" : String(body.plan).toUpperCase(),
+        amount: "0",
+        status: "LEAD",
+        machineId: String(body.machineId || ""),
+        source,
+        help,
+        message,
+        timestamp: new Date().toISOString(),
+      }),
+      cache: "no-store",
     });
 
-    return NextResponse.json({
-      success: true,
-      message: "Lead saved",
-    });
+    if (!response.ok) {
+      console.error("Google Apps Script lead save failed:", response.status);
+      return NextResponse.json(
+        { success: false, error: "We could not save your enquiry. Please use WhatsApp or email." },
+        { status: 502 }
+      );
+    }
+
+    return NextResponse.json({ success: true, message: "Enquiry received." });
   } catch (error) {
     console.error("Save lead error:", error);
-
     return NextResponse.json(
-      { success: false, error: "Failed to save lead" },
+      { success: false, error: "Failed to save enquiry." },
       { status: 500 }
     );
   }
