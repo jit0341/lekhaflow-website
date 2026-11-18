@@ -19,8 +19,15 @@ export default function DocumentCloudWorkspace() {
   const [notice, setNotice] = useState("");
 
   const load = useCallback(async () => {
-    const response = await fetch("/api/document-cloud/documents", { cache: "no-store" });
-    const data = await response.json();
+    let response = await fetch("/api/document-cloud/documents", { cache: "no-store" });
+    let data = await response.json();
+    if (response.status === 401) {
+      const refreshed = await fetch("/api/document-cloud/refresh", { method: "POST" });
+      if (refreshed.ok) {
+        response = await fetch("/api/document-cloud/documents", { cache: "no-store" });
+        data = await response.json();
+      }
+    }
     if (!response.ok || !data.success) throw new Error(data.error || "Please sign in again.");
     setDocuments(data.documents || []);
     setUsed(Number(data.storageUsedBytes || 0));
