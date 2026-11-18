@@ -51,8 +51,8 @@ export async function filebasePresignedUpload(key: string, contentType: string, 
   const { bucket } = filebaseConfig();
   return getSignedUrl(
     filebaseClient(),
-    new PutObjectCommand({ Bucket: bucket, Key: key, ContentType: contentType, ContentLength: sizeBytes }),
-    { expiresIn: 300, signableHeaders: new Set(["content-type", "content-length"]) },
+    new PutObjectCommand({ Bucket: bucket, Key: key, ContentType: contentType }),
+    { expiresIn: 300, signableHeaders: new Set(["content-type"]) },
   );
 }
 
