@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
         const removed = await fetch(r2SignedUrl("DELETE", doc.storage_key, 120), { method: "DELETE" });
         if (!removed.ok && removed.status !== 404) throw new Error(`R2 delete returned ${removed.status}`);
         const rpc = doc.upload_status === "PENDING" ? "document_cloud_expire_pending" : "document_cloud_confirm_delete";
-        const payload = doc.upload_status === "PENDING" ? { p_document_id: doc.id } : { p_document_id: doc.id };
+        const payload = { p_document_id: doc.id };
         const confirmed = await fetch(`${url}/rest/v1/rpc/${rpc}`, {
           method: "POST",
           headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json" },
