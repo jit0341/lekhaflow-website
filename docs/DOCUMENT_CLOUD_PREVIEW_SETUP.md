@@ -17,7 +17,7 @@ Set these only in the Preview environment:
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY` — public key for the dedicated project.
 - `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_SECRET_KEY` — server secret for the dedicated project; server-side only.
 - `DOCUMENT_CLOUD_ADMIN_EMAILS` — comma-separated, verified admin email addresses.
-- `DOCUMENT_CLOUD_CRON_SECRET` — long random secret used by the scheduled cleanup endpoint.
+- `CRON_SECRET` — long random secret used by Vercel Cron; the cleanup endpoint also accepts `DOCUMENT_CLOUD_CRON_SECRET` for manual Preview checks.
 - `FILEBASE_ENDPOINT` — `https://s3.filebase.io` (region `auto`).
 - `FILEBASE_BUCKET` — private Filebase bucket name; Preview should use `lekhaflow-documents-test`.
 - `FILEBASE_ACCESS_KEY` — Filebase S3-compatible access key with access to this bucket only.
@@ -58,7 +58,7 @@ Configure the bucket CORS policy to allow only the exact Vercel Preview origin(s
 - Filebase bucket lifecycle rule: expire all objects after 14 days as a final safety net.
 - The repository config schedules `/api/cron/document-cloud-retention` daily at 03:00 UTC when deployed to a Vercel Production environment. Vercel Cron does not run on ordinary Preview deployments.
 - During Preview testing, invoke the endpoint manually with `Authorization: Bearer <DOCUMENT_CLOUD_CRON_SECRET>` from a secure terminal. Do not put the secret in a URL or browser code.
-- Before production release, set `DOCUMENT_CLOUD_CRON_SECRET` in the Vercel Production environment and verify the scheduled invocation in Vercel logs.
+- Before production release, set `CRON_SECRET` in the Vercel Production environment and verify the scheduled invocation in Vercel logs. For manual Preview checks, `DOCUMENT_CLOUD_CRON_SECRET` may also be used.
 - Application retention: after a successful client-side download, set expiry to the earlier of 3 days after download or 14 days after upload.
 - Failed/abandoned reservations older than 30 minutes are cleaned up and their quota released.
 - Filebase lifecycle expiry is asynchronous; never promise deletion at an exact second.
