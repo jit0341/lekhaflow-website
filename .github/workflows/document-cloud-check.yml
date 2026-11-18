@@ -1,0 +1,42 @@
+name: Document Cloud Preview Build
+
+on:
+  push:
+    branches:
+      - feature/document-cloud
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "app/api/document-cloud/**"
+      - "app/document-cloud/**"
+      - "lib/document-cloud/**"
+      - "supabase/migrations/**"
+      - "package.json"
+      - "package-lock.json"
+      - "vercel.json"
+      - ".github/workflows/document-cloud-check.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: document-cloud-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build Next.js application
+        run: npm run build
