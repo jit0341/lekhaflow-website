@@ -20,7 +20,7 @@ export async function requireDocumentCloudAdmin(request: NextRequest) {
     return { error: NextResponse.json({ success: false, error: "Authentication service unavailable." }, { status: 503 }) };
   }
 
-  if (!user?.email || !adminEmails().has(user.email.toLowerCase())) {
+  if (!user?.email || !user.email_confirmed_at || !adminEmails().has(user.email.toLowerCase())) {
     return { error: NextResponse.json({ success: false, error: "Administrator access required." }, { status: 403 }) };
   }
 
