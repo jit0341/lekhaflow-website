@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDocumentCloudUser, supabaseConfig } from "@/lib/document-cloud/supabase-auth";
+import { getDocumentCloudUser, supabaseConfig, supabaseServerKey } from "@/lib/document-cloud/supabase-auth";
 import { filebaseDeleteObject, filebasePresignedDownload } from "@/lib/document-cloud/filebase";
 
 export const runtime = "nodejs";
@@ -16,8 +16,7 @@ async function ownedReadyDocument(request: NextRequest, id: string) {
   if (!profileResponse.ok || !Array.isArray(profileRows) || profileRows[0]?.account_status !== "ACTIVE") {
     return { error: NextResponse.json({ success: false, error: "An active client account is required." }, { status: 403 }) };
   }
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!serviceKey) throw new Error("SUPABASE_SERVICE_ROLE_KEY is not configured.");
+  const serviceKey = supabaseServerKey();
   const response = await fetch(`${url}/rest/v1/document_cloud_documents?select=id,client_id,original_filename,content_type,size_bytes,storage_key,upload_status,first_downloaded_at,delete_after&id=eq.${encodeURIComponent(id)}&client_id=eq.${encodeURIComponent(user.id)}`, {
     headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` }, cache: "no-store",
   });
