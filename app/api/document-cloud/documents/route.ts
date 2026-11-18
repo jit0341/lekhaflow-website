@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     const session = await activeUser(request);
     if (!session) return NextResponse.json({ success: false, error: "An active client session is required." }, { status: 401 });
     const { url, key } = supabaseConfig();
-    const response = await fetch(`${url}/rest/v1/document_cloud_documents?select=id,category,original_filename,content_type,size_bytes,upload_status,uploaded_at,first_downloaded_at,delete_after&client_id=eq.${encodeURIComponent(session.user.id)}&upload_status=eq.READY&order=uploaded_at.desc`, {
+    const response = await fetch(`${url}/rest/v1/document_cloud_documents?select=id,category,original_filename,content_type,size_bytes,upload_status,uploaded_at,first_downloaded_at,delete_after&client_id=eq.${encodeURIComponent(session.user.id)}&upload_status=eq.READY&delete_after=gt.${encodeURIComponent(new Date().toISOString())}&order=uploaded_at.desc`, {
       headers: { apikey: key, Authorization: `Bearer ${request.cookies.get("lf_dc_access")?.value || ""}` },
       cache: "no-store",
     });
