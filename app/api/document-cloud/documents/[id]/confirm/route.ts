@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isDocumentCloudSameOrigin } from "@/lib/document-cloud/supabase-auth";
 import { getDocumentCloudUser, supabaseConfig } from "@/lib/document-cloud/supabase-auth";
 
 export const runtime = "nodejs";
 
-export async function POST(request: NextRequest, context: { params: Promise<{ id: string }> }) {
+export async function POST(request: NextRequest, context:
+  if (!isDocumentCloudSameOrigin(request)) {
+    return NextResponse.json({ success: false, error: "Invalid request origin." }, { status: 403 });
+  } { params: Promise<{ id: string }> }) {
   try {
     const user = await getDocumentCloudUser(request);
     if (!user) return NextResponse.json({ success: false, error: "Sign in required." }, { status: 401 });
