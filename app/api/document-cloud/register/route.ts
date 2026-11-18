@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isDocumentCloudSameOrigin } from "@/lib/document-cloud/supabase-auth";
 import { supabaseAuthRequest } from "@/lib/document-cloud/supabase-auth";
 
 export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
+  if (!isDocumentCloudSameOrigin(request)) {
+    return NextResponse.json({ success: false, error: "Invalid request origin." }, { status: 403 });
+  }
   try {
     const body = await request.json();
     const businessName = String(body.businessName || "").trim();
