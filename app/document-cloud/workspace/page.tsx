@@ -98,6 +98,21 @@ export default function DocumentCloudWorkspace() {
     finally { setBusyId(""); }
   }
 
+  async function preview(doc: Doc) {
+    const previewWindow = window.open("about:blank", "_blank", "noopener,noreferrer");
+    if (!previewWindow) { setError("Allow pop-ups to preview this document."); return; }
+    setBusyId(doc.id); setError(""); setNotice("");
+    try {
+      const response = await fetch(`/api/document-cloud/documents/${doc.id}?mode=preview`, { method: "POST" });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.error || "Preview could not start.");
+      previewWindow.location.href = data.url;
+    } catch (e) {
+      previewWindow.close();
+      setError(e instanceof Error ? e.message : "Preview failed.");
+    } finally { setBusyId(""); }
+  }
+
   async function remove(doc: Doc) {
     if (!window.confirm(`Permanently delete "${doc.original_filename}"?`)) return;
     setBusyId(doc.id); setError(""); setNotice("");
@@ -143,7 +158,7 @@ export default function DocumentCloudWorkspace() {
 
         <section className="mt-8">
           <div className="flex flex-wrap items-center justify-between gap-2"><h2 className="text-xl font-black">Your documents</h2><button onClick={() => void load().catch(e => setError(String(e)))} className="text-sm font-bold text-teal-700 hover:underline">Refresh list</button></div>
-          {documents.length === 0 ? <div className="mt-4 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center"><p className="font-bold">No documents uploaded yet</p><p className="mt-1 text-sm text-slate-500">Your uploaded files will appear here.</p></div> : <div className="mt-4 space-y-3">{documents.map(doc => <article key={doc.id} className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"><div className="min-w-0"><div className="flex flex-wrap items-center gap-2"><span className="rounded-full bg-teal-50 px-2.5 py-1 text-[10px] font-black text-teal-800">{categoryName(doc.category)}</span><span className="text-xs text-slate-400">{fmt(Number(doc.size_bytes))}</span></div><h3 className="mt-2 break-all text-sm font-black">{doc.original_filename}</h3><p className="mt-1 text-xs text-slate-500">Uploaded {new Date(doc.uploaded_at).toLocaleString()}</p><p className="mt-1 text-xs text-amber-700">{doc.delete_after ? `Scheduled expiry: ${new Date(doc.delete_after).toLocaleString()}` : "Expires within 14 days; after first successful download, 3-day retention applies"}</p></div><div className="flex gap-2"><button disabled={busyId === doc.id} onClick={() => void download(doc)} className="rounded-lg bg-slate-900 px-3 py-2 text-xs font-bold text-white disabled:opacity-50">{busyId === doc.id ? "Working…" : "Download"}</button><button disabled={busyId === doc.id} onClick={() => void remove(doc)} className="rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-700 disabled:opacity-50">Delete</button></div></article>)}</div>}
+          {documents.length === 0 ? <div className="mt-4 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center"><p className="font-bold">No documents uploaded yet</p><p className="mt-1 text-sm text-slate-500">Your uploaded files will appear here.</p></div> : <div className="mt-4 space-y-3">{documents.map(doc => <article key={doc.id} className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"><div className="min-w-0"><div className="flex flex-wrap items-center gap-2"><span className="rounded-full bg-teal-50 px-2.5 py-1 text-[10px] font-black text-teal-800">{categoryName(doc.category)}</span><span className="text-xs text-slate-400">{fmt(Number(doc.size_bytes))}</span></div><h3 className="mt-2 break-all text-sm font-black">{doc.original_filename}</h3><p className="mt-1 text-xs text-slate-500">Uploaded {new Date(doc.uploaded_at).toLocaleString()}</p><p className="mt-1 text-xs text-amber-700">{doc.delete_after ? `Scheduled expiry: ${new Date(doc.delete_after).toLocaleString()}` : "Expires within 14 days; after first successful download, 3-day retention applies"}</p></div><div className="flex gap-2"><button disabled={busyId === doc.id} onClick={() => void preview(doc)} className="rounded-lg border border-slate-300 px-3 py-2 text-xs font-bold text-slate-700 disabled:opacity-50">Preview</button><button disabled={busyId === doc.id} onClick={() => void download(doc)} className="rounded-lg bg-slate-900 px-3 py-2 text-xs font-bold text-white disabled:opacity-50">{busyId === doc.id ? "Working…" : "Download"}</button><button disabled={busyId === doc.id} onClick={() => void remove(doc)} className="rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-700 disabled:opacity-50">Delete</button></div></article>)}</div>}
         </section>
         <p className="mt-8 text-xs leading-5 text-slate-500">Your files are stored privately. Keep your own backup: files expire automatically under the Document Cloud retention policy.</p>
       </div>
