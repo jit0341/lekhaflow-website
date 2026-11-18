@@ -38,6 +38,7 @@ const mainLinks = [
   { name: "Pricing", href: "/pricing" },
   { name: "Partners", href: "/partner" },
   { name: "Downloads", href: "/downloads" },
+  { name: "Document Cloud", href: "/document-cloud" },
   { name: "Insights", href: "/blog" },
   { name: "Contact & Support", href: "/contact" },
   { name: "Admin", href: "/admin-login" },
