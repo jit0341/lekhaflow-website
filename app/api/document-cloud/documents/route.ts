@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDocumentCloudUser, supabaseConfig } from "@/lib/document-cloud/supabase-auth";
-import { newStorageKey, r2SignedUrl, validFileSignature } from "@/lib/document-cloud/r2";
+import { newStorageKey, r2SignedUrl } from "@/lib/document-cloud/r2";
 
 export const runtime = "nodejs";
 
