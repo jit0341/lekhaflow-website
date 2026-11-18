@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
 
     const head = await filebaseHeadObject(storageKey);
     if (Number(head.ContentLength) !== Number(doc.size_bytes)) {
-      await filebaseDeleteObject(storageKey).catch(() => null);
+      await filebaseDeleteObject(storageKey);
       const accessToken = request.cookies.get("lf_dc_access")?.value || "";
       await fetch(`${url}/rest/v1/rpc/document_cloud_cancel_upload`, {
         method: "POST", headers: { apikey: key, Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     }
     const bytes = await filebaseReadObject(storageKey);
     if (bytes.byteLength !== Number(doc.size_bytes) || !validFileSignature(bytes, doc.content_type)) {
-      await filebaseDeleteObject(storageKey).catch(() => null);
+      await filebaseDeleteObject(storageKey);
       const accessToken = request.cookies.get("lf_dc_access")?.value || "";
       await fetch(`${url}/rest/v1/rpc/document_cloud_cancel_upload`, {
         method: "POST",
