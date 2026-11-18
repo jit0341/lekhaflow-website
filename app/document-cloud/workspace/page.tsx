@@ -39,6 +39,7 @@ export default function DocumentCloudWorkspace() {
   async function upload() {
     if (!file) { setError("Choose a file first."); return; }
     setBusy(true); setError(""); setNotice("");
+    let pendingDocumentId: string | null = null;
     try {
       if (file.size > MAX) throw new Error("A single file cannot exceed 25 MB.");
       const reservationResponse = await fetch("/api/document-cloud/documents", {
@@ -47,6 +48,7 @@ export default function DocumentCloudWorkspace() {
       });
       const reservation = await reservationResponse.json();
       if (!reservationResponse.ok || !reservation.success) throw new Error(reservation.error || "Could not reserve storage.");
+      pendingDocumentId = reservation.documentId;
       const stored = await fetch(reservation.uploadUrl, { method: "PUT", headers: reservation.uploadHeaders, body: file });
       if (!stored.ok) throw new Error("File upload to secure storage failed. Please retry.");
       const finalizedResponse = await fetch("/api/document-cloud/documents/finalize", {
@@ -55,12 +57,21 @@ export default function DocumentCloudWorkspace() {
       });
       const finalized = await finalizedResponse.json();
       if (!finalizedResponse.ok || !finalized.success) throw new Error(finalized.error || "File verification failed.");
+      pendingDocumentId = null;
       setNotice("File uploaded and verified successfully.");
       setFile(null);
       const input = document.getElementById("document-cloud-file") as HTMLInputElement | null;
       if (input) input.value = "";
       await load();
-    } catch (e) { setError(e instanceof Error ? e.message : "Upload failed."); }
+    } catch (e) {
+      if (pendingDocumentId) {
+        await fetch("/api/document-cloud/documents/cancel", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ documentId: pendingDocumentId }),
+        }).catch(() => null);
+      }
+      setError(e instanceof Error ? e.message : "Upload failed.");
+    }
     finally { setBusy(false); }
   }
 
@@ -77,9 +88,11 @@ export default function DocumentCloudWorkspace() {
       const anchor = document.createElement("a");
       anchor.href = objectUrl; anchor.download = data.filename || doc.original_filename;
       document.body.appendChild(anchor); anchor.click(); anchor.remove();
-      URL.revokeObjectURL(objectUrl);
-      await fetch(`/api/document-cloud/documents/${doc.id}/confirm`, { method: "POST" });
-      setNotice("Download completed. The document will expire within the displayed retention period.");
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 60000);
+      const confirmation = await fetch(`/api/document-cloud/documents/${doc.id}/confirm`, { method: "POST" });
+      const confirmationData = await confirmation.json().catch(() => ({}));
+      if (!confirmation.ok || !confirmationData.success) throw new Error("File downloaded, but retention timing could not be confirmed. Please refresh the list or contact support.");
+      setNotice(`Download completed. Scheduled expiry: ${new Date(confirmationData.deleteAfter).toLocaleString()}.`);
       await load();
     } catch (e) { setError(e instanceof Error ? e.message : "Download failed."); }
     finally { setBusyId(""); }
