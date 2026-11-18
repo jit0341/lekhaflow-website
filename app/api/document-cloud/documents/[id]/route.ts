@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDocumentCloudUser, supabaseConfig } from "@/lib/document-cloud/supabase-auth";
-import { r2SignedUrl } from "@/lib/document-cloud/r2";
+import { filebaseDeleteObject, filebasePresignedDownload } from "@/lib/document-cloud/filebase";
 
 export const runtime = "nodejs";
 
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
     if ("error" in result) return result.error;
     return NextResponse.json({
       success: true,
-      url: r2SignedUrl("GET", result.doc.storage_key, 180),
+      url: await filebasePresignedDownload(result.doc.storage_key),
       filename: result.doc.original_filename,
       contentType: result.doc.content_type,
     });
@@ -51,8 +51,12 @@ export async function DELETE(request: NextRequest, context: { params: Promise<{ 
     const { id } = await context.params;
     const result = await ownedReadyDocument(request, id);
     if ("error" in result) return result.error;
-    const removed = await fetch(r2SignedUrl("DELETE", result.doc.storage_key, 120), { method: "DELETE" });
-    if (!removed.ok && removed.status !== 404) {
+    let removed = true;
+    try { await filebaseDeleteObject(result.doc.storage_key); } catch (error) {
+      const status = (error as { $metadata?: { httpStatusCode?: number } })?.$metadata?.httpStatusCode;
+      if (status !== 404) removed = false;
+    }
+    if (!removed) {
       return NextResponse.json({ success: false, error: "Storage could not delete this file. Please retry." }, { status: 502 });
     }
     const confirmed = await fetch(`${result.url}/rest/v1/rpc/document_cloud_confirm_delete`, {
