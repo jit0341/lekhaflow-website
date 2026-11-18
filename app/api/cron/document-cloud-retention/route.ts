@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 export async function GET(request: NextRequest) {
-  const secret = process.env.DOCUMENT_CLOUD_CRON_SECRET;
+  const secret = process.env.CRON_SECRET || process.env.DOCUMENT_CLOUD_CRON_SECRET;
   if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) {
     return NextResponse.json({ success: false, error: "Unauthorized." }, { status: 401 });
   }
