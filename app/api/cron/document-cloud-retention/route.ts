@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseConfig } from "@/lib/document-cloud/supabase-auth";
+import { supabaseConfig, supabaseServerKey } from "@/lib/document-cloud/supabase-auth";
 import { filebaseDeleteObject } from "@/lib/document-cloud/filebase";
 
 export const runtime = "nodejs";
@@ -13,8 +13,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const { url } = supabaseConfig();
-    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-    if (!serviceKey) throw new Error("SUPABASE_SERVICE_ROLE_KEY is not configured.");
+    const serviceKey = supabaseServerKey();
     const now = new Date();
     const cutoff = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
     const pendingCutoff = new Date(now.getTime() - 30 * 60 * 1000);
