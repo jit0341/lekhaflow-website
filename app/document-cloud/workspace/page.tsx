@@ -99,8 +99,9 @@ export default function DocumentCloudWorkspace() {
   }
 
   async function preview(doc: Doc) {
-    const previewWindow = window.open("about:blank", "_blank", "noopener,noreferrer");
+    const previewWindow = window.open("about:blank", "_blank");
     if (!previewWindow) { setError("Allow pop-ups to preview this document."); return; }
+    previewWindow.opener = null;
     setBusyId(doc.id); setError(""); setNotice("");
     try {
       const response = await fetch(`/api/document-cloud/documents/${doc.id}?mode=preview`, { method: "POST" });
