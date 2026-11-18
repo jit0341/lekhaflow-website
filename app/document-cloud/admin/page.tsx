@@ -24,6 +24,9 @@ export default function DocumentCloudAdminPage() {
   const [saving, setSaving] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [authenticated, setAuthenticated] = useState(false);
+  const [adminEmail, setAdminEmail] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
 
   const load = useCallback(async () => {
     setBusy(true); setError("");
@@ -31,15 +34,30 @@ export default function DocumentCloudAdminPage() {
       const response = await fetch("/api/document-cloud/admin/clients", { cache: "no-store" });
       const data = await response.json();
       if (!response.ok || !data.success) throw new Error(data.error || "Could not load accounts.");
-      setClients(data.clients || []);
+      setClients(data.clients || []);\n      setAuthenticated(true);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Could not load accounts.");
+      setAuthenticated(false);\n      setError(e instanceof Error ? e.message : "Could not load accounts.");
     } finally { setBusy(false); }
   }, []);
 
   useEffect(() => { void load(); }, [load]);
 
   const visible = useMemo(() => filter === "ALL" ? clients : filter === "TEST" ? clients.filter(c => c.is_test_account) : clients.filter(c => c.account_status === filter), [clients, filter]);
+
+  async function adminLogin() {
+    setSaving("admin-login"); setError(""); setNotice("");
+    try {
+      const response = await fetch("/api/document-cloud/admin/login", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: adminEmail, password: adminPassword }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.error || "Administrator sign-in failed.");
+      setAdminPassword("");
+      await load();
+    } catch (e) { setError(e instanceof Error ? e.message : "Administrator sign-in failed."); }
+    finally { setSaving(null); }
+  }
 
   async function update(client: Client, accountStatus: string, isTestAccount = client.is_test_account) {
     setSaving(client.id); setError(""); setNotice("");
@@ -71,6 +89,16 @@ export default function DocumentCloudAdminPage() {
           <button onClick={() => void load()} disabled={busy} className="rounded-xl border border-slate-700 px-4 py-2.5 text-sm font-bold hover:bg-slate-800 disabled:opacity-50">{busy ? "Refreshing…" : "Refresh"}</button>
         </div>
 
+        {!authenticated && <section className="mt-8 max-w-lg rounded-2xl border border-slate-800 bg-slate-900 p-6">
+          <h2 className="text-lg font-black">Administrator sign in</h2>
+          <p className="mt-1 text-sm text-slate-400">Use a verified Supabase account listed in DOCUMENT_CLOUD_ADMIN_EMAILS.</p>
+          <label className="mt-4 block text-xs font-bold text-slate-400">ADMIN EMAIL</label>
+          <input type="email" autoComplete="username" value={adminEmail} onChange={e => setAdminEmail(e.target.value)} className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white" />
+          <label className="mt-4 block text-xs font-bold text-slate-400">PASSWORD</label>
+          <input type="password" autoComplete="current-password" value={adminPassword} onChange={e => setAdminPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white" />
+          <button onClick={() => void adminLogin()} disabled={saving === "admin-login" || !adminEmail || !adminPassword} className="mt-4 w-full rounded-xl bg-teal-500 px-4 py-3 text-sm font-black text-slate-950 disabled:opacity-50">{saving === "admin-login" ? "Signing in…" : "Sign in securely"}</button>
+        </section>}
+        {authenticated && <>
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[["All clients", counts.all], ["Pending review", counts.pending], ["Active clients", counts.active], ["TEST accounts", counts.test]].map(([label, value]) => <div key={label} className="rounded-2xl border border-slate-800 bg-slate-900 p-5"><p className="text-xs font-bold text-slate-400">{label}</p><p className="mt-2 text-3xl font-black">{value}</p></div>)}
         </div>
@@ -102,6 +130,7 @@ export default function DocumentCloudAdminPage() {
           </div>}
         </div>
         <p className="mt-5 text-xs leading-5 text-slate-500">This page is protected by the server-side Document Cloud administrator allowlist. Test accounts use normal authentication and remain clearly labelled.</p>
+        </>}
       </div>
     </main>
   );
