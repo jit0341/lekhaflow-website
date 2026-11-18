@@ -34,9 +34,11 @@ export default function DocumentCloudAdminPage() {
       const response = await fetch("/api/document-cloud/admin/clients", { cache: "no-store" });
       const data = await response.json();
       if (!response.ok || !data.success) throw new Error(data.error || "Could not load accounts.");
-      setClients(data.clients || []);\n      setAuthenticated(true);
+      setClients(data.clients || []);
+      setAuthenticated(true);
     } catch (e) {
-      setAuthenticated(false);\n      setError(e instanceof Error ? e.message : "Could not load accounts.");
+      setAuthenticated(false);
+      setError(e instanceof Error ? e.message : "Could not load accounts.");
     } finally { setBusy(false); }
   }, []);
 
