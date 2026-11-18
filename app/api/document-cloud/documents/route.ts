@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isDocumentCloudSameOrigin } from "@/lib/document-cloud/supabase-auth";
 import { getDocumentCloudUser, supabaseConfig } from "@/lib/document-cloud/supabase-auth";
 import { newStorageKey, filebasePresignedUpload } from "@/lib/document-cloud/filebase";
 
@@ -41,6 +42,9 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  if (!isDocumentCloudSameOrigin(request)) {
+    return NextResponse.json({ success: false, error: "Invalid request origin." }, { status: 403 });
+  }
   try {
     const session = await activeUser(request);
     if (!session) return NextResponse.json({ success: false, error: "An active client session is required." }, { status: 401 });
