@@ -33,12 +33,25 @@ Apply the following SQL files to the dedicated Document Cloud Supabase project, 
 2. `supabase/migrations/0002_document_cloud_lifecycle.sql`
 3. `supabase/migrations/0003_document_cloud_retention.sql`
 4. `supabase/migrations/0004_document_cloud_pending_cleanup.sql`
+5. `supabase/migrations/0005_document_cloud_rate_limits.sql`
 
 Verify the tables, triggers, RLS policies, RPC grants and indexes exist. Confirm the `document_cloud_clients` trigger creates profiles only when registration metadata is valid.
 
 ## R2 CORS
 
-Configure the bucket CORS policy to allow only the exact Vercel Preview origin(s) and local development origin required for testing. Allow browser methods `PUT` and `GET`; allow the `Content-Type` request header; expose `ETag` and `Content-Length`. Do not use wildcard origins for a customer-facing deployment. CORS is not access control: keep the bucket private and rely on short-lived signed URLs.
+Configure the bucket CORS policy to allow only the exact Vercel Preview origin(s) and local development origin required for testing. Allow browser methods `PUT` and `GET`; allow the `Content-Type` request header; expose `ETag` and `Content-Length`. Example policy shape (replace origins with exact origins):
+
+```json
+[
+  {
+    "AllowedOrigins": ["https://YOUR-PREVIEW-DOMAIN.vercel.app"],
+    "AllowedMethods": ["GET", "PUT"],
+    "AllowedHeaders": ["Content-Type"],
+    "ExposeHeaders": ["ETag", "Content-Length"],
+    "MaxAgeSeconds": 300
+  }
+]
+``` Do not use wildcard origins for a customer-facing deployment. CORS is not access control: keep the bucket private and rely on short-lived signed URLs.
 
 ## Retention
 
@@ -82,5 +95,6 @@ Configure the bucket CORS policy to allow only the exact Vercel Preview origin(s
 - The actual Supabase project, R2 bucket, Preview environment variables and R2 CORS/lifecycle rules must be provisioned by the account owner; repository access cannot create or verify those external resources.
 - The database migrations have been added to this branch but have not been applied to a Supabase project.
 - The code has not yet been built or exercised against real Supabase/R2 credentials.
-- Password reset, token refresh, rate limiting, admin audit UI and production-grade observability still require implementation/review before declaring the portal production-ready.
+- Password reset and seamless access/refresh-token rotation are not yet implemented; the current access session expires and may require the client to sign in again.
+- Admin audit events are recorded for account changes, but an audit-history viewer and production-grade observability still require implementation/review before declaring the portal production-ready.
 - The current branch has diverged from `main`; compare and reconcile the base branch carefully before opening a production-targeting PR. Never force-push or merge it directly.
