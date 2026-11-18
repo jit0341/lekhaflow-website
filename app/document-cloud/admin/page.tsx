@@ -27,6 +27,7 @@ export default function DocumentCloudAdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [adminEmail, setAdminEmail] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
+  const [health, setHealth] = useState<{ success: boolean; checks: Record<string, { ok: boolean; detail?: string }> } | null>(null);
 
   const load = useCallback(async () => {
     setBusy(true); setError("");
@@ -68,6 +69,22 @@ export default function DocumentCloudAdminPage() {
     finally { setSaving(null); }
   }
 
+  async function checkHealth() {
+    setSaving("health"); setError(""); setNotice("");
+    try {
+      const response = await fetch("/api/document-cloud/admin/health", { cache: "no-store" });
+      const data = await response.json();
+      setHealth(data);
+      if (!response.ok || !data.success) throw new Error("One or more services could not be reached. See the diagnostics below.");
+    } catch (e) { setError(e instanceof Error ? e.message : "Service health check failed."); }
+    finally { setSaving(null); }
+  }
+
+  async function adminLogout() {
+    await fetch("/api/document-cloud/logout", { method: "POST" });
+    setAuthenticated(false); setClients([]); setHealth(null);
+  }
+
   async function update(client: Client, accountStatus: string, isTestAccount = client.is_test_account) {
     setSaving(client.id); setError(""); setNotice("");
     try {
@@ -95,10 +112,11 @@ export default function DocumentCloudAdminPage() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div><p className="text-xs font-black uppercase tracking-[.24em] text-teal-400">LekhaFlow · Internal</p><h1 className="mt-2 text-3xl font-black sm:text-4xl">Document Cloud Admin</h1><p className="mt-2 text-sm text-slate-400">Client approvals, account status and test-account controls</p></div>
-          <button onClick={() => void load()} disabled={busy} className="rounded-xl border border-slate-700 px-4 py-2.5 text-sm font-bold hover:bg-slate-800 disabled:opacity-50">{busy ? "Refreshing…" : "Refresh"}</button>
+          <div className="flex flex-wrap gap-2"><button onClick={() => void load()} disabled={busy} className="rounded-xl border border-slate-700 px-4 py-2.5 text-sm font-bold hover:bg-slate-800 disabled:opacity-50">{busy ? "Refreshing…" : "Refresh"}</button>{authenticated && <><button onClick={() => void checkHealth()} disabled={saving === "health"} className="rounded-xl bg-teal-500 px-4 py-2.5 text-sm font-black text-slate-950 disabled:opacity-50">{saving === "health" ? "Checking…" : "Check Services"}</button><button onClick={() => void adminLogout()} className="rounded-xl border border-slate-700 px-4 py-2.5 text-sm font-bold hover:bg-slate-800">Sign out</button></>}</div>
         </div>
 
         {error && <p role="alert" className="mt-5 max-w-2xl rounded-xl border border-red-900 bg-red-950/60 p-4 text-sm text-red-200">{error}</p>}
+        {health && <section className="mt-5 grid gap-3 sm:grid-cols-2">{Object.entries(health.checks || {}).map(([name, check]) => <div key={name} className="rounded-xl border border-slate-800 bg-slate-900 p-4"><div className="flex items-center justify-between"><p className="text-sm font-black capitalize">{name}</p><span className={check.ok ? "text-xs font-black text-teal-300" : "text-xs font-black text-red-300"}>{check.ok ? "CONNECTED" : "NOT CONNECTED"}</span></div><p className="mt-2 break-words text-xs leading-5 text-slate-400">{check.detail || "No details returned."}</p></div>)}</section>}
         {notice && <p role="status" className="mt-5 max-w-2xl rounded-xl border border-teal-900 bg-teal-950/60 p-4 text-sm text-teal-200">{notice}</p>}
 
         {!authenticated && <section className="mt-8 max-w-lg rounded-2xl border border-slate-800 bg-slate-900 p-6">
