@@ -3,6 +3,12 @@ import { isDocumentCloudSameOrigin, supabaseConfig } from "@/lib/document-cloud/
 
 export const runtime = "nodejs";
 
+function allowedAdmin(email: string) {
+  return new Set((process.env.DOCUMENT_CLOUD_ADMIN_EMAILS || "")
+    .split(",").map(value => value.trim().toLowerCase()).filter(Boolean))
+    .has(email.toLowerCase());
+}
+
 export async function POST(request: NextRequest) {
   if (!isDocumentCloudSameOrigin(request)) {
     return NextResponse.json({ success: false, error: "Invalid request origin." }, { status: 403 });
@@ -24,6 +30,11 @@ export async function POST(request: NextRequest) {
     });
     if (!userResponse.ok) {
       return NextResponse.json({ success: false, error: "This recovery link is invalid or expired. Request a new password reset email." }, { status: 401 });
+    }
+    const recoveredUser = await userResponse.json().catch(() => ({}));
+    const recoveredEmail = String(recoveredUser.email || "").trim().toLowerCase();
+    if (!recoveredEmail || !allowedAdmin(recoveredEmail)) {
+      return NextResponse.json({ success: false, error: "This recovery link does not belong to an authorized Document Cloud administrator." }, { status: 403 });
     }
 
     const updateResponse = await fetch(`${url}/auth/v1/user`, {
