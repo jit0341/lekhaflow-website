@@ -26,7 +26,7 @@ async function ownedReadyDocument(request: NextRequest, id: string) {
   );
   const rows = await response.json().catch(() => []);
   const doc = Array.isArray(rows) ? rows[0] : null;
-  if (!response.ok || !doc || doc.upload_status !== "READY") {
+  if (!response.ok || !doc || doc.upload_status !== "READY" || (doc.delete_after && new Date(doc.delete_after).getTime() <= Date.now())) {
     return { error: NextResponse.json({ success: false, error: "Document not found." }, { status: 404 }) };
   }
   return { user, doc, url, serviceKey };
