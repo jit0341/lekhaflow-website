@@ -19,7 +19,7 @@ Set these only in the Preview environment:
 - `DOCUMENT_CLOUD_ADMIN_EMAILS` — comma-separated, verified admin email addresses.
 - `DOCUMENT_CLOUD_CRON_SECRET` — long random secret used by the scheduled cleanup endpoint.
 - `FILEBASE_ENDPOINT` — `https://s3.filebase.io` (region `auto`).
-- `FILEBASE_BUCKET` — private Filebase bucket name.
+- `FILEBASE_BUCKET` — private Filebase bucket name; Preview should use `lekhaflow-documents-test`.
 - `FILEBASE_ACCESS_KEY` — Filebase S3-compatible access key with access to this bucket only.
 - `FILEBASE_SECRET_KEY` — matching Filebase secret.
 
@@ -62,6 +62,10 @@ Configure the bucket CORS policy to allow only the exact Vercel Preview origin(s
 - Application retention: after a successful client-side download, set expiry to the earlier of 3 days after download or 14 days after upload.
 - Failed/abandoned reservations older than 30 minutes are cleaned up and their quota released.
 - Filebase lifecycle expiry is asynchronous; never promise deletion at an exact second.
+
+## Connectivity check
+
+After deploying the branch to Vercel Preview and signing in as an allowlisted administrator, call `GET /api/document-cloud/admin/health`. It verifies the dedicated Supabase table and Filebase bucket credentials without returning secret values.
 
 ## Required code review before Preview testing
 
