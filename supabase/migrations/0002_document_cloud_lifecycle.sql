@@ -65,7 +65,7 @@ begin
 end;
 $$;
 
--- Call only after the private R2 object has actually been deleted.
+-- Call only after the private Filebase object has actually been deleted.
 create or replace function public.document_cloud_confirm_delete(p_document_id uuid)
 returns boolean
 language plpgsql
