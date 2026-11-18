@@ -56,9 +56,9 @@ export async function filebasePresignedUpload(key: string, contentType: string) 
   );
 }
 
-export async function filebasePresignedDownload(key: string) {
+export async function filebasePresignedDownload(key: string, disposition: "inline" | "attachment" = "attachment") {
   const { bucket } = filebaseConfig();
-  return getSignedUrl(filebaseClient(), new GetObjectCommand({ Bucket: bucket, Key: key }), { expiresIn: 180 });
+  return getSignedUrl(filebaseClient(), new GetObjectCommand({ Bucket: bucket, Key: key, ResponseContentDisposition: disposition }), { expiresIn: 180 });
 }
 
 export async function filebaseHeadObject(key: string) {
