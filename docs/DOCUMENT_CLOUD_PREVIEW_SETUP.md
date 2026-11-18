@@ -97,8 +97,8 @@ After deploying the branch to Vercel Preview and signing in as an allowlisted ad
 ## Current known limitations
 
 - The actual Supabase project, Filebase bucket, Preview environment variables and Filebase CORS/lifecycle rules must be provisioned by the account owner; repository access cannot create or verify those external resources.
-- The database migrations have been added to this branch but have not been applied to a Supabase project.
+- The owner confirmed that migrations 0002–0005 were successfully executed in the Supabase SQL Editor. Migration 0001 was previously reported as applied. Before Preview testing, verify the five migration files against the live schema (tables, triggers, functions, grants and indexes) and confirm this is the dedicated Document Cloud Supabase project.
 - The code has not yet been built or exercised against real Supabase/Filebase credentials.
 - Password reset is not yet implemented. Access tokens are refreshed through the HttpOnly refresh-token cookie when the workspace reloads after an access-token expiry; a fully idle or revoked session may still require sign-in.
 - Admin audit events are recorded for account changes, but an audit-history viewer and production-grade observability still require implementation/review before declaring the portal production-ready.
-- The current branch has diverged from `main`; compare and reconcile the base branch carefully before opening a production-targeting PR. Never force-push or merge it directly.
+- The website's correct base branch is `master`. The current `feature/document-cloud` branch is 148 commits ahead of `master` and 0 commits behind at the last comparison; it contains 48 changed files. Review the full diff carefully before opening any production-targeting PR. Never force-push or merge it directly.
