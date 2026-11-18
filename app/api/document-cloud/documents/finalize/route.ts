@@ -30,6 +30,11 @@ export async function POST(request: NextRequest) {
     const head = await fetch(r2SignedUrl("HEAD", storageKey, 120), { method: "HEAD", cache: "no-store" });
     if (!head.ok || Number(head.headers.get("content-length")) !== Number(doc.size_bytes)) {
       await fetch(r2SignedUrl("DELETE", storageKey, 120), { method: "DELETE" }).catch(() => null);
+      const accessToken = request.cookies.get("lf_dc_access")?.value || "";
+      await fetch(`${url}/rest/v1/rpc/document_cloud_cancel_upload`, {
+        method: "POST", headers: { apikey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "", Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ p_document_id: documentId }), cache: "no-store",
+      }).catch(() => null);
       return NextResponse.json({ success: false, error: "Uploaded file size does not match the reserved size." }, { status: 413 });
     }
     const object = await fetch(r2SignedUrl("GET", storageKey, 120), { cache: "no-store" });
