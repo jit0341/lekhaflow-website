@@ -6,7 +6,7 @@ on:
       - feature/document-cloud
   pull_request:
     branches:
-      - main
+      - master
     paths:
       - "app/api/document-cloud/**"
       - "app/document-cloud/**"
