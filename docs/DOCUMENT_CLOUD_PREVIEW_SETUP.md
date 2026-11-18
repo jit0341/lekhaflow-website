@@ -14,14 +14,14 @@ This feature remains isolated on `feature/document-cloud`. Do not merge, deploy 
 Set these only in the Preview environment:
 
 - `NEXT_PUBLIC_SUPABASE_URL` — dedicated Supabase project URL.
-- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — Supabase publishable/anon key for the dedicated project.
-- `SUPABASE_SERVICE_ROLE_KEY` — service-role key for the dedicated project; server-side only.
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY` — public key for the dedicated project.
+- `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_SECRET_KEY` — server secret for the dedicated project; server-side only.
 - `DOCUMENT_CLOUD_ADMIN_EMAILS` — comma-separated, verified admin email addresses.
 - `DOCUMENT_CLOUD_CRON_SECRET` — long random secret used by the scheduled cleanup endpoint.
-- `Filebase_ACCOUNT_ID` — Filebase S3 endpoint (normally https://s3.filebase.io).
-- `Filebase_BUCKET_NAME` — private Filebase bucket name.
-- `Filebase_ACCESS_KEY_ID` — Filebase S3-compatible access key with access to this bucket only.
-- `Filebase_SECRET_ACCESS_KEY` — matching Filebase secret.
+- `FILEBASE_ENDPOINT` — `https://s3.filebase.io` (region `auto`).
+- `FILEBASE_BUCKET` — private Filebase bucket name.
+- `FILEBASE_ACCESS_KEY` — Filebase S3-compatible access key with access to this bucket only.
+- `FILEBASE_SECRET_KEY` — matching Filebase secret.
 
 Never prefix service-role, cron, or Filebase secret values with `NEXT_PUBLIC_`. Never commit secrets to Git.
 
