@@ -27,6 +27,8 @@ export default function DocumentCloudAdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [adminEmail, setAdminEmail] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
+  const [recoveryBusy, setRecoveryBusy] = useState(false);
+  const [recoveryNotice, setRecoveryNotice] = useState("");
   const [health, setHealth] = useState<{ success: boolean; checks: Record<string, { ok: boolean; detail?: string }> } | null>(null);
 
   const load = useCallback(async () => {
@@ -67,6 +69,20 @@ export default function DocumentCloudAdminPage() {
       await load();
     } catch (e) { setError(e instanceof Error ? e.message : "Administrator sign-in failed."); }
     finally { setSaving(null); }
+  }
+
+  async function sendPasswordRecovery() {
+    setRecoveryBusy(true); setError(""); setRecoveryNotice("");
+    try {
+      const response = await fetch("/api/document-cloud/admin/recover", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: adminEmail }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.error || "Could not send recovery email.");
+      setRecoveryNotice(data.message || "Password recovery email sent. Open the newest email only.");
+    } catch (e) { setError(e instanceof Error ? e.message : "Could not send recovery email."); }
+    finally { setRecoveryBusy(false); }
   }
 
   async function checkHealth() {
@@ -127,6 +143,8 @@ export default function DocumentCloudAdminPage() {
           <label className="mt-4 block text-xs font-bold text-slate-400">PASSWORD</label>
           <input type="password" autoComplete="current-password" value={adminPassword} onChange={e => setAdminPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white" />
           <button onClick={() => void adminLogin()} disabled={saving === "admin-login" || !adminEmail || !adminPassword} className="mt-4 w-full rounded-xl bg-teal-500 px-4 py-3 text-sm font-black text-slate-950 disabled:opacity-50">{saving === "admin-login" ? "Signing in…" : "Sign in securely"}</button>
+          <button type="button" onClick={() => void sendPasswordRecovery()} disabled={recoveryBusy || !adminEmail} className="mt-3 w-full rounded-xl border border-slate-700 px-4 py-3 text-sm font-bold text-slate-300 hover:bg-slate-800 disabled:opacity-50">{recoveryBusy ? "Sending recovery email…" : "Forgot password? Send reset link"}</button>
+          {recoveryNotice && <p role="status" className="mt-3 rounded-xl border border-teal-900 bg-teal-950/50 p-3 text-sm text-teal-200">{recoveryNotice}</p>}
         </section>}
         {authenticated && <>
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
