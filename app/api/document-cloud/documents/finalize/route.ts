@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDocumentCloudUser, supabaseConfig } from "@/lib/document-cloud/supabase-auth";
+import { getDocumentCloudUser, supabaseConfig, supabaseServerKey } from "@/lib/document-cloud/supabase-auth";
 import { filebaseDeleteObject, filebaseHeadObject, filebaseReadObject, validFileSignature } from "@/lib/document-cloud/filebase";
 
 export const runtime = "nodejs";
@@ -23,8 +23,7 @@ export async function POST(request: NextRequest) {
     if (!profileResponse.ok || !Array.isArray(profileRows) || profileRows[0]?.account_status !== "ACTIVE") {
       return NextResponse.json({ success: false, error: "An active client account is required." }, { status: 403 });
     }
-    const serviceKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
-    if (!serviceKey) throw new Error("Supabase server secret is not configured.");
+    const serviceKey = supabaseServerKey();
     const lookup = await fetch(`${url}/rest/v1/document_cloud_documents?select=id,client_id,content_type,size_bytes,storage_key,upload_status&id=eq.${encodeURIComponent(documentId)}&client_id=eq.${encodeURIComponent(user.id)}`, {
       headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` }, cache: "no-store",
     });
@@ -40,7 +39,7 @@ export async function POST(request: NextRequest) {
       await filebaseDeleteObject(storageKey).catch(() => null);
       const accessToken = request.cookies.get("lf_dc_access")?.value || "";
       await fetch(`${url}/rest/v1/rpc/document_cloud_cancel_upload`, {
-        method: "POST", headers: { apikey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "", Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+        method: "POST", headers: { apikey: key, Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
         body: JSON.stringify({ p_document_id: documentId }), cache: "no-store",
       }).catch(() => null);
       return NextResponse.json({ success: false, error: "Uploaded file size does not match the reserved size." }, { status: 413 });
