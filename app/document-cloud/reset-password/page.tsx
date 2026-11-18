@@ -2,10 +2,8 @@
 
 import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 function ResetPasswordForm() {
-  const router = useRouter();
   const [accessToken, setAccessToken] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -25,8 +23,9 @@ function ResetPasswordForm() {
       window.history.replaceState(null, "", window.location.pathname);
       return;
     }
-    const queryError = new URLSearchParams(window.location.search).get("error_description");
-    setError(queryError ? decodeURIComponent(queryError.replace(/\+/g, " ")) : "The recovery link is missing, invalid or expired. Request a fresh email and open its newest link.");
+    const query = new URLSearchParams(window.location.search);
+    const queryError = query.get("error_description") || query.get("error");
+    setError(queryError || "The recovery link is missing, invalid or expired. Request a fresh email and open its newest link.");
     setStatus("");
   }, []);
 
