@@ -36,7 +36,7 @@ export default function DocumentCloudPage() {
         setMode("login");
         setPassword("");
       } else {
-        setMessage("Login successful. Your secure Document Cloud session is active. Document workspace is being prepared.");
+        window.location.href = "/document-cloud/workspace";
       }
     } catch {
       setError("Network error. Please try again.");
