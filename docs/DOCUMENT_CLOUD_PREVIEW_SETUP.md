@@ -1,6 +1,6 @@
 # Document Cloud — Preview Setup and Acceptance Checklist
 
-This feature remains isolated on `feature/document-cloud`. Do not merge, deploy to Production, or run migrations against the existing production Supabase project as part of this checklist.
+This feature is isolated on `document-cloud-integration`, created directly from the Website `master` branch. Do not merge or deploy to Production without explicit owner approval.
 
 ## Required isolated services
 
@@ -27,7 +27,7 @@ Never prefix service-role, cron, or Filebase secret values with `NEXT_PUBLIC_`. 
 
 ## Database migration order
 
-Apply the following SQL files to the dedicated Document Cloud Supabase project, in order:
+The owner has already run migrations 0001–0005 in the Supabase SQL Editor and confirmed successful execution. Do not run them again unless a reviewed follow-up migration is added. For a fresh isolated environment only, the required order is:
 
 1. `supabase/migrations/0001_document_cloud.sql`
 2. `supabase/migrations/0002_document_cloud_lifecycle.sql`
@@ -101,4 +101,4 @@ After deploying the branch to Vercel Preview and signing in as an allowlisted ad
 - The code has not yet been built or exercised against real Supabase/Filebase credentials.
 - Password reset is not yet implemented. Access tokens are refreshed through the HttpOnly refresh-token cookie when the workspace reloads after an access-token expiry; a fully idle or revoked session may still require sign-in.
 - Admin audit events are recorded for account changes, but an audit-history viewer and production-grade observability still require implementation/review before declaring the portal production-ready.
-- The current branch has diverged from `main`; compare and reconcile the base branch carefully before opening a production-targeting PR. Never force-push or merge it directly.
+- The integration branch is based directly on `master` and currently contains only Document Cloud-related files. Re-run the comparison against `master` before any pull request. Never force-push or merge without owner approval.
