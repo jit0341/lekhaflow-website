@@ -19,6 +19,9 @@ declare
   recent_hour integer;
   recent_day integer;
 begin
+  -- Serialize concurrent reservations per client so the hourly/daily limits cannot race.
+  perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended(new.client_id::text, 0));
+
   select count(*) into recent_hour
     from public.document_cloud_upload_rate_events
     where client_id = new.client_id and created_at > now() - interval '1 hour';
