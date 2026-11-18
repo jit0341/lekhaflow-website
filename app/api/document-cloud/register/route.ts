@@ -22,7 +22,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "Please provide valid details. Password must be at least 10 characters." }, { status: 400 });
     }
 
-    const { response, data } = await supabaseAuthRequest("signup", {
+    // Send Supabase confirmation back to the same deployment that received
+    // registration. Without redirect_to, Supabase falls back to the project's
+    // Site URL (which may still be localhost during development).
+    const emailRedirectTo = new URL("/document-cloud", request.nextUrl.origin).toString();
+    const signupPath = `signup?redirect_to=${encodeURIComponent(emailRedirectTo)}`;
+    const { response, data } = await supabaseAuthRequest(signupPath, {
       email,
       password,
       data: { business_name: businessName, contact_name: contactName },
