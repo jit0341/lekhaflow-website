@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireDocumentCloudAdmin, requireSameOrigin, serviceRoleRequest } from "@/lib/document-cloud/admin";
+import { supabaseServerKey } from "@/lib/document-cloud/supabase-auth";
 
 export const runtime = "nodejs";
 
@@ -40,8 +41,7 @@ export async function PATCH(request: NextRequest) {
 
     if (status === "ACTIVE") {
       const { url } = await import("@/lib/document-cloud/supabase-auth").then(m => m.supabaseConfig());
-      const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-      if (!serviceKey) throw new Error("SUPABASE_SERVICE_ROLE_KEY is not configured.");
+      const serviceKey = supabaseServerKey();
       const authUserResponse = await fetch(`${url}/auth/v1/admin/users/${encodeURIComponent(id)}`, {
         headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` },
         cache: "no-store",
