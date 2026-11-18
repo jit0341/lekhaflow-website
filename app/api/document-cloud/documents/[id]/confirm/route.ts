@@ -10,7 +10,15 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
     const { id } = await context.params;
     if (!/^[0-9a-f-]{36}$/i.test(id)) return NextResponse.json({ success: false, error: "Invalid document ID." }, { status: 400 });
 
-    const { url } = supabaseConfig();
+    const { url, key } = supabaseConfig();
+    const accessToken = request.cookies.get("lf_dc_access")?.value || "";
+    const profileResponse = await fetch(`${url}/rest/v1/document_cloud_clients?select=account_status&id=eq.${encodeURIComponent(user.id)}`, {
+      headers: { apikey: key, Authorization: `Bearer ${accessToken}` }, cache: "no-store",
+    });
+    const profileRows = await profileResponse.json().catch(() => []);
+    if (!profileResponse.ok || !Array.isArray(profileRows) || profileRows[0]?.account_status !== "ACTIVE") {
+      return NextResponse.json({ success: false, error: "An active client account is required." }, { status: 403 });
+    }
     const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
     if (!serviceKey) throw new Error("SUPABASE_SERVICE_ROLE_KEY is not configured.");
     const base = `${url}/rest/v1/document_cloud_documents?select=id,client_id,upload_status&id=eq.${encodeURIComponent(id)}&client_id=eq.${encodeURIComponent(user.id)}`;
