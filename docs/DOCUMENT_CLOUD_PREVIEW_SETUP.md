@@ -43,8 +43,9 @@ Configure the bucket CORS policy to allow only the exact Vercel Preview origin(s
 ## Retention
 
 - R2 bucket lifecycle rule: expire all objects after 14 days as a final safety net.
-- Vercel Cron is configured to call `/api/cron/document-cloud-retention` daily at 03:00 UTC.
-- Set `DOCUMENT_CLOUD_CRON_SECRET` in Preview; Vercel's cron request must send `Authorization: Bearer <secret>`.
+- The repository config schedules `/api/cron/document-cloud-retention` daily at 03:00 UTC when deployed to a Vercel Production environment. Vercel Cron does not run on ordinary Preview deployments.
+- During Preview testing, invoke the endpoint manually with `Authorization: Bearer <DOCUMENT_CLOUD_CRON_SECRET>` from a secure terminal. Do not put the secret in a URL or browser code.
+- Before production release, set `DOCUMENT_CLOUD_CRON_SECRET` in the Vercel Production environment and verify the scheduled invocation in Vercel logs.
 - Application retention: after a successful client-side download, set expiry to the earlier of 3 days after download or 14 days after upload.
 - Failed/abandoned reservations older than 30 minutes are cleaned up and their quota released.
 - R2 lifecycle expiry is asynchronous; never promise deletion at an exact second.
