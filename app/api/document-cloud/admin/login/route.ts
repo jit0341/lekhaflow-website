@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isDocumentCloudSameOrigin } from "@/lib/document-cloud/supabase-auth";
 import { setDocumentCloudSession, supabaseAuthRequest } from "@/lib/document-cloud/supabase-auth";
 
 export const runtime = "nodejs";
@@ -10,6 +11,9 @@ function allowedAdmin(email: string) {
 }
 
 export async function POST(request: NextRequest) {
+  if (!isDocumentCloudSameOrigin(request)) {
+    return NextResponse.json({ success: false, error: "Invalid request origin." }, { status: 403 });
+  }
   try {
     const body = await request.json();
     const email = String(body.email || "").trim().toLowerCase();
