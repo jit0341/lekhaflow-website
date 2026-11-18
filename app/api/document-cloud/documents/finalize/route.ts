@@ -70,7 +70,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, message: "Document uploaded and verified." });
   } catch (error) {
     console.error("Document Cloud finalize error:", error);
-    if (storageKey) await filebaseDeleteObject(storageKey).catch(() => null);
+    // Leave the reservation PENDING on ambiguous failures. The scheduled cleanup
+    // job will delete the object and release quota without risking READY metadata.
     return NextResponse.json({ success: false, error: "Upload verification failed. Please retry." }, { status: 502 });
   }
 }
