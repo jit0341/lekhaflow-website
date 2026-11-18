@@ -17,7 +17,8 @@ export async function GET(request: NextRequest) {
     if (!serviceKey) throw new Error("SUPABASE_SERVICE_ROLE_KEY is not configured.");
     const now = new Date();
     const cutoff = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
-    const query = `document_cloud_documents?select=id,client_id,storage_key,upload_status,uploaded_at,delete_after&upload_status=in.(READY,DELETE_PENDING,EXPIRED)&or=(delete_after.lte.${encodeURIComponent(now.toISOString())},and(delete_after.is.null,uploaded_at.lte.${encodeURIComponent(cutoff.toISOString())}))&limit=100`;
+    const pendingCutoff = new Date(now.getTime() - 30 * 60 * 1000);
+    const query = `document_cloud_documents?select=id,client_id,storage_key,upload_status,uploaded_at,delete_after,created_at&or=(and(upload_status.in.(READY,DELETE_PENDING,EXPIRED),delete_after.lte.${encodeURIComponent(now.toISOString())}),and(upload_status.eq.READY,delete_after.is.null,uploaded_at.lte.${encodeURIComponent(cutoff.toISOString())}),and(upload_status.eq.PENDING,created_at.lte.${encodeURIComponent(pendingCutoff.toISOString())}))&limit=100`;
     const list = await fetch(`${url}/rest/v1/${query}`, {
       headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` }, cache: "no-store",
     });
@@ -30,10 +31,12 @@ export async function GET(request: NextRequest) {
       try {
         const removed = await fetch(r2SignedUrl("DELETE", doc.storage_key, 120), { method: "DELETE" });
         if (!removed.ok && removed.status !== 404) throw new Error(`R2 delete returned ${removed.status}`);
-        const confirmed = await fetch(`${url}/rest/v1/rpc/document_cloud_confirm_delete`, {
+        const rpc = doc.upload_status === "PENDING" ? "document_cloud_expire_pending" : "document_cloud_confirm_delete";
+        const payload = doc.upload_status === "PENDING" ? { p_document_id: doc.id } : { p_document_id: doc.id };
+        const confirmed = await fetch(`${url}/rest/v1/rpc/${rpc}`, {
           method: "POST",
           headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ p_document_id: doc.id }), cache: "no-store",
+          body: JSON.stringify(payload), cache: "no-store",
         });
         if (!confirmed.ok) throw new Error("Database quota release failed");
         deleted++;
