@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isDocumentCloudSameOrigin } from "@/lib/document-cloud/supabase-auth";
 import { getDocumentCloudUser, supabaseConfig, supabaseServerKey } from "@/lib/document-cloud/supabase-auth";
 import { filebaseDeleteObject, filebasePresignedDownload } from "@/lib/document-cloud/filebase";
 
@@ -28,7 +29,10 @@ async function ownedReadyDocument(request: NextRequest, id: string) {
   return { user, doc, url, serviceKey };
 }
 
-export async function POST(request: NextRequest, context: { params: Promise<{ id: string }> }) {
+export async function POST(request: NextRequest, context:
+  if (!isDocumentCloudSameOrigin(request)) {
+    return NextResponse.json({ success: false, error: "Invalid request origin." }, { status: 403 });
+  } { params: Promise<{ id: string }> }) {
   try {
     const { id } = await context.params;
     const result = await ownedReadyDocument(request, id);
