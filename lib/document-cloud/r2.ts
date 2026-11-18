@@ -1,4 +1,4 @@
-import { createHmac, randomUUID } from "node:crypto";
+import { createHash, createHmac, randomUUID } from "node:crypto";
 
 const required = (name: string) => {
   const value = process.env[name];
@@ -47,7 +47,7 @@ export function r2SignedUrl(method: "GET" | "PUT" | "HEAD" | "DELETE", key: stri
   };
   const canonicalQuery = Object.keys(params).sort().map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`).join("&");
   const canonicalRequest = [method, path, canonicalQuery, `host:${host}\n`, "host", "UNSIGNED-PAYLOAD"].join("\n");
-  const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, createHmac("sha256", "").update(canonicalRequest).digest("hex")].join("\n");
+  const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, createHash("sha256").update(canonicalRequest).digest("hex")].join("\n");
   const signature = createHmac("sha256", signingKey(secret, date)).update(stringToSign).digest("hex");
   return `https://${host}${path}?${canonicalQuery}&X-Amz-Signature=${signature}`;
 }
