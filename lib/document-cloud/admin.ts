@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDocumentCloudUser, supabaseConfig } from "@/lib/document-cloud/supabase-auth";
+import { getDocumentCloudUser, supabaseConfig, supabaseServerKey } from "@/lib/document-cloud/supabase-auth";
 
 type AuthUser = { id: string; email?: string };
 
@@ -40,8 +40,7 @@ export function requireSameOrigin(request: NextRequest) {
 
 export async function serviceRoleRequest(path: string, init: RequestInit = {}) {
   const { url } = supabaseConfig();
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!serviceKey) throw new Error("SUPABASE_SERVICE_ROLE_KEY is not configured.");
+  const serviceKey = supabaseServerKey();
 
   const response = await fetch(`${url}/rest/v1/${path}`, {
     ...init,
