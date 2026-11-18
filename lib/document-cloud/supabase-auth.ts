@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "");
-const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-export function supabaseConfig() {
+export function supabaseServerKey() {\n  const value = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;\n  if (!value) throw new Error("Supabase server secret is not configured.");\n  return value;\n}\n\nexport function supabaseConfig() {
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     throw new Error("Supabase URL or publishable key is not configured.");
   }
