@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     }
     const bytes = await filebaseReadObject(storageKey);
     if (bytes.byteLength !== Number(doc.size_bytes) || !validFileSignature(bytes, doc.content_type)) {
-      await fetch(r2SignedUrl("DELETE", storageKey, 120), { method: "DELETE" }).catch(() => null);
+      await filebaseDeleteObject(storageKey).catch(() => null);
       const accessToken = request.cookies.get("lf_dc_access")?.value || "";
       await fetch(`${url}/rest/v1/rpc/document_cloud_cancel_upload`, {
         method: "POST",
