@@ -91,6 +91,9 @@ export default function DocumentCloudAdminPage() {
           <button onClick={() => void load()} disabled={busy} className="rounded-xl border border-slate-700 px-4 py-2.5 text-sm font-bold hover:bg-slate-800 disabled:opacity-50">{busy ? "Refreshing…" : "Refresh"}</button>
         </div>
 
+        {error && <p role="alert" className="mt-5 max-w-2xl rounded-xl border border-red-900 bg-red-950/60 p-4 text-sm text-red-200">{error}</p>}
+        {notice && <p role="status" className="mt-5 max-w-2xl rounded-xl border border-teal-900 bg-teal-950/60 p-4 text-sm text-teal-200">{notice}</p>}
+
         {!authenticated && <section className="mt-8 max-w-lg rounded-2xl border border-slate-800 bg-slate-900 p-6">
           <h2 className="text-lg font-black">Administrator sign in</h2>
           <p className="mt-1 text-sm text-slate-400">Use a verified Supabase account listed in DOCUMENT_CLOUD_ADMIN_EMAILS.</p>
@@ -104,9 +107,6 @@ export default function DocumentCloudAdminPage() {
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[["All clients", counts.all], ["Pending review", counts.pending], ["Active clients", counts.active], ["TEST accounts", counts.test]].map(([label, value]) => <div key={label} className="rounded-2xl border border-slate-800 bg-slate-900 p-5"><p className="text-xs font-bold text-slate-400">{label}</p><p className="mt-2 text-3xl font-black">{value}</p></div>)}
         </div>
-
-        {error && <p role="alert" className="mt-5 rounded-xl border border-red-900 bg-red-950/60 p-4 text-sm text-red-200">{error}</p>}
-        {notice && <p role="status" className="mt-5 rounded-xl border border-teal-900 bg-teal-950/60 p-4 text-sm text-teal-200">{notice}</p>}
 
         <div className="mt-8 flex flex-wrap gap-2">
           {["ALL", "APPROVAL_PENDING", "ACTIVE", "SUSPENDED", "REJECTED", "TEST"].map(value => <button key={value} onClick={() => setFilter(value)} className={`rounded-full px-3 py-2 text-xs font-black ${filter === value ? "bg-teal-500 text-slate-950" : "border border-slate-700 text-slate-300 hover:bg-slate-800"}`}>{value === "ALL" ? "All" : value.replaceAll("_", " ")}</button>)}
