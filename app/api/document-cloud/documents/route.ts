@@ -41,73 +41,49 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  let documentId: string | null = null;
-  let storageKey: string | null = null;
   try {
     const session = await activeUser(request);
     if (!session) return NextResponse.json({ success: false, error: "An active client session is required." }, { status: 401 });
 
-    const form = await request.formData();
-    const file = form.get("file");
-    const category = String(form.get("category") || "");
-    if (!(file instanceof File)) return NextResponse.json({ success: false, error: "Select a file to upload." }, { status: 400 });
-    if (!["PURCHASE", "SALES", "BANK_STATEMENT"].includes(category)) return NextResponse.json({ success: false, error: "Select a valid document category." }, { status: 400 });
-    if (file.size < 1 || file.size > MAX_FILE_BYTES) return NextResponse.json({ success: false, error: "Each file must be between 1 byte and 25 MB." }, { status: 413 });
-    if (!ALLOWED[file.type]) return NextResponse.json({ success: false, error: "Only PDF, JPG, PNG and WEBP files are allowed." }, { status: 415 });
-
-    const bytes = new Uint8Array(await file.arrayBuffer());
-    if (!validFileSignature(bytes, file.type)) return NextResponse.json({ success: false, error: "The file contents do not match the selected file type." }, { status: 415 });
+    const body = await request.json();
+    const fileName = String(body.fileName || "").trim();
+    const contentType = String(body.contentType || "");
+    const sizeBytes = Number(body.sizeBytes);
+    const category = String(body.category || "");
+    if (fileName.length < 1 || fileName.length > 255 || /[\\/\\\\]/.test(fileName)) {
+      return NextResponse.json({ success: false, error: "Invalid file name." }, { status: 400 });
+    }
+    if (!["PURCHASE", "SALES", "BANK_STATEMENT"].includes(category)) {
+      return NextResponse.json({ success: false, error: "Select a valid document category." }, { status: 400 });
+    }
+    if (!Number.isSafeInteger(sizeBytes) || sizeBytes < 1 || sizeBytes > MAX_FILE_BYTES) {
+      return NextResponse.json({ success: false, error: "Each file must be between 1 byte and 25 MB." }, { status: 413 });
+    }
+    if (!ALLOWED[contentType]) {
+      return NextResponse.json({ success: false, error: "Only PDF, JPG, PNG and WEBP files are allowed." }, { status: 415 });
+    }
 
     const accessToken = request.cookies.get("lf_dc_access")?.value || "";
     const { url, key } = supabaseConfig();
-    storageKey = newStorageKey(session.user.id, file.name);
+    const storageKey = newStorageKey(session.user.id, fileName);
     const reservation = await fetch(`${url}/rest/v1/rpc/document_cloud_reserve_upload`, {
       method: "POST",
       headers: { apikey: key, Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ p_category: category, p_original_filename: file.name.slice(0, 255), p_content_type: file.type, p_size_bytes: file.size, p_storage_key: storageKey }),
+      body: JSON.stringify({ p_category: category, p_original_filename: fileName, p_content_type: contentType, p_size_bytes: sizeBytes, p_storage_key: storageKey }),
       cache: "no-store",
     });
-    const reservationData = await reservation.json().catch(() => null);
-    if (!reservation.ok || !reservationData) {
+    const documentId = await reservation.json().catch(() => null);
+    if (!reservation.ok || typeof documentId !== "string") {
       return NextResponse.json({ success: false, error: "Upload could not be reserved. Check account status and available storage." }, { status: 409 });
     }
-    documentId = String(reservationData);
-
-    const upload = await fetch(r2SignedUrl("PUT", storageKey, 300), {
-      method: "PUT", headers: { "Content-Type": file.type }, body: Buffer.from(bytes),
+    return NextResponse.json({
+      success: true,
+      documentId,
+      uploadUrl: r2SignedUrl("PUT", storageKey, 300),
+      uploadHeaders: { "Content-Type": contentType },
     });
-    if (!upload.ok) throw new Error(`R2 upload failed with status ${upload.status}`);
-
-    const head = await fetch(r2SignedUrl("HEAD", storageKey, 120), { method: "HEAD" });
-    const actualSize = Number(head.headers.get("content-length"));
-    if (!head.ok || actualSize !== file.size) throw new Error("Uploaded object size verification failed.");
-
-    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-    if (!serviceKey) throw new Error("SUPABASE_SERVICE_ROLE_KEY is not configured.");
-    const finalized = await fetch(`${url}/rest/v1/rpc/document_cloud_finalize_upload`, {
-      method: "POST",
-      headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ p_document_id: documentId, p_actual_size_bytes: actualSize }),
-      cache: "no-store",
-    });
-    if (!finalized.ok) throw new Error("Could not finalize document metadata.");
-    return NextResponse.json({ success: true, documentId, message: "Document uploaded and verified." });
   } catch (error) {
-    console.error("Document Cloud upload error:", error);
-    if (storageKey) {
-      try { await fetch(r2SignedUrl("DELETE", storageKey, 120), { method: "DELETE" }); } catch {}
-    }
-    if (documentId) {
-      try {
-        const accessToken = request.cookies.get("lf_dc_access")?.value || "";
-        const { url, key } = supabaseConfig();
-        await fetch(`${url}/rest/v1/rpc/document_cloud_cancel_upload`, {
-          method: "POST",
-          headers: { apikey: key, Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ p_document_id: documentId }), cache: "no-store",
-        });
-      } catch {}
-    }
-    return NextResponse.json({ success: false, error: "Upload failed. Any reserved storage has been released where possible." }, { status: 502 });
+    console.error("Document Cloud upload reservation error:", error);
+    return NextResponse.json({ success: false, error: "Upload service is not configured." }, { status: 503 });
   }
 }
