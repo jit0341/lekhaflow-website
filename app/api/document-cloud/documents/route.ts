@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       documentId,
-      uploadUrl: await filebasePresignedUpload(storageKey, contentType, sizeBytes),
+      uploadUrl: await filebasePresignedUpload(storageKey, contentType),
       uploadHeaders: { "Content-Type": contentType },
     });
   } catch (error) {
