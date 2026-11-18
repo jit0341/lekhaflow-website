@@ -87,9 +87,9 @@ After deploying the branch to Vercel Preview and signing in as an allowlisted ad
 6. Reject each file above 25 MiB and reject any reservation that would exceed 1 GiB, including concurrent requests.
 7. Confirm file bytes exist in private Filebase and metadata is marked `READY` only after size and signature verification.
 8. Confirm a client cannot list, preview, download, delete or finalize another client's document by changing IDs.
-9. Confirm download creates a local copy and starts the three-day timer only after successful fetch.
+9. Confirm PDF/image preview works through a short-lived inline URL without starting retention; download creates a local copy and starts the three-day timer only after the successful file fetch.
 10. Confirm delete removes the Filebase object and releases quota exactly once; test retries and partial failures.
-11. Confirm abandoned reservations release quota after 30 minutes.
+11. Confirm failed uploads trigger immediate cancellation; abandoned reservations release quota after 30 minutes.
 12. Confirm daily retention removes objects after the configured expiry and releases quota.
 13. Confirm suspended/rejected clients cannot use any workspace API.
 14. Run a full regression test of existing website pages, Razorpay payment routes, license generation and delivery.
@@ -99,6 +99,6 @@ After deploying the branch to Vercel Preview and signing in as an allowlisted ad
 - The actual Supabase project, Filebase bucket, Preview environment variables and Filebase CORS/lifecycle rules must be provisioned by the account owner; repository access cannot create or verify those external resources.
 - The database migrations have been added to this branch but have not been applied to a Supabase project.
 - The code has not yet been built or exercised against real Supabase/Filebase credentials.
-- Password reset and seamless access/refresh-token rotation are not yet implemented; the current access session expires and may require the client to sign in again.
+- Password reset is not yet implemented. Access tokens are refreshed through the HttpOnly refresh-token cookie when the workspace reloads after an access-token expiry; a fully idle or revoked session may still require sign-in.
 - Admin audit events are recorded for account changes, but an audit-history viewer and production-grade observability still require implementation/review before declaring the portal production-ready.
 - The current branch has diverged from `main`; compare and reconcile the base branch carefully before opening a production-targeting PR. Never force-push or merge it directly.
