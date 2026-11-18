@@ -38,6 +38,20 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ success: false, error: "A valid client ID and account status are required." }, { status: 400 });
     }
 
+    if (status === "ACTIVE") {
+      const { url } = await import("@/lib/document-cloud/supabase-auth").then(m => m.supabaseConfig());
+      const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+      if (!serviceKey) throw new Error("SUPABASE_SERVICE_ROLE_KEY is not configured.");
+      const authUserResponse = await fetch(`${url}/auth/v1/admin/users/${encodeURIComponent(id)}`, {
+        headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` },
+        cache: "no-store",
+      });
+      const authUser = await authUserResponse.json().catch(() => ({}));
+      if (!authUserResponse.ok || !authUser.email_confirmed_at) {
+        return NextResponse.json({ success: false, error: "Verify the client's email before activating this account." }, { status: 409 });
+      }
+    }
+
     const update: Record<string, unknown> = {
       account_status: status,
       approval_note: approvalNote,
