@@ -40,7 +40,7 @@ export async function POST(request: NextRequest, context:
     if ("error" in result) return result.error;
     return NextResponse.json({
       success: true,
-      url: await filebasePresignedDownload(result.doc.storage_key),
+      url: await filebasePresignedDownload(result.doc.storage_key, request.nextUrl.searchParams.get("mode") === "preview" ? "inline" : "attachment"),
       filename: result.doc.original_filename,
       contentType: result.doc.content_type,
     });
