@@ -66,6 +66,14 @@ export async function POST(request: NextRequest) {
     if (!ALLOWED[contentType]) {
       return NextResponse.json({ success: false, error: "Only PDF, JPG, PNG and WEBP files are allowed." }, { status: 415 });
     }
+    const extension = fileName.toLowerCase().split(".").pop() || "";
+    const allowedExtensions: Record<string, string[]> = {
+      "application/pdf": ["pdf"], "image/jpeg": ["jpg", "jpeg"],
+      "image/png": ["png"], "image/webp": ["webp"],
+    };
+    if (!allowedExtensions[contentType].includes(extension)) {
+      return NextResponse.json({ success: false, error: "File extension does not match its declared file type." }, { status: 415 });
+    }
 
     const accessToken = request.cookies.get("lf_dc_access")?.value || "";
     const { url, key } = supabaseConfig();
