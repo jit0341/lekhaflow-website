@@ -131,7 +131,7 @@ begin
   end if;
 
   if p_storage_key is null or char_length(p_storage_key) < 10
-     or left(p_storage_key, char_length(current_user_id::text) + 1) <> current_user_id::text || '/' then
+     or left(p_storage_key, char_length(current_user_id::text) + 1) <> (current_user_id::text || '/') then
     raise exception 'Invalid storage key';
   end if;
 
