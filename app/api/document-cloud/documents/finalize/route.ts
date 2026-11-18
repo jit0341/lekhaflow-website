@@ -27,6 +27,11 @@ export async function POST(request: NextRequest) {
     }
     storageKey = doc.storage_key;
 
+    const head = await fetch(r2SignedUrl("HEAD", storageKey, 120), { method: "HEAD", cache: "no-store" });
+    if (!head.ok || Number(head.headers.get("content-length")) !== Number(doc.size_bytes)) {
+      await fetch(r2SignedUrl("DELETE", storageKey, 120), { method: "DELETE" }).catch(() => null);
+      return NextResponse.json({ success: false, error: "Uploaded file size does not match the reserved size." }, { status: 413 });
+    }
     const object = await fetch(r2SignedUrl("GET", storageKey, 120), { cache: "no-store" });
     if (!object.ok) throw new Error("Uploaded object was not found in private storage.");
     const bytes = new Uint8Array(await object.arrayBuffer());
