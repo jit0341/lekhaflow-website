@@ -12,7 +12,7 @@ function adminEmails(): Set<string> {
   );
 }
 
-export async function requireDocumentCloudAdmin(request: NextRequest) {
+export async function requireDocumentCloudAdmin(request: NextRequest): Promise<{ user: AuthUser; error?: never } | { user?: never; error: NextResponse }> {
   let user: AuthUser | null = null;
   try {
     user = await getDocumentCloudUser(request);
