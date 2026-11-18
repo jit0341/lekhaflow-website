@@ -71,6 +71,11 @@ export async function PATCH(request: NextRequest) {
     if (!Array.isArray(data) || data.length === 0) {
       return NextResponse.json({ success: false, error: "Client account not found." }, { status: 404 });
     }
+    await serviceRoleRequest("document_cloud_audit_events", {
+      method: "POST",
+      headers: { Prefer: "return=minimal" },
+      body: JSON.stringify({ client_id: id, actor_user_id: auth.user.id, event_type: "ACCOUNT_STATUS_CHANGED", details: { account_status: status, is_test_account: update.is_test_account ?? null } }),
+    }).catch((auditError) => console.error("Document Cloud admin audit write failed:", auditError));
     return NextResponse.json({ success: true, client: data[0] });
   } catch (error) {
     console.error("Document Cloud admin update error:", error);
