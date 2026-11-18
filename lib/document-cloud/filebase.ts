@@ -19,9 +19,9 @@ let client: S3Client | null = null;
 
 export function filebaseConfig() {
   return {
-    endpoint: process.env.FILEBASE_ENDPOINT || "https://s3.filebase.io",
+    endpoint: process.env.FILEBASE_ENDPOINT || process.env.FILEBASE_S3_ENDPOINT || "https://s3.filebase.io",
     region: process.env.FILEBASE_REGION || "auto",
-    bucket: required("FILEBASE_BUCKET"),
+    bucket: process.env.FILEBASE_BUCKET || process.env.FILEBASE_BUCKET_NAME || required("FILEBASE_BUCKET"),
   };
 }
 
@@ -33,8 +33,8 @@ export function filebaseClient() {
       region: config.region,
       forcePathStyle: true,
       credentials: {
-        accessKeyId: required("FILEBASE_ACCESS_KEY"),
-        secretAccessKey: required("FILEBASE_SECRET_KEY"),
+        accessKeyId: process.env.FILEBASE_ACCESS_KEY || process.env.FILEBASE_ACCESS_KEY_ID || required("FILEBASE_ACCESS_KEY"),
+        secretAccessKey: process.env.FILEBASE_SECRET_KEY || process.env.FILEBASE_SECRET_ACCESS_KEY || required("FILEBASE_SECRET_KEY"),
       },
     });
   }
@@ -47,7 +47,7 @@ export function newStorageKey(userId: string, fileName: string) {
   return `${userId}/${randomUUID()}.${safeExtension}`;
 }
 
-export async function filebasePresignedUpload(key: string, contentType: string, sizeBytes: number) {
+export async function filebasePresignedUpload(key: string, contentType: string) {
   const { bucket } = filebaseConfig();
   return getSignedUrl(
     filebaseClient(),
