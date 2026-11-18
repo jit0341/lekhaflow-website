@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseConfig } from "@/lib/document-cloud/supabase-auth";
-import { r2SignedUrl } from "@/lib/document-cloud/r2";
+import { filebaseDeleteObject } from "@/lib/document-cloud/filebase";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -29,8 +29,7 @@ export async function GET(request: NextRequest) {
     const failures: string[] = [];
     for (const doc of docs) {
       try {
-        const removed = await fetch(r2SignedUrl("DELETE", doc.storage_key, 120), { method: "DELETE" });
-        if (!removed.ok && removed.status !== 404) throw new Error(`R2 delete returned ${removed.status}`);
+        await filebaseDeleteObject(doc.storage_key);
         const rpc = doc.upload_status === "PENDING" ? "document_cloud_expire_pending" : "document_cloud_confirm_delete";
         const payload = { p_document_id: doc.id };
         const confirmed = await fetch(`${url}/rest/v1/rpc/${rpc}`, {
