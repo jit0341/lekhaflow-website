@@ -29,12 +29,12 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
 
     const serviceKey = supabaseServerKey();
     const found = await fetch(
-      `${url}/rest/v1/document_cloud_documents?select=id,client_id,upload_status&id=eq.${encodeURIComponent(id)}&client_id=eq.${encodeURIComponent(user.id)}`,
+      `${url}/rest/v1/document_cloud_documents?select=id,client_id,upload_status,delete_after&id=eq.${encodeURIComponent(id)}&client_id=eq.${encodeURIComponent(user.id)}`,
       { headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` }, cache: "no-store" },
     );
     const rows = await found.json().catch(() => []);
     const doc = Array.isArray(rows) ? rows[0] : null;
-    if (!found.ok || !doc || doc.upload_status !== "READY") {
+    if (!found.ok || !doc || doc.upload_status !== "READY" || (doc.delete_after && new Date(doc.delete_after).getTime() <= Date.now())) {
       return NextResponse.json({ success: false, error: "Document not found." }, { status: 404 });
     }
 
