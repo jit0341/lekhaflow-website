@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDocumentCloudUser, supabaseConfig, supabaseServerKey } from "@/lib/document-cloud/supabase-auth";
 
-type AuthUser = { id: string; email?: string };
+type AuthUser = { id: string; email?: string; email_confirmed_at?: string };
 
 function adminEmails(): Set<string> {
   return new Set(
