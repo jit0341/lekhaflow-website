@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDocumentCloudUser, supabaseConfig } from "@/lib/document-cloud/supabase-auth";
-import { newStorageKey, r2SignedUrl } from "@/lib/document-cloud/r2";
+import { newStorageKey, filebasePresignedUpload } from "@/lib/document-cloud/filebase";
 
 export const runtime = "nodejs";
 
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       documentId,
-      uploadUrl: r2SignedUrl("PUT", storageKey, 300),
+      uploadUrl: await filebasePresignedUpload(storageKey, contentType, sizeBytes),
       uploadHeaders: { "Content-Type": contentType },
     });
   } catch (error) {
