@@ -68,7 +68,7 @@ export async function filebaseHeadObject(key: string) {
 
 export async function filebaseReadObject(key: string) {
   const { bucket } = filebaseConfig();
-  const result = await filebaseClient().send(new GetObjectCommand({ Bucket: bucket, Key: key, ChecksumMode: "ENABLED" }));
+  const result = await filebaseClient().send(new GetObjectCommand({ Bucket: bucket, Key: key }));
   if (!result.Body) throw new Error("Filebase returned an empty object body.");
   return new Uint8Array(await result.Body.transformToByteArray());
 }
