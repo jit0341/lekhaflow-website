@@ -14,6 +14,7 @@ create index if not exists document_cloud_audit_client_idx
   on public.document_cloud_audit_events(client_id, created_at desc);
 alter table public.document_cloud_audit_events enable row level security;
 revoke all on public.document_cloud_audit_events from anon, authenticated;
+grant select, insert on public.document_cloud_audit_events to service_role;
 
 -- Move verified registrations into the administrator review queue.
 create or replace function public.document_cloud_email_verified()
