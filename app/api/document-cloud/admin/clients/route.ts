@@ -13,7 +13,18 @@ export async function GET(request: NextRequest) {
       "document_cloud_clients?select=id,business_name,contact_name,email,account_status,is_test_account,storage_quota_bytes,storage_used_bytes,approval_note,approved_at,created_at,updated_at&order=created_at.desc"
     );
     if (!response.ok) {
-      return NextResponse.json({ success: false, error: "Could not load client accounts." }, { status: 502 });
+      const dbError = data && typeof data === "object" ? data as Record<string, unknown> : {};
+      const diagnostic = {
+        httpStatus: response.status,
+        code: typeof dbError.code === "string" ? dbError.code : "UNKNOWN",
+        message: typeof dbError.message === "string" ? dbError.message.slice(0, 240) : "Supabase returned an unexpected response.",
+      };
+      console.error("Document Cloud admin list request rejected:", diagnostic);
+      return NextResponse.json({
+        success: false,
+        error: "Could not load client accounts.",
+        diagnostic,
+      }, { status: 502 });
     }
     return NextResponse.json({ success: true, clients: data || [] });
   } catch (error) {
