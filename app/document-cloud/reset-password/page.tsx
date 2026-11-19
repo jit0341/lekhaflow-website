@@ -4,30 +4,69 @@ import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
 
 function ResetPasswordForm() {
+  const [tokenHash, setTokenHash] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [status, setStatus] = useState("Checking your recovery link…");
   const [error, setError] = useState("");
   const [ready, setReady] = useState(false);
+  const [verifyNeeded, setVerifyNeeded] = useState(false);
+  const [verifying, setVerifying] = useState(false);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
-    const token = hash.get("access_token") || "";
+    const implicitToken = hash.get("access_token") || "";
     const type = hash.get("type") || "";
-    if (token && type === "recovery") {
-      setAccessToken(token);
+    if (implicitToken && type === "recovery") {
+      setAccessToken(implicitToken);
       setReady(true);
       setStatus("Recovery link verified. Choose a new password.");
       window.history.replaceState(null, "", window.location.pathname);
       return;
     }
+
     const query = new URLSearchParams(window.location.search);
+    const hashToken = query.get("token_hash") || "";
+    const queryType = query.get("type") || "";
+    if (hashToken && queryType === "recovery") {
+      setTokenHash(hashToken);
+      setVerifyNeeded(true);
+      setStatus("Recovery email opened. Click Verify recovery link to continue.");
+      window.history.replaceState(null, "", window.location.pathname + "?recovery=pending");
+      return;
+    }
+
     const queryError = query.get("error_description") || query.get("error");
-    setError(queryError || "The recovery link is missing, invalid or expired. Request a fresh email and open its newest link.");
+    setError(queryError || "The recovery link is missing, invalid or expired. Request a fresh email.");
     setStatus("");
   }, []);
+
+  async function verifyRecovery() {
+    setVerifying(true);
+    setError("");
+    try {
+      const response = await fetch("/api/document-cloud/admin/verify-recovery", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tokenHash, type: "recovery" }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success || !data.accessToken) {
+        throw new Error(data.error || "Could not verify recovery link.");
+      }
+      setAccessToken(data.accessToken);
+      setVerifyNeeded(false);
+      setReady(true);
+      setStatus("Recovery link verified. Choose a new password.");
+      setTokenHash("");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not verify recovery link.");
+    } finally {
+      setVerifying(false);
+    }
+  }
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -53,6 +92,7 @@ function ResetPasswordForm() {
       setReady(false);
       setPassword("");
       setConfirmPassword("");
+      setAccessToken("");
     } catch (e) {
       setError(e instanceof Error ? e.message : "Password update failed.");
     } finally {
@@ -67,6 +107,7 @@ function ResetPasswordForm() {
         <h1 className="mt-3 text-2xl font-black">Set a new password</h1>
         {status && <p role="status" className="mt-4 rounded-xl border border-teal-900 bg-teal-950/50 p-4 text-sm text-teal-200">{status}</p>}
         {error && <p role="alert" className="mt-4 rounded-xl border border-red-900 bg-red-950/50 p-4 text-sm text-red-200">{error}</p>}
+        {verifyNeeded && <button type="button" onClick={() => void verifyRecovery()} disabled={verifying} className="mt-5 w-full rounded-xl bg-teal-500 px-4 py-3 text-sm font-black text-slate-950 disabled:opacity-50">{verifying ? "Verifying link…" : "Verify recovery link"}</button>}
         {ready && <form onSubmit={submit} className="mt-5 space-y-4">
           <div>
             <label className="block text-xs font-bold text-slate-400">NEW PASSWORD</label>
