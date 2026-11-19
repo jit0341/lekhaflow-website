@@ -46,7 +46,7 @@ export async function serviceRoleRequest(path: string, init: RequestInit = {}) {
     ...init,
     headers: {
       apikey: serviceKey,
-      Authorization: `Bearer ${serviceKey}`,
+      ...(serviceKey.startsWith("sb_secret_") ? {} : { Authorization: `Bearer ${serviceKey}` }),
       "Content-Type": "application/json",
       ...(init.headers || {}),
     },
