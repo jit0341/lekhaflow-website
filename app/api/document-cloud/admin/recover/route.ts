@@ -26,8 +26,14 @@ export async function POST(request: NextRequest) {
     const { response, data } = await supabaseAuthRequest(path, { email });
 
     if (!response.ok) {
-      const message = String(data.msg || data.message || data.error_description || data.error || "Could not send the recovery email.");
-      return NextResponse.json({ success: false, error: message }, { status: response.status });
+      const code = String(data.code || data.error_code || "");
+      const rawMessage = String(data.msg || data.message || data.error_description || data.error || "");
+      const limited = response.status === 429 || code === "over_email_send_rate_limit" ||
+        /email rate limit exceeded/i.test(rawMessage);
+      const message = limited
+        ? "Supabase email sending limit has been reached. Do not keep retrying. Configure custom SMTP in Supabase Authentication > SMTP Settings to raise the email quota, then try again after the current limit window resets."
+        : rawMessage || "Could not send the recovery email.";
+      return NextResponse.json({ success: false, error: message }, { status: limited ? 429 : response.status });
     }
 
     return NextResponse.json({
