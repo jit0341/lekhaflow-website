@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     const { url } = supabaseConfig();
     const secret = supabaseServerKey();
     const response = await fetch(`${url}/rest/v1/document_cloud_clients?select=id&limit=1`, {
-      headers: { apikey: secret, Authorization: `Bearer ${secret}` },
+      headers: { apikey: secret, ...(secret.startsWith("sb_secret_") ? {} : { Authorization: `Bearer ${secret}` }) },
       cache: "no-store",
     });
     checks.supabase = response.ok
