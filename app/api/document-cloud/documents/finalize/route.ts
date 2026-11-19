@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isDocumentCloudSameOrigin } from "@/lib/document-cloud/supabase-auth";
 import { getDocumentCloudUser, supabaseConfig, supabaseServerKey } from "@/lib/document-cloud/supabase-auth";
-import { filebaseDeleteObject, filebaseHeadObject, filebaseReadObject, validFileSignature } from "@/lib/document-cloud/filebase";
+import { filebaseDeleteObject, filebaseHeadObject, filebaseReadObjectRange, validFileSignature } from "@/lib/document-cloud/filebase";
 
 export const runtime = "nodejs";
 
@@ -48,8 +48,10 @@ export async function POST(request: NextRequest) {
       }).catch(() => null);
       return NextResponse.json({ success: false, error: "Uploaded file size does not match the reserved size." }, { status: 413 });
     }
-    const bytes = await filebaseReadObject(storageKey);
-    if (bytes.byteLength !== Number(doc.size_bytes) || !validFileSignature(bytes, doc.content_type)) {
+    // Validate the signature using a small byte range instead of downloading
+    // the entire object a second time. The HEAD response already verifies size.
+    const signatureBytes = await filebaseReadObjectRange(storageKey, "bytes=0-15");
+    if (!validFileSignature(signatureBytes, doc.content_type)) {
       await filebaseDeleteObject(storageKey);
       const accessToken = request.cookies.get("lf_dc_access")?.value || "";
       await fetch(`${url}/rest/v1/rpc/document_cloud_cancel_upload`, {
@@ -57,13 +59,13 @@ export async function POST(request: NextRequest) {
         headers: { apikey: key, Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
         body: JSON.stringify({ p_document_id: documentId }), cache: "no-store",
       }).catch(() => null);
-      return NextResponse.json({ success: false, error: "Uploaded file failed size or file-signature verification." }, { status: 415 });
+      return NextResponse.json({ success: false, error: "Uploaded file failed file-signature verification." }, { status: 415 });
     }
 
     const finalize = await fetch(`${url}/rest/v1/rpc/document_cloud_finalize_upload`, {
       method: "POST",
       headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ p_document_id: documentId, p_actual_size_bytes: bytes.byteLength }),
+      body: JSON.stringify({ p_document_id: documentId, p_actual_size_bytes: Number(head.ContentLength) }),
       cache: "no-store",
     });
     if (!finalize.ok) throw new Error("Could not finalize document metadata.");
