@@ -73,6 +73,13 @@ export async function filebaseReadObject(key: string) {
   return new Uint8Array(await result.Body.transformToByteArray());
 }
 
+export async function filebaseReadObjectRange(key: string, range = "bytes=0-15") {
+  const { bucket } = filebaseConfig();
+  const result = await filebaseClient().send(new GetObjectCommand({ Bucket: bucket, Key: key, Range: range }));
+  if (!result.Body) throw new Error("Filebase returned an empty range response.");
+  return new Uint8Array(await result.Body.transformToByteArray());
+}
+
 export async function filebaseDeleteObject(key: string) {
   const { bucket } = filebaseConfig();
   await filebaseClient().send(new DeleteObjectCommand({ Bucket: bucket, Key: key }));
