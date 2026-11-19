@@ -43,7 +43,7 @@ export async function PATCH(request: NextRequest) {
       const { url } = await import("@/lib/document-cloud/supabase-auth").then(m => m.supabaseConfig());
       const serviceKey = supabaseServerKey();
       const authUserResponse = await fetch(`${url}/auth/v1/admin/users/${encodeURIComponent(id)}`, {
-        headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` },
+        headers: { apikey: serviceKey, ...(serviceKey.startsWith("sb_secret_") ? {} : { Authorization: `Bearer ${serviceKey}` }) },
         cache: "no-store",
       });
       const authUser = await authUserResponse.json().catch(() => ({}));
