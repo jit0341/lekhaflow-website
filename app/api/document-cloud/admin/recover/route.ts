@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const email = String(body.email || "").trim().toLowerCase();
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || !allowedAdmin(email)) {
+    if (!/^[^\s@]+@[^\s@]+[.][^\s@]+$/.test(email) || !allowedAdmin(email)) {
       return NextResponse.json({ success: false, error: "Enter the verified administrator email listed in the Vercel allowlist." }, { status: 400 });
     }
 
