@@ -36,14 +36,26 @@ export default function DocumentCloudAdminPage() {
     setBusy(true); setError("");
     try {
       let response = await fetch("/api/document-cloud/admin/clients", { cache: "no-store" });
-      let data = await response.json();
-      if (response.status === 401 || response.status === 403) {
+
+      // An unauthenticated visitor should simply see the admin sign-in form.
+      // Only attempt refresh for an expired session (401), not a denied admin role (403).
+      if (response.status === 401) {
         const refreshed = await fetch("/api/document-cloud/refresh", { method: "POST" });
         if (refreshed.ok) {
           response = await fetch("/api/document-cloud/admin/clients", { cache: "no-store" });
-          data = await response.json();
+        } else {
+          setAuthenticated(false);
+          setClients([]);
+          return;
         }
       }
+      if (response.status === 403) {
+        setAuthenticated(false);
+        setClients([]);
+        return;
+      }
+
+      const data = await response.json();
       if (!response.ok || !data.success) throw new Error(data.error || "Could not load accounts.");
       setClients(data.clients || []);
       setAuthenticated(true);
