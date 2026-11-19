@@ -27,6 +27,7 @@ export default function DocumentCloudAdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [adminEmail, setAdminEmail] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
+  const [showAdminPassword, setShowAdminPassword] = useState(false);
   const [recoveryBusy, setRecoveryBusy] = useState(false);
   const [recoveryNotice, setRecoveryNotice] = useState("");
   const [health, setHealth] = useState<{ success: boolean; checks: Record<string, { ok: boolean; detail?: string }> } | null>(null);
@@ -141,7 +142,23 @@ export default function DocumentCloudAdminPage() {
           <label className="mt-4 block text-xs font-bold text-slate-400">ADMIN EMAIL</label>
           <input type="email" autoComplete="username" value={adminEmail} onChange={e => setAdminEmail(e.target.value)} className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white" />
           <label className="mt-4 block text-xs font-bold text-slate-400">PASSWORD</label>
-          <input type="password" autoComplete="current-password" value={adminPassword} onChange={e => setAdminPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white" />
+          <div className="relative mt-2">
+            <input type={showAdminPassword ? "text" : "password"} autoComplete="current-password" value={adminPassword} onChange={e => setAdminPassword(e.target.value)} className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 pr-12 text-sm text-white" />
+            <button
+              type="button"
+              onClick={() => setShowAdminPassword(value => !value)}
+              aria-label={showAdminPassword ? "Hide password" : "Show password"}
+              aria-pressed={showAdminPassword}
+              title={showAdminPassword ? "Hide password" : "Show password"}
+              className="absolute inset-y-0 right-0 flex items-center justify-center px-4 text-slate-400 hover:text-teal-300"
+            >
+              {showAdminPassword ? (
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 3l18 18M10.6 10.6a2 2 0 002.8 2.8M9.9 5.2A10.8 10.8 0 0112 5c5 0 8.5 4.5 9.5 7a11.8 11.8 0 01-3.1 4.4M6.2 6.2C4.1 7.6 2.9 9.8 2.5 12c.5 1.3 1.6 3.1 3.8 4.7A10.7 10.7 0 0012 19c1.1 0 2.1-.2 3-.5" /></svg>
+              ) : (
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z" /><circle cx="12" cy="12" r="3" /></svg>
+              )}
+            </button>
+          </div>
           <button onClick={() => void adminLogin()} disabled={saving === "admin-login" || !adminEmail || !adminPassword} className="mt-4 w-full rounded-xl bg-teal-500 px-4 py-3 text-sm font-black text-slate-950 disabled:opacity-50">{saving === "admin-login" ? "Signing in…" : "Sign in securely"}</button>
           <button type="button" onClick={() => void sendPasswordRecovery()} disabled={recoveryBusy || !adminEmail} className="mt-3 w-full rounded-xl border border-slate-700 px-4 py-3 text-sm font-bold text-slate-300 hover:bg-slate-800 disabled:opacity-50">{recoveryBusy ? "Sending recovery email…" : "Forgot password? Send reset link"}</button>
           {recoveryNotice && <p role="status" className="mt-3 rounded-xl border border-teal-900 bg-teal-950/50 p-3 text-sm text-teal-200">{recoveryNotice}</p>}
