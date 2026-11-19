@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
 
 function ResetPasswordForm() {
+  const [audience, setAudience] = useState<"admin" | "client">("admin");
   const [tokenHash, setTokenHash] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +17,10 @@ function ResetPasswordForm() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    const selectedAudience = query.get("audience") === "client" ? "client" : "admin";
+    setAudience(selectedAudience);
+
     const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
     const implicitToken = hash.get("access_token") || "";
     const type = hash.get("type") || "";
@@ -23,23 +28,20 @@ function ResetPasswordForm() {
       setAccessToken(implicitToken);
       setReady(true);
       setStatus("Recovery link verified. Choose a new password.");
-      window.history.replaceState(null, "", window.location.pathname);
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
       return;
     }
 
-    const query = new URLSearchParams(window.location.search);
     const hashToken = query.get("token_hash") || "";
-    const queryType = query.get("type") || "";
-    if (hashToken && queryType === "recovery") {
+    if (hashToken && query.get("type") === "recovery") {
       setTokenHash(hashToken);
       setVerifyNeeded(true);
       setStatus("Recovery email opened. Click Verify recovery link to continue.");
-      window.history.replaceState(null, "", window.location.pathname + "?recovery=pending");
+      window.history.replaceState(null, "", window.location.pathname + "?audience=" + selectedAudience + "&recovery=pending");
       return;
     }
 
-    const queryError = query.get("error_description") || query.get("error");
-    setError(queryError || "The recovery link is missing, invalid or expired. Request a fresh email.");
+    setError(query.get("error_description") || query.get("error") || "The recovery link is missing, invalid or expired. Request a fresh email.");
     setStatus("");
   }, []);
 
@@ -47,7 +49,10 @@ function ResetPasswordForm() {
     setVerifying(true);
     setError("");
     try {
-      const response = await fetch("/api/document-cloud/admin/verify-recovery", {
+      const endpoint = audience === "admin"
+        ? "/api/document-cloud/admin/verify-recovery"
+        : "/api/document-cloud/verify-recovery";
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ tokenHash, type: "recovery" }),
@@ -81,7 +86,10 @@ function ResetPasswordForm() {
     }
     setSaving(true);
     try {
-      const response = await fetch("/api/document-cloud/admin/reset-password", {
+      const endpoint = audience === "admin"
+        ? "/api/document-cloud/admin/reset-password"
+        : "/api/document-cloud/reset-password";
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ accessToken, password }),
@@ -100,11 +108,14 @@ function ResetPasswordForm() {
     }
   }
 
+  const returnHref = audience === "admin" ? "/document-cloud/admin" : "/document-cloud";
+  const returnLabel = audience === "admin" ? "Return to Document Cloud Admin" : "Return to Client Login";
+
   return (
     <main className="min-h-screen bg-slate-950 px-4 pb-16 pt-28 text-slate-100">
       <section className="mx-auto max-w-lg rounded-2xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
         <p className="text-xs font-black uppercase tracking-[.22em] text-teal-400">LekhaFlow · Secure account</p>
-        <h1 className="mt-3 text-2xl font-black">Set a new password</h1>
+        <h1 className="mt-3 text-2xl font-black">Set a new {audience === "admin" ? "administrator" : "client"} password</h1>
         {status && <p role="status" className="mt-4 rounded-xl border border-teal-900 bg-teal-950/50 p-4 text-sm text-teal-200">{status}</p>}
         {error && <p role="alert" className="mt-4 rounded-xl border border-red-900 bg-red-950/50 p-4 text-sm text-red-200">{error}</p>}
         {verifyNeeded && <button type="button" onClick={() => void verifyRecovery()} disabled={verifying} className="mt-5 w-full rounded-xl bg-teal-500 px-4 py-3 text-sm font-black text-slate-950 disabled:opacity-50">{verifying ? "Verifying link…" : "Verify recovery link"}</button>}
@@ -119,7 +130,7 @@ function ResetPasswordForm() {
           </div>
           <button type="submit" disabled={saving} className="w-full rounded-xl bg-teal-500 px-4 py-3 text-sm font-black text-slate-950 disabled:opacity-50">{saving ? "Updating…" : "Update password"}</button>
         </form>}
-        <Link href="/document-cloud/admin" className="mt-6 inline-flex text-sm font-bold text-teal-300 hover:text-teal-200">Return to Document Cloud Admin</Link>
+        <Link href={returnHref} className="mt-6 inline-flex text-sm font-bold text-teal-300 hover:text-teal-200">{returnLabel}</Link>
       </section>
     </main>
   );
