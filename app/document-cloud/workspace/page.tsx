@@ -14,6 +14,8 @@ export default function DocumentCloudWorkspace() {
   const [category, setCategory] = useState("PURCHASE");
   const [file, setFile] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadStage, setUploadStage] = useState("");
   const [busyId, setBusyId] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -56,8 +58,27 @@ export default function DocumentCloudWorkspace() {
       const reservation = await reservationResponse.json();
       if (!reservationResponse.ok || !reservation.success) throw new Error(reservation.error || "Could not reserve storage.");
       pendingDocumentId = reservation.documentId;
-      const stored = await fetch(reservation.uploadUrl, { method: "PUT", headers: reservation.uploadHeaders, body: file });
-      if (!stored.ok) throw new Error("File upload to secure storage failed. Please retry.");
+      setUploadProgress(0);
+      setUploadStage("Uploading to secure storage");
+      await new Promise<void>((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("PUT", reservation.uploadUrl);
+        for (const [name, value] of Object.entries(reservation.uploadHeaders || {})) {
+          xhr.setRequestHeader(name, String(value));
+        }
+        xhr.upload.onprogress = event => {
+          if (event.lengthComputable) setUploadProgress(Math.min(99, Math.round(event.loaded / event.total * 100)));
+        };
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) resolve();
+          else reject(new Error(`Secure storage rejected the upload (HTTP ${xhr.status}). Please retry.`));
+        };
+        xhr.onerror = () => reject(new Error("Network or CORS error while uploading. Check your connection and try again."));
+        xhr.onabort = () => reject(new Error("Upload was interrupted. Please retry."));
+        xhr.send(file);
+      });
+      setUploadProgress(100);
+      setUploadStage("Verifying file");
       const finalizedResponse = await fetch("/api/document-cloud/documents/finalize", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ documentId: reservation.documentId }),
@@ -67,6 +88,8 @@ export default function DocumentCloudWorkspace() {
       pendingDocumentId = null;
       setNotice("File uploaded and verified successfully.");
       setFile(null);
+      setUploadProgress(0);
+      setUploadStage("");
       const input = document.getElementById("document-cloud-file") as HTMLInputElement | null;
       if (input) input.value = "";
       await load();
@@ -79,7 +102,7 @@ export default function DocumentCloudWorkspace() {
       }
       setError(e instanceof Error ? e.message : "Upload failed.");
     }
-    finally { setBusy(false); }
+    finally { setBusy(false); setUploadStage(""); }
   }
 
   async function download(doc: Doc) {
@@ -159,6 +182,7 @@ export default function DocumentCloudWorkspace() {
             <button onClick={() => void upload()} disabled={busy || !file} className="rounded-xl bg-teal-700 px-5 py-3 text-sm font-black text-white hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-50">{busy ? "Uploading…" : "Upload securely"}</button>
           </div>
           {file && <p className="mt-3 text-xs text-slate-500">{file.name} · {fmt(file.size)}</p>}
+          {busy && <div className="mt-4" aria-live="polite"><div className="flex items-center justify-between text-xs font-semibold text-slate-600"><span>{uploadStage || "Preparing upload"}</span><span>{uploadProgress}%</span></div><div className="mt-2 h-2.5 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-teal-600 transition-all" style={{ width: `${uploadProgress}%` }} /></div><p className="mt-2 text-xs text-slate-500">Keep this page open until verification finishes.</p></div>}
         </section>
 
         {error && <p role="alert" className="mt-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{error}</p>}
