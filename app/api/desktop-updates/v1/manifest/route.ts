@@ -42,7 +42,7 @@ function signManifest(unsignedManifest: Record<string, unknown>) {
     ...unsignedManifest,
     signature: {
       algorithm: "Ed25519",
-      key_id: process.env.LEKHAFLOW_UPDATE_SIGNING_KEY_ID || "lekhaflow-update-2026-11",
+      key_id: process.env.LEKHAFLOW_UPDATE_SIGNING_KEY_ID || "lekhaflow-update-2026-11-v2",
       value: signature,
     },
   };
@@ -98,7 +98,7 @@ export async function GET(request: NextRequest) {
       release_notes: "Product improvements, compatibility updates and reliability enhancements.",
       installer: {
         file_name: asset.name,
-        url: "https://lekhaflow.in/api/desktop-updates/v1/download?product=" + product + "&version=" + version,
+        url: (() => { const downloadUrl = new URL("/api/desktop-updates/v1/download", request.nextUrl.origin); downloadUrl.searchParams.set("product", product); downloadUrl.searchParams.set("version", version); return downloadUrl.toString(); })(),
         size_bytes: asset.size,
         sha256: asset.digest.slice("sha256:".length).toLowerCase(),
       },
