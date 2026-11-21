@@ -18,7 +18,9 @@ Set these in the Production environment only after review:
 The public Download Center defaults to the existing V15.1.0 Standard Full and v1.0 Standard Trial releases. The desktop updater uses its separate stable-tag mapping. Do not activate a NEXT installer until its final Inno Setup package has passed clean-install and in-place-upgrade testing.
 
 ## Signing-key rotation
-The private key previously shared as a downloadable chat artifact must be considered exposed and must not be used. Generate a fresh Ed25519 key pair locally and offline. Add the PEM private key to Vercel's encrypted Production environment variable. Embed only the matching public key in the updater's UPDATE_PUBLIC_KEYS map and rebuild the desktop application. Never commit the private key or put it in a GitHub release asset.
+The private key previously shared as a downloadable chat artifact is compromised and must never be used.
+
+The preview deployment has been tested with key ID `lekhaflow-update-2026-11-v2`. The desktop patch in this release kit embeds the matching public verification key. Before enabling Production, copy the matching private PEM from the protected Vercel Preview secret into a separate encrypted/sensitive Vercel Production environment variable. Keep the private key out of Git, release assets, desktop files and chat messages. If a new key pair is generated instead, update the client's public-key map and rebuild the desktop application before enabling that key on the server.
 
 ## Current release inventory checked 2026-11-22
 - Standard Full: V15.1.0, asset Lekhaflow_Standard_setup.exe.
