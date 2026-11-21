@@ -42,7 +42,7 @@ function signManifest(unsignedManifest: Record<string, unknown>) {
     ...unsignedManifest,
     signature: {
       algorithm: "Ed25519",
-      key_id: process.env.LEKHAFLOW_UPDATE_SIGNING_KEY_ID || "lekhaflow-update-2026-11-v2",
+      key_id: process.env.LEKHAFLOW_UPDATE_SIGNING_KEY_ID || "lekhaflow-update-2026-01",
       value: signature,
     },
   };
