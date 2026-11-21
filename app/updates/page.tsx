@@ -1,84 +1,124 @@
-// app/updates/page.tsx
-
 "use client";
 
-import { useState, useEffect } from "react";
-import { Download, CheckCircle2, Zap, Shield, Cpu, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2, Download, RefreshCw } from "lucide-react";
+
+type ReleaseInfo = {
+  success?: boolean;
+  latestVersion?: string;
+  publishedAt?: string;
+  releaseName?: string;
+  releaseUrl?: string;
+  standard?: { url?: string; name?: string; size?: number };
+};
 
 export default function UpdatesPage() {
-  const [latestVersion, setLatestVersion] = useState("v15.0");
-  const [updateAvailable, setUpdateAvailable] = useState(false);
-  const [changelog, setChangelog] = useState([]);
+  const [release, setRelease] = useState<ReleaseInfo | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [serviceUnavailable, setServiceUnavailable] = useState(false);
+
+  async function loadRelease() {
+    setLoading(true);
+    setServiceUnavailable(false);
+    try {
+      const response = await fetch("/api/github-release", { cache: "no-store" });
+      const data = (await response.json()) as ReleaseInfo;
+      if (!response.ok || !data.success) throw new Error("Release lookup failed");
+      setRelease(data);
+    } catch {
+      setServiceUnavailable(true);
+      setRelease(null);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
-    async function fetchUpdates() {
-      // ✅ GitHub से Latest Release Fetch करें
-      const res = await fetch("/api/github_release");
-      const data = await res.json();
-      if (data.success) {
-        setLatestVersion(data.latestVersion);
-        setChangelog(data.changelog || []);
-      }
-    }
-    fetchUpdates();
+    void loadRelease();
   }, []);
 
-  const handleUpdate = async () => {
-    // ✅ Update Download Trigger
-    const res = await fetch("/api/update/latest");
-    const data = await res.json();
-    if (data.url) {
-      window.open(data.url, '_blank');
-    }
+  const formatDate = (value?: string) => {
+    if (!value) return "";
+    const date = new Date(value);
+    return Number.isNaN(date.getTime())
+      ? ""
+      : date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
   };
 
   return (
-    <div className="min-h-screen bg-white py-20">
-      <div className="max-w-5xl mx-auto px-6">
-        <h1 className="text-5xl font-black text-slate-950 uppercase italic tracking-tighter text-center mb-4">
-          Software Updates
-        </h1>
-        <p className="text-slate-600 text-center mb-12">
-          Keep your LekhaFlow Gold up to date with the latest features
-        </p>
+    <main className="min-h-screen bg-slate-50 px-4 py-20">
+      <div className="mx-auto max-w-5xl">
+        <header className="mb-10 text-center">
+          <p className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-blue-700">LekhaFlow Support</p>
+          <h1 className="text-4xl font-black tracking-tight text-slate-950 md:text-5xl">Updates & Release Information</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-slate-600">
+            Find the latest official LekhaFlow releases, product improvements and installation packages.
+          </p>
+        </header>
 
-        {/* ✅ Update Now Button */}
-        <div className="bg-white border-2 border-amber-500 p-8 rounded-3xl mb-12">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+        <section className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm md:p-10">
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-2xl font-black text-slate-950">
-                Update Available: {latestVersion}
-              </h2>
-              <p className="text-slate-600 text-sm">
-                New features and improvements are ready for you!
-              </p>
+              <h2 className="text-2xl font-extrabold text-slate-950">Latest Standard release</h2>
+              {loading ? (
+                <p className="mt-2 text-slate-500">Checking official release information…</p>
+              ) : serviceUnavailable ? (
+                <p className="mt-2 text-rose-700">Release information is temporarily unavailable. Please try again.</p>
+              ) : (
+                <>
+                  <p className="mt-2 text-slate-700">
+                    Version <strong>{release?.latestVersion || "—"}</strong>
+                    {release?.publishedAt ? " · Released " + formatDate(release.publishedAt) : ""}
+                  </p>
+                  <p className="mt-2 text-sm text-slate-500">
+                    {release?.standard?.name || release?.releaseName || "Official LekhaFlow Standard package"}
+                  </p>
+                </>
+              )}
             </div>
             <button
-              onClick={handleUpdate}
-              className="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-black rounded-2xl font-black uppercase text-sm tracking-widest transition-all flex items-center gap-3"
+              type="button"
+              onClick={() => void loadRelease()}
+              disabled={loading}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 px-5 py-3 font-bold text-slate-700 hover:bg-slate-50 disabled:opacity-50"
             >
-              <Download size={20} />
-              Update Now
-              <ArrowRight size={20} />
+              <RefreshCw size={17} /> Check again
             </button>
           </div>
-        </div>
 
-        {/* ✅ Changelog */}
-        <div className="space-y-6">
-          <h2 className="text-2xl font-black text-slate-950 uppercase tracking-tighter">
-            What's New
-          </h2>
-          {changelog.map((feature: string, index: number) => (
-            <div key={index} className="bg-white border border-slate-200 p-6 rounded-2xl">
+          {!loading && !serviceUnavailable && release?.standard?.url && (
+            <div className="mt-8 rounded-2xl bg-blue-50 p-5">
               <div className="flex items-start gap-3">
-                <CheckCircle2 className="text-teal-500 flex-shrink-0 mt-1" size={20} />
-                <span className="text-slate-600">{feature}</span>
+                <CheckCircle2 className="mt-1 text-emerald-600" size={20} />
+                <div className="flex-1">
+                  <h3 className="font-bold text-slate-950">Official package available</h3>
+                  <p className="mt-1 text-sm text-slate-600">
+                    Download the current Standard installer from the official Download Center.
+                  </p>
+                  <a
+                    href={release.standard.url}
+                    className="mt-4 inline-flex items-center gap-2 rounded-xl bg-blue-700 px-5 py-3 font-bold text-white hover:bg-blue-600"
+                  >
+                    <Download size={18} /> Download Standard <ArrowRight size={17} />
+                  </a>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
+          )}
+
+          <div className="mt-8 border-t border-slate-100 pt-6">
+            <Link href="/downloads" className="font-bold text-blue-700 hover:underline">
+              Open the official Download Center
+            </Link>
+            {release?.releaseUrl && (
+              <span className="ml-3 text-sm text-slate-500">
+                · <a href={release.releaseUrl} target="_blank" rel="noreferrer" className="hover:underline">Release details</a>
+              </span>
+            )}
+          </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }
