@@ -1,6 +1,7 @@
 import { createPrivateKey, sign } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import {
+  channelFromQuery,
   configuredStableTag,
   fetchReleaseByTag,
   findInstallerAsset,
@@ -16,12 +17,10 @@ function canonicalise(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonicalise);
   if (value && typeof value === "object") {
     const source = value as Record<string, unknown>;
-    return Object.keys(source)
-      .sort()
-      .reduce<Record<string, unknown>>((out, key) => {
-        out[key] = canonicalise(source[key]);
-        return out;
-      }, {});
+    return Object.keys(source).sort().reduce<Record<string, unknown>>((out, key) => {
+      out[key] = canonicalise(source[key]);
+      return out;
+    }, {});
   }
   return value;
 }
@@ -31,13 +30,10 @@ function signManifest(unsignedManifest: Record<string, unknown>) {
   if (!pem.trim()) throw new Error("Signing key missing.");
 
   const privateKey = createPrivateKey(pem);
-  if (privateKey.asymmetricKeyType !== "ed25519") {
-    throw new Error("Signing key must be Ed25519.");
-  }
+  if (privateKey.asymmetricKeyType !== "ed25519") throw new Error("Signing key must be Ed25519.");
 
   const canonical = JSON.stringify(canonicalise(unsignedManifest));
   const signature = sign(null, Buffer.from(canonical, "utf8"), privateKey).toString("base64");
-
   return {
     ...unsignedManifest,
     signature: {
@@ -61,36 +57,37 @@ export async function GET(request: NextRequest) {
   const current = String(params.get("current") || "").trim();
   const platform = String(params.get("platform") || "").trim().toLowerCase();
   const architecture = String(params.get("architecture") || "").trim().toLowerCase();
-  const channel = String(params.get("channel") || "stable").trim().toLowerCase();
+  const channel = channelFromQuery(params.get("channel"));
 
-  if (!product || !current || platform !== "windows" || architecture !== "x64" || channel !== "stable") {
+  if (!product || !current || platform !== "windows" || architecture !== "x64" || !channel) {
     return errorResponse("This product update request is not supported.", 400, "INVALID_UPDATE_REQUEST");
   }
-
   if (!/^\d+\.\d+\.\d+$/.test(current)) {
     return errorResponse("The installed product version is invalid.", 400, "INVALID_CURRENT_VERSION");
   }
 
   try {
-    const tag = configuredStableTag(product);
-    if (!tag) {
-      return errorResponse("No approved update is published for this product yet.", 404, "NO_RELEASE_CONFIGURED");
-    }
-
+    const tag = configuredStableTag(product, channel);
     const release = await fetchReleaseByTag(tag);
     const version = normaliseVersion(release.tag_name || tag);
-    const asset = findInstallerAsset(release, product, version, "full");
+    const variant = channel === "demo" ? "demo" : "full";
+    const asset = findInstallerAsset(release, product, version, variant);
 
     if (!asset || !asset.digest || !/^sha256:[0-9a-f]{64}$/i.test(asset.digest)) {
       return errorResponse("The approved installer is not ready for secure delivery.", 503, "INSTALLER_NOT_READY");
     }
 
+    const downloadUrl = new URL("/api/desktop-updates/v1/download", request.nextUrl.origin);
+    downloadUrl.searchParams.set("product", product);
+    downloadUrl.searchParams.set("version", version);
+    downloadUrl.searchParams.set("channel", channel);
+
     const unsignedManifest: Record<string, unknown> = {
       schema_version: 1,
       product_id: product,
-      product_name: productDisplayName(product),
+      product_name: productDisplayName(product) + (channel === "demo" ? " Demo" : ""),
       version,
-      channel: "stable",
+      channel,
       platform: "windows",
       architecture: "x64",
       published_at: release.published_at || new Date(0).toISOString(),
@@ -98,7 +95,7 @@ export async function GET(request: NextRequest) {
       release_notes: "Product improvements, compatibility updates and reliability enhancements.",
       installer: {
         file_name: asset.name,
-        url: (() => { const downloadUrl = new URL("/api/desktop-updates/v1/download", request.nextUrl.origin); downloadUrl.searchParams.set("product", product); downloadUrl.searchParams.set("version", version); return downloadUrl.toString(); })(),
+        url: downloadUrl.toString(),
         size_bytes: asset.size,
         sha256: asset.digest.slice("sha256:".length).toLowerCase(),
       },
