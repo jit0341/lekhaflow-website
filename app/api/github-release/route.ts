@@ -1,124 +1,84 @@
 import { NextResponse } from "next/server";
+import {
+  configuredStableTag,
+  fetchReleaseByTag,
+  findInstallerAsset,
+  normaliseVersion,
+} from "@/lib/desktop-updates";
 
-const GITHUB_RELEASES_URL =
-  "https://api.github.com/repos/jit0341/lekhaflow-website/releases?per_page=30";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-type GitHubAsset = {
-  name?: string;
-  browser_download_url?: string;
-  size?: number;
-  state?: string;
-};
+type CardKey = "standardFull" | "standardDemo" | "professionalFull" | "professionalDemo";
 
-type GitHubRelease = {
-  tag_name?: string;
-  name?: string;
-  published_at?: string;
-  created_at?: string;
-  html_url?: string;
-  assets?: GitHubAsset[];
-};
-
-function findExeAsset(assets: GitHubAsset[], patterns: RegExp[]) {
-  return assets.find((asset) => {
-    const name = asset?.name || "";
-    return (
-      /\.exe$/i.test(name) &&
-      (!asset.state || asset.state === "uploaded") &&
-      patterns.some((pattern) => pattern.test(name))
-    );
-  });
+function emptyAsset() {
+  return { available: false, url: "", name: "", size: 0, version: "", publishedAt: "" };
 }
-
-function assetInfo(asset?: GitHubAsset) {
-  return {
-    url: asset?.browser_download_url || "",
-    name: asset?.name || "",
-    size: asset?.size || 0,
-  };
-}
-
-const standardPatterns = [
-  /^LekhaFlow_Standard_Suite_Setup_[^/]+\.exe$/i,
-  /^LekhaFlow_Standard_Setup_[^/]+\.exe$/i,
-  /^Lekhaflow_Standard_setup\.exe$/i,
-];
-const trialPatterns = [
-  /^LekhaFlow_Standard_Trial_[^/]+\.exe$/i,
-  /^LekhaFlow_Standard_Suite_Trial_[^/]+\.exe$/i,
-  /^lekhaflow-standard-trial-setup\.exe$/i,
-];
 
 export async function GET() {
   try {
-    const response = await fetch(GITHUB_RELEASES_URL, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "User-Agent": "LekhaFlow-Website",
-      },
-      cache: "no-store",
-    });
+    // One immutable GitHub release contains all four assets for the same version.
+    const tag = configuredStableTag("standard", "stable");
+    const release = await fetchReleaseByTag(tag);
+    const version = normaliseVersion(release.tag_name || tag);
+    const publishedAt = release.published_at || "";
 
-    if (!response.ok) {
-      return NextResponse.json(
-        { success: false, error: "Unable to fetch GitHub releases." },
-        { status: 502, headers: { "Cache-Control": "no-store, max-age=0" } }
-      );
+    const mappings: Array<{ key: CardKey; product: "standard" | "professional"; variant: "full" | "demo" }> = [
+      { key: "standardFull", product: "standard", variant: "full" },
+      { key: "standardDemo", product: "standard", variant: "demo" },
+      { key: "professionalFull", product: "professional", variant: "full" },
+      { key: "professionalDemo", product: "professional", variant: "demo" },
+    ];
+
+    const products: Record<CardKey, ReturnType<typeof emptyAsset>> = {
+      standardFull: emptyAsset(),
+      standardDemo: emptyAsset(),
+      professionalFull: emptyAsset(),
+      professionalDemo: emptyAsset(),
+    };
+
+    for (const item of mappings) {
+      const asset = findInstallerAsset(release, item.product, version, item.variant);
+      if (asset) {
+        products[item.key] = {
+          available: true,
+          url: asset.browser_download_url,
+          name: asset.name,
+          size: asset.size,
+          version,
+          publishedAt,
+        };
+      }
     }
 
-    const releases = (await response.json()) as GitHubRelease[];
-    if (!Array.isArray(releases)) {
-      return NextResponse.json(
-        { success: false, error: "Unexpected GitHub releases response." },
-        { status: 502 }
-      );
-    }
-
-    // Full and trial installers may be published in separate GitHub releases.
-    const standardRelease = releases.find((release) =>
-      findExeAsset(release.assets || [], standardPatterns)
-    );
-    const trialRelease = releases.find((release) =>
-      findExeAsset(release.assets || [], trialPatterns)
-    );
-
-    const standardAsset = standardRelease
-      ? findExeAsset(standardRelease.assets || [], standardPatterns)
-      : undefined;
-    const trialAsset = trialRelease
-      ? findExeAsset(trialRelease.assets || [], trialPatterns)
-      : undefined;
-
+    const availableCount = Object.values(products).filter((item) => item.available).length;
     return NextResponse.json(
       {
         success: true,
-        latestVersion: standardRelease?.tag_name || "",
-        publishedAt: standardRelease?.published_at || standardRelease?.created_at || "",
-        releaseName: standardRelease?.name || "",
-        releaseUrl: standardRelease?.html_url || "",
-        standard: assetInfo(standardAsset),
-        standardTrial: assetInfo(trialAsset),
-        gold: assetInfo(undefined),
-        goldTrial: assetInfo(undefined),
-        releasesChecked: releases.length,
-        assets: [
-          ...(standardRelease?.assets || []),
-          ...(trialRelease?.assets || []),
-        ]
-          .filter((asset) => /\.exe$/i.test(asset?.name || ""))
-          .map((asset) => ({
-            name: asset.name || "",
-            size: asset.size || 0,
-            url: asset.browser_download_url || "",
-          })),
+        tag: release.tag_name,
+        releaseName: release.name || "LekhaFlow " + version,
+        releaseUrl: release.html_url || "",
+        publishedAt,
+        latestVersion: version,
+        availableCount,
+        products,
       },
-      { headers: { "Cache-Control": "no-store, max-age=0" } }
+      { headers: { "Cache-Control": "no-store, max-age=0" } },
     );
   } catch (error) {
-    console.error("GitHub release API error:", error);
+    console.error("LekhaFlow release lookup failed:", error);
     return NextResponse.json(
-      { success: false, error: "GitHub release lookup failed." },
-      { status: 502, headers: { "Cache-Control": "no-store, max-age=0" } }
+      {
+        success: false,
+        error: "The four product installers are not available yet. Please try again after the official GitHub release is published.",
+        products: {
+          standardFull: emptyAsset(),
+          standardDemo: emptyAsset(),
+          professionalFull: emptyAsset(),
+          professionalDemo: emptyAsset(),
+        },
+      },
+      { status: 200, headers: { "Cache-Control": "no-store, max-age=0" } },
     );
   }
 }
