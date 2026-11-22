@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
   ArrowRight,
@@ -45,6 +46,7 @@ const mainLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
   const closeMobile = () => { setMobileOpen(false); setProductOpen(false); };
@@ -52,15 +54,15 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-[100] border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6">
-        <Link href="/" onClick={closeMobile} className="flex min-w-[205px] shrink-0 items-center gap-2">
+        <Link href="/" onClick={closeMobile} className="mr-6 flex min-w-[230px] shrink-0 items-center gap-2.5 pr-5">
           <img src="/logo.png" alt="LekhaFlow" className="h-9 w-9 object-contain" />
           <span className="text-2xl font-black tracking-tight text-slate-950">LEKHA</span>
           <span className="text-2xl font-black tracking-tight text-teal-600">FLOW</span>
         </Link>
 
-        <nav className="ml-auto hidden flex-1 items-center justify-end gap-4 pl-6 xl:flex 2xl:gap-5">
+        <nav className="ml-auto hidden flex-1 items-center justify-end gap-1.5 pl-8 2xl:flex 2xl:gap-2">
           <div className="relative" onMouseEnter={() => setProductOpen(true)} onMouseLeave={() => setProductOpen(false)}>
-            <button type="button" onClick={() => setProductOpen(!productOpen)} aria-expanded={productOpen} aria-haspopup="true" className="flex items-center gap-1.5 text-sm font-bold text-slate-700 transition-colors hover:text-teal-600">
+            <button type="button" onClick={() => setProductOpen(!productOpen)} aria-expanded={productOpen} aria-haspopup="true" className="flex items-center gap-1.5 rounded-xl px-3 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-50 hover:text-teal-700">
               Product <ChevronDown size={15} className={productOpen ? "rotate-180 transition-transform" : "transition-transform"} />
             </button>
 
@@ -127,16 +129,16 @@ export default function Navbar() {
             )}
           </div>
 
-          {mainLinks.map((link) => <Link key={link.href} href={link.href} className="text-sm font-bold text-slate-700 transition-colors hover:text-teal-600">{link.name}</Link>)}
+          {mainLinks.map((link) => { const active = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href)); return <Link key={link.href} href={link.href} aria-current={active ? "page" : undefined} className={`whitespace-nowrap rounded-xl px-3 py-2.5 text-[13px] font-bold transition-all ${active ? "bg-teal-50 text-teal-800" : "text-slate-700 hover:bg-slate-50 hover:text-teal-700"}`}>{link.name}</Link>; })}
 
-          <Link href="/downloads" className="group flex items-center gap-2 rounded-full bg-slate-950 px-5 py-2.5 text-xs font-black uppercase tracking-wide text-white transition hover:bg-teal-600"><Sparkles size={14} /> Free Trial</Link>
+          <Link href="/downloads" className="group ml-3 flex shrink-0 items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-xs font-black uppercase tracking-wide text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-teal-700 hover:shadow-md"><Sparkles size={14} /> Free Trial</Link>
         </nav>
 
-        <button type="button" aria-label={mobileOpen ? "Close menu" : "Open menu"} onClick={() => setMobileOpen(!mobileOpen)} className="rounded-xl p-2 text-slate-900 hover:bg-slate-100 xl:hidden">{mobileOpen ? <X size={26} /> : <Menu size={26} />}</button>
+        <button type="button" aria-label={mobileOpen ? "Close menu" : "Open menu"} onClick={() => setMobileOpen(!mobileOpen)} className="rounded-xl p-2 text-slate-900 hover:bg-slate-100 2xl:hidden">{mobileOpen ? <X size={26} /> : <Menu size={26} />}</button>
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-slate-200 bg-white xl:hidden">
+        <div className="border-t border-slate-200 bg-white 2xl:hidden">
           <nav className="mx-auto max-w-7xl px-5 py-5">
             <button type="button" onClick={() => setProductOpen(!productOpen)} className="flex w-full items-center justify-between border-b border-slate-100 py-4 text-left text-sm font-black text-slate-900">Product <ChevronDown size={18} className={productOpen ? "rotate-180 transition-transform" : "transition-transform"} /></button>
             {productOpen && (
