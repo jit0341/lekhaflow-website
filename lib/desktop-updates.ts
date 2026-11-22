@@ -23,6 +23,8 @@ const REPO = "jit0341/lekhaflow-website";
 const API_ROOT = "https://api.github.com";
 
 export type ProductId = "standard" | "professional" | "gold";
+export type UpdateChannel = "stable" | "demo";
+export type InstallerVariant = "full" | "demo";
 
 export function normaliseVersion(tag: string): string {
   const value = String(tag || "").trim().replace(/^[vV]/, "");
@@ -30,12 +32,6 @@ export function normaliseVersion(tag: string): string {
     throw new Error("The configured release tag is not a semantic version.");
   }
   return value;
-}
-
-export function versionFromReleaseName(release: GitHubRelease): string {
-  const text = String(release.name || "") + " " + String(release.tag_name || "");
-  const match = text.match(/(?:^|[^0-9])(\d+\.\d+\.\d+)(?:$|[^0-9])/);
-  return match ? match[1] : "";
 }
 
 export async function fetchReleaseByTag(tag: string): Promise<GitHubRelease> {
@@ -50,7 +46,7 @@ export async function fetchReleaseByTag(tag: string): Promise<GitHubRelease> {
         Accept: "application/vnd.github+json",
         "User-Agent": "LekhaFlow-Website-Update-Service",
       },
-      next: { revalidate: 300 },
+      next: { revalidate: 60 },
     },
   );
 
@@ -60,51 +56,49 @@ export async function fetchReleaseByTag(tag: string): Promise<GitHubRelease> {
 
   const release = (await response.json()) as GitHubRelease;
   if (release.draft || release.prerelease) {
-    throw new Error("Draft or prerelease builds cannot be served on the stable channel.");
+    throw new Error("Draft or prerelease builds cannot be served on a public channel.");
   }
   return release;
 }
 
-export function configuredStableTag(product: ProductId): string {
+export function configuredStableTag(product: ProductId, channel: UpdateChannel = "stable"): string {
   const envKey = {
-    standard: "LEKHAFLOW_STANDARD_STABLE_TAG",
-    professional: "LEKHAFLOW_PROFESSIONAL_STABLE_TAG",
-    gold: "LEKHAFLOW_GOLD_STABLE_TAG",
-  }[product];
+    standard: {
+      stable: "LEKHAFLOW_STANDARD_STABLE_TAG",
+      demo: "LEKHAFLOW_STANDARD_DEMO_TAG",
+    },
+    professional: {
+      stable: "LEKHAFLOW_PROFESSIONAL_STABLE_TAG",
+      demo: "LEKHAFLOW_PROFESSIONAL_DEMO_TAG",
+    },
+    gold: {
+      stable: "LEKHAFLOW_GOLD_STABLE_TAG",
+      demo: "LEKHAFLOW_GOLD_DEMO_TAG",
+    },
+  }[product][channel];
 
-  // Existing Standard 15.1.0 is a baseline. Activate a newer NEXT release
-  // only after its installer has passed clean-install and upgrade QA.
-  const fallback = product === "standard" ? "V15.1.0" : "";
-  return String(process.env[envKey] || fallback).trim();
+  // All four 15.2.0 packages are published together in one immutable release.
+  // Product-specific env vars can pin a channel to a later tag independently.
+  return String(process.env[envKey] || "V15.2.0").trim();
 }
 
 export function findInstallerAsset(
   release: GitHubRelease,
   product: ProductId,
   version: string,
-  variant: "full" | "trial" = "full",
+  variant: InstallerVariant = "full",
 ): GitHubAsset | undefined {
   const assets = Array.isArray(release.assets) ? release.assets : [];
-  const expected = new Set<string>();
+  const productLabel = product.charAt(0).toUpperCase() + product.slice(1);
+  const suffix = variant === "demo" ? "_Demo_Setup_" : "_Setup_";
+  const expected = ( "LekhaFlow_" + productLabel + suffix + version + ".exe" ).toLowerCase();
 
-  if (product === "standard" && variant === "full") {
-    expected.add(("LekhaFlow_Standard_Setup_" + version + ".exe").toLowerCase());
-    expected.add(("LekhaFlow_Standard_Suite_Setup_" + version + ".exe").toLowerCase());
-    if (version === "15.1.0") expected.add("lekhaflow_standard_setup.exe");
-  } else if (product === "standard" && variant === "trial") {
-    expected.add(("LekhaFlow_Standard_Trial_Setup_" + version + ".exe").toLowerCase());
-    expected.add("lekhaflow-standard-trial-setup.exe");
-  } else {
-    expected.add(("LekhaFlow_" + product + "_Setup_" + version + ".exe").toLowerCase());
-    expected.add(("LekhaFlow_" + product + "_Suite_Setup_" + version + ".exe").toLowerCase());
-  }
-
+  // The exact name is intentional: never select an arbitrary EXE or another edition.
   return assets.find((asset) => {
     const name = String(asset?.name || "").toLowerCase();
     return (
-      name.endsWith(".exe") &&
+      name === expected &&
       (!asset.state || asset.state === "uploaded") &&
-      expected.has(name) &&
       /^https:\/\//i.test(String(asset.browser_download_url || "")) &&
       Number(asset.size) > 0
     );
@@ -122,4 +116,9 @@ export function productDisplayName(product: ProductId): string {
 export function productIdFromQuery(value: string | null): ProductId | null {
   const v = String(value || "").trim().toLowerCase();
   return v === "standard" || v === "professional" || v === "gold" ? v : null;
+}
+
+export function channelFromQuery(value: string | null): UpdateChannel | null {
+  const v = String(value || "stable").trim().toLowerCase();
+  return v === "stable" || v === "demo" ? v : null;
 }
