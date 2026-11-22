@@ -16,6 +16,26 @@ function emptyAsset() {
 }
 
 export async function GET() {
+  // Keep the public download cards deliberately inactive until the signed
+  // Desktop updater has passed production verification. Enable explicitly
+  // with LEKHAFLOW_DOWNLOAD_CENTER_ENABLED=true after QA.
+  if (String(process.env.LEKHAFLOW_DOWNLOAD_CENTER_ENABLED || "").toLowerCase() !== "true") {
+    return NextResponse.json(
+      {
+        success: true,
+        enabled: false,
+        availableCount: 0,
+        products: {
+          standardFull: emptyAsset(),
+          standardDemo: emptyAsset(),
+          professionalFull: emptyAsset(),
+          professionalDemo: emptyAsset(),
+        },
+      },
+      { headers: { "Cache-Control": "no-store, max-age=0" } },
+    );
+  }
+
   try {
     // One immutable GitHub release contains all four assets for the same version.
     const tag = configuredStableTag("standard", "stable");
