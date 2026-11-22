@@ -1,4 +1,4 @@
-import { createPrivateKey, sign } from "node:crypto";
+import { createPublicKey, verify } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import {
   channelFromQuery,
@@ -13,6 +13,39 @@ import {
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+// This public key is the same verification key embedded in the released
+// Desktop clients. The matching private key remains offline; it is never
+// stored in Vercel, GitHub source, or the client installer.
+const UPDATE_KEY_ID = "lekhaflow-update-2026-01";
+const UPDATE_PUBLIC_KEY_B64 = "gMg86jsnYGsvuEzdup5zQuFJ+o3wztoqGjMtXznzwvo=";
+const UPDATE_PUBLIC_KEY_SPKI_PREFIX = Buffer.from("302a300506032b6570032100", "hex");
+const RELEASE_MANIFEST_BASE = "LekhaFlow_";
+
+type SignedManifest = {
+  schema_version: number;
+  product_id: string;
+  product_name: string;
+  version: string;
+  channel: string;
+  platform: string;
+  architecture: string;
+  published_at: string;
+  release_name?: string;
+  release_notes?: string;
+  installer: {
+    file_name: string;
+    url: string;
+    size_bytes: number;
+    sha256: string;
+  };
+  signature: {
+    algorithm: string;
+    key_id: string;
+    value: string;
+  };
+  [key: string]: unknown;
+};
+
 function canonicalise(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonicalise);
   if (value && typeof value === "object") {
@@ -25,23 +58,35 @@ function canonicalise(value: unknown): unknown {
   return value;
 }
 
-function signManifest(unsignedManifest: Record<string, unknown>) {
-  const pem = String(process.env.LEKHAFLOW_UPDATE_SIGNING_PRIVATE_KEY || "").replace(/\\n/g, "\n");
-  if (!pem.trim()) throw new Error("Signing key missing.");
+function verifyOfflineSignature(manifest: SignedManifest): boolean {
+  const signature = manifest.signature;
+  if (
+    !signature ||
+    signature.algorithm !== "Ed25519" ||
+    signature.key_id !== UPDATE_KEY_ID ||
+    typeof signature.value !== "string"
+  ) return false;
 
-  const privateKey = createPrivateKey(pem);
-  if (privateKey.asymmetricKeyType !== "ed25519") throw new Error("Signing key must be Ed25519.");
-
-  const canonical = JSON.stringify(canonicalise(unsignedManifest));
-  const signature = sign(null, Buffer.from(canonical, "utf8"), privateKey).toString("base64");
-  return {
-    ...unsignedManifest,
-    signature: {
-      algorithm: "Ed25519",
-      key_id: process.env.LEKHAFLOW_UPDATE_SIGNING_KEY_ID || "lekhaflow-update-2026-01",
-      value: signature,
-    },
-  };
+  const publicBytes = Buffer.from(UPDATE_PUBLIC_KEY_B64, "base64");
+  if (publicBytes.length !== 32) return false;
+  const publicKey = createPublicKey({
+    key: Buffer.concat([UPDATE_PUBLIC_KEY_SPKI_PREFIX, publicBytes]),
+    format: "der",
+    type: "spki",
+  });
+  const unsigned = { ...manifest } as Record<string, unknown>;
+  delete unsigned.signature;
+  const canonical = JSON.stringify(canonicalise(unsigned));
+  try {
+    return verify(
+      null,
+      Buffer.from(canonical, "utf8"),
+      publicKey,
+      Buffer.from(signature.value, "base64"),
+    );
+  } catch {
+    return false;
+  }
 }
 
 function errorResponse(message: string, status: number, code: string) {
@@ -49,6 +94,37 @@ function errorResponse(message: string, status: number, code: string) {
     { success: false, code, error: message },
     { status, headers: { "Cache-Control": "no-store, max-age=0" } },
   );
+}
+
+function manifestAssetName(
+  product: "standard" | "professional" | "gold",
+  channel: "stable" | "demo",
+  version: string,
+) {
+  const label = product.charAt(0).toUpperCase() + product.slice(1);
+  const channelLabel = channel === "demo" ? "Demo" : "Stable";
+  return RELEASE_MANIFEST_BASE + label + "_" + channelLabel + "_Manifest_" + version + ".json";
+}
+
+async function loadReleaseManifest(release: Awaited<ReturnType<typeof fetchReleaseByTag>>, assetName: string) {
+  const asset = (release.assets || []).find((item) =>
+    String(item.name || "").toLowerCase() === assetName.toLowerCase() &&
+    Number(item.size) > 0 &&
+    /^https:\/\/github\.com\//i.test(String(item.browser_download_url || "")),
+  );
+  if (!asset) throw new Error("The signed manifest asset has not been published.");
+
+  const response = await fetch(asset.browser_download_url, {
+    headers: {
+      Accept: "application/octet-stream",
+      "User-Agent": "LekhaFlow-Offline-Signed-Update-Service",
+    },
+    cache: "no-store",
+  });
+  if (!response.ok) throw new Error("The signed manifest asset could not be downloaded.");
+  const text = await response.text();
+  if (!text || text.length > 256 * 1024) throw new Error("The signed manifest asset has an invalid size.");
+  return JSON.parse(text) as SignedManifest;
 }
 
 export async function GET(request: NextRequest) {
@@ -71,37 +147,46 @@ export async function GET(request: NextRequest) {
     const release = await fetchReleaseByTag(tag);
     const version = normaliseVersion(release.tag_name || tag);
     const variant = channel === "demo" ? "demo" : "full";
-    const asset = findInstallerAsset(release, product, version, variant);
-
-    if (!asset || !asset.digest || !/^sha256:[0-9a-f]{64}$/i.test(asset.digest)) {
-      return errorResponse("The approved installer is not ready for secure delivery.", 503, "INSTALLER_NOT_READY");
+    const installerAsset = findInstallerAsset(release, product, version, variant);
+    if (!installerAsset) {
+      return errorResponse("The approved installer has not been published.", 503, "INSTALLER_NOT_READY");
     }
 
-    const downloadUrl = new URL("/api/desktop-updates/v1/download", request.nextUrl.origin);
-    downloadUrl.searchParams.set("product", product);
-    downloadUrl.searchParams.set("version", version);
-    downloadUrl.searchParams.set("channel", channel);
+    const manifestName = manifestAssetName(product, channel, version);
+    const manifest = await loadReleaseManifest(release, manifestName);
 
-    const unsignedManifest: Record<string, unknown> = {
-      schema_version: 1,
-      product_id: product,
-      product_name: productDisplayName(product) + (channel === "demo" ? " Demo" : ""),
-      version,
-      channel,
-      platform: "windows",
-      architecture: "x64",
-      published_at: release.published_at || new Date(0).toISOString(),
-      release_name: release.name || (productDisplayName(product) + " " + version),
-      release_notes: "Product improvements, compatibility updates and reliability enhancements.",
-      installer: {
-        file_name: asset.name,
-        url: downloadUrl.toString(),
-        size_bytes: asset.size,
-        sha256: asset.digest.slice("sha256:".length).toLowerCase(),
-      },
-    };
+    if (
+      manifest.schema_version !== 1 ||
+      manifest.product_id !== product ||
+      manifest.channel !== channel ||
+      manifest.version !== version ||
+      manifest.platform !== "windows" ||
+      manifest.architecture !== "x64"
+    ) {
+      return errorResponse("The signed manifest does not match this product release.", 503, "MANIFEST_IDENTITY_MISMATCH");
+    }
 
-    return NextResponse.json(signManifest(unsignedManifest), {
+    const installer = manifest.installer;
+    const expectedDownload = new URL("/api/desktop-updates/v1/download", "https://lekhaflow.in");
+    expectedDownload.searchParams.set("product", product);
+    expectedDownload.searchParams.set("version", version);
+    expectedDownload.searchParams.set("channel", channel);
+    if (
+      !installer ||
+      installer.file_name !== installerAsset.name ||
+      Number(installer.size_bytes) !== Number(installerAsset.size) ||
+      !/^sha256:[0-9a-f]{64}$/i.test(String(installerAsset.digest || "")) ||
+      String(installer.sha256 || "").toLowerCase() !== String(installerAsset.digest).slice("sha256:".length).toLowerCase() ||
+      installer.url !== expectedDownload.toString()
+    ) {
+      return errorResponse("The signed installer metadata does not match the published setup file.", 503, "INSTALLER_METADATA_MISMATCH");
+    }
+
+    if (!verifyOfflineSignature(manifest)) {
+      return errorResponse("The published manifest failed its Ed25519 signature check.", 503, "MANIFEST_SIGNATURE_INVALID");
+    }
+
+    return NextResponse.json(manifest, {
       headers: {
         "Cache-Control": "no-store, max-age=0",
         "X-Content-Type-Options": "nosniff",
@@ -110,11 +195,11 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Desktop update manifest error:", error);
     const message = error instanceof Error ? error.message : "";
-    const keyMissing = message.includes("Signing key") || message.includes("Ed25519");
+    const noManifest = message.includes("signed manifest");
     return errorResponse(
-      keyMissing ? "The update service is not configured yet." : "The official update service is temporarily unavailable.",
+      noManifest ? "The offline-signed update manifest is not published yet." : "The official update service is temporarily unavailable.",
       503,
-      keyMissing ? "UPDATE_SIGNING_NOT_CONFIGURED" : "UPDATE_SERVICE_UNAVAILABLE",
+      noManifest ? "SIGNED_MANIFEST_NOT_PUBLISHED" : "UPDATE_SERVICE_UNAVAILABLE",
     );
   }
 }
