@@ -6,7 +6,6 @@ import {
   fetchReleaseByTag,
   findInstallerAsset,
   normaliseVersion,
-  productDisplayName,
   productIdFromQuery,
 } from "@/lib/desktop-updates";
 
@@ -171,12 +170,19 @@ export async function GET(request: NextRequest) {
     expectedDownload.searchParams.set("product", product);
     expectedDownload.searchParams.set("version", version);
     expectedDownload.searchParams.set("channel", channel);
+    const signedSha256 = String(installer?.sha256 || "").toLowerCase();
+    const releaseDigest = String(installerAsset.digest || "").toLowerCase();
+    const signedHashValid = /^[0-9a-f]{64}$/.test(signedSha256);
+    const releaseDigestMatches = !releaseDigest || (
+      /^sha256:[0-9a-f]{64}$/.test(releaseDigest) &&
+      signedSha256 === releaseDigest.slice("sha256:".length)
+    );
     if (
       !installer ||
       installer.file_name !== installerAsset.name ||
       Number(installer.size_bytes) !== Number(installerAsset.size) ||
-      !/^sha256:[0-9a-f]{64}$/i.test(String(installerAsset.digest || "")) ||
-      String(installer.sha256 || "").toLowerCase() !== String(installerAsset.digest).slice("sha256:".length).toLowerCase() ||
+      !signedHashValid ||
+      !releaseDigestMatches ||
       installer.url !== expectedDownload.toString()
     ) {
       return errorResponse("The signed installer metadata does not match the published setup file.", 503, "INSTALLER_METADATA_MISMATCH");
