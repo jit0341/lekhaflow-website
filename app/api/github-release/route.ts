@@ -1,159 +1,131 @@
-// app/api/github-release/route.ts
-
 import { NextResponse } from "next/server";
 
-const GITHUB_RELEASES_URL =
-  "https://api.github.com/repos/jit0341/lekhaflow-website/releases/latest";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-type GitHubAsset = {
+const RELEASE_URL =
+  "https://api.github.com/repos/jit0341/lekhaflow-website/releases/tags/V15.2.1";
+
+type ProductKey =
+  | "standardFull"
+  | "standardDemo"
+  | "professionalFull"
+  | "professionalDemo";
+
+type Asset = {
   name?: string;
   browser_download_url?: string;
   size?: number;
-  content_type?: string;
   state?: string;
+  digest?: string | null;
 };
 
-function findExeAsset(
-  assets: GitHubAsset[],
-  patterns: RegExp[]
-): GitHubAsset | undefined {
-  return assets.find((asset) => {
-    const name = asset?.name || "";
+type Release = {
+  tag_name?: string;
+  name?: string;
+  html_url?: string;
+  published_at?: string;
+  draft?: boolean;
+  prerelease?: boolean;
+  assets?: Asset[];
+};
 
-    if (!/\.exe$/i.test(name)) {
-      return false;
-    }
+const expectedAssets: Record<ProductKey, string> = {
+  standardFull: "LekhaFlow_Standard_Setup_15.2.1.exe",
+  standardDemo: "LekhaFlow_Standard_Demo_Setup_15.2.1.exe",
+  professionalFull: "LekhaFlow_Professional_Setup_15.2.1.exe",
+  professionalDemo: "LekhaFlow_Professional_Demo_Setup_15.2.1.exe",
+};
 
-    if (asset.state && asset.state !== "uploaded") {
-      return false;
-    }
-
-    return patterns.some((pattern) => pattern.test(name));
-  });
-}
-
-function assetInfo(asset?: GitHubAsset) {
+function emptyAsset() {
   return {
-    url: asset?.browser_download_url || "",
-    name: asset?.name || "",
-    size: asset?.size || 0,
+    available: false,
+    url: "",
+    name: "",
+    size: 0,
+    sha256: "",
+    version: "15.2.1",
   };
 }
 
 export async function GET() {
   try {
-    const response = await fetch(GITHUB_RELEASES_URL, {
-      method: "GET",
+    const response = await fetch(RELEASE_URL, {
       headers: {
         Accept: "application/vnd.github+json",
-        "User-Agent": "LekhaFlow-Website",
+        "User-Agent": "LekhaFlow-Download-Center",
       },
-      cache: "no-store",
+      next: { revalidate: 300 },
     });
 
     if (!response.ok) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Unable to fetch latest GitHub release.",
-        },
-        {
-          status: 502,
-          headers: {
-            "Cache-Control": "no-store, max-age=0",
-          },
-        }
-      );
+      throw new Error("GitHub release lookup failed with HTTP " + response.status);
     }
 
-    const data = await response.json();
+    const release = (await response.json()) as Release;
+    if (release.tag_name !== "V15.2.1" || release.draft || release.prerelease) {
+      throw new Error("The approved LekhaFlow V15.2.1 release is not publicly available.");
+    }
 
-    const assets: GitHubAsset[] = Array.isArray(data.assets)
-      ? data.assets
-      : [];
+    const assets = Array.isArray(release.assets) ? release.assets : [];
+    const products = {} as Record<ProductKey, ReturnType<typeof emptyAsset>>;
 
-    /*
-     * Production naming support
-     *
-     * Current Standard:
-     *   LekhaFlow_Standard_Suite_Setup_15.1.0.exe
-     *
-     * Future-compatible names:
-     *   LekhaFlow_Standard_Setup_15.1.0.exe
-     *   LekhaFlow_Standard_Trial_15.1.0.exe
-     *   LekhaFlow_Gold_Setup_15.1.0.exe
-     *   LekhaFlow_Gold_Trial_15.1.0.exe
-     */
+    for (const [key, expectedName] of Object.entries(expectedAssets) as Array<[ProductKey, string]>) {
+      const asset = assets.find((item) =>
+        item.name === expectedName &&
+        (!item.state || item.state === "uploaded") &&
+        /^https:\/\//i.test(String(item.browser_download_url || "")) &&
+        Number(item.size) > 0
+      );
 
-    const standard = findExeAsset(assets, [
-      /^LekhaFlow_Standard_Suite_Setup_[^/]+\.exe$/i,
-      /^LekhaFlow_Standard_Setup_[^/]+\.exe$/i,
-    ]);
+      products[key] = asset
+        ? {
+            available: true,
+            url: asset.browser_download_url || "",
+            name: asset.name || "",
+            size: asset.size || 0,
+            sha256: String(asset.digest || "").replace(/^sha256:/i, ""),
+            version: "15.2.1",
+          }
+        : emptyAsset();
+    }
 
-    const standardTrial = findExeAsset(assets, [
-      /^LekhaFlow_Standard_Trial_[^/]+\.exe$/i,
-      /^LekhaFlow_Standard_Suite_Trial_[^/]+\.exe$/i,
-    ]);
-
-    const gold = findExeAsset(assets, [
-      /^LekhaFlow_Gold_Setup_[^/]+\.exe$/i,
-      /^LekhaFlow_Gold_Suite_Setup_[^/]+\.exe$/i,
-    ]);
-
-    const goldTrial = findExeAsset(assets, [
-      /^LekhaFlow_Gold_Trial_[^/]+\.exe$/i,
-      /^LekhaFlow_Gold_Suite_Trial_[^/]+\.exe$/i,
-    ]);
-
-    /*
-     * Diagnostic information.
-     * This makes future release naming problems immediately visible
-     * without affecting the website UI.
-     */
+    const availableCount = Object.values(products).filter((item) => item.available).length;
 
     return NextResponse.json(
       {
         success: true,
-
-        latestVersion: data.tag_name || "",
-        publishedAt: data.published_at || data.created_at || "",
-        releaseName: data.name || "",
-        releaseUrl: data.html_url || "",
-
-        standard: assetInfo(standard),
-        standardTrial: assetInfo(standardTrial),
-        gold: assetInfo(gold),
-        goldTrial: assetInfo(goldTrial),
-
-        assetCount: assets.length,
-
-        assets: assets
-          .filter((asset) => /\.exe$/i.test(asset?.name || ""))
-          .map((asset) => ({
-            name: asset.name || "",
-            size: asset.size || 0,
-            url: asset.browser_download_url || "",
-          })),
+        tag: release.tag_name,
+        releaseName: release.name || "LekhaFlow 15.2.1",
+        releaseUrl: release.html_url || "",
+        publishedAt: release.published_at || "",
+        latestVersion: "15.2.1",
+        availableCount,
+        products,
       },
       {
         headers: {
-          "Cache-Control": "no-store, max-age=0",
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+          "X-Content-Type-Options": "nosniff",
         },
       }
     );
   } catch (error) {
-    console.error("GitHub release API error:", error);
-
+    console.error("LekhaFlow V15.2.1 Download Center API error:", error);
     return NextResponse.json(
       {
         success: false,
-        error: "GitHub release lookup failed.",
+        error: "Official download information is temporarily unavailable.",
+        products: {
+          standardFull: emptyAsset(),
+          standardDemo: emptyAsset(),
+          professionalFull: emptyAsset(),
+          professionalDemo: emptyAsset(),
+        },
       },
       {
         status: 502,
-        headers: {
-          "Cache-Control": "no-store, max-age=0",
-        },
+        headers: { "Cache-Control": "no-store, max-age=0" },
       }
     );
   }
