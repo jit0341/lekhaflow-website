@@ -42,6 +42,14 @@ export async function POST(request: NextRequest) {
     if (!doc || doc.upload_status !== "PENDING") {
       return NextResponse.json({ success: false, error: "This upload reservation is no longer pending. Refresh the document list before retrying." }, { status: 404 });
     }
+    if (
+      typeof doc.storage_key !== "string" || doc.storage_key.length < 10 ||
+      typeof doc.content_type !== "string" ||
+      typeof doc.size_bytes !== "number" || !Number.isSafeInteger(doc.size_bytes) || doc.size_bytes <= 0
+    ) {
+      console.error("Document Cloud reservation has incomplete metadata:", documentId);
+      return NextResponse.json({ success: false, error: "Upload reservation metadata is incomplete. Please cancel this upload and retry." }, { status: 409 });
+    }
     storageKey = doc.storage_key;
 
     const head = await filebaseHeadObject(storageKey);
