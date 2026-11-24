@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import {
-  configuredStableTag,
   fetchReleaseByTag,
   findInstallerAsset,
   normaliseVersion,
@@ -16,34 +15,21 @@ function emptyAsset() {
 }
 
 export async function GET() {
-  // Keep the public download cards deliberately inactive until the signed
-  // Desktop updater has passed production verification. Enable explicitly
-  // with LEKHAFLOW_DOWNLOAD_CENTER_ENABLED=true after QA.
-  if (String(process.env.LEKHAFLOW_DOWNLOAD_CENTER_ENABLED || "").toLowerCase() !== "true") {
-    return NextResponse.json(
-      {
-        success: true,
-        enabled: false,
-        availableCount: 0,
-        products: {
-          standardFull: emptyAsset(),
-          standardDemo: emptyAsset(),
-          professionalFull: emptyAsset(),
-          professionalDemo: emptyAsset(),
-        },
-      },
-      { headers: { "Cache-Control": "no-store, max-age=0" } },
-    );
-  }
-
   try {
-    // One immutable GitHub release contains all four assets for the same version.
-    const tag = configuredStableTag("standard", "stable");
+    // The four public cards are pinned to the verified, immutable 15.2.1 release.
+    const tag = "V15.2.1";
     const release = await fetchReleaseByTag(tag);
     const version = normaliseVersion(release.tag_name || tag);
-    const publishedAt = release.published_at || "";
+    if (version !== "15.2.1") {
+      throw new Error("The Download Center received an unexpected release version.");
+    }
 
-    const mappings: Array<{ key: CardKey; product: "standard" | "professional"; variant: "full" | "demo" }> = [
+    const publishedAt = release.published_at || "";
+    const mappings: Array<{
+      key: CardKey;
+      product: "standard" | "professional";
+      variant: "full" | "demo";
+    }> = [
       { key: "standardFull", product: "standard", variant: "full" },
       { key: "standardDemo", product: "standard", variant: "demo" },
       { key: "professionalFull", product: "professional", variant: "full" },
@@ -59,7 +45,7 @@ export async function GET() {
 
     for (const item of mappings) {
       const asset = findInstallerAsset(release, item.product, version, item.variant);
-      if (asset) {
+      if (asset && asset.browser_download_url && asset.size > 0) {
         products[item.key] = {
           available: true,
           url: asset.browser_download_url,
@@ -75,6 +61,7 @@ export async function GET() {
     return NextResponse.json(
       {
         success: true,
+        enabled: true,
         tag: release.tag_name,
         releaseName: release.name || "LekhaFlow " + version,
         releaseUrl: release.html_url || "",
@@ -83,14 +70,20 @@ export async function GET() {
         availableCount,
         products,
       },
-      { headers: { "Cache-Control": "no-store, max-age=0" } },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+          "X-Content-Type-Options": "nosniff",
+        },
+      },
     );
   } catch (error) {
-    console.error("LekhaFlow release lookup failed:", error);
+    console.error("LekhaFlow V15.2.1 Download Center API error:", error);
     return NextResponse.json(
       {
         success: false,
-        error: "The four product installers are not available yet. Please try again after the official GitHub release is published.",
+        enabled: false,
+        error: "Official LekhaFlow 15.2.1 download information is temporarily unavailable.",
         products: {
           standardFull: emptyAsset(),
           standardDemo: emptyAsset(),
@@ -98,7 +91,7 @@ export async function GET() {
           professionalDemo: emptyAsset(),
         },
       },
-      { status: 200, headers: { "Cache-Control": "no-store, max-age=0" } },
+      { status: 502, headers: { "Cache-Control": "no-store, max-age=0" } },
     );
   }
 }
