@@ -78,6 +78,11 @@ export async function POST(request: NextRequest) {
     const accessToken = request.cookies.get("lf_dc_access")?.value || "";
     const { url, key } = supabaseConfig();
     const storageKey = newStorageKey(session.user.id, fileName);
+
+    // Generate the signed URL BEFORE reserving quota. If Filebase signing or
+    // configuration fails, no database reservation exists to leak storage.
+    const uploadUrl = await filebasePresignedUpload(storageKey, contentType);
+
     const reservation = await fetch(`${url}/rest/v1/rpc/document_cloud_reserve_upload`, {
       method: "POST",
       headers: { apikey: key, Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
@@ -91,7 +96,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       documentId,
-      uploadUrl: await filebasePresignedUpload(storageKey, contentType),
+      uploadUrl,
       uploadHeaders: { "Content-Type": contentType },
     });
   } catch (error) {

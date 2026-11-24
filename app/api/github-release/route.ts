@@ -1,124 +1,137 @@
 import { NextResponse } from "next/server";
+import {
+  configuredStableTag,
+  fetchReleaseByTag,
+  findInstallerAsset,
+  normaliseVersion,
+} from "@/lib/desktop-updates";
 
-const GITHUB_RELEASES_URL =
-  "https://api.github.com/repos/jit0341/lekhaflow-website/releases?per_page=30";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-type GitHubAsset = {
-  name?: string;
-  browser_download_url?: string;
-  size?: number;
-  state?: string;
-};
+type CardKey = "standardFull" | "standardDemo" | "professionalFull" | "professionalDemo";
+type ProductId = "standard" | "professional";
+type Channel = "stable" | "demo";
+type Variant = "full" | "demo";
 
-type GitHubRelease = {
-  tag_name?: string;
-  name?: string;
-  published_at?: string;
-  created_at?: string;
-  html_url?: string;
-  assets?: GitHubAsset[];
-};
-
-function findExeAsset(assets: GitHubAsset[], patterns: RegExp[]) {
-  return assets.find((asset) => {
-    const name = asset?.name || "";
-    return (
-      /\.exe$/i.test(name) &&
-      (!asset.state || asset.state === "uploaded") &&
-      patterns.some((pattern) => pattern.test(name))
-    );
-  });
+function emptyAsset() {
+  return { available: false, url: "", name: "", size: 0, version: "", publishedAt: "", tag: "" };
 }
 
-function assetInfo(asset?: GitHubAsset) {
-  return {
-    url: asset?.browser_download_url || "",
-    name: asset?.name || "",
-    size: asset?.size || 0,
-  };
+function compareVersions(a: string, b: string): number {
+  const pa = a.split(".").map((part) => Number(part));
+  const pb = b.split(".").map((part) => Number(part));
+  for (let i = 0; i < 3; i += 1) {
+    if ((pa[i] || 0) !== (pb[i] || 0)) return (pa[i] || 0) - (pb[i] || 0);
+  }
+  return 0;
 }
-
-const standardPatterns = [
-  /^LekhaFlow_Standard_Suite_Setup_[^/]+\.exe$/i,
-  /^LekhaFlow_Standard_Setup_[^/]+\.exe$/i,
-  /^Lekhaflow_Standard_setup\.exe$/i,
-];
-const trialPatterns = [
-  /^LekhaFlow_Standard_Trial_[^/]+\.exe$/i,
-  /^LekhaFlow_Standard_Suite_Trial_[^/]+\.exe$/i,
-  /^lekhaflow-standard-trial-setup\.exe$/i,
-];
 
 export async function GET() {
   try {
-    const response = await fetch(GITHUB_RELEASES_URL, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "User-Agent": "LekhaFlow-Website",
-      },
-      cache: "no-store",
-    });
+    // Each product/channel can move to a new signed release independently.
+    // This lets Standard Full receive a hotfix without republishing the
+    // already-verified Standard Demo and Professional installers.
+    const mappings: Array<{
+      key: CardKey;
+      product: ProductId;
+      channel: Channel;
+      variant: Variant;
+    }> = [
+      { key: "standardFull", product: "standard", channel: "stable", variant: "full" },
+      { key: "standardDemo", product: "standard", channel: "demo", variant: "demo" },
+      { key: "professionalFull", product: "professional", channel: "stable", variant: "full" },
+      { key: "professionalDemo", product: "professional", channel: "demo", variant: "demo" },
+    ];
 
-    if (!response.ok) {
-      return NextResponse.json(
-        { success: false, error: "Unable to fetch GitHub releases." },
-        { status: 502, headers: { "Cache-Control": "no-store, max-age=0" } }
-      );
+    const tags = Array.from(new Set(
+      mappings.map((item) => configuredStableTag(item.product, item.channel)),
+    ));
+    const releases = new Map<string, Awaited<ReturnType<typeof fetchReleaseByTag>>>();
+    await Promise.all(tags.map(async (tag) => {
+      releases.set(tag, await fetchReleaseByTag(tag));
+    }));
+
+    const products: Record<CardKey, ReturnType<typeof emptyAsset>> = {
+      standardFull: emptyAsset(),
+      standardDemo: emptyAsset(),
+      professionalFull: emptyAsset(),
+      professionalDemo: emptyAsset(),
+    };
+
+    const releaseSummaries: Array<{
+      tag: string;
+      version: string;
+      name: string;
+      url: string;
+      publishedAt: string;
+    }> = [];
+
+    for (const item of mappings) {
+      const tag = configuredStableTag(item.product, item.channel);
+      const release = releases.get(tag);
+      if (!release) throw new Error("A configured product release could not be loaded.");
+      const version = normaliseVersion(release.tag_name || tag);
+      const asset = findInstallerAsset(release, item.product, version, item.variant);
+      if (asset && asset.browser_download_url && asset.size > 0) {
+        products[item.key] = {
+          available: true,
+          url: asset.browser_download_url,
+          name: asset.name,
+          size: asset.size,
+          version,
+          publishedAt: release.published_at || "",
+          tag: release.tag_name || tag,
+        };
+      }
+      if (!releaseSummaries.some((entry) => entry.tag === tag)) {
+        releaseSummaries.push({
+          tag: release.tag_name || tag,
+          version,
+          name: release.name || "LekhaFlow " + version,
+          url: release.html_url || "",
+          publishedAt: release.published_at || "",
+        });
+      }
     }
 
-    const releases = (await response.json()) as GitHubRelease[];
-    if (!Array.isArray(releases)) {
-      return NextResponse.json(
-        { success: false, error: "Unexpected GitHub releases response." },
-        { status: 502 }
-      );
-    }
-
-    // Full and trial installers may be published in separate GitHub releases.
-    const standardRelease = releases.find((release) =>
-      findExeAsset(release.assets || [], standardPatterns)
-    );
-    const trialRelease = releases.find((release) =>
-      findExeAsset(release.assets || [], trialPatterns)
-    );
-
-    const standardAsset = standardRelease
-      ? findExeAsset(standardRelease.assets || [], standardPatterns)
-      : undefined;
-    const trialAsset = trialRelease
-      ? findExeAsset(trialRelease.assets || [], trialPatterns)
-      : undefined;
-
+    const availableCount = Object.values(products).filter((item) => item.available).length;
+    const latest = [...releaseSummaries].sort((a, b) => compareVersions(b.version, a.version))[0];
     return NextResponse.json(
       {
         success: true,
-        latestVersion: standardRelease?.tag_name || "",
-        publishedAt: standardRelease?.published_at || standardRelease?.created_at || "",
-        releaseName: standardRelease?.name || "",
-        releaseUrl: standardRelease?.html_url || "",
-        standard: assetInfo(standardAsset),
-        standardTrial: assetInfo(trialAsset),
-        gold: assetInfo(undefined),
-        goldTrial: assetInfo(undefined),
-        releasesChecked: releases.length,
-        assets: [
-          ...(standardRelease?.assets || []),
-          ...(trialRelease?.assets || []),
-        ]
-          .filter((asset) => /\.exe$/i.test(asset?.name || ""))
-          .map((asset) => ({
-            name: asset.name || "",
-            size: asset.size || 0,
-            url: asset.browser_download_url || "",
-          })),
+        enabled: true,
+        tag: latest?.tag || "",
+        releaseName: latest?.name || "LekhaFlow Releases",
+        releaseUrl: latest?.url || "",
+        publishedAt: latest?.publishedAt || "",
+        latestVersion: latest?.version || "",
+        releases: releaseSummaries,
+        availableCount,
+        products,
       },
-      { headers: { "Cache-Control": "no-store, max-age=0" } }
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+          "X-Content-Type-Options": "nosniff",
+        },
+      },
     );
   } catch (error) {
-    console.error("GitHub release API error:", error);
+    console.error("LekhaFlow Download Center API error:", error);
     return NextResponse.json(
-      { success: false, error: "GitHub release lookup failed." },
-      { status: 502, headers: { "Cache-Control": "no-store, max-age=0" } }
+      {
+        success: false,
+        enabled: false,
+        error: "Official LekhaFlow download information is temporarily unavailable.",
+        products: {
+          standardFull: emptyAsset(),
+          standardDemo: emptyAsset(),
+          professionalFull: emptyAsset(),
+          professionalDemo: emptyAsset(),
+        },
+      },
+      { status: 502, headers: { "Cache-Control": "no-store, max-age=0" } },
     );
   }
 }
