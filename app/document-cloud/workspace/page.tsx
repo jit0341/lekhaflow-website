@@ -69,11 +69,26 @@ export default function DocumentCloudWorkspace() {
         xhr.upload.onprogress = event => {
           if (event.lengthComputable) setUploadProgress(Math.min(99, Math.round(event.loaded / event.total * 100)));
         };
+        xhr.timeout = 120000;
         xhr.onload = () => {
-          if (xhr.status >= 200 && xhr.status < 300) resolve();
-          else reject(new Error(`Secure storage rejected the upload (HTTP ${xhr.status}). Please retry.`));
+          if (xhr.status >= 200 && xhr.status < 300) {
+            resolve();
+            return;
+          }
+          const responseText = (xhr.responseText || "").slice(0, 500);
+          const codeMatch = responseText.match(/<Code>([^<]+)<\\/Code>/i);
+          const messageMatch = responseText.match(/<Message>([^<]+)<\\/Message>/i);
+          const providerError = [codeMatch?.[1], messageMatch?.[1]].filter(Boolean).join(": ");
+          reject(new Error(
+            providerError
+              ? `Filebase rejected the upload: ${providerError} (HTTP ${xhr.status}).`
+              : `Filebase rejected the upload (HTTP ${xhr.status}). ${responseText || "No response body returned."}`
+          ));
         };
-        xhr.onerror = () => reject(new Error("Network or CORS error while uploading. Check your connection and try again."));
+        xhr.onerror = () => reject(new Error(
+          "Browser could not complete the Filebase PUT request. Check the Filebase bucket CORS policy, the signed Content-Type header, and the Network tab's OPTIONS/PUT response."
+        ));
+        xhr.ontimeout = () => reject(new Error("Upload timed out after 2 minutes. Please retry; the pending reservation will be cancelled."));
         xhr.onabort = () => reject(new Error("Upload was interrupted. Please retry."));
         xhr.send(file);
       });
@@ -95,10 +110,17 @@ export default function DocumentCloudWorkspace() {
       await load();
     } catch (e) {
       if (pendingDocumentId) {
-        await fetch("/api/document-cloud/documents/cancel", {
+        const cancellation = await fetch("/api/document-cloud/documents/cancel", {
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ documentId: pendingDocumentId }),
-        }).catch(() => null);
+        }).then(async response => ({ response, data: await response.json().catch(() => ({})) })).catch(() => null);
+        if (cancellation?.data?.cleanupPending) {
+          setNotice("Upload cancelled. Storage cleanup is queued and will retry automatically.");
+        } else if (cancellation?.data?.quotaReleased) {
+          setNotice("Upload cancelled and reserved storage released.");
+        } else if (!cancellation?.response.ok) {
+          setNotice("Upload failed. Its storage reservation could not be confirmed as released; automatic cleanup will retry.");
+        }
       }
       setError(e instanceof Error ? e.message : "Upload failed.");
     }
