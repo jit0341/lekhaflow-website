@@ -77,9 +77,8 @@ export function configuredStableTag(product: ProductId, channel: UpdateChannel =
     },
   }[product][channel];
 
-  // All four 15.2.0 packages are published together in one immutable release.
-  // Product-specific env vars can pin a channel to a later tag independently.
-  return String(process.env[envKey] || "V15.2.0").trim();
+  // All four desktop editions are released together in the approved V15.2.1 release.
+  return String(process.env[envKey] || "V15.2.1").trim();
 }
 
 export function findInstallerAsset(
@@ -91,9 +90,9 @@ export function findInstallerAsset(
   const assets = Array.isArray(release.assets) ? release.assets : [];
   const productLabel = product.charAt(0).toUpperCase() + product.slice(1);
   const suffix = variant === "demo" ? "_Demo_Setup_" : "_Setup_";
-  const expected = ( "LekhaFlow_" + productLabel + suffix + version + ".exe" ).toLowerCase();
+  const expected = ("LekhaFlow_" + productLabel + suffix + version + ".exe").toLowerCase();
 
-  // The exact name is intentional: never select an arbitrary EXE or another edition.
+  // Exact name matching prevents cross-edition or arbitrary EXE downloads.
   return assets.find((asset) => {
     const name = String(asset?.name || "").toLowerCase();
     return (
