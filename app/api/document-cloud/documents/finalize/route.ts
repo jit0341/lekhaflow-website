@@ -31,10 +31,16 @@ export async function POST(request: NextRequest) {
     const lookup = await fetch(`${url}/rest/v1/document_cloud_documents?select=id,client_id,content_type,size_bytes,storage_key,upload_status&id=eq.${encodeURIComponent(documentId)}&client_id=eq.${encodeURIComponent(user.id)}`, {
       headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` }, cache: "no-store",
     });
-    const rows = await lookup.json().catch(() => []);
-    const doc = Array.isArray(rows) ? rows[0] : null;
-    if (!lookup.ok || !doc || doc.upload_status !== "PENDING") {
-      return NextResponse.json({ success: false, error: "Pending upload not found." }, { status: 404 });
+    const lookupBody = await lookup.text();
+    if (!lookup.ok) {
+      console.error("Document Cloud pending lookup failed:", lookup.status, lookupBody.slice(0, 500));
+      return NextResponse.json({ success: false, error: "Could not verify the upload reservation. Please contact support with the time of this attempt." }, { status: 502 });
+    }
+    let rows: unknown;
+    try { rows = JSON.parse(lookupBody); } catch { rows = []; }
+    const doc = Array.isArray(rows) ? rows[0] as { upload_status?: string; storage_key?: string; content_type?: string; size_bytes?: number } | undefined : undefined;
+    if (!doc || doc.upload_status !== "PENDING") {
+      return NextResponse.json({ success: false, error: "This upload reservation is no longer pending. Refresh the document list before retrying." }, { status: 404 });
     }
     storageKey = doc.storage_key;
 
