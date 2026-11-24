@@ -11,7 +11,9 @@ export function isDocumentCloudSameOrigin(request: NextRequest) {
 }
 
 export function supabaseServerKey() {
-  const value = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // Lifecycle RPCs are granted to the legacy service_role database role.
+  // A newer sb_secret_* API key is not a drop-in JWT Bearer token.
+  const value = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY;
   if (!value) throw new Error("Supabase server secret is not configured.");
   return value;
 }
