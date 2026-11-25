@@ -82,7 +82,18 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({ p_document_id: documentId, p_actual_size_bytes: Number(head.ContentLength) }),
       cache: "no-store",
     });
-    if (!finalize.ok) throw new Error("Could not finalize document metadata.");
+    const finalizeResult = await finalize.json().catch(() => null);
+    if (!finalize.ok || finalizeResult !== true) {
+      console.error("Document Cloud finalize RPC did not confirm READY state:", {
+        status: finalize.status,
+        result: finalizeResult,
+        documentId,
+      });
+      return NextResponse.json(
+        { success: false, error: "The file reached secure storage, but the document record was not confirmed as READY. Refresh the list before retrying; do not upload the same file repeatedly." },
+        { status: 502 },
+      );
+    }
     return NextResponse.json({ success: true, message: "Document uploaded and verified." });
   } catch (error) {
     console.error("Document Cloud finalize error:", error);
