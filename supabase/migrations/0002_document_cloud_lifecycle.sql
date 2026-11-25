@@ -51,8 +51,12 @@ as $$
 declare
   doc public.document_cloud_documents%rowtype;
 begin
+  if auth.uid() is null then
+    raise exception 'Authentication required';
+  end if;
+
   select * into doc from public.document_cloud_documents
-    where id = p_document_id and upload_status = 'PENDING' for update;
+    where id = p_document_id and client_id = auth.uid() and upload_status = 'PENDING' for update;
   if not found then return false; end if;
   if p_actual_size_bytes is null or p_actual_size_bytes <> doc.size_bytes then
     raise exception 'Uploaded object size does not match reservation';
@@ -96,9 +100,9 @@ begin
 end;
 $$;
 
-revoke all on function public.document_cloud_finalize_upload(uuid, bigint) from public, anon, authenticated;
+revoke all on function public.document_cloud_finalize_upload(uuid, bigint) from public, anon;
 revoke all on function public.document_cloud_confirm_delete(uuid) from public, anon, authenticated;
-grant execute on function public.document_cloud_finalize_upload(uuid, bigint) to service_role;
+grant execute on function public.document_cloud_finalize_upload(uuid, bigint) to authenticated;
 grant execute on function public.document_cloud_confirm_delete(uuid) to service_role;
 
 -- Service-only transitions prevent a browser client from marking unverified objects READY.
