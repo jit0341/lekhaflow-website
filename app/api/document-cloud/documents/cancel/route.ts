@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isDocumentCloudSameOrigin, getDocumentCloudUser, supabaseConfig, supabaseServerKey } from "@/lib/document-cloud/supabase-auth";
+import { isDocumentCloudSameOrigin, getDocumentCloudUser, supabaseConfig } from "@/lib/document-cloud/supabase-auth";
 import { filebaseDeleteObject } from "@/lib/document-cloud/filebase";
 
 export const runtime = "nodejs";
@@ -19,10 +19,11 @@ export async function POST(request: NextRequest) {
     }
 
     const { url, key } = supabaseConfig();
-    const serviceKey = supabaseServerKey();
+    const accessToken = request.cookies.get("lf_dc_access")?.value || "";
+    // RLS ensures the reservation lookup is restricted to the signed-in owner.
     const lookup = await fetch(
       `${url}/rest/v1/document_cloud_documents?select=id,client_id,storage_key,upload_status&id=eq.${encodeURIComponent(id)}&client_id=eq.${encodeURIComponent(user.id)}`,
-      { headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` }, cache: "no-store" },
+      { headers: { apikey: key, Authorization: `Bearer ${accessToken}` }, cache: "no-store" },
     );
     const rows = await lookup.json().catch(() => []);
     const doc = Array.isArray(rows) ? rows[0] : null;
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
     await filebaseDeleteObject(doc.storage_key);
     const cancelled = await fetch(`${url}/rest/v1/rpc/document_cloud_cancel_upload`, {
       method: "POST",
-      headers: { apikey: key, Authorization: `Bearer ${request.cookies.get("lf_dc_access")?.value || ""}`, "Content-Type": "application/json" },
+      headers: { apikey: key, Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
       body: JSON.stringify({ p_document_id: id }),
       cache: "no-store",
     });
