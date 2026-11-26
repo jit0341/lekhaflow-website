@@ -20,6 +20,23 @@ export async function POST(request: NextRequest) {
 
     const { url, key } = supabaseConfig();
     const accessToken = request.cookies.get("lf_dc_access")?.value || "";
+    let jwtClaims: Record<string, unknown> = {};
+
+      try {
+        const payload = accessToken.split(".")[1];
+        jwtClaims = JSON.parse(
+          Buffer.from(payload, "base64url").toString("utf8")
+        );
+      } catch {
+        jwtClaims = {};
+      }
+
+      console.info("Document Cloud JWT diagnostic:", {
+        role: jwtClaims.role ?? null,
+        subMatchesUser: jwtClaims.sub === user.id,
+        issuerPresent: Boolean(jwtClaims.iss),
+        expiresAt: jwtClaims.exp ?? null,
+      });
     const profileResponse = await fetch(`${url}/rest/v1/document_cloud_clients?select=account_status&id=eq.${encodeURIComponent(user.id)}`, {
       headers: { apikey: key, Authorization: `Bearer ${accessToken}` }, cache: "no-store",
     });
